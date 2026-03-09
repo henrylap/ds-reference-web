@@ -1,0 +1,2811 @@
+{
+  "library": "sklearn",
+  "title": "scikit-learn",
+  "officialDocs": "https://scikit-learn.org/stable/",
+  "subtopics": [
+    "Data Splitting",
+    "Preprocessing",
+    "Pipelines",
+    "Models",
+    "Model Selection",
+    "Metrics"
+  ],
+  "commandGroups": [
+    {
+      "name": "Split and Preprocess",
+      "docs": [
+        {
+          "label": "Model Selection",
+          "url": "https://scikit-learn.org/stable/modules/classes.html#module-sklearn.model_selection"
+        },
+        {
+          "label": "Preprocessing",
+          "url": "https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing"
+        }
+      ],
+      "commandIds": [
+        "sklearn-train-test-split",
+        "sklearn-standardscaler",
+        "sklearn-onehotencoder",
+        "sklearn-columntransformer"
+      ]
+    },
+    {
+      "name": "Modeling and Evaluation",
+      "docs": [
+        {
+          "label": "Linear Models",
+          "url": "https://scikit-learn.org/stable/modules/classes.html#module-sklearn.linear_model"
+        },
+        {
+          "label": "Metrics",
+          "url": "https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics"
+        }
+      ],
+      "commandIds": [
+        "sklearn-pipeline",
+        "sklearn-logisticregression",
+        "sklearn-randomforestclassifier",
+        "sklearn-cross-val-score",
+        "sklearn-gridsearchcv",
+        "sklearn-roc-auc-score"
+      ]
+    },
+    {
+      "name": "Extended APIs and Step-by-Step Patterns",
+      "docs": [
+        {
+          "label": "scikit-learn official docs",
+          "url": "https://scikit-learn.org/stable/"
+        }
+      ],
+      "commandIds": [
+        "sklearn-simpleimputer",
+        "sklearn-minmaxscaler",
+        "sklearn-ordinalencoder",
+        "sklearn-labelencoder",
+        "sklearn-make-pipeline",
+        "sklearn-linearregression",
+        "sklearn-ridge",
+        "sklearn-lasso",
+        "sklearn-decisiontreeclassifier",
+        "sklearn-gradientboostingclassifier",
+        "sklearn-kneighborsclassifier",
+        "sklearn-svc",
+        "sklearn-stratifiedkfold",
+        "sklearn-cross-validate",
+        "sklearn-randomizedsearchcv",
+        "sklearn-confusion-matrix",
+        "sklearn-classification-report",
+        "sklearn-mean-squared-error",
+        "sklearn-r2-score",
+        "sklearn-pca"
+      ]
+    }
+  ],
+  "cheatSheet": [
+    "sklearn-train-test-split",
+    "sklearn-standardscaler",
+    "sklearn-onehotencoder",
+    "sklearn-columntransformer",
+    "sklearn-pipeline",
+    "sklearn-logisticregression",
+    "sklearn-randomforestclassifier",
+    "sklearn-cross-val-score",
+    "sklearn-gridsearchcv",
+    "sklearn-roc-auc-score",
+    "sklearn-simpleimputer",
+    "sklearn-minmaxscaler",
+    "sklearn-ordinalencoder",
+    "sklearn-labelencoder",
+    "sklearn-make-pipeline",
+    "sklearn-linearregression",
+    "sklearn-ridge",
+    "sklearn-lasso",
+    "sklearn-decisiontreeclassifier",
+    "sklearn-gradientboostingclassifier",
+    "sklearn-kneighborsclassifier",
+    "sklearn-svc",
+    "sklearn-stratifiedkfold",
+    "sklearn-cross-validate",
+    "sklearn-randomizedsearchcv",
+    "sklearn-confusion-matrix",
+    "sklearn-classification-report",
+    "sklearn-mean-squared-error",
+    "sklearn-r2-score",
+    "sklearn-pca"
+  ],
+  "coverageOutline": [
+    {
+      "topic": "Preprocessing",
+      "docUrl": "https://scikit-learn.org/stable/modules/preprocessing.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "StandardScaler",
+        "OneHotEncoder",
+        "ColumnTransformer",
+        "Pipeline"
+      ]
+    },
+    {
+      "topic": "Classification",
+      "docUrl": "https://scikit-learn.org/stable/supervised_learning.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "LogisticRegression",
+        "RandomForestClassifier",
+        "SVC",
+        "KNeighborsClassifier"
+      ]
+    },
+    {
+      "topic": "Regression",
+      "docUrl": "https://scikit-learn.org/stable/supervised_learning.html",
+      "status": "planned",
+      "highUsageApis": [
+        "LinearRegression",
+        "Ridge",
+        "RandomForestRegressor",
+        "Lasso"
+      ]
+    },
+    {
+      "topic": "Model Selection",
+      "docUrl": "https://scikit-learn.org/stable/model_selection.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "train_test_split",
+        "cross_val_score",
+        "GridSearchCV",
+        "RandomizedSearchCV"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "sklearn-train-test-split",
+      "slug": "sklearn-train-test-split",
+      "name": "train_test_split",
+      "library": "sklearn",
+      "subtopic": "Data Splitting",
+      "tags": [
+        "split",
+        "validation"
+      ],
+      "level": "core",
+      "summary": "Split arrays into train/test subsets.",
+      "syntax": "train_test_split(*arrays, test_size=None, random_state=None, stratify=None)",
+      "description": "Split arrays into train/test subsets. Use it for creating unbiased holdout sets and training, validating, and serving machine learning models. Key parameters: test_size, stratify.",
+      "docs": [
+        {
+          "label": "train_test_split",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "test_size",
+          "type": "float|int",
+          "default": "None",
+          "description": "Test split size.",
+          "values": [
+            "0.2",
+            "0.3"
+          ],
+          "pitfalls": [
+            "Very small test sets create noisy metrics"
+          ]
+        },
+        {
+          "name": "stratify",
+          "type": "array-like",
+          "description": "Preserve class ratio.",
+          "values": [
+            "y"
+          ],
+          "pitfalls": [
+            "Use for imbalanced data"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tuple",
+        "description": "Train/test arrays.",
+        "shape": "(X_train, X_test, y_train, y_test)"
+      },
+      "examples": [
+        {
+          "title": "Complete train/test modeling workflow",
+          "scenario": "Churn model setup with explicit X/y creation, splitting, fitting, and inference.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30],\n    'monthly_spend': [35, 70, 55, 95, 40, 110],\n    'churn': [1, 0, 0, 0, 1, 0]\n})\n\nX = df[['tenure', 'monthly_spend']]\ny = df['churn']\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42, stratify=y)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Predicted class array for holdout rows.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply train_test_split in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "train_test_split additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run train_test_split again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Set random_state for reproducibility."
+      ],
+      "related": [
+        "sklearn-cross-val-score",
+        "sklearn-gridsearchcv"
+      ],
+      "overview": "Split arrays into train/test subsets. Use train_test_split when creating unbiased holdout sets. Typical business pattern: training, validating, and serving machine learning models. Key parameters: test_size, stratify. Returns tuple with shape (X_train, X_test, y_train, y_test).",
+      "applications": [
+        "Primary application: train_test_split is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sklearn-standardscaler",
+      "slug": "sklearn-standardscaler",
+      "name": "StandardScaler",
+      "library": "sklearn",
+      "subtopic": "Preprocessing",
+      "tags": [
+        "scale",
+        "numeric"
+      ],
+      "level": "core",
+      "summary": "Standardize numeric features.",
+      "syntax": "StandardScaler(with_mean=True, with_std=True).fit(X).transform(X)",
+      "description": "Standardize numeric features. Use it for standardizing and encoding raw features before model fit and training, validating, and serving machine learning models. Key parameters: with_mean, with_std.",
+      "docs": [
+        {
+          "label": "StandardScaler",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "with_mean",
+          "type": "bool",
+          "default": "True",
+          "description": "Center features.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "False for sparse input"
+          ]
+        },
+        {
+          "name": "with_std",
+          "type": "bool",
+          "default": "True",
+          "description": "Scale by std.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "No scaling can hurt convergence"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "ndarray|sparse",
+        "description": "Scaled matrix.",
+        "shape": "same as input"
+      },
+      "examples": [
+        {
+          "title": "Scale features before fitting classifier",
+          "scenario": "Normalize numeric churn features before logistic regression fitting.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LogisticRegression\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30],\n    'monthly_spend': [35, 70, 55, 95, 40, 110],\n    'churn': [1, 0, 0, 0, 1, 0]\n})\n\nX = df[['tenure', 'monthly_spend']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\n\nscaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)\n\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train_scaled, y_train)\nprint(model.predict(X_test_scaled))",
+          "expectedOutput": "Predicted class array after scaled fit/predict workflow.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply StandardScaler in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "StandardScaler additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run StandardScaler again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Fit on train only to avoid leakage."
+      ],
+      "related": [
+        "sklearn-pipeline",
+        "sklearn-logisticregression"
+      ],
+      "overview": "Standardize numeric features. Use StandardScaler when standardizing and encoding raw features before model fit. Typical business pattern: training, validating, and serving machine learning models. Key parameters: with_mean, with_std. Returns ndarray|sparse with shape same as input.",
+      "applications": [
+        "Primary application: StandardScaler is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sklearn-onehotencoder",
+      "slug": "sklearn-onehotencoder",
+      "name": "OneHotEncoder",
+      "library": "sklearn",
+      "subtopic": "Preprocessing",
+      "tags": [
+        "categorical",
+        "encoding"
+      ],
+      "level": "core",
+      "summary": "Encode categories into binary columns.",
+      "syntax": "OneHotEncoder(handle_unknown='error', sparse_output=True)",
+      "description": "Encode categories into binary columns. Use it for standardizing and encoding raw features before model fit and turning categorical columns into model-consumable numeric features. Key parameters: handle_unknown, sparse_output.",
+      "docs": [
+        {
+          "label": "OneHotEncoder",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "handle_unknown",
+          "type": "str",
+          "default": "'error'",
+          "description": "Unseen category strategy.",
+          "values": [
+            "'ignore'",
+            "'error'"
+          ],
+          "pitfalls": [
+            "'error' can break prod inference"
+          ]
+        },
+        {
+          "name": "sparse_output",
+          "type": "bool",
+          "default": "True",
+          "description": "Sparse/dense output.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Dense may be memory-heavy"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "matrix",
+        "description": "Encoded feature matrix.",
+        "shape": "(n_samples, encoded_cols)"
+      },
+      "examples": [
+        {
+          "title": "OneHotEncoder integrated in model training and deployment",
+          "scenario": "Categorical marketing features are encoded, fitted in a pipeline, and reused at inference.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import OneHotEncoder\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.linear_model import LogisticRegression\n\ndf = pd.DataFrame({\n    'channel': ['ads', 'organic', 'email', 'ads', 'seo', 'email'],\n    'monthly_spend': [1200, 450, 700, 1500, 300, 650],\n    'churn': [0, 1, 0, 0, 1, 0]\n})\n\nX = df[['channel', 'monthly_spend']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\n\npreprocess = ColumnTransformer([\n    ('cat', OneHotEncoder(handle_unknown='ignore'), ['channel']),\n    ('num', 'passthrough', ['monthly_spend'])\n])\n\npipeline = Pipeline([\n    ('prep', preprocess),\n    ('model', LogisticRegression(max_iter=500))\n])\n\npipeline.fit(X_train, y_train)\nprint(pipeline.predict(X_test)[:3])\n\nnew_rows = pd.DataFrame({'channel': ['affiliate'], 'monthly_spend': [520]})\nprint(pipeline.predict(new_rows))",
+          "expectedOutput": "Output prints churn predictions for test rows and a new inference row with unseen category handling.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply OneHotEncoder in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "OneHotEncoder additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run OneHotEncoder again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Persist encoder with model."
+      ],
+      "related": [
+        "sklearn-columntransformer",
+        "sklearn-pipeline"
+      ],
+      "overview": "OneHotEncoder converts each category into a sparse/dense binary indicator matrix so linear and tree models can consume categorical fields safely. Use it in training and inference pipelines to keep category handling consistent and avoid train/serve mismatches. Key parameters: handle_unknown, sparse_output. Returns matrix with shape (n_samples, encoded_cols).",
+      "applications": [
+        "Primary application: OneHotEncoder is used for turning categorical columns into model-consumable numeric features.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sklearn-columntransformer",
+      "slug": "sklearn-columntransformer",
+      "name": "ColumnTransformer",
+      "library": "sklearn",
+      "subtopic": "Preprocessing",
+      "tags": [
+        "mixed-types",
+        "pipeline"
+      ],
+      "level": "core",
+      "summary": "Apply per-column transformations.",
+      "syntax": "ColumnTransformer(transformers=[('name', transformer, cols)], remainder='drop')",
+      "description": "Apply per-column transformations. Use it for standardizing and encoding raw features before model fit and training, validating, and serving machine learning models. Key parameters: transformers, remainder.",
+      "docs": [
+        {
+          "label": "ColumnTransformer",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "transformers",
+          "type": "list[tuple]",
+          "description": "Named transformer and column set.",
+          "values": [
+            "('num', scaler, ['amount'])"
+          ],
+          "pitfalls": [
+            "Wrong column names fail at runtime"
+          ]
+        },
+        {
+          "name": "remainder",
+          "type": "str|estimator",
+          "default": "'drop'",
+          "description": "Handle unspecified columns.",
+          "values": [
+            "'drop'",
+            "'passthrough'"
+          ],
+          "pitfalls": [
+            "passthrough can leak raw columns"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "transformer",
+        "description": "Composite transformer.",
+        "shape": "(n_samples, transformed_cols)"
+      },
+      "examples": [
+        {
+          "title": "Mixed-type preprocessing + model fit",
+          "scenario": "Preprocess numeric and categorical fields together before training.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.linear_model import LogisticRegression\n\ndf = pd.DataFrame({\n    'channel': ['ads', 'email', 'ads', 'seo', 'email', 'seo'],\n    'monthly_spend': [1200, 700, 1500, 300, 650, 520],\n    'tenure': [3, 12, 2, 18, 9, 6],\n    'churn': [0, 0, 0, 1, 0, 1]\n})\n\nX = df[['channel', 'monthly_spend', 'tenure']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\n\nprep = ColumnTransformer([\n    ('cat', OneHotEncoder(handle_unknown='ignore'), ['channel']),\n    ('num', StandardScaler(), ['monthly_spend', 'tenure'])\n])\n\npipe = Pipeline([('prep', prep), ('model', LogisticRegression(max_iter=500))])\npipe.fit(X_train, y_train)\nprint(pipe.predict(X_test))",
+          "expectedOutput": "Predicted class array using mixed-type preprocessing pipeline.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply ColumnTransformer in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "ColumnTransformer additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run ColumnTransformer again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use with Pipeline to prevent leakage."
+      ],
+      "related": [
+        "sklearn-pipeline",
+        "sklearn-onehotencoder",
+        "sklearn-standardscaler"
+      ],
+      "overview": "ColumnTransformer applies different preprocessing logic to numeric and categorical subsets in one pass. Use it when your table mixes feature types and you need deterministic, auditable feature engineering before model fit. Key parameters: transformers, remainder. Returns transformer with shape (n_samples, transformed_cols).",
+      "applications": [
+        "Primary application: ColumnTransformer is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sklearn-pipeline",
+      "slug": "sklearn-pipeline",
+      "name": "Pipeline",
+      "library": "sklearn",
+      "subtopic": "Pipelines",
+      "tags": [
+        "workflow",
+        "fit-transform"
+      ],
+      "level": "core",
+      "summary": "Chain preprocessing and estimator steps.",
+      "syntax": "Pipeline(steps=[('prep', transformer), ('model', estimator)])",
+      "description": "Chain preprocessing and estimator steps. Use it for keeping train/inference preprocessing identical and training, validating, and serving machine learning models. Key parameters: steps, memory.",
+      "docs": [
+        {
+          "label": "Pipeline",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "steps",
+          "type": "list[tuple]",
+          "description": "Ordered named steps.",
+          "values": [
+            "('scale', StandardScaler())",
+            "('clf', LogisticRegression())"
+          ],
+          "pitfalls": [
+            "Duplicate step names are invalid"
+          ]
+        },
+        {
+          "name": "memory",
+          "type": "str|None",
+          "description": "Optional cache path.",
+          "values": [
+            "None",
+            "'./cache'"
+          ],
+          "pitfalls": [
+            "Cached stale transforms can confuse debugging"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Pipeline",
+        "description": "Estimator with fit/predict interface.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Pipeline fit, inference, and deployment artifact",
+          "scenario": "Train a reusable pipeline and save/load it for deployment-style scoring.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.pipeline import Pipeline, make_pipeline\nimport joblib\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30],\n    'monthly_spend': [35, 70, 55, 95, 40, 110],\n    'churn': [1, 0, 0, 0, 1, 0]\n})\n\nX = df[['tenure', 'monthly_spend']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\n\npipe = Pipeline([('scale', StandardScaler()), ('model', LogisticRegression(max_iter=500))])\npipe.fit(X_train, y_train)\nprint(pipe.predict(X_test))\n\njoblib.dump(pipe, 'pipeline.joblib')\nloaded = joblib.load('pipeline.joblib')\nprint(loaded.predict(X_test.head(1)))",
+          "expectedOutput": "Predicted classes and a deployed-model single-row prediction.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply Pipeline in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "Pipeline additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run Pipeline again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Tune parameters with step__param format."
+      ],
+      "related": [
+        "sklearn-gridsearchcv",
+        "sklearn-logisticregression"
+      ],
+      "overview": "Pipeline chains preprocessing and model steps into one object so every cross-validation fold and deployment call uses identical transformations. Use it to eliminate leakage and guarantee consistent fit/predict behavior across environments. Key parameters: steps, memory. Returns Pipeline with shape n/a.",
+      "applications": [
+        "Primary application: Pipeline is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sklearn-logisticregression",
+      "slug": "sklearn-logistic-regression",
+      "name": "LogisticRegression",
+      "library": "sklearn",
+      "subtopic": "Models",
+      "tags": [
+        "classification",
+        "linear"
+      ],
+      "level": "core",
+      "summary": "Regularized linear classifier.",
+      "syntax": "LogisticRegression(C=1.0, penalty='l2', solver='lbfgs', max_iter=100)",
+      "description": "Regularized linear classifier. Use it for training estimators for classification or regression and predicting discrete outcomes such as churn, fraud, or approval. Key parameters: C, penalty.",
+      "docs": [
+        {
+          "label": "LogisticRegression",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "C",
+          "type": "float",
+          "default": "1.0",
+          "description": "Inverse regularization.",
+          "values": [
+            "0.1",
+            "1.0",
+            "10.0"
+          ],
+          "pitfalls": [
+            "Large C may overfit"
+          ]
+        },
+        {
+          "name": "penalty",
+          "type": "str",
+          "default": "'l2'",
+          "description": "Regularization norm.",
+          "values": [
+            "'l1'",
+            "'l2'"
+          ],
+          "pitfalls": [
+            "Verify solver compatibility"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator",
+        "description": "Fitted classifier.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "LogisticRegression fit/predict/deploy workflow",
+          "scenario": "Train model, run predictions, and persist artifact for deployment scoring.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\nimport joblib\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30, 18, 5],\n    'monthly_spend': [35, 70, 55, 95, 40, 110, 80, 38],\n    'tickets': [5, 1, 2, 0, 4, 0, 1, 6],\n    'churn': [1, 0, 0, 0, 1, 0, 0, 1]\n})\n\nX = df[['tenure', 'monthly_spend', 'tickets']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)\n\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(preds.shape)\n\njoblib.dump(model, 'sk_model.joblib')\nloaded = joblib.load('sk_model.joblib')\nprint(loaded.predict(X_test.head(1)))",
+          "expectedOutput": "Predictions plus deployed-model inference output.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply LogisticRegression in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "LogisticRegression additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run LogisticRegression again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Scale features for stable convergence."
+      ],
+      "related": [
+        "sklearn-standardscaler",
+        "sklearn-roc-auc-score"
+      ],
+      "overview": "LogisticRegression estimates class probabilities using a linear decision boundary and regularization. Use it for binary or multiclass classification when you need calibrated probabilities and a strong baseline with interpretable coefficients. Key parameters: C, penalty. Returns estimator with shape n/a.",
+      "applications": [
+        "Primary application: LogisticRegression is used for predicting discrete outcomes such as churn, fraud, or approval.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sklearn-randomforestclassifier",
+      "slug": "sklearn-random-forest-classifier",
+      "name": "RandomForestClassifier",
+      "library": "sklearn",
+      "subtopic": "Models",
+      "tags": [
+        "tree",
+        "ensemble"
+      ],
+      "level": "core",
+      "summary": "Ensemble classifier using many decision trees.",
+      "syntax": "RandomForestClassifier(n_estimators=100, max_depth=None, random_state=None)",
+      "description": "Ensemble classifier using many decision trees. Use it for training estimators for classification or regression and training, validating, and serving machine learning models. Key parameters: n_estimators, max_depth.",
+      "docs": [
+        {
+          "label": "RandomForestClassifier",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "n_estimators",
+          "type": "int",
+          "default": "100",
+          "description": "Number of trees.",
+          "values": [
+            "100",
+            "300",
+            "500"
+          ],
+          "pitfalls": [
+            "Too few trees can be unstable"
+          ]
+        },
+        {
+          "name": "max_depth",
+          "type": "int|None",
+          "default": "None",
+          "description": "Tree depth cap.",
+          "values": [
+            "None",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Unlimited depth can overfit"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator",
+        "description": "Fitted tree ensemble.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "RandomForestClassifier fit/predict/deploy workflow",
+          "scenario": "Train model, run predictions, and persist artifact for deployment scoring.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nimport joblib\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30, 18, 5],\n    'monthly_spend': [35, 70, 55, 95, 40, 110, 80, 38],\n    'tickets': [5, 1, 2, 0, 4, 0, 1, 6],\n    'churn': [1, 0, 0, 0, 1, 0, 0, 1]\n})\n\nX = df[['tenure', 'monthly_spend', 'tickets']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)\n\nmodel = RandomForestClassifier(n_estimators=150, random_state=42)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(preds.shape)\n\njoblib.dump(model, 'sk_model.joblib')\nloaded = joblib.load('sk_model.joblib')\nprint(loaded.predict(X_test.head(1)))",
+          "expectedOutput": "Predictions plus deployed-model inference output.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply RandomForestClassifier in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "RandomForestClassifier additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run RandomForestClassifier again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Tune depth and min_samples_leaf with CV."
+      ],
+      "related": [
+        "sklearn-cross-val-score",
+        "sklearn-gridsearchcv"
+      ],
+      "overview": "Ensemble classifier using many decision trees. Use RandomForestClassifier when training estimators for classification or regression. Typical business pattern: training, validating, and serving machine learning models. Key parameters: n_estimators, max_depth. Returns estimator with shape n/a.",
+      "applications": [
+        "Primary application: RandomForestClassifier is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sklearn-cross-val-score",
+      "slug": "sklearn-cross-val-score",
+      "name": "cross_val_score",
+      "library": "sklearn",
+      "subtopic": "Model Selection",
+      "tags": [
+        "cv",
+        "evaluation"
+      ],
+      "level": "core",
+      "summary": "Compute cross-validated metric scores.",
+      "syntax": "cross_val_score(estimator, X, y=None, cv=None, scoring=None)",
+      "description": "Compute cross-validated metric scores. Use it for choosing hyperparameters with validation discipline and training, validating, and serving machine learning models. Key parameters: cv, scoring.",
+      "docs": [
+        {
+          "label": "cross_val_score",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "cv",
+          "type": "int|splitter",
+          "default": "5",
+          "description": "Fold count or splitter object.",
+          "values": [
+            "3",
+            "5",
+            "StratifiedKFold(5)"
+          ],
+          "pitfalls": [
+            "Use time-aware splitters for time series"
+          ]
+        },
+        {
+          "name": "scoring",
+          "type": "str|callable",
+          "description": "Metric to compute.",
+          "values": [
+            "'accuracy'",
+            "'roc_auc'",
+            "'f1'"
+          ],
+          "pitfalls": [
+            "Pick metric aligned to business objective"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "ndarray",
+        "description": "Scores by fold.",
+        "shape": "(cv,)"
+      },
+      "examples": [
+        {
+          "title": "Cross-validation workflow",
+          "scenario": "Validate model stability with fold-based evaluation before deployment.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import cross_val_score\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nmodel = LogisticRegression(max_iter=500)\n\nscores = cross_val_score(model, X, y, cv=3, scoring='accuracy')\nprint(scores)",
+          "expectedOutput": "Fold-level or aggregate validation metrics showing model stability.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply cross_val_score in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "cross_val_score additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run cross_val_score again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Check both mean and standard deviation."
+      ],
+      "related": [
+        "sklearn-train-test-split",
+        "sklearn-gridsearchcv"
+      ],
+      "overview": "Compute cross-validated metric scores. Use cross_val_score when choosing hyperparameters with validation discipline. Typical business pattern: training, validating, and serving machine learning models. Key parameters: cv, scoring. Returns ndarray with shape (cv,).",
+      "applications": [
+        "Primary application: cross_val_score is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sklearn-gridsearchcv",
+      "slug": "sklearn-gridsearchcv",
+      "name": "GridSearchCV",
+      "library": "sklearn",
+      "subtopic": "Model Selection",
+      "tags": [
+        "tuning",
+        "hyperparameters"
+      ],
+      "level": "core",
+      "summary": "Exhaustive hyperparameter search with cross-validation.",
+      "syntax": "GridSearchCV(estimator, param_grid, scoring=None, cv=None, n_jobs=None)",
+      "description": "Exhaustive hyperparameter search with cross-validation. Use it for choosing hyperparameters with validation discipline and training, validating, and serving machine learning models. Key parameters: param_grid, scoring.",
+      "docs": [
+        {
+          "label": "GridSearchCV",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "param_grid",
+          "type": "dict|list[dict]",
+          "description": "Parameter search space.",
+          "values": [
+            "{'C':[0.1,1,10]}",
+            "{'n_estimators':[100,300]}"
+          ],
+          "pitfalls": [
+            "Large grids can be expensive"
+          ]
+        },
+        {
+          "name": "scoring",
+          "type": "str|callable",
+          "description": "Metric to optimize.",
+          "values": [
+            "'roc_auc'",
+            "'accuracy'",
+            "'f1'"
+          ],
+          "pitfalls": [
+            "Use business-relevant metric"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "GridSearchCV",
+        "description": "Fitted search object with best_estimator_.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Hyperparameter search with fit workflow",
+          "scenario": "Tune model hyperparameters and fit best estimator on training data.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import GridSearchCV\nfrom sklearn.ensemble import RandomForestClassifier\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\n\nsearch = GridSearchCV(RandomForestClassifier(random_state=42), {'n_estimators':[50,100], 'max_depth':[2,4]}, cv=3)\nsearch.fit(X, y)\nprint(search.best_params_)\nprint(search.best_estimator_.predict(X[:2]))",
+          "expectedOutput": "Best params dict and predictions from fitted best estimator.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply GridSearchCV in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "GridSearchCV additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run GridSearchCV again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use RandomizedSearchCV for broader spaces."
+      ],
+      "related": [
+        "sklearn-cross-val-score",
+        "sklearn-pipeline"
+      ],
+      "overview": "Exhaustive hyperparameter search with cross-validation. Use GridSearchCV when choosing hyperparameters with validation discipline. Typical business pattern: training, validating, and serving machine learning models. Key parameters: param_grid, scoring. Returns GridSearchCV with shape n/a.",
+      "applications": [
+        "Primary application: GridSearchCV is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sklearn-roc-auc-score",
+      "slug": "sklearn-roc-auc-score",
+      "name": "roc_auc_score",
+      "library": "sklearn",
+      "subtopic": "Metrics",
+      "tags": [
+        "auc",
+        "ranking"
+      ],
+      "level": "core",
+      "summary": "Area under ROC curve.",
+      "syntax": "roc_auc_score(y_true, y_score, average='macro', multi_class='raise')",
+      "description": "Area under ROC curve. Use it for quantifying model quality with target-specific metrics and training, validating, and serving machine learning models. Key parameters: y_true, y_score.",
+      "docs": [
+        {
+          "label": "roc_auc_score",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "y_true",
+          "type": "array-like",
+          "description": "True labels.",
+          "values": [
+            "[0,1,0,1]"
+          ],
+          "pitfalls": [
+            "Binary case requires both classes"
+          ]
+        },
+        {
+          "name": "y_score",
+          "type": "array-like",
+          "description": "Predicted scores/probabilities.",
+          "values": [
+            "predict_proba[:,1]",
+            "decision_function output"
+          ],
+          "pitfalls": [
+            "Hard labels lose ranking info"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "float",
+        "description": "AUC from 0 to 1.",
+        "shape": "scalar"
+      },
+      "examples": [
+        {
+          "title": "Fit model then evaluate with target metric",
+          "scenario": "Complete training workflow that ends with the specific evaluation metric.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:, 1]\nprint(roc_auc_score(y_test, proba))",
+          "expectedOutput": "Printed metric output computed after explicit fit and prediction steps.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply roc_auc_score in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "roc_auc_score additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run roc_auc_score again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair with precision/recall at selected thresholds."
+      ],
+      "related": [
+        "sklearn-logisticregression",
+        "sklearn-cross-val-score"
+      ],
+      "overview": "Area under ROC curve. Use roc_auc_score when quantifying model quality with target-specific metrics. Typical business pattern: training, validating, and serving machine learning models. Key parameters: y_true, y_score. Returns float with shape scalar.",
+      "applications": [
+        "Primary application: roc_auc_score is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sklearn-simpleimputer",
+      "slug": "sklearn-simpleimputer",
+      "name": "SimpleImputer",
+      "library": "sklearn",
+      "subtopic": "Preprocessing",
+      "tags": [
+        "missing-data",
+        "imputation",
+        "preprocessing"
+      ],
+      "level": "extended",
+      "summary": "SimpleImputer fills missing values using statistics such as mean, median, or most frequent.",
+      "syntax": "SimpleImputer(strategy='mean').fit(X).transform(X)",
+      "description": "SimpleImputer fills missing values using statistics such as mean, median, or most frequent. Use it for standardizing and encoding raw features before model fit and handling null-heavy CRM, finance, and operations exports. Key parameter: strategy.",
+      "overview": "SimpleImputer fills missing values using statistics such as mean, median, or most frequent. Use SimpleImputer when standardizing and encoding raw features before model fit. Typical business pattern: handling null-heavy CRM, finance, and operations exports. Key parameter: strategy. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: SimpleImputer is used for handling null-heavy CRM, finance, and operations exports.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "SimpleImputer official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "strategy",
+          "type": "Any",
+          "default": "'mean'",
+          "description": "Controls strategy in SimpleImputer.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "SimpleImputer in a full modeling workflow",
+          "scenario": "Classification workflow from train/test split through fitting and scoring pattern.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1, 1.0], [0.2, 0.9], [0.8, 0.2], [0.9, 0.1], [0.15, 0.85], [0.75, 0.25]])\ny = np.array([0, 0, 1, 1, 0, 1])\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\n\nprint(preds.shape)",
+          "expectedOutput": "Output prints prediction shape after model fit and inference steps.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply SimpleImputer in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "SimpleImputer additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run SimpleImputer again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-minmaxscaler",
+      "slug": "sklearn-minmaxscaler",
+      "name": "MinMaxScaler",
+      "library": "sklearn",
+      "subtopic": "Preprocessing",
+      "tags": [
+        "scaling",
+        "preprocessing",
+        "normalization"
+      ],
+      "level": "extended",
+      "summary": "MinMaxScaler rescales numeric features into a fixed range such as [0, 1].",
+      "syntax": "MinMaxScaler(feature_range=(0, 1)).fit(X).transform(X)",
+      "description": "MinMaxScaler rescales numeric features into a fixed range such as [0, 1]. Use it for standardizing and encoding raw features before model fit and stabilizing feature magnitudes for distance- and gradient-based models. Key parameters: feature_range, 1.",
+      "overview": "MinMaxScaler rescales numeric features into a fixed range such as [0, 1]. Use MinMaxScaler when standardizing and encoding raw features before model fit. Typical business pattern: stabilizing feature magnitudes for distance- and gradient-based models. Key parameters: feature_range, 1. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: MinMaxScaler is used for stabilizing feature magnitudes for distance- and gradient-based models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "MinMaxScaler official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "feature_range",
+          "type": "Any",
+          "default": "(0",
+          "description": "Controls feature_range in MinMaxScaler.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "1",
+          "type": "Any",
+          "description": "Controls 1 in MinMaxScaler.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "MinMaxScaler in a full modeling workflow",
+          "scenario": "Classification workflow from train/test split through fitting and scoring pattern.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1, 1.0], [0.2, 0.9], [0.8, 0.2], [0.9, 0.1], [0.15, 0.85], [0.75, 0.25]])\ny = np.array([0, 0, 1, 1, 0, 1])\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\n\nprint(preds.shape)",
+          "expectedOutput": "Output prints prediction shape after model fit and inference steps.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply MinMaxScaler in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "MinMaxScaler additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run MinMaxScaler again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-ordinalencoder",
+      "slug": "sklearn-ordinalencoder",
+      "name": "OrdinalEncoder",
+      "library": "sklearn",
+      "subtopic": "Preprocessing",
+      "tags": [
+        "encoding",
+        "categorical",
+        "preprocessing"
+      ],
+      "level": "extended",
+      "summary": "OrdinalEncoder encodes categorical features as integer codes.",
+      "syntax": "OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1)",
+      "description": "OrdinalEncoder encodes categorical features as integer codes. Use it for standardizing and encoding raw features before model fit and turning categorical columns into model-consumable numeric features. Key parameters: handle_unknown, unknown_value.",
+      "overview": "OrdinalEncoder encodes categorical features as integer codes. Use OrdinalEncoder when standardizing and encoding raw features before model fit. Typical business pattern: turning categorical columns into model-consumable numeric features. Key parameters: handle_unknown, unknown_value. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: OrdinalEncoder is used for turning categorical columns into model-consumable numeric features.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "OrdinalEncoder official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "handle_unknown",
+          "type": "Any",
+          "default": "'use_encoded_value'",
+          "description": "Controls handle_unknown in OrdinalEncoder.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "unknown_value",
+          "type": "int",
+          "default": "-1",
+          "description": "Controls unknown_value in OrdinalEncoder.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "OrdinalEncoder in a full modeling workflow",
+          "scenario": "Classification workflow from train/test split through fitting and scoring pattern.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1, 1.0], [0.2, 0.9], [0.8, 0.2], [0.9, 0.1], [0.15, 0.85], [0.75, 0.25]])\ny = np.array([0, 0, 1, 1, 0, 1])\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\n\nprint(preds.shape)",
+          "expectedOutput": "Output prints prediction shape after model fit and inference steps.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply OrdinalEncoder in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "OrdinalEncoder additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run OrdinalEncoder again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-labelencoder",
+      "slug": "sklearn-labelencoder",
+      "name": "LabelEncoder",
+      "library": "sklearn",
+      "subtopic": "Preprocessing",
+      "tags": [
+        "target",
+        "encoding",
+        "labels"
+      ],
+      "level": "extended",
+      "summary": "LabelEncoder maps target labels to integer classes for model compatibility.",
+      "syntax": "LabelEncoder().fit(y).transform(y)",
+      "description": "LabelEncoder maps target labels to integer classes for model compatibility. Use it for standardizing and encoding raw features before model fit and turning categorical columns into model-consumable numeric features. Most controls are optional keyword arguments.",
+      "overview": "LabelEncoder maps target labels to integer classes for model compatibility. Use LabelEncoder when standardizing and encoding raw features before model fit. Typical business pattern: turning categorical columns into model-consumable numeric features. Most controls are optional keyword arguments. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: LabelEncoder is used for turning categorical columns into model-consumable numeric features.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "LabelEncoder official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "Any",
+          "description": "Controls inputs in LabelEncoder.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "LabelEncoder in a full modeling workflow",
+          "scenario": "Classification workflow from train/test split through fitting and scoring pattern.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1, 1.0], [0.2, 0.9], [0.8, 0.2], [0.9, 0.1], [0.15, 0.85], [0.75, 0.25]])\ny = np.array([0, 0, 1, 1, 0, 1])\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\n\nprint(preds.shape)",
+          "expectedOutput": "Output prints prediction shape after model fit and inference steps.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply LabelEncoder in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "LabelEncoder additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run LabelEncoder again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-make-pipeline",
+      "slug": "sklearn-make-pipeline",
+      "name": "make_pipeline",
+      "library": "sklearn",
+      "subtopic": "Pipelines",
+      "tags": [
+        "pipeline",
+        "workflow",
+        "reproducibility"
+      ],
+      "level": "extended",
+      "summary": "make_pipeline builds a preprocessing + model pipeline with automatic step naming.",
+      "syntax": "make_pipeline(step1, step2, ...)",
+      "description": "make_pipeline builds a preprocessing + model pipeline with automatic step naming. Use it for keeping train/inference preprocessing identical and training, validating, and serving machine learning models. Key parameters: step1, step2, ....",
+      "overview": "make_pipeline builds a preprocessing + model pipeline with automatic step naming. Use make_pipeline when keeping train/inference preprocessing identical. Typical business pattern: training, validating, and serving machine learning models. Key parameters: step1, step2, .... Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: make_pipeline is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "make_pipeline official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "step1",
+          "type": "Any",
+          "description": "Controls step1 in make_pipeline.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "step2",
+          "type": "Any",
+          "description": "Controls step2 in make_pipeline.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "...",
+          "type": "Any",
+          "description": "Controls ... in make_pipeline.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "Pipeline fit, inference, and deployment artifact",
+          "scenario": "Train a reusable pipeline and save/load it for deployment-style scoring.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.pipeline import Pipeline, make_pipeline\nimport joblib\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30],\n    'monthly_spend': [35, 70, 55, 95, 40, 110],\n    'churn': [1, 0, 0, 0, 1, 0]\n})\n\nX = df[['tenure', 'monthly_spend']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\n\npipe = make_pipeline(StandardScaler(), LogisticRegression(max_iter=500))\npipe.fit(X_train, y_train)\nprint(pipe.predict(X_test))\n\njoblib.dump(pipe, 'pipeline.joblib')\nloaded = joblib.load('pipeline.joblib')\nprint(loaded.predict(X_test.head(1)))",
+          "expectedOutput": "Predicted classes and a deployed-model single-row prediction.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply make_pipeline in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "make_pipeline additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run make_pipeline again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-linearregression",
+      "slug": "sklearn-linearregression",
+      "name": "LinearRegression",
+      "library": "sklearn",
+      "subtopic": "Models",
+      "tags": [
+        "regression",
+        "baseline",
+        "models"
+      ],
+      "level": "extended",
+      "summary": "LinearRegression fits an ordinary least squares model for continuous target prediction.",
+      "syntax": "LinearRegression(fit_intercept=True)",
+      "description": "LinearRegression fits an ordinary least squares model for continuous target prediction. Use it for training estimators for classification or regression and forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameter: fit_intercept.",
+      "overview": "LinearRegression fits an ordinary least squares line that minimizes squared residual error between observed and predicted values. Use it when the target is continuous (for example revenue, units sold, or expected demand) and you need a fast, interpretable baseline before trying more complex models. Key parameter: fit_intercept. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: LinearRegression is used for forecasting continuous outcomes such as sales, revenue, demand, or cost.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "LinearRegression official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "fit_intercept",
+          "type": "Any",
+          "default": "True",
+          "description": "Controls fit_intercept in LinearRegression.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "LinearRegression fit/predict/deploy workflow",
+          "scenario": "Train model, run predictions, and persist artifact for deployment scoring.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nimport joblib\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30, 18, 5],\n    'monthly_spend': [35, 70, 55, 95, 40, 110, 80, 38],\n    'tickets': [5, 1, 2, 0, 4, 0, 1, 6],\n    'churn': [1, 0, 0, 0, 1, 0, 0, 1]\n})\n\nX = df[['tenure', 'monthly_spend', 'tickets']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(preds.shape)\n\njoblib.dump(model, 'sk_model.joblib')\nloaded = joblib.load('sk_model.joblib')\nprint(loaded.predict(X_test.head(1)))",
+          "expectedOutput": "Predictions plus deployed-model inference output.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply LinearRegression in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "LinearRegression additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run LinearRegression again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-ridge",
+      "slug": "sklearn-ridge",
+      "name": "Ridge",
+      "library": "sklearn",
+      "subtopic": "Models",
+      "tags": [
+        "regression",
+        "regularization",
+        "models"
+      ],
+      "level": "extended",
+      "summary": "Ridge adds L2 regularization to linear regression to reduce coefficient variance.",
+      "syntax": "Ridge(alpha=1.0)",
+      "description": "Ridge adds L2 regularization to linear regression to reduce coefficient variance. Use it for training estimators for classification or regression and forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameter: alpha.",
+      "overview": "Ridge adds L2 regularization to linear regression to reduce coefficient variance. Use Ridge when training estimators for classification or regression. Typical business pattern: forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameter: alpha. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: Ridge is used for forecasting continuous outcomes such as sales, revenue, demand, or cost.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "Ridge official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "alpha",
+          "type": "Any",
+          "default": "1.0",
+          "description": "Controls alpha in Ridge.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "Ridge fit/predict/deploy workflow",
+          "scenario": "Train model, run predictions, and persist artifact for deployment scoring.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import Ridge\nimport joblib\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30, 18, 5],\n    'monthly_spend': [35, 70, 55, 95, 40, 110, 80, 38],\n    'tickets': [5, 1, 2, 0, 4, 0, 1, 6],\n    'churn': [1, 0, 0, 0, 1, 0, 0, 1]\n})\n\nX = df[['tenure', 'monthly_spend', 'tickets']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)\n\nmodel = Ridge(alpha=1.0)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(preds.shape)\n\njoblib.dump(model, 'sk_model.joblib')\nloaded = joblib.load('sk_model.joblib')\nprint(loaded.predict(X_test.head(1)))",
+          "expectedOutput": "Predictions plus deployed-model inference output.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply Ridge in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "Ridge additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run Ridge again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-lasso",
+      "slug": "sklearn-lasso",
+      "name": "Lasso",
+      "library": "sklearn",
+      "subtopic": "Models",
+      "tags": [
+        "regression",
+        "regularization",
+        "feature-selection"
+      ],
+      "level": "extended",
+      "summary": "Lasso adds L1 regularization and can drive weak feature coefficients to zero.",
+      "syntax": "Lasso(alpha=1.0)",
+      "description": "Lasso adds L1 regularization and can drive weak feature coefficients to zero. Use it for training estimators for classification or regression and forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameter: alpha.",
+      "overview": "Lasso adds L1 regularization and can drive weak feature coefficients to zero. Use Lasso when training estimators for classification or regression. Typical business pattern: forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameter: alpha. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: Lasso is used for forecasting continuous outcomes such as sales, revenue, demand, or cost.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "Lasso official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "alpha",
+          "type": "Any",
+          "default": "1.0",
+          "description": "Controls alpha in Lasso.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "Lasso fit/predict/deploy workflow",
+          "scenario": "Train model, run predictions, and persist artifact for deployment scoring.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import Lasso\nimport joblib\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30, 18, 5],\n    'monthly_spend': [35, 70, 55, 95, 40, 110, 80, 38],\n    'tickets': [5, 1, 2, 0, 4, 0, 1, 6],\n    'churn': [1, 0, 0, 0, 1, 0, 0, 1]\n})\n\nX = df[['tenure', 'monthly_spend', 'tickets']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)\n\nmodel = Lasso(alpha=0.05)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(preds.shape)\n\njoblib.dump(model, 'sk_model.joblib')\nloaded = joblib.load('sk_model.joblib')\nprint(loaded.predict(X_test.head(1)))",
+          "expectedOutput": "Predictions plus deployed-model inference output.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply Lasso in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "Lasso additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run Lasso again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-decisiontreeclassifier",
+      "slug": "sklearn-decisiontreeclassifier",
+      "name": "DecisionTreeClassifier",
+      "library": "sklearn",
+      "subtopic": "Models",
+      "tags": [
+        "classification",
+        "tree-model",
+        "models"
+      ],
+      "level": "extended",
+      "summary": "DecisionTreeClassifier learns rule-based class splits from feature thresholds.",
+      "syntax": "DecisionTreeClassifier(max_depth=None, random_state=None)",
+      "description": "DecisionTreeClassifier learns rule-based class splits from feature thresholds. Use it for training estimators for classification or regression and predicting discrete outcomes such as churn, fraud, or approval. Key parameters: max_depth, random_state.",
+      "overview": "DecisionTreeClassifier learns rule-based class splits from feature thresholds. Use DecisionTreeClassifier when training estimators for classification or regression. Typical business pattern: predicting discrete outcomes such as churn, fraud, or approval. Key parameters: max_depth, random_state. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: DecisionTreeClassifier is used for predicting discrete outcomes such as churn, fraud, or approval.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DecisionTreeClassifier official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "max_depth",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls max_depth in DecisionTreeClassifier.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "random_state",
+          "type": "int | None",
+          "default": "None",
+          "description": "Controls random_state in DecisionTreeClassifier.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "DecisionTreeClassifier fit/predict/deploy workflow",
+          "scenario": "Train model, run predictions, and persist artifact for deployment scoring.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.tree import DecisionTreeClassifier\nimport joblib\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30, 18, 5],\n    'monthly_spend': [35, 70, 55, 95, 40, 110, 80, 38],\n    'tickets': [5, 1, 2, 0, 4, 0, 1, 6],\n    'churn': [1, 0, 0, 0, 1, 0, 0, 1]\n})\n\nX = df[['tenure', 'monthly_spend', 'tickets']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)\n\nmodel = DecisionTreeClassifier(max_depth=4, random_state=42)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(preds.shape)\n\njoblib.dump(model, 'sk_model.joblib')\nloaded = joblib.load('sk_model.joblib')\nprint(loaded.predict(X_test.head(1)))",
+          "expectedOutput": "Predictions plus deployed-model inference output.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply DecisionTreeClassifier in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "DecisionTreeClassifier additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DecisionTreeClassifier again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-gradientboostingclassifier",
+      "slug": "sklearn-gradientboostingclassifier",
+      "name": "GradientBoostingClassifier",
+      "library": "sklearn",
+      "subtopic": "Models",
+      "tags": [
+        "classification",
+        "boosting",
+        "models"
+      ],
+      "level": "extended",
+      "summary": "GradientBoostingClassifier builds additive trees to reduce classification loss iteratively.",
+      "syntax": "GradientBoostingClassifier(n_estimators=100, learning_rate=0.1)",
+      "description": "GradientBoostingClassifier builds additive trees to reduce classification loss iteratively. Use it for training estimators for classification or regression and predicting discrete outcomes such as churn, fraud, or approval. Key parameters: n_estimators, learning_rate.",
+      "overview": "GradientBoostingClassifier builds additive trees to reduce classification loss iteratively. Use GradientBoostingClassifier when training estimators for classification or regression. Typical business pattern: predicting discrete outcomes such as churn, fraud, or approval. Key parameters: n_estimators, learning_rate. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: GradientBoostingClassifier is used for predicting discrete outcomes such as churn, fraud, or approval.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "GradientBoostingClassifier official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "n_estimators",
+          "type": "int",
+          "default": "100",
+          "description": "Controls n_estimators in GradientBoostingClassifier.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "learning_rate",
+          "type": "Any",
+          "default": "0.1",
+          "description": "Controls learning_rate in GradientBoostingClassifier.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "GradientBoostingClassifier fit/predict/deploy workflow",
+          "scenario": "Train model, run predictions, and persist artifact for deployment scoring.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import GradientBoostingClassifier\nimport joblib\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30, 18, 5],\n    'monthly_spend': [35, 70, 55, 95, 40, 110, 80, 38],\n    'tickets': [5, 1, 2, 0, 4, 0, 1, 6],\n    'churn': [1, 0, 0, 0, 1, 0, 0, 1]\n})\n\nX = df[['tenure', 'monthly_spend', 'tickets']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)\n\nmodel = GradientBoostingClassifier(random_state=42)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(preds.shape)\n\njoblib.dump(model, 'sk_model.joblib')\nloaded = joblib.load('sk_model.joblib')\nprint(loaded.predict(X_test.head(1)))",
+          "expectedOutput": "Predictions plus deployed-model inference output.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply GradientBoostingClassifier in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "GradientBoostingClassifier additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run GradientBoostingClassifier again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-kneighborsclassifier",
+      "slug": "sklearn-kneighborsclassifier",
+      "name": "KNeighborsClassifier",
+      "library": "sklearn",
+      "subtopic": "Models",
+      "tags": [
+        "classification",
+        "distance",
+        "models"
+      ],
+      "level": "extended",
+      "summary": "KNeighborsClassifier predicts class by nearest labeled neighbors in feature space.",
+      "syntax": "KNeighborsClassifier(n_neighbors=5)",
+      "description": "KNeighborsClassifier predicts class by nearest labeled neighbors in feature space. Use it for training estimators for classification or regression and predicting discrete outcomes such as churn, fraud, or approval. Key parameter: n_neighbors.",
+      "overview": "KNeighborsClassifier predicts class by nearest labeled neighbors in feature space. Use KNeighborsClassifier when training estimators for classification or regression. Typical business pattern: predicting discrete outcomes such as churn, fraud, or approval. Key parameter: n_neighbors. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: KNeighborsClassifier is used for predicting discrete outcomes such as churn, fraud, or approval.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "KNeighborsClassifier official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "n_neighbors",
+          "type": "int",
+          "default": "5",
+          "description": "Controls n_neighbors in KNeighborsClassifier.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "KNeighborsClassifier fit/predict/deploy workflow",
+          "scenario": "Train model, run predictions, and persist artifact for deployment scoring.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.neighbors import KNeighborsClassifier\nimport joblib\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30, 18, 5],\n    'monthly_spend': [35, 70, 55, 95, 40, 110, 80, 38],\n    'tickets': [5, 1, 2, 0, 4, 0, 1, 6],\n    'churn': [1, 0, 0, 0, 1, 0, 0, 1]\n})\n\nX = df[['tenure', 'monthly_spend', 'tickets']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)\n\nmodel = KNeighborsClassifier(n_neighbors=3)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(preds.shape)\n\njoblib.dump(model, 'sk_model.joblib')\nloaded = joblib.load('sk_model.joblib')\nprint(loaded.predict(X_test.head(1)))",
+          "expectedOutput": "Predictions plus deployed-model inference output.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply KNeighborsClassifier in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "KNeighborsClassifier additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run KNeighborsClassifier again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-svc",
+      "slug": "sklearn-svc",
+      "name": "SVC",
+      "library": "sklearn",
+      "subtopic": "Models",
+      "tags": [
+        "classification",
+        "svm",
+        "models"
+      ],
+      "level": "extended",
+      "summary": "SVC trains a support vector classifier with margin maximization and optional kernels.",
+      "syntax": "SVC(C=1.0, kernel='rbf')",
+      "description": "SVC trains a support vector classifier with margin maximization and optional kernels. Use it for training estimators for classification or regression and predicting discrete outcomes such as churn, fraud, or approval. Key parameters: C, kernel.",
+      "overview": "SVC trains a support vector classifier with margin maximization and optional kernels. Use SVC when training estimators for classification or regression. Typical business pattern: predicting discrete outcomes such as churn, fraud, or approval. Key parameters: C, kernel. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: SVC is used for predicting discrete outcomes such as churn, fraud, or approval.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "SVC official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "C",
+          "type": "Any",
+          "default": "1.0",
+          "description": "Controls C in SVC.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "kernel",
+          "type": "Any",
+          "default": "'rbf'",
+          "description": "Controls kernel in SVC.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "SVC fit/predict/deploy workflow",
+          "scenario": "Train model, run predictions, and persist artifact for deployment scoring.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.svm import SVC\nimport joblib\n\ndf = pd.DataFrame({\n    'tenure': [3, 12, 8, 24, 6, 30, 18, 5],\n    'monthly_spend': [35, 70, 55, 95, 40, 110, 80, 38],\n    'tickets': [5, 1, 2, 0, 4, 0, 1, 6],\n    'churn': [1, 0, 0, 0, 1, 0, 0, 1]\n})\n\nX = df[['tenure', 'monthly_spend', 'tickets']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)\n\nmodel = SVC(probability=True, random_state=42)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(preds.shape)\n\njoblib.dump(model, 'sk_model.joblib')\nloaded = joblib.load('sk_model.joblib')\nprint(loaded.predict(X_test.head(1)))",
+          "expectedOutput": "Predictions plus deployed-model inference output.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply SVC in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "SVC additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run SVC again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-stratifiedkfold",
+      "slug": "sklearn-stratifiedkfold",
+      "name": "StratifiedKFold",
+      "library": "sklearn",
+      "subtopic": "Model Selection",
+      "tags": [
+        "cv",
+        "validation",
+        "splits"
+      ],
+      "level": "extended",
+      "summary": "StratifiedKFold creates folds that preserve class ratios across splits.",
+      "syntax": "StratifiedKFold(n_splits=5, shuffle=False, random_state=None)",
+      "description": "StratifiedKFold creates folds that preserve class ratios across splits. Use it for choosing hyperparameters with validation discipline and training, validating, and serving machine learning models. Key parameters: n_splits, shuffle, random_state.",
+      "overview": "StratifiedKFold creates folds that preserve class ratios across splits. Use StratifiedKFold when choosing hyperparameters with validation discipline. Typical business pattern: training, validating, and serving machine learning models. Key parameters: n_splits, shuffle, random_state. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: StratifiedKFold is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "StratifiedKFold official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "n_splits",
+          "type": "int",
+          "default": "5",
+          "description": "Controls n_splits in StratifiedKFold.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "shuffle",
+          "type": "Any",
+          "default": "False",
+          "description": "Controls shuffle in StratifiedKFold.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "random_state",
+          "type": "int | None",
+          "default": "None",
+          "description": "Controls random_state in StratifiedKFold.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "Cross-validation workflow",
+          "scenario": "Validate model stability with fold-based evaluation before deployment.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import StratifiedKFold\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nmodel = LogisticRegression(max_iter=500)\n\ncv = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)\nfor fold, (tr, te) in enumerate(cv.split(X, y), 1):\n    model.fit(X[tr], y[tr])\n    print(f'fold={fold}, preds={model.predict(X[te]).tolist()}')",
+          "expectedOutput": "Fold-level or aggregate validation metrics showing model stability.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply StratifiedKFold in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "StratifiedKFold additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run StratifiedKFold again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-cross-validate",
+      "slug": "sklearn-cross-validate",
+      "name": "cross_validate",
+      "library": "sklearn",
+      "subtopic": "Model Selection",
+      "tags": [
+        "cv",
+        "validation",
+        "metrics"
+      ],
+      "level": "extended",
+      "summary": "cross_validate runs multi-metric cross-validation and returns fit/score diagnostics.",
+      "syntax": "cross_validate(estimator, X, y, cv=None, scoring=None)",
+      "description": "cross_validate runs multi-metric cross-validation and returns fit/score diagnostics. Use it for choosing hyperparameters with validation discipline and training, validating, and serving machine learning models. Key parameters: estimator, X, y.",
+      "overview": "cross_validate runs multi-metric cross-validation and returns fit/score diagnostics. Use cross_validate when choosing hyperparameters with validation discipline. Typical business pattern: training, validating, and serving machine learning models. Key parameters: estimator, X, y. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: cross_validate is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "cross_validate official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "estimator",
+          "type": "Any",
+          "description": "Controls estimator in cross_validate.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "X",
+          "type": "Any",
+          "description": "Controls X in cross_validate.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "Any",
+          "description": "Controls y in cross_validate.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "cv",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls cv in cross_validate.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "Cross-validation workflow",
+          "scenario": "Validate model stability with fold-based evaluation before deployment.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import cross_validate\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nmodel = LogisticRegression(max_iter=500)\n\nscores = cross_validate(model, X, y, cv=3, scoring=['accuracy','roc_auc'])\nprint(scores['test_accuracy'])\nprint(scores['test_roc_auc'])",
+          "expectedOutput": "Fold-level or aggregate validation metrics showing model stability.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply cross_validate in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "cross_validate additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run cross_validate again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-randomizedsearchcv",
+      "slug": "sklearn-randomizedsearchcv",
+      "name": "RandomizedSearchCV",
+      "library": "sklearn",
+      "subtopic": "Model Selection",
+      "tags": [
+        "tuning",
+        "search",
+        "optimization"
+      ],
+      "level": "extended",
+      "summary": "RandomizedSearchCV samples hyperparameter combinations with cross-validation.",
+      "syntax": "RandomizedSearchCV(estimator, param_distributions, n_iter=10)",
+      "description": "RandomizedSearchCV samples hyperparameter combinations with cross-validation. Use it for choosing hyperparameters with validation discipline and training, validating, and serving machine learning models. Key parameters: estimator, param_distributions, n_iter.",
+      "overview": "RandomizedSearchCV samples hyperparameter combinations with cross-validation. Use RandomizedSearchCV when choosing hyperparameters with validation discipline. Typical business pattern: training, validating, and serving machine learning models. Key parameters: estimator, param_distributions, n_iter. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: RandomizedSearchCV is used for training, validating, and serving machine learning models.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "RandomizedSearchCV official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "estimator",
+          "type": "Any",
+          "description": "Controls estimator in RandomizedSearchCV.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "param_distributions",
+          "type": "Any",
+          "description": "Controls param_distributions in RandomizedSearchCV.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "n_iter",
+          "type": "int",
+          "default": "10",
+          "description": "Controls n_iter in RandomizedSearchCV.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "Hyperparameter search with fit workflow",
+          "scenario": "Tune model hyperparameters and fit best estimator on training data.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import RandomizedSearchCV\nfrom sklearn.ensemble import RandomForestClassifier\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\n\nsearch = RandomizedSearchCV(RandomForestClassifier(random_state=42), {'n_estimators':[50,100,200], 'max_depth':[2,4,6]}, n_iter=3, cv=3, random_state=42)\nsearch.fit(X, y)\nprint(search.best_params_)\nprint(search.best_estimator_.predict(X[:2]))",
+          "expectedOutput": "Best params dict and predictions from fitted best estimator.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply RandomizedSearchCV in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "RandomizedSearchCV additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run RandomizedSearchCV again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-confusion-matrix",
+      "slug": "sklearn-confusion-matrix",
+      "name": "confusion_matrix",
+      "library": "sklearn",
+      "subtopic": "Metrics",
+      "tags": [
+        "metrics",
+        "classification",
+        "evaluation"
+      ],
+      "level": "extended",
+      "summary": "confusion_matrix counts true/false positives and negatives by class.",
+      "syntax": "confusion_matrix(y_true, y_pred)",
+      "description": "confusion_matrix counts true/false positives and negatives by class. Use it for quantifying model quality with target-specific metrics and predicting discrete outcomes such as churn, fraud, or approval. Key parameters: y_true, y_pred.",
+      "overview": "confusion_matrix counts true/false positives and negatives by class. Use confusion_matrix when quantifying model quality with target-specific metrics. Typical business pattern: predicting discrete outcomes such as churn, fraud, or approval. Key parameters: y_true, y_pred. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: confusion_matrix is used for predicting discrete outcomes such as churn, fraud, or approval.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "confusion_matrix official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "y_true",
+          "type": "Any",
+          "description": "Controls y_true in confusion_matrix.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y_pred",
+          "type": "Any",
+          "description": "Controls y_pred in confusion_matrix.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "Fit model then evaluate with target metric",
+          "scenario": "Complete training workflow that ends with the specific evaluation metric.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import confusion_matrix\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(confusion_matrix(y_test, preds))",
+          "expectedOutput": "Printed metric output computed after explicit fit and prediction steps.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply confusion_matrix in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "confusion_matrix additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run confusion_matrix again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-classification-report",
+      "slug": "sklearn-classification-report",
+      "name": "classification_report",
+      "library": "sklearn",
+      "subtopic": "Metrics",
+      "tags": [
+        "metrics",
+        "classification",
+        "evaluation"
+      ],
+      "level": "extended",
+      "summary": "classification_report summarizes precision, recall, and F1 per class.",
+      "syntax": "classification_report(y_true, y_pred)",
+      "description": "classification_report summarizes precision, recall, and F1 per class. Use it for quantifying model quality with target-specific metrics and predicting discrete outcomes such as churn, fraud, or approval. Key parameters: y_true, y_pred.",
+      "overview": "classification_report summarizes precision, recall, and F1 per class. Use classification_report when quantifying model quality with target-specific metrics. Typical business pattern: predicting discrete outcomes such as churn, fraud, or approval. Key parameters: y_true, y_pred. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: classification_report is used for predicting discrete outcomes such as churn, fraud, or approval.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "classification_report official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "y_true",
+          "type": "Any",
+          "description": "Controls y_true in classification_report.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y_pred",
+          "type": "Any",
+          "description": "Controls y_pred in classification_report.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "Fit model then evaluate with target metric",
+          "scenario": "Complete training workflow that ends with the specific evaluation metric.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import classification_report\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(classification_report(y_test, preds))",
+          "expectedOutput": "Printed metric output computed after explicit fit and prediction steps.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply classification_report in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "classification_report additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run classification_report again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-mean-squared-error",
+      "slug": "sklearn-mean-squared-error",
+      "name": "mean_squared_error",
+      "library": "sklearn",
+      "subtopic": "Metrics",
+      "tags": [
+        "metrics",
+        "regression",
+        "evaluation"
+      ],
+      "level": "extended",
+      "summary": "mean_squared_error computes average squared prediction error for regression.",
+      "syntax": "mean_squared_error(y_true, y_pred)",
+      "description": "mean_squared_error computes average squared prediction error for regression. Use it for quantifying model quality with target-specific metrics and forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameters: y_true, y_pred.",
+      "overview": "mean_squared_error computes average squared prediction error for regression. Use mean_squared_error when quantifying model quality with target-specific metrics. Typical business pattern: forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameters: y_true, y_pred. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: mean_squared_error is used for forecasting continuous outcomes such as sales, revenue, demand, or cost.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "mean_squared_error official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "y_true",
+          "type": "Any",
+          "description": "Controls y_true in mean_squared_error.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y_pred",
+          "type": "Any",
+          "description": "Controls y_pred in mean_squared_error.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "Fit model then evaluate with target metric",
+          "scenario": "Complete training workflow that ends with the specific evaluation metric.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import mean_squared_error\n\nX = np.array([[1],[2],[3],[4],[5],[6]])\ny = np.array([2,4,6,8,10,12])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(mean_squared_error(y_test, preds))",
+          "expectedOutput": "Printed metric output computed after explicit fit and prediction steps.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply mean_squared_error in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "mean_squared_error additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run mean_squared_error again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-r2-score",
+      "slug": "sklearn-r2-score",
+      "name": "r2_score",
+      "library": "sklearn",
+      "subtopic": "Metrics",
+      "tags": [
+        "metrics",
+        "regression",
+        "evaluation"
+      ],
+      "level": "extended",
+      "summary": "r2_score measures variance explained by regression predictions.",
+      "syntax": "r2_score(y_true, y_pred)",
+      "description": "r2_score measures variance explained by regression predictions. Use it for quantifying model quality with target-specific metrics and forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameters: y_true, y_pred.",
+      "overview": "r2_score measures variance explained by regression predictions. Use r2_score when quantifying model quality with target-specific metrics. Typical business pattern: forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameters: y_true, y_pred. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: r2_score is used for forecasting continuous outcomes such as sales, revenue, demand, or cost.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "r2_score official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "y_true",
+          "type": "Any",
+          "description": "Controls y_true in r2_score.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y_pred",
+          "type": "Any",
+          "description": "Controls y_pred in r2_score.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "Fit model then evaluate with target metric",
+          "scenario": "Complete training workflow that ends with the specific evaluation metric.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import r2_score\n\nX = np.array([[1],[2],[3],[4],[5],[6]])\ny = np.array([2,4,6,8,10,12])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nprint(r2_score(y_test, preds))",
+          "expectedOutput": "Printed metric output computed after explicit fit and prediction steps.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply r2_score in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "r2_score additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run r2_score again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sklearn-pca",
+      "slug": "sklearn-pca",
+      "name": "PCA",
+      "library": "sklearn",
+      "subtopic": "Preprocessing",
+      "tags": [
+        "dimensionality-reduction",
+        "features",
+        "preprocessing"
+      ],
+      "level": "extended",
+      "summary": "PCA projects features into orthogonal components that capture maximal variance.",
+      "syntax": "PCA(n_components=None).fit(X).transform(X)",
+      "description": "PCA projects features into orthogonal components that capture maximal variance. Use it for standardizing and encoding raw features before model fit and cleaning raw feature columns before model fitting. Key parameter: n_components.",
+      "overview": "PCA projects features into orthogonal components that capture maximal variance. Use PCA when standardizing and encoding raw features before model fit. Typical business pattern: cleaning raw feature columns before model fitting. Key parameter: n_components. Returns estimator | array | metric with shape depends on estimator and data.",
+      "applications": [
+        "Primary application: PCA is used for cleaning raw feature columns before model fitting.",
+        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "PCA official docs",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "n_components",
+          "type": "int",
+          "default": "None",
+          "description": "Controls n_components in PCA.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "estimator | array | metric",
+        "shape": "depends on estimator and data",
+        "description": "Fitted estimator, transformed matrix, or evaluation scalar."
+      },
+      "examples": [
+        {
+          "title": "Dimensionality reduction before model fitting",
+          "scenario": "Reduce correlated features with PCA and then fit a downstream classifier.",
+          "code": "import numpy as np\nfrom sklearn.decomposition import PCA\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0,0.9],[0.2,0.8,0.7],[0.8,0.2,0.3],[0.9,0.1,0.2],[0.15,0.85,0.8],[0.75,0.25,0.4]])\ny = np.array([0,0,1,1,0,1])\n\npca = PCA(n_components=2, random_state=42)\nX_reduced = pca.fit_transform(X)\n\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_reduced, y)\nprint(X_reduced.shape)\nprint(model.predict(X_reduced[:2]))",
+          "expectedOutput": "Reduced feature shape and model predictions on reduced space.",
+          "walkthrough": [
+            "Prepare a toy but realistic dataset with business feature names.",
+            "Apply PCA in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
+            "Reuse the same structure with your production feature table and deployment checks."
+          ]
+        },
+        {
+          "title": "PCA additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run PCA again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    }
+  ],
+  "overview": "scikit-learn standardizes practical machine learning with composable APIs for preprocessing, model training, validation, hyperparameter tuning, and evaluation.",
+  "applications": [
+    "Production-grade classification and regression workflows.",
+    "Reliable preprocessing pipelines for mixed data types.",
+    "Model selection with cross-validation and robust metrics."
+  ]
+}

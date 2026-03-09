@@ -1,0 +1,3147 @@
+{
+  "library": "pandas",
+  "title": "Pandas",
+  "officialDocs": "https://pandas.pydata.org/docs/",
+  "subtopics": [
+    "I/O",
+    "Selection",
+    "Transformation",
+    "Join",
+    "Aggregation",
+    "Missing Data",
+    "Time Series"
+  ],
+  "commandGroups": [
+    {
+      "name": "Load and Inspect",
+      "docs": [
+        {
+          "label": "Pandas IO Tools",
+          "url": "https://pandas.pydata.org/docs/user_guide/io.html"
+        }
+      ],
+      "commandIds": [
+        "pandas-read-csv",
+        "pandas-head",
+        "pandas-sort-values"
+      ]
+    },
+    {
+      "name": "Selection and Transformation",
+      "docs": [
+        {
+          "label": "Indexing and Selecting",
+          "url": "https://pandas.pydata.org/docs/user_guide/indexing.html"
+        }
+      ],
+      "commandIds": [
+        "pandas-loc",
+        "pandas-query",
+        "pandas-assign",
+        "pandas-fillna",
+        "pandas-to-datetime"
+      ]
+    },
+    {
+      "name": "Joins and Aggregation",
+      "docs": [
+        {
+          "label": "Merge, Join, Concat",
+          "url": "https://pandas.pydata.org/docs/user_guide/merging.html"
+        },
+        {
+          "label": "Group By",
+          "url": "https://pandas.pydata.org/docs/user_guide/groupby.html"
+        }
+      ],
+      "commandIds": [
+        "pandas-merge",
+        "pandas-groupby-agg",
+        "pandas-pivot-table",
+        "pandas-resample"
+      ]
+    },
+    {
+      "name": "Extended APIs and Step-by-Step Patterns",
+      "docs": [
+        {
+          "label": "Pandas official docs",
+          "url": "https://pandas.pydata.org/docs/"
+        }
+      ],
+      "commandIds": [
+        "pandas-read-excel",
+        "pandas-info",
+        "pandas-describe",
+        "pandas-iloc",
+        "pandas-drop",
+        "pandas-rename",
+        "pandas-astype",
+        "pandas-value-counts",
+        "pandas-groupby-transform",
+        "pandas-melt",
+        "pandas-concat",
+        "pandas-join",
+        "pandas-drop-duplicates",
+        "pandas-isna",
+        "pandas-dropna",
+        "pandas-replace",
+        "pandas-cut",
+        "pandas-qcut",
+        "pandas-rolling",
+        "pandas-shift"
+      ]
+    }
+  ],
+  "cheatSheet": [
+    "pandas-read-csv",
+    "pandas-head",
+    "pandas-loc",
+    "pandas-assign",
+    "pandas-query",
+    "pandas-merge",
+    "pandas-groupby-agg",
+    "pandas-pivot-table",
+    "pandas-sort-values",
+    "pandas-fillna",
+    "pandas-to-datetime",
+    "pandas-resample",
+    "pandas-read-excel",
+    "pandas-info",
+    "pandas-describe",
+    "pandas-iloc",
+    "pandas-drop",
+    "pandas-rename",
+    "pandas-astype",
+    "pandas-value-counts",
+    "pandas-groupby-transform",
+    "pandas-melt",
+    "pandas-concat",
+    "pandas-join",
+    "pandas-drop-duplicates",
+    "pandas-isna",
+    "pandas-dropna",
+    "pandas-replace",
+    "pandas-cut",
+    "pandas-qcut",
+    "pandas-rolling",
+    "pandas-shift"
+  ],
+  "coverageOutline": [
+    {
+      "topic": "Indexing and Selection",
+      "docUrl": "https://pandas.pydata.org/docs/user_guide/indexing.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "loc",
+        "iloc",
+        "query",
+        "filter"
+      ]
+    },
+    {
+      "topic": "Window Functions",
+      "docUrl": "https://pandas.pydata.org/docs/user_guide/window.html",
+      "status": "planned",
+      "highUsageApis": [
+        "rolling",
+        "expanding",
+        "ewm"
+      ]
+    },
+    {
+      "topic": "Missing Data",
+      "docUrl": "https://pandas.pydata.org/docs/user_guide/missing_data.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "isna",
+        "fillna",
+        "dropna",
+        "interpolate"
+      ]
+    },
+    {
+      "topic": "Reshaping",
+      "docUrl": "https://pandas.pydata.org/docs/user_guide/reshaping.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "pivot_table",
+        "melt",
+        "stack",
+        "unstack"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "pandas-read-csv",
+      "slug": "pandas-read-csv",
+      "name": "pandas.read_csv",
+      "library": "pandas",
+      "subtopic": "I/O",
+      "tags": [
+        "io",
+        "csv",
+        "loading"
+      ],
+      "level": "core",
+      "summary": "Read CSV files into a DataFrame.",
+      "syntax": "pd.read_csv(filepath_or_buffer, sep=',', usecols=None, dtype=None, parse_dates=None)",
+      "description": "Read CSV files into a DataFrame. Use it for ingesting exports and serializing clean outputs and cleaning and reshaping transaction/event tables. Key parameters: filepath_or_buffer, usecols, dtype.",
+      "docs": [
+        {
+          "label": "pandas.read_csv",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "filepath_or_buffer",
+          "type": "str | path-like | file-like",
+          "description": "CSV source path or open file object.",
+          "values": [
+            "'sales.csv'",
+            "Path('data/orders.csv')"
+          ],
+          "pitfalls": [
+            "Wrong relative path is the most common failure"
+          ]
+        },
+        {
+          "name": "usecols",
+          "type": "list-like | callable",
+          "description": "Subset columns to load.",
+          "values": [
+            "['order_id', 'amount']",
+            "lambda c: c.startswith('metric_')"
+          ],
+          "pitfalls": [
+            "Missing requested column raises error"
+          ]
+        },
+        {
+          "name": "dtype",
+          "type": "dict[str, type] | type",
+          "description": "Column type map.",
+          "values": [
+            "{'store_id': 'string'}",
+            "{'amount': 'float64'}"
+          ],
+          "pitfalls": [
+            "Bad dtype assignment fails on dirty data"
+          ]
+        },
+        {
+          "name": "parse_dates",
+          "type": "bool | list",
+          "description": "Columns to parse as datetimes.",
+          "values": [
+            "['order_date']"
+          ],
+          "pitfalls": [
+            "Mixed formats may produce object dtype"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "description": "Loaded table.",
+        "shape": "(rows, columns)"
+      },
+      "examples": [
+        {
+          "title": "Load daily sales extract",
+          "scenario": "Finance ingests exported daily orders for gross revenue reporting.",
+          "code": "import pandas as pd\nfrom io import StringIO\ncsv_data = StringIO('order_id,order_date,amount\\n1,2026-03-01,120.5\\n2,2026-03-02,89.0')\ndf = pd.read_csv(csv_data, parse_dates=['order_date'])\nprint(df.dtypes.to_dict())",
+          "expectedOutput": "{'order_id': dtype('int64'), 'order_date': datetime64[ns], 'amount': dtype('float64')}",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply pandas.read_csv with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "pandas.read_csv additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = pd.read_csv(filepath_or_buffer, sep=',', usecols=None, dtype=None, pnp.array([1, 1, 2, 3])se_dates=None)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run pandas.read_csv again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use chunksize for very large files to reduce memory pressure."
+      ],
+      "related": [
+        "pandas-to-datetime",
+        "pandas-head"
+      ],
+      "overview": "Read CSV files into a DataFrame. Use pandas.read_csv when ingesting exports and serializing clean outputs. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: filepath_or_buffer, usecols, dtype. Returns pandas.DataFrame with shape (rows, columns).",
+      "applications": [
+        "Primary application: pandas.read_csv is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-head",
+      "slug": "pandas-dataframe-head",
+      "name": "DataFrame.head",
+      "library": "pandas",
+      "subtopic": "I/O",
+      "tags": [
+        "inspect",
+        "preview"
+      ],
+      "level": "core",
+      "summary": "Return first n rows for quick inspection.",
+      "syntax": "DataFrame.head(n=5)",
+      "description": "Return first n rows for quick inspection. Use it for ingesting exports and serializing clean outputs and cleaning and reshaping transaction/event tables. Key parameter: n.",
+      "docs": [
+        {
+          "label": "DataFrame.head",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "n",
+          "type": "int",
+          "default": "5",
+          "description": "Number of rows to return.",
+          "values": [
+            "5",
+            "10",
+            "20"
+          ],
+          "pitfalls": [
+            "Does not guarantee representative sample"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "description": "Top n rows.",
+        "shape": "(n, columns)"
+      },
+      "examples": [
+        {
+          "title": "Sanity-check campaign dataset",
+          "scenario": "Marketing validates columns before feature engineering.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'campaign': ['A','B','C'], 'spend':[1200,900,1500]})\nprint(df.head(2))",
+          "expectedOutput": "2-row DataFrame with campaign and spend columns",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply DataFrame.head with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "DataFrame.head additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = DataFrame.head(n=5)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.head again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use sample() for random previews."
+      ],
+      "related": [
+        "pandas-read-csv"
+      ],
+      "overview": "Return first n rows for quick inspection. Use DataFrame.head when ingesting exports and serializing clean outputs. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameter: n. Returns pandas.DataFrame with shape (n, columns).",
+      "applications": [
+        "Primary application: DataFrame.head is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-loc",
+      "slug": "pandas-dataframe-loc",
+      "name": "DataFrame.loc",
+      "library": "pandas",
+      "subtopic": "Selection",
+      "tags": [
+        "selection",
+        "indexing"
+      ],
+      "level": "core",
+      "summary": "Label-based row/column selection.",
+      "syntax": "df.loc[row_selector, col_selector]",
+      "description": "Label-based row/column selection. Use it for filtering and selecting numeric values efficiently and cleaning and reshaping transaction/event tables. Key parameters: row_selector, col_selector.",
+      "docs": [
+        {
+          "label": "DataFrame.loc",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "row_selector",
+          "type": "label | list-like | bool mask | slice",
+          "description": "Rows to select.",
+          "values": [
+            "df['amount'] > 100",
+            "'2026-03-01':'2026-03-10'"
+          ],
+          "pitfalls": [
+            "Boolean mask must align with DataFrame index"
+          ]
+        },
+        {
+          "name": "col_selector",
+          "type": "label | list-like | slice",
+          "description": "Columns to select.",
+          "values": [
+            "'amount'",
+            "['region','amount']"
+          ],
+          "pitfalls": [
+            "KeyError for missing column labels"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.Series | pandas.DataFrame",
+        "description": "Selected data view/copy depending on operation.",
+        "shape": "depends on selectors"
+      },
+      "examples": [
+        {
+          "title": "Filter high-value orders",
+          "scenario": "E-commerce analyst isolates orders above $100 in North region.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'region':['N','S','N'], 'amount':[80,120,210]})\nout = df.loc[(df['region']=='N') & (df['amount']>100), ['region','amount']]\nprint(out)",
+          "expectedOutput": "1-row DataFrame for region N with amount 210",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply DataFrame.loc with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "DataFrame.loc additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.loc[row_selector, col_selector]\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.loc again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use .copy() after slicing when you plan to mutate."
+      ],
+      "related": [
+        "pandas-query",
+        "pandas-assign"
+      ],
+      "overview": "Label-based row/column selection. Use DataFrame.loc when filtering and selecting numeric values efficiently. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: row_selector, col_selector. Returns pandas.Series | pandas.DataFrame with shape depends on selectors.",
+      "applications": [
+        "Primary application: DataFrame.loc is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-assign",
+      "slug": "pandas-dataframe-assign",
+      "name": "DataFrame.assign",
+      "library": "pandas",
+      "subtopic": "Transformation",
+      "tags": [
+        "feature-engineering",
+        "columns"
+      ],
+      "level": "core",
+      "summary": "Return new DataFrame with added/updated columns.",
+      "syntax": "df.assign(new_col=expr, other=lambda x: ...)",
+      "description": "Return new DataFrame with added/updated columns. Use it for cleaning and engineering columns in tabular datasets and cleaning and reshaping transaction/event tables. Key parameter: **kwargs.",
+      "docs": [
+        {
+          "label": "DataFrame.assign",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.assign.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "**kwargs",
+          "type": "column expressions",
+          "description": "Name-expression mapping for new columns.",
+          "values": [
+            "margin=df['rev']-df['cost']",
+            "ratio=lambda x: x.a/x.b"
+          ],
+          "pitfalls": [
+            "Later expressions can reference earlier assigned columns only in order"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "description": "New DataFrame with derived columns.",
+        "shape": "(rows, columns + new_cols)"
+      },
+      "examples": [
+        {
+          "title": "Create contribution margin column",
+          "scenario": "Finance adds margin and margin_pct to order table.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'revenue':[100,140], 'cost':[70,95]})\nout = df.assign(margin=lambda x: x['revenue']-x['cost'], margin_pct=lambda x: x['margin']/x['revenue'])\nprint(out[['margin','margin_pct']])",
+          "expectedOutput": "2-row DataFrame with margin and margin_pct",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply DataFrame.assign with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "DataFrame.assign additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.assign(new_col=expr, other=lambda x: ...)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.assign again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Prefer assign in chain pipelines for traceability."
+      ],
+      "related": [
+        "pandas-query",
+        "pandas-groupby-agg"
+      ],
+      "overview": "Return new DataFrame with added/updated columns. Use DataFrame.assign when cleaning and engineering columns in tabular datasets. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameter: **kwargs. Returns pandas.DataFrame with shape (rows, columns + new_cols).",
+      "applications": [
+        "Primary application: DataFrame.assign is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-query",
+      "slug": "pandas-dataframe-query",
+      "name": "DataFrame.query",
+      "library": "pandas",
+      "subtopic": "Selection",
+      "tags": [
+        "filter",
+        "expression"
+      ],
+      "level": "core",
+      "summary": "Filter rows using expression strings.",
+      "syntax": "df.query(expr, engine='numexpr')",
+      "description": "Filter rows using expression strings. Use it for filtering and selecting numeric values efficiently and cleaning and reshaping transaction/event tables. Key parameters: expr, engine.",
+      "docs": [
+        {
+          "label": "DataFrame.query",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.query.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "expr",
+          "type": "str",
+          "description": "Boolean expression over columns.",
+          "values": [
+            "'amount > 100 and region == \"N\"'"
+          ],
+          "pitfalls": [
+            "Column names with spaces require backticks"
+          ]
+        },
+        {
+          "name": "engine",
+          "type": "str",
+          "default": "'numexpr'",
+          "description": "Expression evaluation engine.",
+          "values": [
+            "'numexpr'",
+            "'python'"
+          ],
+          "pitfalls": [
+            "numexpr may not support all Python operations"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "description": "Filtered rows.",
+        "shape": "(<=rows, columns)"
+      },
+      "examples": [
+        {
+          "title": "Find at-risk subscriptions",
+          "scenario": "SaaS team filters customers with low engagement and high invoice age.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'engagement':[0.2,0.8,0.3], 'invoice_days':[45,10,60]})\nout = df.query('engagement < 0.4 and invoice_days >= 30')\nprint(out.shape)",
+          "expectedOutput": "(2, 2)",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply DataFrame.query with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "DataFrame.query additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.0.9uery(expr, engine='numexpr')\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.query again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use @var syntax to reference Python variables in query strings."
+      ],
+      "related": [
+        "pandas-loc"
+      ],
+      "overview": "Filter rows using expression strings. Use DataFrame.query when filtering and selecting numeric values efficiently. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: expr, engine. Returns pandas.DataFrame with shape (<=rows, columns).",
+      "applications": [
+        "Primary application: DataFrame.query is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-merge",
+      "slug": "pandas-dataframe-merge",
+      "name": "DataFrame.merge",
+      "library": "pandas",
+      "subtopic": "Join",
+      "tags": [
+        "join",
+        "sql",
+        "combine"
+      ],
+      "level": "core",
+      "summary": "Database-style join between DataFrames.",
+      "syntax": "df_left.merge(df_right, how='inner', on=None, left_on=None, right_on=None)",
+      "description": "Database-style join between DataFrames. Use it for combining fact tables with lookup dimensions and combining transactional tables with customer/product reference data. Key parameters: how, on / left_on / right_on, validate.",
+      "docs": [
+        {
+          "label": "DataFrame.merge",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "how",
+          "type": "{'left','right','inner','outer','cross'}",
+          "default": "'inner'",
+          "description": "Join strategy.",
+          "values": [
+            "left",
+            "inner",
+            "outer"
+          ],
+          "pitfalls": [
+            "Many-to-many joins can explode row counts"
+          ]
+        },
+        {
+          "name": "on / left_on / right_on",
+          "type": "str | list[str]",
+          "description": "Join key columns.",
+          "values": [
+            "'customer_id'",
+            "['store_id','week']"
+          ],
+          "pitfalls": [
+            "Key dtype mismatch yields unexpected unmatched rows"
+          ]
+        },
+        {
+          "name": "validate",
+          "type": "str",
+          "description": "Join cardinality check.",
+          "values": [
+            "'1:1'",
+            "'1:m'",
+            "'m:1'"
+          ],
+          "pitfalls": [
+            "Skipping validate can hide data quality issues"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "description": "Joined table.",
+        "shape": "depends on join cardinality"
+      },
+      "examples": [
+        {
+          "title": "Attach plan tier to invoices",
+          "scenario": "Billing analytics joins invoice facts with account dimension.",
+          "code": "import pandas as pd\ninv = pd.DataFrame({'account_id':[1,2,3], 'amount':[120,80,200]})\nacct = pd.DataFrame({'account_id':[1,2,3], 'tier':['Pro','Basic','Enterprise']})\nout = inv.merge(acct, on='account_id', how='left', validate='1:1')\nprint(out.head())",
+          "expectedOutput": "3-row DataFrame with amount and tier columns",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply DataFrame.merge with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "DataFrame.merge additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df_left.merge(df_right, how='inner', on=None, left_on=None, right_on=None)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.merge again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Add indicator=True when auditing unmatched keys."
+      ],
+      "related": [
+        "pandas-groupby-agg",
+        "pandas-pivot-table"
+      ],
+      "overview": "Database-style join between DataFrames. Use DataFrame.merge when combining fact tables with lookup dimensions. Typical business pattern: combining transactional tables with customer/product reference data. Key parameters: how, on / left_on / right_on, validate. Returns pandas.DataFrame with shape depends on join cardinality.",
+      "applications": [
+        "Primary application: DataFrame.merge is used for combining transactional tables with customer/product reference data.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-groupby-agg",
+      "slug": "pandas-groupby-agg",
+      "name": "DataFrame.groupby(...).agg",
+      "library": "pandas",
+      "subtopic": "Aggregation",
+      "tags": [
+        "groupby",
+        "agg",
+        "kpi"
+      ],
+      "level": "core",
+      "summary": "Split-apply-combine aggregation by keys.",
+      "syntax": "df.groupby(keys, as_index=True).agg(named_agg)",
+      "description": "Split-apply-combine aggregation by keys. Use it for building grouped KPI tables for reporting and cleaning and reshaping transaction/event tables. Key parameters: keys, as_index, named_agg.",
+      "docs": [
+        {
+          "label": "GroupBy.agg",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.DataFrameGroupBy.agg.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "keys",
+          "type": "label | list[label]",
+          "description": "Grouping columns.",
+          "values": [
+            "'region'",
+            "['region','channel']"
+          ],
+          "pitfalls": [
+            "High-cardinality keys can create huge outputs"
+          ]
+        },
+        {
+          "name": "as_index",
+          "type": "bool",
+          "default": "True",
+          "description": "Whether groups become index.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "as_index=True may confuse downstream merge code"
+          ]
+        },
+        {
+          "name": "named_agg",
+          "type": "dict-like",
+          "description": "Named output aggregations.",
+          "values": [
+            "sales_sum=('sales','sum')",
+            "orders=('id','count')"
+          ],
+          "pitfalls": [
+            "Mixing old and new agg syntax can be hard to read"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "description": "Grouped summary table.",
+        "shape": "(num_groups, num_metrics)"
+      },
+      "examples": [
+        {
+          "title": "Weekly revenue by channel",
+          "scenario": "Growth team summarizes order revenue and count by acquisition channel.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'channel':['ads','ads','organic'], 'revenue':[100,140,90], 'order_id':[1,2,3]})\nout = df.groupby('channel', as_index=False).agg(total_revenue=('revenue','sum'), orders=('order_id','count'))\nprint(out)",
+          "expectedOutput": "2-row DataFrame with channel, total_revenue, orders",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply DataFrame.groupby(...).agg with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "DataFrame.groupby(...).agg additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.groupby(keys, as_index=True).agg(named_agg)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.groupby(...).agg again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Reset index when you need flat columns for BI exports."
+      ],
+      "related": [
+        "pandas-pivot-table",
+        "pandas-merge"
+      ],
+      "overview": "Split-apply-combine aggregation by keys. Use DataFrame.groupby(...).agg when building grouped KPI tables for reporting. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: keys, as_index, named_agg. Returns pandas.DataFrame with shape (num_groups, num_metrics).",
+      "applications": [
+        "Primary application: DataFrame.groupby(...).agg is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-pivot-table",
+      "slug": "pandas-pivot-table",
+      "name": "DataFrame.pivot_table",
+      "library": "pandas",
+      "subtopic": "Aggregation",
+      "tags": [
+        "pivot",
+        "matrix",
+        "summary"
+      ],
+      "level": "core",
+      "summary": "Create spreadsheet-style aggregated pivot tables.",
+      "syntax": "df.pivot_table(values, index, columns=None, aggfunc='mean', fill_value=None)",
+      "description": "Create spreadsheet-style aggregated pivot tables. Use it for building grouped KPI tables for reporting and cleaning and reshaping transaction/event tables. Key parameters: values, index, columns, aggfunc.",
+      "docs": [
+        {
+          "label": "DataFrame.pivot_table",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot_table.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "values",
+          "type": "str | list[str]",
+          "description": "Metric column(s) to aggregate.",
+          "values": [
+            "'revenue'",
+            "['revenue','orders']"
+          ],
+          "pitfalls": [
+            "Non-numeric values need compatible aggfunc"
+          ]
+        },
+        {
+          "name": "index, columns",
+          "type": "str | list[str]",
+          "description": "Row/column grouping keys.",
+          "values": [
+            "index='region', columns='month'"
+          ],
+          "pitfalls": [
+            "Large cardinality creates very wide pivot"
+          ]
+        },
+        {
+          "name": "aggfunc",
+          "type": "str | function | list",
+          "default": "'mean'",
+          "description": "Aggregation function(s).",
+          "values": [
+            "'sum'",
+            "'mean'",
+            "'count'"
+          ],
+          "pitfalls": [
+            "Multiple aggfunc produce MultiIndex columns"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "description": "Pivoted summary matrix.",
+        "shape": "(len(index groups), len(column groups))"
+      },
+      "examples": [
+        {
+          "title": "Region x channel revenue matrix",
+          "scenario": "Leadership review needs compact matrix for sales distribution.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'region':['N','N','S'], 'channel':['ads','organic','ads'], 'revenue':[120,90,140]})\npvt = df.pivot_table(values='revenue', index='region', columns='channel', aggfunc='sum', fill_value=0)\nprint(pvt)",
+          "expectedOutput": "2x2 pivot with summed revenue values",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply DataFrame.pivot_table with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "DataFrame.pivot_table additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.pivot_table(records[0]s, index, columns=None, aggfunc='mean', 0.5=None)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.pivot_table again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use fill_value to avoid NaNs in dashboard exports."
+      ],
+      "related": [
+        "pandas-groupby-agg"
+      ],
+      "overview": "Create spreadsheet-style aggregated pivot tables. Use DataFrame.pivot_table when building grouped KPI tables for reporting. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: values, index, columns, aggfunc. Returns pandas.DataFrame with shape (len(index groups), len(column groups)).",
+      "applications": [
+        "Primary application: DataFrame.pivot_table is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-sort-values",
+      "slug": "pandas-sort-values",
+      "name": "DataFrame.sort_values",
+      "library": "pandas",
+      "subtopic": "Transformation",
+      "tags": [
+        "sorting",
+        "ranking"
+      ],
+      "level": "core",
+      "summary": "Sort rows by one or more columns.",
+      "syntax": "df.sort_values(by, ascending=True, na_position='last')",
+      "description": "Sort rows by one or more columns. Use it for cleaning and engineering columns in tabular datasets and cleaning and reshaping transaction/event tables. Key parameters: by, ascending, na_position.",
+      "docs": [
+        {
+          "label": "DataFrame.sort_values",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "by",
+          "type": "str | list[str]",
+          "description": "Sort key columns.",
+          "values": [
+            "'revenue'",
+            "['region','revenue']"
+          ],
+          "pitfalls": [
+            "Mixed dtypes can produce unexpected ordering"
+          ]
+        },
+        {
+          "name": "ascending",
+          "type": "bool | list[bool]",
+          "default": "True",
+          "description": "Sort direction.",
+          "values": [
+            "True",
+            "False",
+            "[True, False]"
+          ],
+          "pitfalls": [
+            "List length must match number of by columns"
+          ]
+        },
+        {
+          "name": "na_position",
+          "type": "{'first','last'}",
+          "default": "'last'",
+          "description": "Where to place missing values.",
+          "values": [
+            "'first'",
+            "'last'"
+          ],
+          "pitfalls": [
+            "Default can hide missing rows at bottom"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "description": "Sorted DataFrame.",
+        "shape": "same as input"
+      },
+      "examples": [
+        {
+          "title": "Top 3 risky accounts",
+          "scenario": "Risk ops sorts accounts by descending risk score.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'account':[101,102,103], 'risk_score':[0.12,0.82,0.55]})\nprint(df.sort_values('risk_score', ascending=False).head(3))",
+          "expectedOutput": "Rows ordered by risk_score: 102, 103, 101",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply DataFrame.sort_values with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "DataFrame.sort_values additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.sort_records[0]s(by, ascending=True, na_position='last')\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.sort_values again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use stable mergesort when deterministic order on ties matters."
+      ],
+      "related": [
+        "pandas-head"
+      ],
+      "overview": "Sort rows by one or more columns. Use DataFrame.sort_values when cleaning and engineering columns in tabular datasets. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: by, ascending, na_position. Returns pandas.DataFrame with shape same as input.",
+      "applications": [
+        "Primary application: DataFrame.sort_values is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-fillna",
+      "slug": "pandas-fillna",
+      "name": "DataFrame.fillna",
+      "library": "pandas",
+      "subtopic": "Missing Data",
+      "tags": [
+        "missing",
+        "imputation"
+      ],
+      "level": "core",
+      "summary": "Fill missing values with scalar, dict, or method.",
+      "syntax": "df.fillna(value=None, method=None, axis=None, limit=None)",
+      "description": "Fill missing values with scalar, dict, or method. Use it for auditing and remediating null-heavy source extracts and cleaning and reshaping transaction/event tables. Key parameters: value, method, limit.",
+      "docs": [
+        {
+          "label": "DataFrame.fillna",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.fillna.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "value",
+          "type": "scalar | dict | Series | DataFrame",
+          "description": "Replacement value(s).",
+          "values": [
+            "0",
+            "{'region':'unknown'}"
+          ],
+          "pitfalls": [
+            "Column dtype may change after fill"
+          ]
+        },
+        {
+          "name": "method",
+          "type": "{'ffill','bfill'}",
+          "description": "Propagation strategy.",
+          "values": [
+            "'ffill'",
+            "'bfill'"
+          ],
+          "pitfalls": [
+            "Method can leak future info in ML if misused"
+          ]
+        },
+        {
+          "name": "limit",
+          "type": "int",
+          "description": "Max consecutive NaNs to fill.",
+          "values": [
+            "1",
+            "2",
+            "5"
+          ],
+          "pitfalls": [
+            "Not all missing gaps will be filled"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "description": "DataFrame with filled values.",
+        "shape": "same as input"
+      },
+      "examples": [
+        {
+          "title": "Fill missing campaign spend",
+          "scenario": "Marketing report requires zero for missing spend cells.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'campaign':['A','B'], 'spend':[1200, None]})\nout = df.fillna({'spend': 0})\nprint(out)",
+          "expectedOutput": "Spend for campaign B becomes 0",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply DataFrame.fillna with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "DataFrame.fillna additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.fillna(records[0]=None, method=None, axis=None, limit=None)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.fillna again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Consider model-based imputation for production ML pipelines."
+      ],
+      "related": [
+        "pandas-groupby-agg",
+        "np-isnan"
+      ],
+      "overview": "Fill missing values with scalar, dict, or method. Use DataFrame.fillna when auditing and remediating null-heavy source extracts. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: value, method, limit. Returns pandas.DataFrame with shape same as input.",
+      "applications": [
+        "Primary application: DataFrame.fillna is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-to-datetime",
+      "slug": "pandas-to-datetime",
+      "name": "pandas.to_datetime",
+      "library": "pandas",
+      "subtopic": "Time Series",
+      "tags": [
+        "datetime",
+        "parsing"
+      ],
+      "level": "core",
+      "summary": "Convert argument to datetime dtype.",
+      "syntax": "pd.to_datetime(arg, format=None, errors='raise', utc=False)",
+      "description": "Convert argument to datetime dtype. Use it for constructing lag, rolling, and resampled temporal features and cleaning and reshaping transaction/event tables. Key parameters: arg, format, errors.",
+      "docs": [
+        {
+          "label": "pandas.to_datetime",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "arg",
+          "type": "scalar | array-like | Series",
+          "description": "Value(s) to convert.",
+          "values": [
+            "Series",
+            "list",
+            "single string"
+          ],
+          "pitfalls": [
+            "Mixed timezone and naive strings can coerce to object"
+          ]
+        },
+        {
+          "name": "format",
+          "type": "str",
+          "description": "Datetime parse format.",
+          "values": [
+            "'%Y-%m-%d'",
+            "'%m/%d/%Y'"
+          ],
+          "pitfalls": [
+            "Wrong format raises parser errors"
+          ]
+        },
+        {
+          "name": "errors",
+          "type": "{'raise','coerce','ignore'}",
+          "default": "'raise'",
+          "description": "Error handling strategy.",
+          "values": [
+            "'raise'",
+            "'coerce'"
+          ],
+          "pitfalls": [
+            "coerce introduces NaT that must be handled"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "datetime64[ns] Series/Index/Timestamp",
+        "description": "Datetime-converted object.",
+        "shape": "same length as input"
+      },
+      "examples": [
+        {
+          "title": "Parse subscription renewal date",
+          "scenario": "Retention analysis needs monthly cohorts from renewal timestamps.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'renewal':['2026-01-15','2026-02-20']})\ndf['renewal'] = pd.to_datetime(df['renewal'])\nprint(df['renewal'].dt.month.tolist())",
+          "expectedOutput": "[1, 2]",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply pandas.to_datetime with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "pandas.to_datetime additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = pd.to_datetime(np.array([1, 1, 2, 3])g, format=None, errors='raise', utc=False)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run pandas.to_datetime again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Provide explicit format for faster and safer parsing."
+      ],
+      "related": [
+        "py-datetime-strptime",
+        "pandas-resample"
+      ],
+      "overview": "Convert argument to datetime dtype. Use pandas.to_datetime when constructing lag, rolling, and resampled temporal features. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: arg, format, errors. Returns datetime64[ns] Series/Index/Timestamp with shape same length as input.",
+      "applications": [
+        "Primary application: pandas.to_datetime is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-resample",
+      "slug": "pandas-dataframe-resample",
+      "name": "DataFrame.resample",
+      "library": "pandas",
+      "subtopic": "Time Series",
+      "tags": [
+        "timeseries",
+        "resample",
+        "aggregation"
+      ],
+      "level": "core",
+      "summary": "Resample time-indexed data into new frequency bins.",
+      "syntax": "df.resample(rule, on=None).agg(func)",
+      "description": "Resample time-indexed data into new frequency bins. Use it for constructing lag, rolling, and resampled temporal features and summarizing raw events into decision-ready KPIs. Key parameters: rule, on, func.",
+      "docs": [
+        {
+          "label": "DataFrame.resample",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.resample.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "rule",
+          "type": "offset alias",
+          "description": "Target frequency.",
+          "values": [
+            "'D'",
+            "'W'",
+            "'M'",
+            "'H'"
+          ],
+          "pitfalls": [
+            "Month-end defaults may differ from business definitions"
+          ]
+        },
+        {
+          "name": "on",
+          "type": "str",
+          "description": "Datetime column if index is not datetime.",
+          "values": [
+            "'event_time'"
+          ],
+          "pitfalls": [
+            "Column must be datetime-like"
+          ]
+        },
+        {
+          "name": "func",
+          "type": "str | function",
+          "description": "Aggregation applied per bin.",
+          "values": [
+            "'sum'",
+            "'count'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Missing bins may need fillna after resample"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.Series | pandas.DataFrame",
+        "description": "Time-bucketed aggregation.",
+        "shape": "(num_bins, metrics)"
+      },
+      "examples": [
+        {
+          "title": "Weekly GMV trend",
+          "scenario": "E-commerce dashboard rolls transaction-level GMV into weekly totals.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'ts':['2026-01-01','2026-01-02','2026-01-08'], 'gmv':[120,80,200]})\ndf['ts'] = pd.to_datetime(df['ts'])\nweekly = df.resample('W', on='ts').agg(total_gmv=('gmv','sum'))\nprint(weekly.shape)",
+          "expectedOutput": "(2, 1)",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply DataFrame.resample with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "DataFrame.resample additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.resample(rule, on=None).agg(func)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.resample again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Ensure timezone consistency before resampling global event data."
+      ],
+      "related": [
+        "pandas-to-datetime",
+        "pandas-groupby-agg"
+      ],
+      "overview": "Resample time-indexed data into new frequency bins. Use DataFrame.resample when constructing lag, rolling, and resampled temporal features. Typical business pattern: summarizing raw events into decision-ready KPIs. Key parameters: rule, on, func. Returns pandas.Series | pandas.DataFrame with shape (num_bins, metrics).",
+      "applications": [
+        "Primary application: DataFrame.resample is used for summarizing raw events into decision-ready KPIs.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "pandas-read-excel",
+      "slug": "pandas-read-excel",
+      "name": "pandas.read_excel",
+      "library": "pandas",
+      "subtopic": "I/O",
+      "tags": [
+        "excel",
+        "io",
+        "loading"
+      ],
+      "level": "extended",
+      "summary": "pandas.read_excel loads worksheet data into a DataFrame.",
+      "syntax": "pd.read_excel(io, sheet_name=0, usecols=None)",
+      "description": "pandas.read_excel loads worksheet data into a DataFrame. Use it for ingesting exports and serializing clean outputs and cleaning and reshaping transaction/event tables. Key parameters: io, sheet_name, usecols.",
+      "overview": "pandas.read_excel loads worksheet data into a DataFrame. Use pandas.read_excel when ingesting exports and serializing clean outputs. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: io, sheet_name, usecols. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: pandas.read_excel is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "pandas.read_excel official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "io",
+          "type": "Any",
+          "description": "Controls io in pandas.read_excel.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "sheet_name",
+          "type": "Any",
+          "default": "0",
+          "description": "Controls sheet_name in pandas.read_excel.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "usecols",
+          "type": "str | list[str]",
+          "default": "None",
+          "description": "Controls usecols in pandas.read_excel.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "pandas.read_excel for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = pd.read_excel(io, sheet_name=0, usecols=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run pandas.read_excel directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "pandas.read_excel additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = pd.read_excel(io, sheet_name=0, usecols=None)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run pandas.read_excel again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-info",
+      "slug": "pandas-info",
+      "name": "DataFrame.info",
+      "library": "pandas",
+      "subtopic": "I/O",
+      "tags": [
+        "inspection",
+        "schema"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.info prints schema, non-null counts, and memory usage.",
+      "syntax": "df.info(verbose=None, show_counts=None)",
+      "description": "DataFrame.info prints schema, non-null counts, and memory usage. Use it for ingesting exports and serializing clean outputs and cleaning and reshaping transaction/event tables. Key parameters: verbose, show_counts.",
+      "overview": "DataFrame.info prints schema, non-null counts, and memory usage. Use DataFrame.info when ingesting exports and serializing clean outputs. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: verbose, show_counts. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.info is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.info official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "verbose",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls verbose in DataFrame.info.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "show_counts",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls show_counts in DataFrame.info.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.info for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.info(verbose=None, show_counts=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.info directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.info additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.info(verbose=None, show_counts=None)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.info again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-describe",
+      "slug": "pandas-describe",
+      "name": "DataFrame.describe",
+      "library": "pandas",
+      "subtopic": "Aggregation",
+      "tags": [
+        "eda",
+        "summary"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.describe returns summary statistics for numeric and categorical columns.",
+      "syntax": "df.describe(include=None)",
+      "description": "DataFrame.describe returns summary statistics for numeric and categorical columns. Use it for building grouped KPI tables for reporting and cleaning and reshaping transaction/event tables. Key parameter: include.",
+      "overview": "DataFrame.describe returns summary statistics for numeric and categorical columns. Use DataFrame.describe when building grouped KPI tables for reporting. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameter: include. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.describe is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.describe official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "include",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls include in DataFrame.describe.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.describe for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.describe(include=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.describe directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.describe additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.describe(include=None)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.describe again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-iloc",
+      "slug": "pandas-iloc",
+      "name": "DataFrame.iloc",
+      "library": "pandas",
+      "subtopic": "Selection",
+      "tags": [
+        "selection",
+        "indexing"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.iloc performs integer-position based row/column selection.",
+      "syntax": "df.iloc[row_indexer, col_indexer]",
+      "description": "DataFrame.iloc performs integer-position based row/column selection. Use it for filtering and selecting numeric values efficiently and cleaning and reshaping transaction/event tables. Most controls are optional keyword arguments.",
+      "overview": "DataFrame.iloc performs integer-position based row/column selection. Use DataFrame.iloc when filtering and selecting numeric values efficiently. Typical business pattern: cleaning and reshaping transaction/event tables. Most controls are optional keyword arguments. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.iloc is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.iloc official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "Any",
+          "description": "Controls inputs in DataFrame.iloc.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.iloc for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.iloc[:, :2]\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.iloc directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.iloc additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.iloc[:, :2]\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.iloc again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-drop",
+      "slug": "pandas-drop",
+      "name": "DataFrame.drop",
+      "library": "pandas",
+      "subtopic": "Transformation",
+      "tags": [
+        "cleanup",
+        "columns"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.drop removes rows or columns by labels.",
+      "syntax": "df.drop(labels=None, axis=0, columns=None, inplace=False)",
+      "description": "DataFrame.drop removes rows or columns by labels. Use it for cleaning and engineering columns in tabular datasets and cleaning and reshaping transaction/event tables. Key parameters: labels, axis, columns.",
+      "overview": "DataFrame.drop removes rows or columns by labels. Use DataFrame.drop when cleaning and engineering columns in tabular datasets. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: labels, axis, columns. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.drop is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.drop official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "labels",
+          "type": "str | list[str]",
+          "default": "None",
+          "description": "Controls labels in DataFrame.drop.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "0",
+          "description": "Controls axis in DataFrame.drop.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "columns",
+          "type": "str | list[str]",
+          "default": "None",
+          "description": "Controls columns in DataFrame.drop.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "inplace",
+          "type": "bool",
+          "default": "False",
+          "description": "Controls inplace in DataFrame.drop.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.drop for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.drop(labels=None, axis=0, columns=None, inplace=False)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.drop directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.drop additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.drop(labels=None, axis=0, columns=None, inplace=False)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.drop again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-rename",
+      "slug": "pandas-rename",
+      "name": "DataFrame.rename",
+      "library": "pandas",
+      "subtopic": "Transformation",
+      "tags": [
+        "labels",
+        "cleanup"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.rename changes row/column labels without mutating source by default.",
+      "syntax": "df.rename(columns=None, index=None)",
+      "description": "DataFrame.rename changes row/column labels without mutating source by default. Use it for cleaning and engineering columns in tabular datasets and cleaning and reshaping transaction/event tables. Key parameters: columns, index.",
+      "overview": "DataFrame.rename changes row/column labels without mutating source by default. Use DataFrame.rename when cleaning and engineering columns in tabular datasets. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: columns, index. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.rename is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.rename official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.rename.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "columns",
+          "type": "str | list[str]",
+          "default": "None",
+          "description": "Controls columns in DataFrame.rename.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "index",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls index in DataFrame.rename.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.rename for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.rename(columns=None, index=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.rename directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.rename additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.rename(columns=None, index=None)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.rename again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-astype",
+      "slug": "pandas-astype",
+      "name": "DataFrame.astype",
+      "library": "pandas",
+      "subtopic": "Transformation",
+      "tags": [
+        "types",
+        "casting"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.astype casts columns to specific data types.",
+      "syntax": "df.astype(dtype, copy=True)",
+      "description": "DataFrame.astype casts columns to specific data types. Use it for cleaning and engineering columns in tabular datasets and cleaning and reshaping transaction/event tables. Key parameters: dtype, copy.",
+      "overview": "DataFrame.astype casts columns to specific data types. Use DataFrame.astype when cleaning and engineering columns in tabular datasets. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: dtype, copy. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.astype is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.astype official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.astype.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "dtype",
+          "type": "Any",
+          "description": "Controls dtype in DataFrame.astype.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "copy",
+          "type": "bool",
+          "default": "True",
+          "description": "Controls copy in DataFrame.astype.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.astype for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.astype(dtype, copy=True)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.astype directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.astype additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.astype(dtype, copy=True)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.astype again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-value-counts",
+      "slug": "pandas-value-counts",
+      "name": "Series.value_counts",
+      "library": "pandas",
+      "subtopic": "Aggregation",
+      "tags": [
+        "counts",
+        "categorical"
+      ],
+      "level": "extended",
+      "summary": "Series.value_counts counts category frequency, optionally normalized.",
+      "syntax": "s.value_counts(normalize=False, dropna=True)",
+      "description": "Series.value_counts counts category frequency, optionally normalized. Use it for building grouped KPI tables for reporting and cleaning and reshaping transaction/event tables. Key parameters: normalize, dropna.",
+      "overview": "Series.value_counts counts category frequency, optionally normalized. Use Series.value_counts when building grouped KPI tables for reporting. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: normalize, dropna. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: Series.value_counts is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "Series.value_counts official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "normalize",
+          "type": "Any",
+          "default": "False",
+          "description": "Controls normalize in Series.value_counts.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "dropna",
+          "type": "bool",
+          "default": "True",
+          "description": "Controls dropna in Series.value_counts.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "Series.value_counts for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = s.value_counts(normalize=False, dropna=True)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run Series.value_counts directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "Series.value_counts additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = s.records[0]_counts(normalize=False, dropna=True)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run Series.value_counts again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-groupby-transform",
+      "slug": "pandas-groupby-transform",
+      "name": "GroupBy.transform",
+      "library": "pandas",
+      "subtopic": "Aggregation",
+      "tags": [
+        "groupby",
+        "features"
+      ],
+      "level": "extended",
+      "summary": "GroupBy.transform computes group-level metrics aligned back to original rows.",
+      "syntax": "df.groupby(keys)[col].transform(func)",
+      "description": "GroupBy.transform computes group-level metrics aligned back to original rows. Use it for building grouped KPI tables for reporting and cleaning and reshaping transaction/event tables. Key parameter: keys.",
+      "overview": "GroupBy.transform computes group-level metrics aligned back to original rows. Use GroupBy.transform when building grouped KPI tables for reporting. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameter: keys. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: GroupBy.transform is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "GroupBy.transform official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.SeriesGroupBy.transform.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "keys",
+          "type": "Any",
+          "description": "Controls keys in GroupBy.transform.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "GroupBy.transform for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.groupby(['segment'])['value'].transform('mean')\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run GroupBy.transform directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "GroupBy.transform additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.groupby(['segment'])['records[0]'].transform('mean')\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run GroupBy.transform again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-melt",
+      "slug": "pandas-melt",
+      "name": "pandas.melt",
+      "library": "pandas",
+      "subtopic": "Transformation",
+      "tags": [
+        "reshape",
+        "long-format"
+      ],
+      "level": "extended",
+      "summary": "pandas.melt reshapes wide tables into long format.",
+      "syntax": "pd.melt(frame, id_vars=None, value_vars=None)",
+      "description": "pandas.melt reshapes wide tables into long format. Use it for cleaning and engineering columns in tabular datasets and cleaning and reshaping transaction/event tables. Key parameters: frame, id_vars, value_vars.",
+      "overview": "pandas.melt reshapes wide tables into long format. Use pandas.melt when cleaning and engineering columns in tabular datasets. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: frame, id_vars, value_vars. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: pandas.melt is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "pandas.melt official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.melt.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "frame",
+          "type": "Any",
+          "description": "Controls frame in pandas.melt.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "id_vars",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls id_vars in pandas.melt.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "value_vars",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls value_vars in pandas.melt.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "pandas.melt for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = pd.melt(df, id_vars=['segment'], value_vars=['value'])\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run pandas.melt directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "pandas.melt additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = pd.melt(df, id_vnp.array([1, 1, 2, 3])s=['segment'], records[0]_vars=['value'])\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run pandas.melt again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-concat",
+      "slug": "pandas-concat",
+      "name": "pandas.concat",
+      "library": "pandas",
+      "subtopic": "Join",
+      "tags": [
+        "combine",
+        "append"
+      ],
+      "level": "extended",
+      "summary": "pandas.concat combines DataFrames along rows or columns.",
+      "syntax": "pd.concat(objs, axis=0, ignore_index=False)",
+      "description": "pandas.concat combines DataFrames along rows or columns. Use it for combining fact tables with lookup dimensions and cleaning and reshaping transaction/event tables. Key parameters: objs, axis, ignore_index.",
+      "overview": "pandas.concat combines DataFrames along rows or columns. Use pandas.concat when combining fact tables with lookup dimensions. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: objs, axis, ignore_index. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: pandas.concat is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "pandas.concat official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.concat.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "objs",
+          "type": "Any",
+          "description": "Controls objs in pandas.concat.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "0",
+          "description": "Controls axis in pandas.concat.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "ignore_index",
+          "type": "Any",
+          "default": "False",
+          "description": "Controls ignore_index in pandas.concat.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "pandas.concat for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = pd.concat([df.iloc[:2], df.iloc[2:]], ignore_index=True)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run pandas.concat directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "pandas.concat additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = pd.concat([df.iloc[:2], df.iloc[2:]], ignore_index=True)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run pandas.concat again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-join",
+      "slug": "pandas-join",
+      "name": "DataFrame.join",
+      "library": "pandas",
+      "subtopic": "Join",
+      "tags": [
+        "join",
+        "index"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.join merges DataFrames using index alignment or key columns.",
+      "syntax": "df.join(other, on=None, how='left')",
+      "description": "DataFrame.join merges DataFrames using index alignment or key columns. Use it for combining fact tables with lookup dimensions and combining transactional tables with customer/product reference data. Key parameters: other, on, how.",
+      "overview": "DataFrame.join merges DataFrames using index alignment or key columns. Use DataFrame.join when combining fact tables with lookup dimensions. Typical business pattern: combining transactional tables with customer/product reference data. Key parameters: other, on, how. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.join is used for combining transactional tables with customer/product reference data.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.join official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "other",
+          "type": "Any",
+          "description": "Controls other in DataFrame.join.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "on",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls on in DataFrame.join.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "how",
+          "type": "Any",
+          "default": "'left'",
+          "description": "Controls how in DataFrame.join.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.join for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.join(other, how='left')\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.join directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.join additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.join(other, how='left')\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.join again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-drop-duplicates",
+      "slug": "pandas-drop-duplicates",
+      "name": "DataFrame.drop_duplicates",
+      "library": "pandas",
+      "subtopic": "Transformation",
+      "tags": [
+        "deduplication",
+        "quality"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.drop_duplicates removes duplicate rows by selected columns.",
+      "syntax": "df.drop_duplicates(subset=None, keep='first')",
+      "description": "DataFrame.drop_duplicates removes duplicate rows by selected columns. Use it for cleaning and engineering columns in tabular datasets and cleaning and reshaping transaction/event tables. Key parameters: subset, keep.",
+      "overview": "DataFrame.drop_duplicates removes duplicate rows by selected columns. Use DataFrame.drop_duplicates when cleaning and engineering columns in tabular datasets. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: subset, keep. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.drop_duplicates is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.drop_duplicates official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "subset",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls subset in DataFrame.drop_duplicates.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "keep",
+          "type": "Any",
+          "default": "'first'",
+          "description": "Controls keep in DataFrame.drop_duplicates.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.drop_duplicates for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.drop_duplicates(subset=None, keep='first')\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.drop_duplicates directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.drop_duplicates additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.drop_duplicates(subset=None, keep='first')\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.drop_duplicates again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-isna",
+      "slug": "pandas-isna",
+      "name": "DataFrame.isna",
+      "library": "pandas",
+      "subtopic": "Missing Data",
+      "tags": [
+        "missing-data",
+        "diagnostics"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.isna returns a boolean mask of missing values.",
+      "syntax": "df.isna()",
+      "description": "DataFrame.isna returns a boolean mask of missing values. Use it for auditing and remediating null-heavy source extracts and handling null-heavy CRM, finance, and operations exports. Most controls are optional keyword arguments.",
+      "overview": "DataFrame.isna returns a boolean mask of missing values. Use DataFrame.isna when auditing and remediating null-heavy source extracts. Typical business pattern: handling null-heavy CRM, finance, and operations exports. Most controls are optional keyword arguments. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.isna is used for handling null-heavy CRM, finance, and operations exports.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.isna official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isna.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "Any",
+          "description": "Controls inputs in DataFrame.isna.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.isna for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.isna()\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.isna directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.isna additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.isna()\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.isna again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-dropna",
+      "slug": "pandas-dropna",
+      "name": "DataFrame.dropna",
+      "library": "pandas",
+      "subtopic": "Missing Data",
+      "tags": [
+        "missing-data",
+        "cleanup"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.dropna removes rows or columns containing missing values.",
+      "syntax": "df.dropna(axis=0, how='any', subset=None)",
+      "description": "DataFrame.dropna removes rows or columns containing missing values. Use it for auditing and remediating null-heavy source extracts and handling null-heavy CRM, finance, and operations exports. Key parameters: axis, how, subset.",
+      "overview": "DataFrame.dropna removes rows or columns containing missing values. Use DataFrame.dropna when auditing and remediating null-heavy source extracts. Typical business pattern: handling null-heavy CRM, finance, and operations exports. Key parameters: axis, how, subset. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.dropna is used for handling null-heavy CRM, finance, and operations exports.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.dropna official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.dropna.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "0",
+          "description": "Controls axis in DataFrame.dropna.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "how",
+          "type": "Any",
+          "default": "'any'",
+          "description": "Controls how in DataFrame.dropna.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "subset",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls subset in DataFrame.dropna.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.dropna for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.dropna(axis=0, how='any', subset=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.dropna directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.dropna additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.dropna(axis=0, how='any', subset=None)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.dropna again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-replace",
+      "slug": "pandas-replace",
+      "name": "DataFrame.replace",
+      "library": "pandas",
+      "subtopic": "Transformation",
+      "tags": [
+        "cleaning",
+        "values"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.replace substitutes values using scalar, list, dict, or regex rules.",
+      "syntax": "df.replace(to_replace, value)",
+      "description": "DataFrame.replace substitutes values using scalar, list, dict, or regex rules. Use it for cleaning and engineering columns in tabular datasets and cleaning and reshaping transaction/event tables. Key parameters: to_replace, value.",
+      "overview": "DataFrame.replace substitutes values using scalar, list, dict, or regex rules. Use DataFrame.replace when cleaning and engineering columns in tabular datasets. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: to_replace, value. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.replace is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.replace official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.replace.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "to_replace",
+          "type": "Any",
+          "description": "Controls to_replace in DataFrame.replace.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "value",
+          "type": "Any",
+          "description": "Controls value in DataFrame.replace.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.replace for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.replace(-1, pd.NA)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.replace directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.replace additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.replace(to_replace, records[0])\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.replace again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-cut",
+      "slug": "pandas-cut",
+      "name": "pandas.cut",
+      "library": "pandas",
+      "subtopic": "Transformation",
+      "tags": [
+        "binning",
+        "segmentation"
+      ],
+      "level": "extended",
+      "summary": "pandas.cut bins continuous values into interval categories.",
+      "syntax": "pd.cut(x, bins, labels=None)",
+      "description": "pandas.cut bins continuous values into interval categories. Use it for cleaning and engineering columns in tabular datasets and cleaning and reshaping transaction/event tables. Key parameters: x, bins, labels.",
+      "overview": "pandas.cut bins continuous values into interval categories. Use pandas.cut when cleaning and engineering columns in tabular datasets. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: x, bins, labels. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: pandas.cut is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "pandas.cut official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.cut.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "x",
+          "type": "Any",
+          "description": "Controls x in pandas.cut.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "bins",
+          "type": "Any",
+          "description": "Controls bins in pandas.cut.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "labels",
+          "type": "str | list[str]",
+          "default": "None",
+          "description": "Controls labels in pandas.cut.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "pandas.cut for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = pd.cut(df['value'], bins=[0, 15, 30, 50], labels=['low','mid','high'])\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run pandas.cut directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "pandas.cut additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = pd.cut(df['records[0]'], bins=[0,15,30,50], labels=['low','mid','high'])\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run pandas.cut again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-qcut",
+      "slug": "pandas-qcut",
+      "name": "pandas.qcut",
+      "library": "pandas",
+      "subtopic": "Transformation",
+      "tags": [
+        "quantiles",
+        "segmentation"
+      ],
+      "level": "extended",
+      "summary": "pandas.qcut bins values into quantile-based buckets.",
+      "syntax": "pd.qcut(x, q, labels=None)",
+      "description": "pandas.qcut bins values into quantile-based buckets. Use it for cleaning and engineering columns in tabular datasets and cleaning and reshaping transaction/event tables. Key parameters: x, q, labels.",
+      "overview": "pandas.qcut bins values into quantile-based buckets. Use pandas.qcut when cleaning and engineering columns in tabular datasets. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: x, q, labels. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: pandas.qcut is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "pandas.qcut official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.qcut.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "x",
+          "type": "Any",
+          "description": "Controls x in pandas.qcut.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "q",
+          "type": "Any",
+          "description": "Controls q in pandas.qcut.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "labels",
+          "type": "str | list[str]",
+          "default": "None",
+          "description": "Controls labels in pandas.qcut.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "pandas.qcut for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = pd.qcut(df['value'], q=2, labels=['low','high'])\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run pandas.qcut directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "pandas.qcut additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = pd.0.9cut(df['records[0]'], q=2, labels=['low','high'])\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run pandas.qcut again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-rolling",
+      "slug": "pandas-rolling",
+      "name": "DataFrame.rolling",
+      "library": "pandas",
+      "subtopic": "Time Series",
+      "tags": [
+        "window",
+        "time-series"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.rolling creates moving window views for time-series statistics.",
+      "syntax": "df.rolling(window, min_periods=None)",
+      "description": "DataFrame.rolling creates moving window views for time-series statistics. Use it for constructing lag, rolling, and resampled temporal features and tracking daily/weekly performance with lag and rolling signals. Key parameters: window, min_periods.",
+      "overview": "DataFrame.rolling creates moving window views for time-series statistics. Use DataFrame.rolling when constructing lag, rolling, and resampled temporal features. Typical business pattern: tracking daily/weekly performance with lag and rolling signals. Key parameters: window, min_periods. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.rolling is used for tracking daily/weekly performance with lag and rolling signals.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.rolling official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.rolling.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "window",
+          "type": "Any",
+          "description": "Controls window in DataFrame.rolling.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "min_periods",
+          "type": "int",
+          "default": "None",
+          "description": "Controls min_periods in DataFrame.rolling.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.rolling for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df[['value']].rolling(window=2)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.rolling directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.rolling additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df[['records[0]']].rolling(window=2)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.rolling again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "pandas-shift",
+      "slug": "pandas-shift",
+      "name": "DataFrame.shift",
+      "library": "pandas",
+      "subtopic": "Time Series",
+      "tags": [
+        "lag",
+        "features"
+      ],
+      "level": "extended",
+      "summary": "DataFrame.shift offsets rows for lag/lead features.",
+      "syntax": "df.shift(periods=1)",
+      "description": "DataFrame.shift offsets rows for lag/lead features. Use it for constructing lag, rolling, and resampled temporal features and cleaning and reshaping transaction/event tables. Key parameter: periods.",
+      "overview": "DataFrame.shift offsets rows for lag/lead features. Use DataFrame.shift when constructing lag, rolling, and resampled temporal features. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameter: periods. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "applications": [
+        "Primary application: DataFrame.shift is used for cleaning and reshaping transaction/event tables.",
+        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.shift official docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.shift.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "periods",
+          "type": "Any",
+          "default": "1",
+          "description": "Controls periods in DataFrame.shift.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "DataFrame | Series | scalar",
+        "shape": "(rows, columns) or scalar",
+        "description": "Tabular transformation or summary result."
+      },
+      "examples": [
+        {
+          "title": "DataFrame.shift for segmented revenue reporting",
+          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
+          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.shift(periods=1)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "walkthrough": [
+            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
+            "Run DataFrame.shift directly (not commented) and store output in `result`.",
+            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+          ]
+        },
+        {
+          "title": "DataFrame.shift additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.shift(periods=1)\nprint(type(result).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run DataFrame.shift again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    }
+  ],
+  "overview": "Pandas is the daily workhorse for tabular data in analytics: load, clean, join, aggregate, reshape, and time-align datasets before visualization or modeling.",
+  "applications": [
+    "ETL from CSV/Excel exports into analysis-ready tables.",
+    "EDA and KPI reporting with groupby, pivots, and time windows.",
+    "Feature table preparation for machine learning."
+  ]
+}

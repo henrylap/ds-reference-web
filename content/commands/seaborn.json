@@ -1,0 +1,3070 @@
+{
+  "library": "seaborn",
+  "title": "Seaborn",
+  "officialDocs": "https://seaborn.pydata.org/",
+  "subtopics": [
+    "Themes",
+    "Relational Plots",
+    "Categorical Plots",
+    "Distribution",
+    "Matrix",
+    "Multi-plot",
+    "Relational",
+    "Categorical",
+    "Styling"
+  ],
+  "commandGroups": [
+    {
+      "name": "Core API",
+      "docs": [
+        {
+          "label": "Seaborn API",
+          "url": "https://seaborn.pydata.org/api.html"
+        }
+      ],
+      "commandIds": [
+        "sns-set-theme",
+        "sns-lineplot",
+        "sns-barplot",
+        "sns-scatterplot",
+        "sns-histplot",
+        "sns-boxplot",
+        "sns-violinplot",
+        "sns-heatmap",
+        "sns-pairplot",
+        "sns-catplot"
+      ]
+    },
+    {
+      "name": "Extended APIs and Step-by-Step Patterns",
+      "docs": [
+        {
+          "label": "Seaborn official docs",
+          "url": "https://seaborn.pydata.org/"
+        }
+      ],
+      "commandIds": [
+        "sns-relplot",
+        "sns-displot",
+        "sns-kdeplot",
+        "sns-ecdfplot",
+        "sns-regplot",
+        "sns-lmplot",
+        "sns-jointplot",
+        "sns-countplot",
+        "sns-stripplot",
+        "sns-swarmplot",
+        "sns-pointplot",
+        "sns-boxenplot",
+        "sns-clustermap",
+        "sns-facetgrid",
+        "sns-pairgrid",
+        "sns-move-legend",
+        "sns-color-palette",
+        "sns-set-context",
+        "sns-set-style",
+        "sns-residplot"
+      ]
+    }
+  ],
+  "cheatSheet": [
+    "sns-set-theme",
+    "sns-lineplot",
+    "sns-barplot",
+    "sns-scatterplot",
+    "sns-histplot",
+    "sns-boxplot",
+    "sns-violinplot",
+    "sns-heatmap",
+    "sns-pairplot",
+    "sns-catplot",
+    "sns-relplot",
+    "sns-displot",
+    "sns-kdeplot",
+    "sns-ecdfplot",
+    "sns-regplot",
+    "sns-lmplot",
+    "sns-jointplot",
+    "sns-countplot",
+    "sns-stripplot",
+    "sns-swarmplot",
+    "sns-pointplot",
+    "sns-boxenplot",
+    "sns-clustermap",
+    "sns-facetgrid",
+    "sns-pairgrid",
+    "sns-move-legend",
+    "sns-color-palette",
+    "sns-set-context",
+    "sns-set-style",
+    "sns-residplot"
+  ],
+  "coverageOutline": [
+    {
+      "topic": "Relational Plots",
+      "docUrl": "https://seaborn.pydata.org/tutorial/relational.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "lineplot",
+        "scatterplot",
+        "relplot"
+      ]
+    },
+    {
+      "topic": "Categorical Plots",
+      "docUrl": "https://seaborn.pydata.org/tutorial/categorical.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "barplot",
+        "boxplot",
+        "violinplot",
+        "catplot"
+      ]
+    },
+    {
+      "topic": "Distribution",
+      "docUrl": "https://seaborn.pydata.org/tutorial/distributions.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "histplot",
+        "kdeplot",
+        "displot"
+      ]
+    },
+    {
+      "topic": "Styles and Themes",
+      "docUrl": "https://seaborn.pydata.org/tutorial/aesthetics.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "set_theme",
+        "set_style",
+        "color_palette"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "sns-set-theme",
+      "slug": "seaborn-set-theme",
+      "name": "sns.set_theme",
+      "library": "seaborn",
+      "subtopic": "Themes",
+      "tags": [
+        "style",
+        "theme"
+      ],
+      "level": "core",
+      "summary": "Set default visual theme for seaborn/matplotlib plots.",
+      "syntax": "sns.set_theme(context='notebook', style='darkgrid', palette='deep')",
+      "description": "Set default visual theme for seaborn/matplotlib plots. Use it for delivering reliable seaborn workflows and rapid exploratory analysis and model diagnostics. Key parameters: context, style.",
+      "docs": [
+        {
+          "label": "set_theme",
+          "url": "https://seaborn.pydata.org/generated/seaborn.set_theme.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "context",
+          "type": "str",
+          "default": "'notebook'",
+          "description": "Scale presets for labels and lines.",
+          "values": [
+            "'paper'",
+            "'notebook'",
+            "'talk'",
+            "'poster'"
+          ],
+          "pitfalls": [
+            "Large context can overcrowd small figures"
+          ]
+        },
+        {
+          "name": "style",
+          "type": "str",
+          "default": "'darkgrid'",
+          "description": "Background/grid style.",
+          "values": [
+            "'darkgrid'",
+            "'whitegrid'",
+            "'ticks'"
+          ],
+          "pitfalls": [
+            "Grid-heavy styles can distract on dense plots"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Updates global style settings.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Set dashboard style",
+          "scenario": "Keep weekly KPI charts visually consistent.",
+          "code": "import seaborn as sns\nsns.set_theme(style='whitegrid', context='talk')\nprint('theme-set')",
+          "expectedOutput": "theme-set",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply sns.set_theme with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "sns.set_theme additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run sns.set_theme again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Call once near notebook/script start."
+      ],
+      "related": [
+        "sns-lineplot",
+        "sns-barplot"
+      ],
+      "overview": "Set default visual theme for seaborn/matplotlib plots. Use sns.set_theme when delivering reliable seaborn workflows. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: context, style. Returns None with shape n/a.",
+      "applications": [
+        "Primary application: sns.set_theme is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sns-lineplot",
+      "slug": "seaborn-lineplot",
+      "name": "sns.lineplot",
+      "library": "seaborn",
+      "subtopic": "Relational Plots",
+      "tags": [
+        "line",
+        "trend"
+      ],
+      "level": "core",
+      "summary": "Line plot with optional grouping and confidence intervals.",
+      "syntax": "sns.lineplot(data=None, x=None, y=None, hue=None, style=None, estimator='mean')",
+      "description": "Line plot with optional grouping and confidence intervals. Use it for delivering reliable seaborn workflows and rapid exploratory analysis and model diagnostics. Key parameters: x,y, hue/style.",
+      "docs": [
+        {
+          "label": "lineplot",
+          "url": "https://seaborn.pydata.org/generated/seaborn.lineplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "x,y",
+          "type": "str|vector",
+          "description": "Variables for axes.",
+          "values": [
+            "'week','revenue'"
+          ],
+          "pitfalls": [
+            "Non-ordered x can scramble trend interpretation"
+          ]
+        },
+        {
+          "name": "hue/style",
+          "type": "str|vector",
+          "description": "Grouping semantics.",
+          "values": [
+            "hue='channel'",
+            "style='plan'"
+          ],
+          "pitfalls": [
+            "Too many categories reduce readability"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "matplotlib.axes.Axes",
+        "description": "Axes with line artists.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Revenue by channel trend",
+          "scenario": "Growth team compares channel trend lines.",
+          "code": "import pandas as pd, seaborn as sns\ndf=pd.DataFrame({'week':[1,1,2,2],'revenue':[100,80,120,95],'channel':['ads','organic','ads','organic']})\nax=sns.lineplot(data=df,x='week',y='revenue',hue='channel')\nprint(type(ax).__name__)",
+          "expectedOutput": "Axes",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply sns.lineplot with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "sns.lineplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run sns.lineplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "For raw points over time, set estimator=None."
+      ],
+      "related": [
+        "sns-scatterplot",
+        "mpl-ax-plot"
+      ],
+      "overview": "Line plot with optional grouping and confidence intervals. Use sns.lineplot when delivering reliable seaborn workflows. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: x,y, hue/style. Returns matplotlib.axes.Axes with shape n/a.",
+      "applications": [
+        "Primary application: sns.lineplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sns-barplot",
+      "slug": "seaborn-barplot",
+      "name": "sns.barplot",
+      "library": "seaborn",
+      "subtopic": "Categorical Plots",
+      "tags": [
+        "bar",
+        "categorical"
+      ],
+      "level": "core",
+      "summary": "Show aggregated value by category using bars.",
+      "syntax": "sns.barplot(data=None, x=None, y=None, hue=None, estimator='mean')",
+      "description": "Show aggregated value by category using bars. Use it for delivering reliable seaborn workflows and rapid exploratory analysis and model diagnostics. Key parameters: x,y, estimator.",
+      "docs": [
+        {
+          "label": "barplot",
+          "url": "https://seaborn.pydata.org/generated/seaborn.barplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "x,y",
+          "type": "str|vector",
+          "description": "Category and metric.",
+          "values": [
+            "x='region', y='revenue'"
+          ],
+          "pitfalls": [
+            "Default mean may hide skewed distributions"
+          ]
+        },
+        {
+          "name": "estimator",
+          "type": "callable|str",
+          "default": "mean",
+          "description": "Aggregation function.",
+          "values": [
+            "'mean'",
+            "'sum'",
+            "np.median"
+          ],
+          "pitfalls": [
+            "Confirm estimator matches business KPI"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "matplotlib.axes.Axes",
+        "description": "Axes with bars.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Revenue by region",
+          "scenario": "Quarterly region-level KPI comparison.",
+          "code": "import pandas as pd, seaborn as sns\ndf=pd.DataFrame({'region':['N','N','S','S'],'revenue':[100,120,90,110]})\nax=sns.barplot(data=df,x='region',y='revenue',estimator='mean')\nprint(type(ax).__name__)",
+          "expectedOutput": "Axes",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply sns.barplot with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "sns.barplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run sns.barplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "For pre-aggregated data, set errorbar=None to avoid misleading intervals."
+      ],
+      "related": [
+        "sns-catplot",
+        "mpl-ax-bar"
+      ],
+      "overview": "Show aggregated value by category using bars. Use sns.barplot when delivering reliable seaborn workflows. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: x,y, estimator. Returns matplotlib.axes.Axes with shape n/a.",
+      "applications": [
+        "Primary application: sns.barplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sns-scatterplot",
+      "slug": "seaborn-scatterplot",
+      "name": "sns.scatterplot",
+      "library": "seaborn",
+      "subtopic": "Relational Plots",
+      "tags": [
+        "scatter",
+        "relationship"
+      ],
+      "level": "core",
+      "summary": "Scatter plot with semantic mappings (hue, size, style).",
+      "syntax": "sns.scatterplot(data=None, x=None, y=None, hue=None, size=None, style=None)",
+      "description": "Scatter plot with semantic mappings (hue, size, style). Use it for delivering reliable seaborn workflows and rapid exploratory analysis and model diagnostics. Key parameters: hue/size/style, alpha.",
+      "docs": [
+        {
+          "label": "scatterplot",
+          "url": "https://seaborn.pydata.org/generated/seaborn.scatterplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "hue/size/style",
+          "type": "str|vector",
+          "description": "Visual encodings.",
+          "values": [
+            "hue='segment'",
+            "size='orders'"
+          ],
+          "pitfalls": [
+            "Too many encodings make charts hard to read"
+          ]
+        },
+        {
+          "name": "alpha",
+          "type": "float",
+          "description": "Point transparency via kwargs.",
+          "values": [
+            "0.5",
+            "0.8",
+            "1.0"
+          ],
+          "pitfalls": [
+            "Opaque points can hide density"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "matplotlib.axes.Axes",
+        "description": "Axes containing scatter points.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Spend vs conversions",
+          "scenario": "Paid media efficiency check.",
+          "code": "import pandas as pd, seaborn as sns\ndf=pd.DataFrame({'spend':[2,4,6,8],'conv':[30,50,72,88],'channel':['ads','ads','organic','organic']})\nax=sns.scatterplot(data=df,x='spend',y='conv',hue='channel')\nprint(type(ax).__name__)",
+          "expectedOutput": "Axes",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply sns.scatterplot with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "sns.scatterplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run sns.scatterplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Combine with sns.regplot when trend line is required."
+      ],
+      "related": [
+        "sns-lineplot",
+        "mpl-ax-scatter"
+      ],
+      "overview": "Scatter plot with semantic mappings (hue, size, style). Use sns.scatterplot when delivering reliable seaborn workflows. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: hue/size/style, alpha. Returns matplotlib.axes.Axes with shape n/a.",
+      "applications": [
+        "Primary application: sns.scatterplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sns-histplot",
+      "slug": "seaborn-histplot",
+      "name": "sns.histplot",
+      "library": "seaborn",
+      "subtopic": "Distribution",
+      "tags": [
+        "histogram",
+        "distribution"
+      ],
+      "level": "core",
+      "summary": "Histogram with optional KDE and grouping.",
+      "syntax": "sns.histplot(data=None, x=None, bins='auto', kde=False, hue=None)",
+      "description": "Histogram with optional KDE and grouping. Use it for diagnosing spread, skew, and outliers and rapid exploratory analysis and model diagnostics. Key parameters: bins, kde.",
+      "docs": [
+        {
+          "label": "histplot",
+          "url": "https://seaborn.pydata.org/generated/seaborn.histplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "bins",
+          "type": "int|str|sequence",
+          "default": "'auto'",
+          "description": "Binning strategy.",
+          "values": [
+            "10",
+            "20",
+            "'auto'"
+          ],
+          "pitfalls": [
+            "Different bins can change business interpretation"
+          ]
+        },
+        {
+          "name": "kde",
+          "type": "bool",
+          "default": "False",
+          "description": "Overlay density curve.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "KDE can be misleading for very small samples"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "matplotlib.axes.Axes",
+        "description": "Axes with histogram artists.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Order-value distribution",
+          "scenario": "Pricing review of basket sizes.",
+          "code": "import pandas as pd, seaborn as sns\ndf=pd.DataFrame({'order_value':[25,40,55,60,80,95,120]})\nax=sns.histplot(data=df,x='order_value',bins=5,kde=True)\nprint(type(ax).__name__)",
+          "expectedOutput": "Axes",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply sns.histplot with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "sns.histplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run sns.histplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use stat='percent' for stakeholder-friendly scales."
+      ],
+      "related": [
+        "sns-boxplot",
+        "mpl-ax-hist"
+      ],
+      "overview": "Histogram with optional KDE and grouping. Use sns.histplot when diagnosing spread, skew, and outliers. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: bins, kde. Returns matplotlib.axes.Axes with shape n/a.",
+      "applications": [
+        "Primary application: sns.histplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sns-boxplot",
+      "slug": "seaborn-boxplot",
+      "name": "sns.boxplot",
+      "library": "seaborn",
+      "subtopic": "Categorical Plots",
+      "tags": [
+        "boxplot",
+        "distribution"
+      ],
+      "level": "core",
+      "summary": "Box-and-whisker summary by category.",
+      "syntax": "sns.boxplot(data=None, x=None, y=None, hue=None)",
+      "description": "Box-and-whisker summary by category. Use it for delivering reliable seaborn workflows and rapid exploratory analysis and model diagnostics. Key parameters: x,y, hue.",
+      "docs": [
+        {
+          "label": "boxplot",
+          "url": "https://seaborn.pydata.org/generated/seaborn.boxplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "x,y",
+          "type": "str|vector",
+          "description": "Category/value variables.",
+          "values": [
+            "x='segment', y='order_value'"
+          ],
+          "pitfalls": [
+            "Very small groups produce unstable quartiles"
+          ]
+        },
+        {
+          "name": "hue",
+          "type": "str|vector",
+          "description": "Second grouping variable.",
+          "values": [
+            "hue='channel'"
+          ],
+          "pitfalls": [
+            "Too many hue levels clutter layout"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "matplotlib.axes.Axes",
+        "description": "Axes with box artists.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Order value by segment",
+          "scenario": "Customer value spread analysis.",
+          "code": "import pandas as pd, seaborn as sns\ndf=pd.DataFrame({'segment':['SMB','SMB','ENT','ENT'],'order_value':[50,62,110,140]})\nax=sns.boxplot(data=df,x='segment',y='order_value')\nprint(type(ax).__name__)",
+          "expectedOutput": "Axes",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply sns.boxplot with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "sns.boxplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run sns.boxplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair with stripplot/swarmplot to show raw points when sample is small."
+      ],
+      "related": [
+        "sns-violinplot",
+        "sns-histplot"
+      ],
+      "overview": "Box-and-whisker summary by category. Use sns.boxplot when delivering reliable seaborn workflows. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: x,y, hue. Returns matplotlib.axes.Axes with shape n/a.",
+      "applications": [
+        "Primary application: sns.boxplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sns-violinplot",
+      "slug": "seaborn-violinplot",
+      "name": "sns.violinplot",
+      "library": "seaborn",
+      "subtopic": "Categorical Plots",
+      "tags": [
+        "violin",
+        "distribution"
+      ],
+      "level": "core",
+      "summary": "Distribution estimate by category with kernel density shape.",
+      "syntax": "sns.violinplot(data=None, x=None, y=None, hue=None, cut=2)",
+      "description": "Distribution estimate by category with kernel density shape. Use it for delivering reliable seaborn workflows and rapid exploratory analysis and model diagnostics. Key parameters: cut, inner.",
+      "docs": [
+        {
+          "label": "violinplot",
+          "url": "https://seaborn.pydata.org/generated/seaborn.violinplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "cut",
+          "type": "float",
+          "default": "2",
+          "description": "How far KDE extends beyond data range.",
+          "values": [
+            "0",
+            "1",
+            "2"
+          ],
+          "pitfalls": [
+            "Large cut can imply impossible values"
+          ]
+        },
+        {
+          "name": "inner",
+          "type": "str|None",
+          "default": "'box'",
+          "description": "Interior annotation style.",
+          "values": [
+            "'box'",
+            "'quart'",
+            "None"
+          ],
+          "pitfalls": [
+            "Over-annotation can reduce readability"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "matplotlib.axes.Axes",
+        "description": "Axes with violin artists.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Latency by service tier",
+          "scenario": "Infra team compares latency distribution.",
+          "code": "import pandas as pd, seaborn as sns\ndf=pd.DataFrame({'tier':['basic','basic','pro','pro'],'latency':[210,230,120,135]})\nax=sns.violinplot(data=df,x='tier',y='latency',cut=0)\nprint(type(ax).__name__)",
+          "expectedOutput": "Axes",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply sns.violinplot with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "sns.violinplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run sns.violinplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use cut=0 for bounded metrics (e.g., rates, latency)."
+      ],
+      "related": [
+        "sns-boxplot"
+      ],
+      "overview": "Distribution estimate by category with kernel density shape. Use sns.violinplot when delivering reliable seaborn workflows. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: cut, inner. Returns matplotlib.axes.Axes with shape n/a.",
+      "applications": [
+        "Primary application: sns.violinplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sns-heatmap",
+      "slug": "seaborn-heatmap",
+      "name": "sns.heatmap",
+      "library": "seaborn",
+      "subtopic": "Matrix",
+      "tags": [
+        "heatmap",
+        "matrix",
+        "correlation"
+      ],
+      "level": "core",
+      "summary": "Color-encoded matrix visualization.",
+      "syntax": "sns.heatmap(data, annot=False, fmt='.2g', cmap=None, center=None)",
+      "description": "Color-encoded matrix visualization. Use it for exploring pairwise or clustered structure and rapid exploratory analysis and model diagnostics. Key parameters: data, annot.",
+      "docs": [
+        {
+          "label": "heatmap",
+          "url": "https://seaborn.pydata.org/generated/seaborn.heatmap.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "2D dataset",
+          "description": "Matrix-like values.",
+          "values": [
+            "DataFrame",
+            "ndarray"
+          ],
+          "pitfalls": [
+            "Non-numeric values are not supported"
+          ]
+        },
+        {
+          "name": "annot",
+          "type": "bool",
+          "default": "False",
+          "description": "Show cell values.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Annotations clutter large matrices"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "matplotlib.axes.Axes",
+        "description": "Axes with heatmap artists.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Channel x month revenue",
+          "scenario": "Revenue matrix view for planning.",
+          "code": "import pandas as pd, seaborn as sns\ndf=pd.DataFrame({'Jan':[120,90],'Feb':[130,95]},index=['ads','organic'])\nax=sns.heatmap(df,annot=True,fmt='.0f',cmap='YlGnBu')\nprint(type(ax).__name__)",
+          "expectedOutput": "Axes",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply sns.heatmap with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "sns.heatmap additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run sns.heatmap again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Choose diverging cmap + center=0 for delta metrics."
+      ],
+      "related": [
+        "pandas-pivot-table"
+      ],
+      "overview": "Color-encoded matrix visualization. Use sns.heatmap when exploring pairwise or clustered structure. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, annot. Returns matplotlib.axes.Axes with shape n/a.",
+      "applications": [
+        "Primary application: sns.heatmap is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sns-pairplot",
+      "slug": "seaborn-pairplot",
+      "name": "sns.pairplot",
+      "library": "seaborn",
+      "subtopic": "Multi-plot",
+      "tags": [
+        "pairwise",
+        "eda"
+      ],
+      "level": "core",
+      "summary": "Grid of pairwise relationships and univariate distributions.",
+      "syntax": "sns.pairplot(data, hue=None, vars=None, corner=False)",
+      "description": "Grid of pairwise relationships and univariate distributions. Use it for delivering reliable seaborn workflows and rapid exploratory analysis and model diagnostics. Key parameters: vars, hue.",
+      "docs": [
+        {
+          "label": "pairplot",
+          "url": "https://seaborn.pydata.org/generated/seaborn.pairplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "vars",
+          "type": "list[str]|None",
+          "description": "Subset columns to include.",
+          "values": [
+            "['spend','conv','ctr']",
+            "None"
+          ],
+          "pitfalls": [
+            "Too many variables create unreadable grids"
+          ]
+        },
+        {
+          "name": "hue",
+          "type": "str|None",
+          "description": "Category for color grouping.",
+          "values": [
+            "'churn'",
+            "'segment'"
+          ],
+          "pitfalls": [
+            "High-cardinality hue overwhelms plot"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "seaborn.axisgrid.PairGrid",
+        "description": "PairGrid object.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Feature screening",
+          "scenario": "Churn model exploratory analysis.",
+          "code": "import pandas as pd, seaborn as sns\ndf=pd.DataFrame({'spend':[2,3,7,8],'usage':[20,25,70,75],'churn':[1,1,0,0]})\ng=sns.pairplot(df,vars=['spend','usage'],hue='churn',corner=True)\nprint(type(g).__name__)",
+          "expectedOutput": "PairGrid",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply sns.pairplot with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "sns.pairplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run sns.pairplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use a small variable subset for performance and clarity."
+      ],
+      "related": [
+        "sns-scatterplot",
+        "sns-histplot"
+      ],
+      "overview": "Grid of pairwise relationships and univariate distributions. Use sns.pairplot when delivering reliable seaborn workflows. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: vars, hue. Returns seaborn.axisgrid.PairGrid with shape n/a.",
+      "applications": [
+        "Primary application: sns.pairplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sns-catplot",
+      "slug": "seaborn-catplot",
+      "name": "sns.catplot",
+      "library": "seaborn",
+      "subtopic": "Multi-plot",
+      "tags": [
+        "categorical",
+        "faceting"
+      ],
+      "level": "core",
+      "summary": "Figure-level interface for categorical plots with faceting.",
+      "syntax": "sns.catplot(data=None, x=None, y=None, hue=None, col=None, kind='strip')",
+      "description": "Figure-level interface for categorical plots with faceting. Use it for delivering reliable seaborn workflows and rapid exploratory analysis and model diagnostics. Key parameters: kind, col/row.",
+      "docs": [
+        {
+          "label": "catplot",
+          "url": "https://seaborn.pydata.org/generated/seaborn.catplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "kind",
+          "type": "str",
+          "default": "'strip'",
+          "description": "Underlying categorical plot type.",
+          "values": [
+            "'bar'",
+            "'box'",
+            "'violin'",
+            "'point'"
+          ],
+          "pitfalls": [
+            "Choose kind consistent with metric meaning"
+          ]
+        },
+        {
+          "name": "col/row",
+          "type": "str|None",
+          "description": "Facet dimension(s).",
+          "values": [
+            "col='quarter'",
+            "row='region'"
+          ],
+          "pitfalls": [
+            "Too many facets make plots too small"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "seaborn.axisgrid.FacetGrid",
+        "description": "FacetGrid with mapped categorical plots.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Revenue by channel and quarter",
+          "scenario": "Executive segmented categorical comparison.",
+          "code": "import pandas as pd, seaborn as sns\ndf=pd.DataFrame({'quarter':['Q1','Q1','Q2','Q2'],'channel':['ads','organic','ads','organic'],'revenue':[120,90,140,110]})\ng=sns.catplot(data=df,x='channel',y='revenue',col='quarter',kind='bar')\nprint(type(g).__name__)",
+          "expectedOutput": "FacetGrid",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply sns.catplot with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "sns.catplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run sns.catplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Great for standardizing repeated segmented views."
+      ],
+      "related": [
+        "sns-barplot",
+        "sns-boxplot"
+      ],
+      "overview": "Figure-level interface for categorical plots with faceting. Use sns.catplot when delivering reliable seaborn workflows. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: kind, col/row. Returns seaborn.axisgrid.FacetGrid with shape n/a.",
+      "applications": [
+        "Primary application: sns.catplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "sns-relplot",
+      "slug": "seaborn-relplot",
+      "name": "seaborn.relplot",
+      "library": "seaborn",
+      "subtopic": "Relational",
+      "tags": [
+        "facets",
+        "relational",
+        "eda"
+      ],
+      "level": "extended",
+      "summary": "seaborn.relplot builds figure-level relational plots with optional faceting.",
+      "syntax": "sns.relplot(data, x=None, y=None, hue=None, col=None)",
+      "description": "seaborn.relplot builds figure-level relational plots with optional faceting. Use it for analyzing feature relationships and trends and rapid exploratory analysis and model diagnostics. Key parameters: data, x, y.",
+      "overview": "seaborn.relplot builds figure-level relational plots with optional faceting. Use seaborn.relplot when analyzing feature relationships and trends. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, x, y. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.relplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.relplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.relplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "description": "Controls data in seaborn.relplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.relplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls y in seaborn.relplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls hue in seaborn.relplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.relplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.relplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.relplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-displot",
+      "slug": "seaborn-displot",
+      "name": "seaborn.displot",
+      "library": "seaborn",
+      "subtopic": "Distribution",
+      "tags": [
+        "distribution",
+        "histogram",
+        "eda"
+      ],
+      "level": "extended",
+      "summary": "seaborn.displot builds figure-level distribution plots such as histograms and KDE.",
+      "syntax": "sns.displot(data, x=None, kind='hist')",
+      "description": "seaborn.displot builds figure-level distribution plots such as histograms and KDE. Use it for diagnosing spread, skew, and outliers and rapid exploratory analysis and model diagnostics. Key parameters: data, x, kind.",
+      "overview": "seaborn.displot builds figure-level distribution plots such as histograms and KDE. Use seaborn.displot when diagnosing spread, skew, and outliers. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, x, kind. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.displot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.displot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.displot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "description": "Controls data in seaborn.displot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.displot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "kind",
+          "type": "str | list[str]",
+          "default": "'hist'",
+          "description": "Controls kind in seaborn.displot.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.displot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.displot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.displot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-kdeplot",
+      "slug": "seaborn-kdeplot",
+      "name": "seaborn.kdeplot",
+      "library": "seaborn",
+      "subtopic": "Distribution",
+      "tags": [
+        "density",
+        "distribution",
+        "eda"
+      ],
+      "level": "extended",
+      "summary": "seaborn.kdeplot estimates and plots smooth probability density curves.",
+      "syntax": "sns.kdeplot(data=None, x=None, y=None)",
+      "description": "seaborn.kdeplot estimates and plots smooth probability density curves. Use it for diagnosing spread, skew, and outliers and rapid exploratory analysis and model diagnostics. Key parameters: data, x, y.",
+      "overview": "seaborn.kdeplot estimates and plots smooth probability density curves. Use seaborn.kdeplot when diagnosing spread, skew, and outliers. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, x, y. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.kdeplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.kdeplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.kdeplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls data in seaborn.kdeplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.kdeplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls y in seaborn.kdeplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.kdeplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.kdeplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.kdeplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-ecdfplot",
+      "slug": "seaborn-ecdfplot",
+      "name": "seaborn.ecdfplot",
+      "library": "seaborn",
+      "subtopic": "Distribution",
+      "tags": [
+        "cumulative",
+        "distribution",
+        "percentiles"
+      ],
+      "level": "extended",
+      "summary": "seaborn.ecdfplot plots cumulative distribution functions.",
+      "syntax": "sns.ecdfplot(data=None, x=None, hue=None)",
+      "description": "seaborn.ecdfplot plots cumulative distribution functions. Use it for diagnosing spread, skew, and outliers and rapid exploratory analysis and model diagnostics. Key parameters: data, x, hue.",
+      "overview": "seaborn.ecdfplot plots cumulative distribution functions. Use seaborn.ecdfplot when diagnosing spread, skew, and outliers. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, x, hue. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.ecdfplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.ecdfplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.ecdfplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls data in seaborn.ecdfplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.ecdfplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls hue in seaborn.ecdfplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.ecdfplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.ecdfplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.ecdfplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-regplot",
+      "slug": "seaborn-regplot",
+      "name": "seaborn.regplot",
+      "library": "seaborn",
+      "subtopic": "Relational",
+      "tags": [
+        "regression",
+        "relationship",
+        "eda"
+      ],
+      "level": "extended",
+      "summary": "seaborn.regplot draws scatter plus fitted regression trend and confidence interval.",
+      "syntax": "sns.regplot(data=None, x=None, y=None)",
+      "description": "seaborn.regplot draws scatter plus fitted regression trend and confidence interval. Use it for analyzing feature relationships and trends and forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameters: data, x, y.",
+      "overview": "seaborn.regplot draws scatter plus fitted regression trend and confidence interval. Use seaborn.regplot when analyzing feature relationships and trends. Typical business pattern: forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameters: data, x, y. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.regplot is used for forecasting continuous outcomes such as sales, revenue, demand, or cost.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.regplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.regplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls data in seaborn.regplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.regplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls y in seaborn.regplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.regplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.regplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.regplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-lmplot",
+      "slug": "seaborn-lmplot",
+      "name": "seaborn.lmplot",
+      "library": "seaborn",
+      "subtopic": "Relational",
+      "tags": [
+        "regression",
+        "facets",
+        "relationship"
+      ],
+      "level": "extended",
+      "summary": "seaborn.lmplot builds faceted regression plots across categories.",
+      "syntax": "sns.lmplot(data, x, y, hue=None, col=None)",
+      "description": "seaborn.lmplot builds faceted regression plots across categories. Use it for analyzing feature relationships and trends and forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameters: data, x, y.",
+      "overview": "seaborn.lmplot builds faceted regression plots across categories. Use seaborn.lmplot when analyzing feature relationships and trends. Typical business pattern: forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameters: data, x, y. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.lmplot is used for forecasting continuous outcomes such as sales, revenue, demand, or cost.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.lmplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.lmplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "description": "Controls data in seaborn.lmplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "description": "Controls x in seaborn.lmplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "Any",
+          "description": "Controls y in seaborn.lmplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls hue in seaborn.lmplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.lmplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.lmplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.lmplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-jointplot",
+      "slug": "seaborn-jointplot",
+      "name": "seaborn.jointplot",
+      "library": "seaborn",
+      "subtopic": "Relational",
+      "tags": [
+        "joint",
+        "relationship",
+        "distribution"
+      ],
+      "level": "extended",
+      "summary": "seaborn.jointplot combines bivariate and marginal distributions in one figure.",
+      "syntax": "sns.jointplot(data=None, x=None, y=None, kind='scatter')",
+      "description": "seaborn.jointplot combines bivariate and marginal distributions in one figure. Use it for analyzing feature relationships and trends and rapid exploratory analysis and model diagnostics. Key parameters: data, x, y.",
+      "overview": "seaborn.jointplot combines bivariate and marginal distributions in one figure. Use seaborn.jointplot when analyzing feature relationships and trends. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, x, y. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.jointplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.jointplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.jointplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls data in seaborn.jointplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.jointplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls y in seaborn.jointplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "kind",
+          "type": "str | list[str]",
+          "default": "'scatter'",
+          "description": "Controls kind in seaborn.jointplot.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.jointplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.jointplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.jointplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-countplot",
+      "slug": "seaborn-countplot",
+      "name": "seaborn.countplot",
+      "library": "seaborn",
+      "subtopic": "Categorical",
+      "tags": [
+        "categorical",
+        "counts",
+        "eda"
+      ],
+      "level": "extended",
+      "summary": "seaborn.countplot visualizes category counts directly from raw rows.",
+      "syntax": "sns.countplot(data=None, x=None, hue=None)",
+      "description": "seaborn.countplot visualizes category counts directly from raw rows. Use it for comparing category-level performance and rapid exploratory analysis and model diagnostics. Key parameters: data, x, hue.",
+      "overview": "seaborn.countplot visualizes category counts directly from raw rows. Use seaborn.countplot when comparing category-level performance. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, x, hue. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.countplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.countplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.countplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls data in seaborn.countplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.countplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls hue in seaborn.countplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.countplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.countplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.countplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-stripplot",
+      "slug": "seaborn-stripplot",
+      "name": "seaborn.stripplot",
+      "library": "seaborn",
+      "subtopic": "Categorical",
+      "tags": [
+        "categorical",
+        "distribution",
+        "points"
+      ],
+      "level": "extended",
+      "summary": "seaborn.stripplot shows individual observations for categorical comparisons.",
+      "syntax": "sns.stripplot(data=None, x=None, y=None, jitter=True)",
+      "description": "seaborn.stripplot shows individual observations for categorical comparisons. Use it for comparing category-level performance and rapid exploratory analysis and model diagnostics. Key parameters: data, x, y.",
+      "overview": "seaborn.stripplot shows individual observations for categorical comparisons. Use seaborn.stripplot when comparing category-level performance. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, x, y. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.stripplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.stripplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.stripplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls data in seaborn.stripplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.stripplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls y in seaborn.stripplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "jitter",
+          "type": "Any",
+          "default": "True",
+          "description": "Controls jitter in seaborn.stripplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.stripplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.stripplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.stripplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-swarmplot",
+      "slug": "seaborn-swarmplot",
+      "name": "seaborn.swarmplot",
+      "library": "seaborn",
+      "subtopic": "Categorical",
+      "tags": [
+        "categorical",
+        "distribution",
+        "points"
+      ],
+      "level": "extended",
+      "summary": "seaborn.swarmplot prevents overlap to show each observation clearly.",
+      "syntax": "sns.swarmplot(data=None, x=None, y=None)",
+      "description": "seaborn.swarmplot prevents overlap to show each observation clearly. Use it for comparing category-level performance and rapid exploratory analysis and model diagnostics. Key parameters: data, x, y.",
+      "overview": "seaborn.swarmplot prevents overlap to show each observation clearly. Use seaborn.swarmplot when comparing category-level performance. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, x, y. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.swarmplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.swarmplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.swarmplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls data in seaborn.swarmplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.swarmplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls y in seaborn.swarmplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.swarmplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.swarmplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.swarmplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-pointplot",
+      "slug": "seaborn-pointplot",
+      "name": "seaborn.pointplot",
+      "library": "seaborn",
+      "subtopic": "Categorical",
+      "tags": [
+        "categorical",
+        "estimates",
+        "comparison"
+      ],
+      "level": "extended",
+      "summary": "seaborn.pointplot plots category estimates with uncertainty intervals.",
+      "syntax": "sns.pointplot(data=None, x=None, y=None, hue=None)",
+      "description": "seaborn.pointplot plots category estimates with uncertainty intervals. Use it for comparing category-level performance and rapid exploratory analysis and model diagnostics. Key parameters: data, x, y.",
+      "overview": "seaborn.pointplot plots category estimates with uncertainty intervals. Use seaborn.pointplot when comparing category-level performance. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, x, y. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.pointplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.pointplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.pointplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls data in seaborn.pointplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.pointplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls y in seaborn.pointplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls hue in seaborn.pointplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.pointplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.pointplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.pointplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-boxenplot",
+      "slug": "seaborn-boxenplot",
+      "name": "seaborn.boxenplot",
+      "library": "seaborn",
+      "subtopic": "Categorical",
+      "tags": [
+        "categorical",
+        "distribution",
+        "quantiles"
+      ],
+      "level": "extended",
+      "summary": "seaborn.boxenplot emphasizes distribution tails using letter-value boxes.",
+      "syntax": "sns.boxenplot(data=None, x=None, y=None)",
+      "description": "seaborn.boxenplot emphasizes distribution tails using letter-value boxes. Use it for comparing category-level performance and rapid exploratory analysis and model diagnostics. Key parameters: data, x, y.",
+      "overview": "seaborn.boxenplot emphasizes distribution tails using letter-value boxes. Use seaborn.boxenplot when comparing category-level performance. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, x, y. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.boxenplot is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.boxenplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.boxenplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls data in seaborn.boxenplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.boxenplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls y in seaborn.boxenplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.boxenplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.boxenplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.boxenplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-clustermap",
+      "slug": "seaborn-clustermap",
+      "name": "seaborn.clustermap",
+      "library": "seaborn",
+      "subtopic": "Matrix",
+      "tags": [
+        "matrix",
+        "clustering",
+        "heatmap"
+      ],
+      "level": "extended",
+      "summary": "seaborn.clustermap performs hierarchical clustering and heatmap display.",
+      "syntax": "sns.clustermap(data, metric='euclidean', method='average')",
+      "description": "seaborn.clustermap performs hierarchical clustering and heatmap display. Use it for exploring pairwise or clustered structure and rapid exploratory analysis and model diagnostics. Key parameters: data, metric, method.",
+      "overview": "seaborn.clustermap performs hierarchical clustering and heatmap display. Use seaborn.clustermap when exploring pairwise or clustered structure. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, metric, method. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.clustermap is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.clustermap official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.clustermap.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "description": "Controls data in seaborn.clustermap.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "metric",
+          "type": "Any",
+          "default": "'euclidean'",
+          "description": "Controls metric in seaborn.clustermap.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "method",
+          "type": "str | list[str]",
+          "default": "'average'",
+          "description": "Controls method in seaborn.clustermap.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.clustermap with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.clustermap additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.clustermap again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-facetgrid",
+      "slug": "seaborn-facetgrid",
+      "name": "seaborn.FacetGrid",
+      "library": "seaborn",
+      "subtopic": "Relational",
+      "tags": [
+        "facets",
+        "small-multiples",
+        "layout"
+      ],
+      "level": "extended",
+      "summary": "seaborn.FacetGrid builds multi-panel plots split by row/col/hue facets.",
+      "syntax": "sns.FacetGrid(data, row=None, col=None, hue=None)",
+      "description": "seaborn.FacetGrid builds multi-panel plots split by row/col/hue facets. Use it for analyzing feature relationships and trends and rapid exploratory analysis and model diagnostics. Key parameters: data, row, col.",
+      "overview": "seaborn.FacetGrid builds multi-panel plots split by row/col/hue facets. Use seaborn.FacetGrid when analyzing feature relationships and trends. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, row, col. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.FacetGrid is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.FacetGrid official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.FacetGrid.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "description": "Controls data in seaborn.FacetGrid.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "row",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls row in seaborn.FacetGrid.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "col",
+          "type": "str | list[str]",
+          "default": "None",
+          "description": "Controls col in seaborn.FacetGrid.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls hue in seaborn.FacetGrid.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.FacetGrid with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.FacetGrid additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.FacetGrid again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-pairgrid",
+      "slug": "seaborn-pairgrid",
+      "name": "seaborn.PairGrid",
+      "library": "seaborn",
+      "subtopic": "Matrix",
+      "tags": [
+        "pairwise",
+        "matrix",
+        "eda"
+      ],
+      "level": "extended",
+      "summary": "seaborn.PairGrid builds customizable pairwise relationship matrices.",
+      "syntax": "sns.PairGrid(data, vars=None, hue=None)",
+      "description": "seaborn.PairGrid builds customizable pairwise relationship matrices. Use it for exploring pairwise or clustered structure and rapid exploratory analysis and model diagnostics. Key parameters: data, vars, hue.",
+      "overview": "seaborn.PairGrid builds customizable pairwise relationship matrices. Use seaborn.PairGrid when exploring pairwise or clustered structure. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: data, vars, hue. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.PairGrid is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.PairGrid official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.PairGrid.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "description": "Controls data in seaborn.PairGrid.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "vars",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls vars in seaborn.PairGrid.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls hue in seaborn.PairGrid.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.PairGrid with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.PairGrid additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.PairGrid again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-move-legend",
+      "slug": "seaborn-move-legend",
+      "name": "seaborn.move_legend",
+      "library": "seaborn",
+      "subtopic": "Styling",
+      "tags": [
+        "legend",
+        "styling",
+        "layout"
+      ],
+      "level": "extended",
+      "summary": "seaborn.move_legend repositions legends for readability and layout control.",
+      "syntax": "sns.move_legend(obj, loc)",
+      "description": "seaborn.move_legend repositions legends for readability and layout control. Use it for making charts publication-ready and readable and rapid exploratory analysis and model diagnostics. Key parameters: obj, loc.",
+      "overview": "seaborn.move_legend repositions legends for readability and layout control. Use seaborn.move_legend when making charts publication-ready and readable. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: obj, loc. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.move_legend is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.move_legend official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.move_legend.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "Any",
+          "description": "Controls obj in seaborn.move_legend.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "loc",
+          "type": "Any",
+          "description": "Controls loc in seaborn.move_legend.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.move_legend with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.move_legend additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.move_legend again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-color-palette",
+      "slug": "seaborn-color-palette",
+      "name": "seaborn.color_palette",
+      "library": "seaborn",
+      "subtopic": "Styling",
+      "tags": [
+        "colors",
+        "styling",
+        "theme"
+      ],
+      "level": "extended",
+      "summary": "seaborn.color_palette selects and generates color sequences.",
+      "syntax": "sns.color_palette(palette=None, n_colors=None)",
+      "description": "seaborn.color_palette selects and generates color sequences. Use it for making charts publication-ready and readable and rapid exploratory analysis and model diagnostics. Key parameters: palette, n_colors.",
+      "overview": "seaborn.color_palette selects and generates color sequences. Use seaborn.color_palette when making charts publication-ready and readable. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: palette, n_colors. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.color_palette is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.color_palette official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.color_palette.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "palette",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls palette in seaborn.color_palette.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "n_colors",
+          "type": "int",
+          "default": "None",
+          "description": "Controls n_colors in seaborn.color_palette.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.color_palette with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.color_palette additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.color_palette again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-set-context",
+      "slug": "seaborn-set-context",
+      "name": "seaborn.set_context",
+      "library": "seaborn",
+      "subtopic": "Styling",
+      "tags": [
+        "theme",
+        "styling",
+        "scale"
+      ],
+      "level": "extended",
+      "summary": "seaborn.set_context scales plot elements for notebook, talk, or poster output.",
+      "syntax": "sns.set_context(context, font_scale=1)",
+      "description": "seaborn.set_context scales plot elements for notebook, talk, or poster output. Use it for making charts publication-ready and readable and rapid exploratory analysis and model diagnostics. Key parameters: context, font_scale.",
+      "overview": "seaborn.set_context scales plot elements for notebook, talk, or poster output. Use seaborn.set_context when making charts publication-ready and readable. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameters: context, font_scale. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.set_context is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.set_context official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.set_context.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "context",
+          "type": "Any",
+          "description": "Controls context in seaborn.set_context.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "font_scale",
+          "type": "Any",
+          "default": "1",
+          "description": "Controls font_scale in seaborn.set_context.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.set_context with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.set_context additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.set_context again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-set-style",
+      "slug": "seaborn-set-style",
+      "name": "seaborn.set_style",
+      "library": "seaborn",
+      "subtopic": "Styling",
+      "tags": [
+        "theme",
+        "style",
+        "formatting"
+      ],
+      "level": "extended",
+      "summary": "seaborn.set_style sets axis/grid aesthetics such as darkgrid or whitegrid.",
+      "syntax": "sns.set_style(style='darkgrid')",
+      "description": "seaborn.set_style sets axis/grid aesthetics such as darkgrid or whitegrid. Use it for making charts publication-ready and readable and rapid exploratory analysis and model diagnostics. Key parameter: style.",
+      "overview": "seaborn.set_style sets axis/grid aesthetics such as darkgrid or whitegrid. Use seaborn.set_style when making charts publication-ready and readable. Typical business pattern: rapid exploratory analysis and model diagnostics. Key parameter: style. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.set_style is used for rapid exploratory analysis and model diagnostics.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.set_style official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.set_style.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "style",
+          "type": "str | list[str]",
+          "default": "'darkgrid'",
+          "description": "Controls style in seaborn.set_style.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.set_style with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.set_style additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.set_style again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "sns-residplot",
+      "slug": "seaborn-residplot",
+      "name": "seaborn.residplot",
+      "library": "seaborn",
+      "subtopic": "Relational",
+      "tags": [
+        "residuals",
+        "diagnostics",
+        "regression"
+      ],
+      "level": "extended",
+      "summary": "seaborn.residplot visualizes residual patterns for regression diagnostics.",
+      "syntax": "sns.residplot(data=None, x=None, y=None)",
+      "description": "seaborn.residplot visualizes residual patterns for regression diagnostics. Use it for analyzing feature relationships and trends and forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameters: data, x, y.",
+      "overview": "seaborn.residplot visualizes residual patterns for regression diagnostics. Use seaborn.residplot when analyzing feature relationships and trends. Typical business pattern: forecasting continuous outcomes such as sales, revenue, demand, or cost. Key parameters: data, x, y. Returns Axes | Figure | Grid | None with shape n/a.",
+      "applications": [
+        "Primary application: seaborn.residplot is used for forecasting continuous outcomes such as sales, revenue, demand, or cost.",
+        "Workflow application: treat this command as a statistical plotting step for exploratory and diagnostic analysis.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "seaborn.residplot official docs",
+          "url": "https://seaborn.pydata.org/generated/seaborn.residplot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls data in seaborn.residplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "x",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls x in seaborn.residplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls y in seaborn.residplot.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Axes | Figure | Grid | None",
+        "shape": "n/a",
+        "description": "Visualization object for further customization and rendering."
+      },
+      "examples": [
+        {
+          "title": "seaborn.residplot with polished business chart styling",
+          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "walkthrough": [
+            "Set a clear visual theme (palette, context, background) before plotting.",
+            "Plot business metrics with readable labels, title, and spacing.",
+            "Apply layout and style tweaks so the chart is presentation-ready."
+          ]
+        },
+        {
+          "title": "seaborn.residplot additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run seaborn.residplot again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    }
+  ],
+  "overview": "Seaborn builds statistical visualizations quickly on top of Matplotlib, with strong defaults and semantic mappings for EDA and model diagnostics.",
+  "applications": [
+    "Fast exploratory data analysis by segment and distribution.",
+    "Relationship plots for feature/target diagnostics.",
+    "Consistent style and faceting for notebook storytelling."
+  ]
+}

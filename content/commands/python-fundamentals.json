@@ -1,0 +1,3166 @@
+{
+  "library": "python",
+  "title": "Python Fundamentals for Data Science",
+  "officialDocs": "https://docs.python.org/3/tutorial/",
+  "subtopics": [
+    "Core Syntax",
+    "Collections",
+    "Control Flow",
+    "Functions",
+    "Error Handling",
+    "I/O",
+    "Datetime",
+    "Typing"
+  ],
+  "commandGroups": [
+    {
+      "name": "Core Syntax and Collections",
+      "docs": [
+        {
+          "label": "Python Tutorial - Data Structures",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html"
+        }
+      ],
+      "commandIds": [
+        "py-assignment-casting",
+        "py-sequence-index-slice",
+        "py-list-comprehension",
+        "py-dict-get-setdefault",
+        "py-operators-boolean",
+        "py-set-operations"
+      ]
+    },
+    {
+      "name": "Control Flow and Functions",
+      "docs": [
+        {
+          "label": "Python Tutorial - Control Flow",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html"
+        }
+      ],
+      "commandIds": [
+        "py-control-flow-if",
+        "py-loop-for-enumerate",
+        "py-def-args-kwargs",
+        "py-loop-while",
+        "py-lambda-inline"
+      ]
+    },
+    {
+      "name": "Exceptions, Files, Datetime, Typing",
+      "docs": [
+        {
+          "label": "Python Tutorial - Errors and Exceptions",
+          "url": "https://docs.python.org/3/tutorial/errors.html"
+        },
+        {
+          "label": "Python Datetime",
+          "url": "https://docs.python.org/3/library/datetime.html"
+        },
+        {
+          "label": "Typing Module",
+          "url": "https://docs.python.org/3/library/typing.html"
+        }
+      ],
+      "commandIds": [
+        "py-try-except",
+        "py-with-open",
+        "py-datetime-strptime",
+        "py-typing-annotations"
+      ]
+    },
+    {
+      "name": "Extended APIs and Step-by-Step Patterns",
+      "docs": [
+        {
+          "label": "Python Fundamentals for Data Science official docs",
+          "url": "https://docs.python.org/3/"
+        }
+      ],
+      "commandIds": [
+        "py-builtins-len-sum",
+        "py-builtins-min-max-sorted",
+        "py-enumerate-zip",
+        "py-any-all",
+        "py-string-methods",
+        "py-f-string-format",
+        "py-list-append-extend",
+        "py-list-sort-sorted",
+        "py-dict-items-keys-values",
+        "py-dict-comprehension",
+        "py-set-comprehension",
+        "py-match-case",
+        "py-json-loads-dumps",
+        "py-csv-dictreader",
+        "py-pathlib-path",
+        "py-contextlib-suppress",
+        "py-datetime-timedelta",
+        "py-datetime-timezone",
+        "py-typing-typed-dict",
+        "py-dataclass-basics"
+      ]
+    }
+  ],
+  "cheatSheet": [
+    "py-assignment-casting",
+    "py-sequence-index-slice",
+    "py-list-comprehension",
+    "py-dict-get-setdefault",
+    "py-control-flow-if",
+    "py-loop-for-enumerate",
+    "py-def-args-kwargs",
+    "py-try-except",
+    "py-with-open",
+    "py-datetime-strptime",
+    "py-typing-annotations",
+    "py-operators-boolean",
+    "py-set-operations",
+    "py-loop-while",
+    "py-lambda-inline",
+    "py-builtins-len-sum",
+    "py-builtins-min-max-sorted",
+    "py-enumerate-zip",
+    "py-any-all",
+    "py-string-methods",
+    "py-f-string-format",
+    "py-list-append-extend",
+    "py-list-sort-sorted",
+    "py-dict-items-keys-values",
+    "py-dict-comprehension",
+    "py-set-comprehension",
+    "py-match-case",
+    "py-json-loads-dumps",
+    "py-csv-dictreader",
+    "py-pathlib-path",
+    "py-contextlib-suppress",
+    "py-datetime-timedelta",
+    "py-datetime-timezone",
+    "py-typing-typed-dict",
+    "py-dataclass-basics"
+  ],
+  "coverageOutline": [
+    {
+      "topic": "Built-in Functions",
+      "docUrl": "https://docs.python.org/3/library/functions.html",
+      "status": "planned",
+      "highUsageApis": [
+        "len",
+        "sum",
+        "min",
+        "max",
+        "zip",
+        "enumerate",
+        "sorted"
+      ]
+    },
+    {
+      "topic": "Data Structures",
+      "docUrl": "https://docs.python.org/3/tutorial/datastructures.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "list",
+        "dict.get",
+        "set",
+        "tuple",
+        "slicing"
+      ]
+    },
+    {
+      "topic": "Context Management",
+      "docUrl": "https://docs.python.org/3/reference/compound_stmts.html#with",
+      "status": "seeded",
+      "highUsageApis": [
+        "with open",
+        "contextlib.contextmanager"
+      ]
+    },
+    {
+      "topic": "Datetime",
+      "docUrl": "https://docs.python.org/3/library/datetime.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "datetime.now",
+        "strptime",
+        "strftime",
+        "timedelta"
+      ]
+    },
+    {
+      "topic": "Pattern Matching",
+      "docUrl": "https://docs.python.org/3/tutorial/controlflow.html#match-statements",
+      "status": "planned",
+      "highUsageApis": [
+        "match",
+        "case",
+        "guards"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "py-assignment-casting",
+      "slug": "python-assignment-casting",
+      "name": "Assignment and Casting",
+      "library": "python",
+      "subtopic": "Core Syntax",
+      "tags": [
+        "variables",
+        "types",
+        "casting"
+      ],
+      "level": "core",
+      "summary": "Create variables dynamically and cast values into numeric/text types for downstream analysis.",
+      "syntax": "x = value; int(x); float(x); str(x)",
+      "description": "Create variables dynamically and cast values into numeric/text types for downstream analysis. Use it for writing concise, reliable Python script logic and implementing reliable data-cleaning and orchestration utilities. Key parameters: value, base.",
+      "docs": [
+        {
+          "label": "Python Tutorial - Numbers",
+          "url": "https://docs.python.org/3/tutorial/introduction.html#numbers"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "value",
+          "type": "Any",
+          "description": "Input object to bind or cast.",
+          "values": [
+            "int",
+            "float",
+            "str",
+            "bool",
+            "None"
+          ],
+          "pitfalls": [
+            "int('4.2') raises ValueError; cast to float first"
+          ]
+        },
+        {
+          "name": "base",
+          "type": "int",
+          "default": "10",
+          "description": "Numeric base when converting strings with int().",
+          "values": [
+            "2",
+            "8",
+            "10",
+            "16"
+          ],
+          "pitfalls": [
+            "Only valid for string inputs"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Typed object",
+        "description": "New object of requested type.",
+        "shape": "scalar"
+      },
+      "examples": [
+        {
+          "title": "Normalize order quantity field",
+          "scenario": "Ops CSV exports quantity as text and needs integer math.",
+          "code": "raw_qty = '120'\nqty = int(raw_qty)\nunit_cost = 3.5\nline_total = qty * unit_cost\nprint(type(qty).__name__, line_total)",
+          "expectedOutput": "int 420.0",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply Assignment and Casting with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "Assignment and Casting additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = x = records[0]\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run Assignment and Casting again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Prefer explicit casting near ingest boundaries.",
+        "Use try/except for dirty inputs before batch transformations."
+      ],
+      "related": [
+        "py-try-except",
+        "py-datetime-strptime"
+      ],
+      "overview": "Create variables dynamically and cast values into numeric/text types for downstream analysis. Use Assignment and Casting when writing concise, reliable Python script logic. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: value, base. Returns Typed object with shape scalar.",
+      "applications": [
+        "Primary application: Assignment and Casting is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-sequence-index-slice",
+      "slug": "python-sequence-index-slice",
+      "name": "Indexing and Slicing",
+      "library": "python",
+      "subtopic": "Collections",
+      "tags": [
+        "lists",
+        "strings",
+        "tuples",
+        "slicing"
+      ],
+      "level": "core",
+      "summary": "Select elements or ranges from ordered sequences with start:stop:step syntax.",
+      "syntax": "seq[idx]; seq[start:stop:step]",
+      "description": "Select elements or ranges from ordered sequences with start:stop:step syntax. Use it for transforming lists, dicts, and sets before loading them into DataFrames and implementing reliable data-cleaning and orchestration utilities. Key parameters: idx, start:stop:step.",
+      "docs": [
+        {
+          "label": "Python Tutorial - Lists",
+          "url": "https://docs.python.org/3/tutorial/introduction.html#lists"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "idx",
+          "type": "int",
+          "description": "Zero-based position; negative indexes count from end.",
+          "values": [
+            "0",
+            "1",
+            "-1",
+            "-2"
+          ],
+          "pitfalls": [
+            "Out-of-range indexes raise IndexError"
+          ]
+        },
+        {
+          "name": "start:stop:step",
+          "type": "int:int:int",
+          "description": "Slice bounds where stop is excluded.",
+          "values": [
+            "[:5]",
+            "[5:]",
+            "[::2]",
+            "[::-1]"
+          ],
+          "pitfalls": [
+            "Slicing copies data for list/tuple/string"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Element or sequence copy",
+        "description": "Single object for index; same sequence type for slice.",
+        "shape": "scalar or 1D"
+      },
+      "examples": [
+        {
+          "title": "Keep most recent 7 daily revenue values",
+          "scenario": "Finance needs the latest rolling week from a list loaded in memory.",
+          "code": "daily_revenue = [4200, 4100, 4300, 4500, 4700, 4600, 4900, 5100, 5300]\nlatest_week = daily_revenue[-7:]\nprint(latest_week)",
+          "expectedOutput": "[4300, 4500, 4700, 4600, 4900, 5100, 5300]",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply Indexing and Slicing with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "Indexing and Slicing additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = se0.9[idx]\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run Indexing and Slicing again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Stop index is exclusive.",
+        "Negative step supports reverse traversal."
+      ],
+      "related": [
+        "py-list-comprehension",
+        "py-loop-for-enumerate"
+      ],
+      "overview": "Select elements or ranges from ordered sequences with start:stop:step syntax. Use Indexing and Slicing when transforming lists, dicts, and sets before loading them into DataFrames. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: idx, start:stop:step. Returns Element or sequence copy with shape scalar or 1D.",
+      "applications": [
+        "Primary application: Indexing and Slicing is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-list-comprehension",
+      "slug": "python-list-comprehension",
+      "name": "List Comprehension",
+      "library": "python",
+      "subtopic": "Collections",
+      "tags": [
+        "list",
+        "comprehension",
+        "loop"
+      ],
+      "level": "core",
+      "summary": "Compact syntax to map and filter iterable data in one expression.",
+      "syntax": "[expression for item in iterable if condition]",
+      "description": "Compact syntax to map and filter iterable data in one expression. Use it for transforming lists, dicts, and sets before loading them into DataFrames and implementing reliable data-cleaning and orchestration utilities. Key parameters: expression, condition.",
+      "docs": [
+        {
+          "label": "Python Tutorial - List Comprehensions",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "expression",
+          "type": "Any",
+          "description": "Transformation applied to each element.",
+          "values": [
+            "x",
+            "x * 1.2",
+            "x.strip().lower()"
+          ],
+          "pitfalls": [
+            "Overly complex expressions hurt readability"
+          ]
+        },
+        {
+          "name": "condition",
+          "type": "bool expression",
+          "description": "Optional filter to keep only matching rows.",
+          "values": [
+            "x > 0",
+            "x is not None"
+          ],
+          "pitfalls": [
+            "Condition is evaluated after iteration variable is bound"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "list",
+        "description": "New list with transformed and filtered elements.",
+        "shape": "1D list length <= input length"
+      },
+      "examples": [
+        {
+          "title": "Apply marketing discount eligibility",
+          "scenario": "Mark eligible basket values above threshold for coupon targeting.",
+          "code": "baskets = [25, 88, 140, 42, 215]\neligible = [value for value in baskets if value >= 100]\nprint(eligible)",
+          "expectedOutput": "[140, 215]",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply List Comprehension with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "List Comprehension additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = [expression for item in records if condition]\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run List Comprehension again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "For nested logic, refactor into a named function for maintainability."
+      ],
+      "related": [
+        "py-loop-for-enumerate",
+        "py-def-args-kwargs"
+      ],
+      "overview": "Compact syntax to map and filter iterable data in one expression. Use List Comprehension when transforming lists, dicts, and sets before loading them into DataFrames. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: expression, condition. Returns list with shape 1D list length <= input length.",
+      "applications": [
+        "Primary application: List Comprehension is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-dict-get-setdefault",
+      "slug": "python-dict-get-setdefault",
+      "name": "dict.get and dict.setdefault",
+      "library": "python",
+      "subtopic": "Collections",
+      "tags": [
+        "dict",
+        "lookup",
+        "default"
+      ],
+      "level": "core",
+      "summary": "Safely read dictionary keys with fallback values and initialize missing keys.",
+      "syntax": "d.get(key, default); d.setdefault(key, default)",
+      "description": "Safely read dictionary keys with fallback values and initialize missing keys. Use it for transforming lists, dicts, and sets before loading them into DataFrames and implementing reliable data-cleaning and orchestration utilities. Key parameters: key, default.",
+      "docs": [
+        {
+          "label": "Python stdtypes - dict",
+          "url": "https://docs.python.org/3/library/stdtypes.html#dict"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "key",
+          "type": "hashable",
+          "description": "Dictionary key to retrieve or initialize.",
+          "values": [
+            "str",
+            "int",
+            "tuple"
+          ],
+          "pitfalls": [
+            "Unhashable keys like list raise TypeError"
+          ]
+        },
+        {
+          "name": "default",
+          "type": "Any",
+          "default": "None",
+          "description": "Fallback value for missing key.",
+          "values": [
+            "0",
+            "[]",
+            "{}",
+            "'unknown'"
+          ],
+          "pitfalls": [
+            "Mutable defaults in setdefault can be shared if reused"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Any",
+        "description": "Stored value or default.",
+        "shape": "scalar or object"
+      },
+      "examples": [
+        {
+          "title": "Count support tickets by channel",
+          "scenario": "Customer ops wants channel-level counts from raw events.",
+          "code": "channels = ['email', 'chat', 'chat', 'phone']\ncounts = {}\nfor c in channels:\n    counts[c] = counts.get(c, 0) + 1\nprint(counts)",
+          "expectedOutput": "{'email': 1, 'chat': 2, 'phone': 1}",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dict.get and dict.setdefault with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "dict.get and dict.setdefault additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = d.get(key, default)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run dict.get and dict.setdefault again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Prefer collections.defaultdict for heavy counting loops.",
+        "Use get() when you do not want to mutate the dictionary."
+      ],
+      "related": [
+        "py-loop-for-enumerate",
+        "py-try-except"
+      ],
+      "overview": "Safely read dictionary keys with fallback values and initialize missing keys. Use dict.get and dict.setdefault when transforming lists, dicts, and sets before loading them into DataFrames. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: key, default. Returns Any with shape scalar or object.",
+      "applications": [
+        "Primary application: dict.get and dict.setdefault is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-control-flow-if",
+      "slug": "python-control-flow-if-elif-match",
+      "name": "if / elif / else and match / case",
+      "library": "python",
+      "subtopic": "Control Flow",
+      "tags": [
+        "if",
+        "elif",
+        "else",
+        "match",
+        "case"
+      ],
+      "level": "core",
+      "summary": "Branch logic based on conditions or structural patterns.",
+      "syntax": "if cond: ... elif cond: ... else: ...; match value: case pattern: ...",
+      "description": "Branch logic based on conditions or structural patterns. Use it for encoding business rules and routing logic explicitly and implementing reliable data-cleaning and orchestration utilities. Key parameters: cond, pattern.",
+      "docs": [
+        {
+          "label": "Python Tutorial - if Statements",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html#if-statements"
+        },
+        {
+          "label": "Python Tutorial - match Statements",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html#match-statements"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "cond",
+          "type": "bool",
+          "description": "Condition expression evaluated top-to-bottom.",
+          "values": [
+            "x > 0",
+            "status == 'active'"
+          ],
+          "pitfalls": [
+            "Order matters; first true branch wins"
+          ]
+        },
+        {
+          "name": "pattern",
+          "type": "literal or capture pattern",
+          "description": "Pattern tested in match statement.",
+          "values": [
+            "'paid'",
+            "{'country': c}"
+          ],
+          "pitfalls": [
+            "match unavailable in Python < 3.10"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Executes code blocks; no direct return unless inside function.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Route leads to campaign strategy",
+          "scenario": "Marketing assigns strategy based on lead source.",
+          "code": "source = 'organic'\nmatch source:\n    case 'paid': strategy = 'retarget'\n    case 'organic': strategy = 'newsletter'\n    case _: strategy = 'manual-review'\nprint(strategy)",
+          "expectedOutput": "newsletter",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply if / elif / else and match / case with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "if / elif / else and match / case additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = if cond: ... elif cond: ... else: ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run if / elif / else and match / case again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Prefer dictionary dispatch for very large static routing tables.",
+        "Use explicit else/case _ to handle unknown categories."
+      ],
+      "related": [
+        "py-loop-for-enumerate",
+        "py-def-args-kwargs"
+      ],
+      "overview": "Branch logic based on conditions or structural patterns. Use if / elif / else and match / case when encoding business rules and routing logic explicitly. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: cond, pattern. Returns None with shape n/a.",
+      "applications": [
+        "Primary application: if / elif / else and match / case is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-loop-for-enumerate",
+      "slug": "python-for-while-enumerate",
+      "name": "for / while with enumerate",
+      "library": "python",
+      "subtopic": "Control Flow",
+      "tags": [
+        "for",
+        "while",
+        "enumerate"
+      ],
+      "level": "core",
+      "summary": "Iterate collections or condition-driven loops with index tracking.",
+      "syntax": "for idx, item in enumerate(iterable, start=0): ...; while condition: ...",
+      "description": "Iterate collections or condition-driven loops with index tracking. Use it for encoding business rules and routing logic explicitly and implementing reliable data-cleaning and orchestration utilities. Key parameters: iterable, start.",
+      "docs": [
+        {
+          "label": "Python Tutorial - for Statements",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html#for-statements"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "iterable",
+          "type": "iterable",
+          "description": "Collection to iterate.",
+          "values": [
+            "list",
+            "tuple",
+            "dict",
+            "range"
+          ],
+          "pitfalls": [
+            "Do not mutate list length while iterating it"
+          ]
+        },
+        {
+          "name": "start",
+          "type": "int",
+          "default": "0",
+          "description": "Starting index when using enumerate.",
+          "values": [
+            "0",
+            "1"
+          ],
+          "pitfalls": [
+            "start affects index labels only, not values"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Loop executes side effects or accumulations.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Generate ranked product list",
+          "scenario": "Product analytics wants human-readable rank labels for top SKUs.",
+          "code": "top_skus = ['SKU-15', 'SKU-29', 'SKU-03']\nfor rank, sku in enumerate(top_skus, start=1):\n    print(rank, sku)",
+          "expectedOutput": "1 SKU-15\n2 SKU-29\n3 SKU-03",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply for / while with enumerate with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "for / while with enumerate additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = for idx, item in enumerate(records, stnp.array([1, 1, 2, 3])t=0): ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run for / while with enumerate again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use list comprehensions for pure transform operations.",
+        "while loops are better for retry logic and state machines."
+      ],
+      "related": [
+        "py-list-comprehension",
+        "py-dict-get-setdefault"
+      ],
+      "overview": "Iterate collections or condition-driven loops with index tracking. Use for / while with enumerate when encoding business rules and routing logic explicitly. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: iterable, start. Returns None with shape n/a.",
+      "applications": [
+        "Primary application: for / while with enumerate is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-def-args-kwargs",
+      "slug": "python-functions-lambda-args-kwargs",
+      "name": "Functions, lambda, *args and **kwargs",
+      "library": "python",
+      "subtopic": "Functions",
+      "tags": [
+        "def",
+        "lambda",
+        "args",
+        "kwargs"
+      ],
+      "level": "core",
+      "summary": "Define reusable logic blocks with flexible positional and keyword arguments.",
+      "syntax": "def fn(a, *args, b=0, **kwargs): ...; lambda x: x * 2",
+      "description": "Define reusable logic blocks with flexible positional and keyword arguments. Use it for delivering reliable python workflows and implementing reliable data-cleaning and orchestration utilities. Key parameters: *args, **kwargs.",
+      "docs": [
+        {
+          "label": "Python Tutorial - Defining Functions",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions"
+        },
+        {
+          "label": "Python Tutorial - Lambda",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "*args",
+          "type": "tuple",
+          "description": "Extra positional arguments.",
+          "values": [
+            "numbers",
+            "column names"
+          ],
+          "pitfalls": [
+            "Overuse hides function contract"
+          ]
+        },
+        {
+          "name": "**kwargs",
+          "type": "dict[str, Any]",
+          "description": "Extra named arguments.",
+          "values": [
+            "threshold=0.7",
+            "region='US'"
+          ],
+          "pitfalls": [
+            "Unexpected keys can silently pass unless validated"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Any",
+        "description": "Whatever object the function returns.",
+        "shape": "depends on implementation"
+      },
+      "examples": [
+        {
+          "title": "Compute weighted pricing score",
+          "scenario": "Pricing team combines margin and demand into one score.",
+          "code": "def pricing_score(price, demand, *, alpha=0.6):\n    return alpha * demand + (1 - alpha) * price\nprint(round(pricing_score(20, 80, alpha=0.7), 2))",
+          "expectedOutput": "62.0",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply Functions, lambda, *args and **kwargs with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "Functions, lambda, *args and **kwargs additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = def fn(a, *np.array([1, 1, 2, 3])gs, b=0, **kwargs): ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run Functions, lambda, *args and **kwargs again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Keep lambda usage to short inline transformations.",
+        "Prefer explicit keyword-only args for sensitive tuning parameters."
+      ],
+      "related": [
+        "py-control-flow-if",
+        "py-typing-annotations"
+      ],
+      "overview": "Define reusable logic blocks with flexible positional and keyword arguments. Use Functions, lambda, *args and **kwargs when delivering reliable python workflows. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: *args, **kwargs. Returns Any with shape depends on implementation.",
+      "applications": [
+        "Primary application: Functions, lambda, *args and **kwargs is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-try-except",
+      "slug": "python-try-except-finally",
+      "name": "try / except / else / finally",
+      "library": "python",
+      "subtopic": "Error Handling",
+      "tags": [
+        "exceptions",
+        "try",
+        "except"
+      ],
+      "level": "core",
+      "summary": "Handle expected runtime errors while keeping pipelines resilient.",
+      "syntax": "try: ... except SpecificError as e: ... else: ... finally: ...",
+      "description": "Handle expected runtime errors while keeping pipelines resilient. Use it for hardening scripts against malformed records and runtime edge cases and implementing reliable data-cleaning and orchestration utilities. Key parameters: SpecificError, finally block.",
+      "docs": [
+        {
+          "label": "Python Tutorial - Errors and Exceptions",
+          "url": "https://docs.python.org/3/tutorial/errors.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "SpecificError",
+          "type": "Exception subclass",
+          "description": "Target error class to catch.",
+          "values": [
+            "ValueError",
+            "KeyError",
+            "FileNotFoundError"
+          ],
+          "pitfalls": [
+            "Avoid bare except; it hides real failures"
+          ]
+        },
+        {
+          "name": "finally block",
+          "type": "code block",
+          "description": "Always runs for cleanup.",
+          "values": [
+            "close connections",
+            "emit metrics"
+          ],
+          "pitfalls": [
+            "Return in finally can mask prior exceptions"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Control-flow construct; returns depend on enclosed code.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Skip malformed transaction rows",
+          "scenario": "Fraud pipeline receives occasional non-numeric amount strings.",
+          "code": "rows = ['120.5', 'bad', '48.0']\nclean = []\nfor value in rows:\n    try:\n        clean.append(float(value))\n    except ValueError:\n        continue\nprint(clean)",
+          "expectedOutput": "[120.5, 48.0]",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply try / except / else / finally with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "try / except / else / finally additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = try: ... except SpecificError as e: ... else: ... finally: ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run try / except / else / finally again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Catch only the narrow exceptions you can recover from.",
+        "Log bad rows for auditability."
+      ],
+      "related": [
+        "py-assignment-casting",
+        "py-with-open"
+      ],
+      "overview": "Handle expected runtime errors while keeping pipelines resilient. Use try / except / else / finally when hardening scripts against malformed records and runtime edge cases. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: SpecificError, finally block. Returns None with shape n/a.",
+      "applications": [
+        "Primary application: try / except / else / finally is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-with-open",
+      "slug": "python-with-open-file-io",
+      "name": "with open(...) for file I/O",
+      "library": "python",
+      "subtopic": "I/O",
+      "tags": [
+        "file",
+        "io",
+        "context-manager"
+      ],
+      "level": "core",
+      "summary": "Read and write local files safely using context managers.",
+      "syntax": "with open(path, mode='r', encoding='utf-8') as f: ...",
+      "description": "Read and write local files safely using context managers. Use it for ingesting exports and serializing clean outputs and implementing reliable data-cleaning and orchestration utilities. Key parameters: path, mode, encoding.",
+      "docs": [
+        {
+          "label": "Python Built-in open",
+          "url": "https://docs.python.org/3/library/functions.html#open"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "path",
+          "type": "str | path-like",
+          "description": "File location.",
+          "values": [
+            "'data.csv'",
+            "'reports/output.txt'"
+          ],
+          "pitfalls": [
+            "Relative paths depend on working directory"
+          ]
+        },
+        {
+          "name": "mode",
+          "type": "str",
+          "default": "'r'",
+          "description": "Open mode for read/write/append.",
+          "values": [
+            "'r'",
+            "'w'",
+            "'a'",
+            "'rb'"
+          ],
+          "pitfalls": [
+            "'w' truncates existing files"
+          ]
+        },
+        {
+          "name": "encoding",
+          "type": "str",
+          "default": "platform default",
+          "description": "Text encoding.",
+          "values": [
+            "'utf-8'",
+            "'latin-1'"
+          ],
+          "pitfalls": [
+            "Omitting encoding causes inconsistent behavior across machines"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "IO object",
+        "description": "File handle supporting read/write methods.",
+        "shape": "stream"
+      },
+      "examples": [
+        {
+          "title": "Write daily KPI snapshot",
+          "scenario": "Product team stores quick daily metrics summary for handoff.",
+          "code": "kpi_line = 'date=2026-03-05, active_users=12450'\nwith open('kpi_snapshot.txt', 'w', encoding='utf-8') as f:\n    f.write(kpi_line)\nprint('written')",
+          "expectedOutput": "written",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply with open(...) for file I/O with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "with open(...) for file I/O additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = with open(path, mode='r', encoding='utf-8') as f: ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run with open(...) for file I/O again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use newline='' for CSV writing with csv module on Windows.",
+        "For large files, iterate line-by-line instead of read()."
+      ],
+      "related": [
+        "py-try-except",
+        "py-datetime-strptime"
+      ],
+      "overview": "Read and write local files safely using context managers. Use with open(...) for file I/O when ingesting exports and serializing clean outputs. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: path, mode, encoding. Returns IO object with shape stream.",
+      "applications": [
+        "Primary application: with open(...) for file I/O is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-datetime-strptime",
+      "slug": "python-datetime-now-strptime",
+      "name": "datetime.now, strptime, strftime",
+      "library": "python",
+      "subtopic": "Datetime",
+      "tags": [
+        "datetime",
+        "parsing",
+        "formatting"
+      ],
+      "level": "core",
+      "summary": "Parse string timestamps, format dates, and create current-time markers.",
+      "syntax": "datetime.now(); datetime.strptime(text, fmt); dt.strftime(fmt)",
+      "description": "Parse string timestamps, format dates, and create current-time markers. Use it for building time-aware features and schedule calculations and implementing reliable data-cleaning and orchestration utilities. Key parameters: text, fmt.",
+      "docs": [
+        {
+          "label": "datetime module",
+          "url": "https://docs.python.org/3/library/datetime.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "text",
+          "type": "str",
+          "description": "Input timestamp string.",
+          "values": [
+            "'2026-03-05'",
+            "'2026-03-05 09:30:00'"
+          ],
+          "pitfalls": [
+            "Format mismatch raises ValueError"
+          ]
+        },
+        {
+          "name": "fmt",
+          "type": "str",
+          "description": "Directive template.",
+          "values": [
+            "'%Y-%m-%d'",
+            "'%Y-%m-%d %H:%M:%S'"
+          ],
+          "pitfalls": [
+            "%m is month, %M is minute"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "datetime.datetime | str",
+        "description": "Parsed datetime object or formatted string.",
+        "shape": "scalar"
+      },
+      "examples": [
+        {
+          "title": "Parse subscription start date",
+          "scenario": "Retention model expects datetime objects for tenure calculations.",
+          "code": "from datetime import datetime\nstart = datetime.strptime('2025-11-12', '%Y-%m-%d')\nprint(start.year, start.month)",
+          "expectedOutput": "2025 11",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply datetime.now, strptime, strftime with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "datetime.now, strptime, strftime additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = datetime.now()\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run datetime.now, strptime, strftime again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use timezone-aware datetimes for multi-region systems.",
+        "Prefer ISO-8601 formats when designing new data contracts."
+      ],
+      "related": [
+        "py-with-open",
+        "pandas-to-datetime"
+      ],
+      "overview": "Parse string timestamps, format dates, and create current-time markers. Use datetime.now, strptime, strftime when building time-aware features and schedule calculations. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: text, fmt. Returns datetime.datetime | str with shape scalar.",
+      "applications": [
+        "Primary application: datetime.now, strptime, strftime is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-typing-annotations",
+      "slug": "python-typing-annotations",
+      "name": "Typing annotations (list, dict, Optional)",
+      "library": "python",
+      "subtopic": "Typing",
+      "tags": [
+        "typing",
+        "annotations",
+        "optional"
+      ],
+      "level": "core",
+      "summary": "Add lightweight type hints that improve readability, linting, and IDE support in DS codebases.",
+      "syntax": "def fn(x: list[float], y: dict[str, int] | None) -> float: ...",
+      "description": "Add lightweight type hints that improve readability, linting, and IDE support in DS codebases. Use it for making utility functions safer for team reuse and implementing reliable data-cleaning and orchestration utilities. Key parameters: list[T], X | None.",
+      "docs": [
+        {
+          "label": "typing module",
+          "url": "https://docs.python.org/3/library/typing.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "list[T]",
+          "type": "generic alias",
+          "description": "Sequence of values of type T.",
+          "values": [
+            "list[float]",
+            "list[str]"
+          ],
+          "pitfalls": [
+            "Hints are ignored at runtime unless extra tooling validates"
+          ]
+        },
+        {
+          "name": "X | None",
+          "type": "union",
+          "description": "Optional value pattern.",
+          "values": [
+            "float | None",
+            "dict[str, int] | None"
+          ],
+          "pitfalls": [
+            "Handle None explicitly before operations"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Annotated function signature",
+        "description": "Improved static analysis and IDE hints.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Typed KPI helper",
+          "scenario": "Analytics team standardizes helper signatures for shared utility modules.",
+          "code": "def conversion_rate(signups: int, visits: int) -> float:\n    return signups / visits if visits else 0.0\nprint(conversion_rate(52, 1300))",
+          "expectedOutput": "0.04",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply Typing annotations (list, dict, Optional) with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "Typing annotations (list, dict, Optional) additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = def fn(x: list[float], y: dict[str, int] | None) -> float: ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run Typing annotations (list, dict, Optional) again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Prefer modern built-in generics (list[int]) in Python 3.9+.",
+        "Use mypy/pyright in CI for stronger enforcement."
+      ],
+      "related": [
+        "py-def-args-kwargs"
+      ],
+      "overview": "Add lightweight type hints that improve readability, linting, and IDE support in DS codebases. Use Typing annotations (list, dict, Optional) when making utility functions safer for team reuse. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: list[T], X | None. Returns Annotated function signature with shape n/a.",
+      "applications": [
+        "Primary application: Typing annotations (list, dict, Optional) is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-operators-boolean",
+      "slug": "python-operators-boolean",
+      "name": "Operators and Boolean Logic",
+      "library": "python",
+      "subtopic": "Core Syntax",
+      "tags": [
+        "operators",
+        "arithmetic",
+        "boolean",
+        "comparison"
+      ],
+      "level": "core",
+      "summary": "Use arithmetic, comparison, membership, and boolean operators to express business rules in transformations and filters.",
+      "syntax": "a + b; a / b; a == b; a in seq; cond_a and cond_b",
+      "description": "Use arithmetic, comparison, membership, and boolean operators to express business rules in transformations and filters. Use it for writing concise, reliable Python script logic and implementing reliable data-cleaning and orchestration utilities. Key parameters: left, right, boolean operators.",
+      "docs": [
+        {
+          "label": "Python Expressions - Operator precedence",
+          "url": "https://docs.python.org/3/reference/expressions.html#operator-precedence"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "left, right",
+          "type": "Any",
+          "description": "Operands used in arithmetic/comparison expressions.",
+          "values": [
+            "int",
+            "float",
+            "str",
+            "bool"
+          ],
+          "pitfalls": [
+            "Mixed incompatible types can raise TypeError"
+          ]
+        },
+        {
+          "name": "boolean operators",
+          "type": "keyword",
+          "default": "n/a",
+          "description": "Combine conditions using and, or, and not.",
+          "values": [
+            "and",
+            "or",
+            "not"
+          ],
+          "pitfalls": [
+            "and/or return operands, not strictly True/False objects"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Computed value or bool",
+        "shape": "scalar",
+        "description": "Result type depends on operators and operands."
+      },
+      "examples": [
+        {
+          "title": "Flag risky transactions",
+          "scenario": "Fintech risk rule flags transactions that are high amount and from new devices.",
+          "code": "amount = 850\\nknown_device = False\\nis_high_risk = (amount > 500) and (not known_device)\\nprint(is_high_risk)",
+          "expectedOutput": "True",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply Operators and Boolean Logic with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "Operators and Boolean Logic additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = a + b\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run Operators and Boolean Logic again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use parentheses to make precedence explicit in long conditions.",
+        "Prefer clear intermediate variables over dense one-line expressions."
+      ],
+      "related": [
+        "py-control-flow-if",
+        "py-loop-for-enumerate"
+      ],
+      "overview": "Use arithmetic, comparison, membership, and boolean operators to express business rules in transformations and filters. Use Operators and Boolean Logic when writing concise, reliable Python script logic. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: left, right, boolean operators. Returns Computed value or bool with shape scalar.",
+      "applications": [
+        "Primary application: Operators and Boolean Logic is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-set-operations",
+      "slug": "python-set-operations",
+      "name": "Set Operations",
+      "library": "python",
+      "subtopic": "Collections",
+      "tags": [
+        "set",
+        "deduplication",
+        "membership"
+      ],
+      "level": "core",
+      "summary": "Use sets for fast uniqueness checks, overlap analysis, and deduplication pipelines.",
+      "syntax": "s = set(iterable); s1 | s2; s1 & s2; s1 - s2",
+      "description": "Use sets for fast uniqueness checks, overlap analysis, and deduplication pipelines. Use it for transforming lists, dicts, and sets before loading them into DataFrames and implementing reliable data-cleaning and orchestration utilities. Key parameters: iterable, set operations.",
+      "docs": [
+        {
+          "label": "Python Tutorial - Sets",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html#sets"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "iterable",
+          "type": "Iterable[Hashable]",
+          "description": "Source values converted into unique set elements.",
+          "values": [
+            "list",
+            "tuple",
+            "generator"
+          ],
+          "pitfalls": [
+            "Unhashable elements like dict/list raise TypeError"
+          ]
+        },
+        {
+          "name": "set operations",
+          "type": "operator | method",
+          "default": "n/a",
+          "description": "Combine or compare sets.",
+          "values": [
+            "| union",
+            "& intersection",
+            "- difference",
+            "^ symmetric_difference"
+          ],
+          "pitfalls": [
+            "Operations return new sets unless using in-place update methods"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "set",
+        "shape": "unique values",
+        "description": "Unique collection based on the requested set operation."
+      },
+      "examples": [
+        {
+          "title": "Compare customer cohorts",
+          "scenario": "Marketing compares this month active users to last month to find retained users.",
+          "code": "last_month = {'u1', 'u2', 'u3', 'u5'}\\nthis_month = {'u2', 'u3', 'u4', 'u6'}\\nretained = last_month & this_month\\nchurned = last_month - this_month\\nprint(retained, churned)",
+          "expectedOutput": "{'u2', 'u3'} {'u1', 'u5'}",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply Set Operations with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "Set Operations additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = s = set(records)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run Set Operations again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use sets when order does not matter.",
+        "Convert back to sorted lists for deterministic reporting output."
+      ],
+      "related": [
+        "py-dict-get-setdefault",
+        "py-list-comprehension"
+      ],
+      "overview": "Use sets for fast uniqueness checks, overlap analysis, and deduplication pipelines. Use Set Operations when transforming lists, dicts, and sets before loading them into DataFrames. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: iterable, set operations. Returns set with shape unique values.",
+      "applications": [
+        "Primary application: Set Operations is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-loop-while",
+      "slug": "python-while-loop",
+      "name": "while Loop",
+      "library": "python",
+      "subtopic": "Control Flow",
+      "tags": [
+        "loop",
+        "while",
+        "iteration"
+      ],
+      "level": "core",
+      "summary": "Repeat logic until a condition changes, useful for convergence checks and controlled retries.",
+      "syntax": "while condition:\\n    # work\\n    if stop_condition:\\n        break",
+      "description": "Repeat logic until a condition changes, useful for convergence checks and controlled retries. Use it for encoding business rules and routing logic explicitly and implementing reliable data-cleaning and orchestration utilities. Key parameters: condition, break/continue.",
+      "docs": [
+        {
+          "label": "Python Tutorial - while statements",
+          "url": "https://docs.python.org/3/tutorial/introduction.html#first-steps-towards-programming"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "condition",
+          "type": "bool expression",
+          "description": "Gate checked before each iteration.",
+          "values": [
+            "counter < limit",
+            "error_rate > target"
+          ],
+          "pitfalls": [
+            "Condition that never changes causes infinite loops"
+          ]
+        },
+        {
+          "name": "break/continue",
+          "type": "keyword",
+          "default": "optional",
+          "description": "Control flow modifiers inside the loop body.",
+          "values": [
+            "break",
+            "continue"
+          ],
+          "pitfalls": [
+            "Overusing continue can hide state updates"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "None (loop side effects)",
+        "shape": "n/a",
+        "description": "Loop itself returns nothing; state variables are updated."
+      },
+      "examples": [
+        {
+          "title": "Iterate until forecast error stabilizes",
+          "scenario": "Ops model tuning repeats updates until error threshold is met.",
+          "code": "error = 0.30\\niterations = 0\\nwhile error > 0.10:\\n    error *= 0.8\\n    iterations += 1\\nprint(round(error, 3), iterations)",
+          "expectedOutput": "0.098 5",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply while Loop with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "while Loop additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = while condition:\\n    # work\\n    if stop_condition:\\n        break\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run while Loop again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Track iteration counters to avoid runaway loops.",
+        "Prefer for-loops when the iteration count is known in advance."
+      ],
+      "related": [
+        "py-loop-for-enumerate",
+        "py-control-flow-if"
+      ],
+      "overview": "Repeat logic until a condition changes, useful for convergence checks and controlled retries. Use while Loop when encoding business rules and routing logic explicitly. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: condition, break/continue. Returns None (loop side effects) with shape n/a.",
+      "applications": [
+        "Primary application: while Loop is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-lambda-inline",
+      "slug": "python-lambda-inline",
+      "name": "lambda Expressions",
+      "library": "python",
+      "subtopic": "Functions",
+      "tags": [
+        "lambda",
+        "function",
+        "key-functions"
+      ],
+      "level": "core",
+      "summary": "Define short anonymous functions for simple transformations and key-based sorting.",
+      "syntax": "lambda args: expression",
+      "description": "Define short anonymous functions for simple transformations and key-based sorting. Use it for delivering reliable python workflows and implementing reliable data-cleaning and orchestration utilities. Key parameters: args, expression.",
+      "docs": [
+        {
+          "label": "Python Tutorial - Lambda Expressions",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "args",
+          "type": "positional arguments",
+          "description": "Input placeholders for the expression.",
+          "values": [
+            "x",
+            "row",
+            "item"
+          ],
+          "pitfalls": [
+            "Avoid complex multi-step logic in lambdas"
+          ]
+        },
+        {
+          "name": "expression",
+          "type": "single expression",
+          "description": "Returned value from the lambda.",
+          "values": [
+            "x * 1.2",
+            "item[\"score\"]"
+          ],
+          "pitfalls": [
+            "Statements like for/if blocks are not allowed"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "callable",
+        "shape": "function object",
+        "description": "Anonymous function that can be invoked or passed to APIs expecting callables."
+      },
+      "examples": [
+        {
+          "title": "Sort SKUs by contribution margin",
+          "scenario": "Pricing analyst sorts products by margin rate descending for prioritization.",
+          "code": "skus = [{'sku': 'A', 'margin': 0.22}, {'sku': 'B', 'margin': 0.35}, {'sku': 'C', 'margin': 0.18}]\\nranked = sorted(skus, key=lambda item: item['margin'], reverse=True)\\nprint([row['sku'] for row in ranked])",
+          "expectedOutput": "['B', 'A', 'C']",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply lambda Expressions with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "lambda Expressions additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = lambda np.array([1, 1, 2, 3])gs: expression\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run lambda Expressions again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Use def for reusable or complex business logic.",
+        "Lambda is ideal for short key functions in sorting/grouping operations."
+      ],
+      "related": [
+        "py-def-args-kwargs",
+        "py-list-comprehension"
+      ],
+      "overview": "Define short anonymous functions for simple transformations and key-based sorting. Use lambda Expressions when delivering reliable python workflows. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: args, expression. Returns callable with shape function object.",
+      "applications": [
+        "Primary application: lambda Expressions is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "py-builtins-len-sum",
+      "slug": "python-builtins-len-sum",
+      "name": "len and sum",
+      "library": "python",
+      "subtopic": "Core Syntax",
+      "tags": [
+        "builtins",
+        "aggregation",
+        "lists"
+      ],
+      "level": "extended",
+      "summary": "Use len() to count records and sum() to aggregate numeric iterables.",
+      "syntax": "len(obj); sum(iterable, start=0)",
+      "description": "Use len() to count records and sum() to aggregate numeric iterables. Use it for writing concise, reliable Python script logic and summarizing raw events into decision-ready KPIs. Key parameter: obj.",
+      "overview": "Use len() to count records and sum() to aggregate numeric iterables. Use len and sum when writing concise, reliable Python script logic. Typical business pattern: summarizing raw events into decision-ready KPIs. Key parameter: obj. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: len and sum is used for summarizing raw events into decision-ready KPIs.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "len and sum official docs",
+          "url": "https://docs.python.org/3/library/functions.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "Any",
+          "description": "Controls obj in len and sum.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "len and sum step-by-step pattern",
+          "scenario": "len and sum is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply len and sum\n# len(obj); sum(iterable, start=0)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply len and sum with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "len and sum additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = len(records)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run len and sum again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-builtins-min-max-sorted",
+      "slug": "python-builtins-min-max-sorted",
+      "name": "min max sorted",
+      "library": "python",
+      "subtopic": "Core Syntax",
+      "tags": [
+        "builtins",
+        "sorting",
+        "ranking"
+      ],
+      "level": "extended",
+      "summary": "Use min(), max(), and sorted() to rank and order Python iterables.",
+      "syntax": "min(iterable); max(iterable); sorted(iterable, key=None, reverse=False)",
+      "description": "Use min(), max(), and sorted() to rank and order Python iterables. Use it for writing concise, reliable Python script logic and implementing reliable data-cleaning and orchestration utilities. Key parameter: iterable.",
+      "overview": "Use min(), max(), and sorted() to rank and order Python iterables. Use min max sorted when writing concise, reliable Python script logic. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameter: iterable. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: min max sorted is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "min max sorted official docs",
+          "url": "https://docs.python.org/3/library/functions.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "iterable",
+          "type": "Any",
+          "description": "Controls iterable in min max sorted.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "min max sorted step-by-step pattern",
+          "scenario": "min max sorted is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply min max sorted\n# min(iterable); max(iterable); sorted(iterable, key=None, reverse=False)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply min max sorted with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "min max sorted additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = min(records)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run min max sorted again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-enumerate-zip",
+      "slug": "python-enumerate-zip",
+      "name": "enumerate and zip",
+      "library": "python",
+      "subtopic": "Control Flow",
+      "tags": [
+        "iteration",
+        "loops",
+        "pairing"
+      ],
+      "level": "extended",
+      "summary": "Use enumerate() for indexed loops and zip() to iterate multiple iterables in lockstep.",
+      "syntax": "enumerate(iterable, start=0); zip(*iterables)",
+      "description": "Use enumerate() for indexed loops and zip() to iterate multiple iterables in lockstep. Use it for encoding business rules and routing logic explicitly and implementing reliable data-cleaning and orchestration utilities. Key parameters: iterable, start.",
+      "overview": "Use enumerate() for indexed loops and zip() to iterate multiple iterables in lockstep. Use enumerate and zip when encoding business rules and routing logic explicitly. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: iterable, start. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: enumerate and zip is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "enumerate and zip official docs",
+          "url": "https://docs.python.org/3/library/functions.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "iterable",
+          "type": "Any",
+          "description": "Controls iterable in enumerate and zip.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "start",
+          "type": "Any",
+          "default": "0",
+          "description": "Controls start in enumerate and zip.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "enumerate and zip step-by-step pattern",
+          "scenario": "enumerate and zip is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply enumerate and zip\n# enumerate(iterable, start=0); zip(*iterables)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply enumerate and zip with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "enumerate and zip additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = enumerate(records, stnp.array([1, 1, 2, 3])t=0)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run enumerate and zip again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-any-all",
+      "slug": "python-any-all",
+      "name": "any and all",
+      "library": "python",
+      "subtopic": "Control Flow",
+      "tags": [
+        "boolean",
+        "validation",
+        "quality-checks"
+      ],
+      "level": "extended",
+      "summary": "Use any() and all() to evaluate boolean conditions across an iterable.",
+      "syntax": "any(iterable); all(iterable)",
+      "description": "Use any() and all() to evaluate boolean conditions across an iterable. Use it for encoding business rules and routing logic explicitly and implementing reliable data-cleaning and orchestration utilities. Key parameter: iterable.",
+      "overview": "Use any() and all() to evaluate boolean conditions across an iterable. Use any and all when encoding business rules and routing logic explicitly. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameter: iterable. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: any and all is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "any and all official docs",
+          "url": "https://docs.python.org/3/library/functions.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "iterable",
+          "type": "Any",
+          "description": "Controls iterable in any and all.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "any and all step-by-step pattern",
+          "scenario": "any and all is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply any and all\n# any(iterable); all(iterable)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply any and all with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "any and all additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = any(records)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run any and all again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-string-methods",
+      "slug": "python-string-methods",
+      "name": "string methods",
+      "library": "python",
+      "subtopic": "Collections",
+      "tags": [
+        "strings",
+        "text-cleaning",
+        "normalization"
+      ],
+      "level": "extended",
+      "summary": "Common string methods clean and normalize text fields before analysis.",
+      "syntax": "s.strip(); s.lower(); s.upper(); s.replace(old, new)",
+      "description": "Common string methods clean and normalize text fields before analysis. Use it for transforming lists, dicts, and sets before loading them into DataFrames and implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments.",
+      "overview": "Common string methods clean and normalize text fields before analysis. Use string methods when transforming lists, dicts, and sets before loading them into DataFrames. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: string methods is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "string methods official docs",
+          "url": "https://docs.python.org/3/library/stdtypes.html#string-methods"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "Any",
+          "description": "Controls inputs in string methods.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "string methods step-by-step pattern",
+          "scenario": "string methods is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply string methods\n# s.strip(); s.lower(); s.upper(); s.replace(old, new)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply string methods with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "string methods additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = s.strip()\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run string methods again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-f-string-format",
+      "slug": "python-f-string-format",
+      "name": "f-strings",
+      "library": "python",
+      "subtopic": "Core Syntax",
+      "tags": [
+        "formatting",
+        "reporting",
+        "strings"
+      ],
+      "level": "extended",
+      "summary": "f-strings format variables directly in strings for readable logs and reports.",
+      "syntax": "f'{value:.2f}'",
+      "description": "f-strings format variables directly in strings for readable logs and reports. Use it for writing concise, reliable Python script logic and implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments.",
+      "overview": "f-strings format variables directly in strings for readable logs and reports. Use f-strings when writing concise, reliable Python script logic. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: f-strings is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "f-strings official docs",
+          "url": "https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "Any",
+          "description": "Controls inputs in f-strings.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "f-strings step-by-step pattern",
+          "scenario": "f-strings is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply f-strings\n# f'{value:.2f}'\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply f-strings with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "f-strings additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = f'{records[0]:.2f}'\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run f-strings again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-list-append-extend",
+      "slug": "python-list-append-extend",
+      "name": "list append extend",
+      "library": "python",
+      "subtopic": "Collections",
+      "tags": [
+        "lists",
+        "mutation",
+        "collections"
+      ],
+      "level": "extended",
+      "summary": "append() adds one item, while extend() appends many items from another iterable.",
+      "syntax": "lst.append(item); lst.extend(iterable)",
+      "description": "append() adds one item, while extend() appends many items from another iterable. Use it for transforming lists, dicts, and sets before loading them into DataFrames and implementing reliable data-cleaning and orchestration utilities. Key parameter: item.",
+      "overview": "append() adds one item, while extend() appends many items from another iterable. Use list append extend when transforming lists, dicts, and sets before loading them into DataFrames. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameter: item. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: list append extend is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "list append extend official docs",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "item",
+          "type": "Any",
+          "description": "Controls item in list append extend.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "list append extend step-by-step pattern",
+          "scenario": "list append extend is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply list append extend\n# lst.append(item); lst.extend(iterable)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply list append extend with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "list append extend additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = lst.append(item)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run list append extend again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-list-sort-sorted",
+      "slug": "python-list-sort-sorted",
+      "name": "list sort and sorted",
+      "library": "python",
+      "subtopic": "Collections",
+      "tags": [
+        "sorting",
+        "lists",
+        "ranking"
+      ],
+      "level": "extended",
+      "summary": "sort() mutates a list in place, while sorted() returns a new ordered iterable.",
+      "syntax": "lst.sort(key=None, reverse=False); sorted(iterable, key=None, reverse=False)",
+      "description": "sort() mutates a list in place, while sorted() returns a new ordered iterable. Use it for transforming lists, dicts, and sets before loading them into DataFrames and implementing reliable data-cleaning and orchestration utilities. Key parameters: key, reverse.",
+      "overview": "sort() mutates a list in place, while sorted() returns a new ordered iterable. Use list sort and sorted when transforming lists, dicts, and sets before loading them into DataFrames. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameters: key, reverse. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: list sort and sorted is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "list sort and sorted official docs",
+          "url": "https://docs.python.org/3/howto/sorting.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "key",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls key in list sort and sorted.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "reverse",
+          "type": "Any",
+          "default": "False",
+          "description": "Controls reverse in list sort and sorted.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "list sort and sorted step-by-step pattern",
+          "scenario": "list sort and sorted is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply list sort and sorted\n# lst.sort(key=None, reverse=False); sorted(iterable, key=None, reverse=False)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply list sort and sorted with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "list sort and sorted additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = lst.sort(key=None, reverse=False)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run list sort and sorted again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-dict-items-keys-values",
+      "slug": "python-dict-items-keys-values",
+      "name": "dict keys values items",
+      "library": "python",
+      "subtopic": "Collections",
+      "tags": [
+        "dict",
+        "mapping",
+        "iteration"
+      ],
+      "level": "extended",
+      "summary": "keys(), values(), and items() expose dictionary views for iteration and joins.",
+      "syntax": "d.keys(); d.values(); d.items()",
+      "description": "keys(), values(), and items() expose dictionary views for iteration and joins. Use it for transforming lists, dicts, and sets before loading them into DataFrames and implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments.",
+      "overview": "keys(), values(), and items() expose dictionary views for iteration and joins. Use dict keys values items when transforming lists, dicts, and sets before loading them into DataFrames. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: dict keys values items is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "dict keys values items official docs",
+          "url": "https://docs.python.org/3/library/stdtypes.html#dict"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "Any",
+          "description": "Controls inputs in dict keys values items.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "dict keys values items step-by-step pattern",
+          "scenario": "dict keys values items is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply dict keys values items\n# d.keys(); d.values(); d.items()\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dict keys values items with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "dict keys values items additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = d.keys()\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run dict keys values items again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-dict-comprehension",
+      "slug": "python-dict-comprehension",
+      "name": "dictionary comprehension",
+      "library": "python",
+      "subtopic": "Collections",
+      "tags": [
+        "dict",
+        "comprehension",
+        "transformation"
+      ],
+      "level": "extended",
+      "summary": "Dictionary comprehensions build key-value mappings from compact transformation logic.",
+      "syntax": "{k: v for k, v in iterable}",
+      "description": "Dictionary comprehensions build key-value mappings from compact transformation logic. Use it for transforming lists, dicts, and sets before loading them into DataFrames and implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments.",
+      "overview": "Dictionary comprehensions build key-value mappings from compact transformation logic. Use dictionary comprehension when transforming lists, dicts, and sets before loading them into DataFrames. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: dictionary comprehension is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "dictionary comprehension official docs",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html#dictionaries"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "Any",
+          "description": "Controls inputs in dictionary comprehension.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "dictionary comprehension step-by-step pattern",
+          "scenario": "dictionary comprehension is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply dictionary comprehension\n# {k: v for k, v in iterable}\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dictionary comprehension with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "dictionary comprehension additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = {k: v for k, v in records}\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run dictionary comprehension again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-set-comprehension",
+      "slug": "python-set-comprehension",
+      "name": "set comprehension",
+      "library": "python",
+      "subtopic": "Collections",
+      "tags": [
+        "set",
+        "comprehension",
+        "deduplication"
+      ],
+      "level": "extended",
+      "summary": "Set comprehensions create unique collections from transformed iterables.",
+      "syntax": "{expr for item in iterable if condition}",
+      "description": "Set comprehensions create unique collections from transformed iterables. Use it for transforming lists, dicts, and sets before loading them into DataFrames and implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments.",
+      "overview": "Set comprehensions create unique collections from transformed iterables. Use set comprehension when transforming lists, dicts, and sets before loading them into DataFrames. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: set comprehension is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "set comprehension official docs",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html#sets"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "Any",
+          "description": "Controls inputs in set comprehension.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "set comprehension step-by-step pattern",
+          "scenario": "set comprehension is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply set comprehension\n# {expr for item in iterable if condition}\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply set comprehension with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "set comprehension additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = {expr for item in records if condition}\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run set comprehension again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-match-case",
+      "slug": "python-match-case",
+      "name": "match case",
+      "library": "python",
+      "subtopic": "Control Flow",
+      "tags": [
+        "pattern-matching",
+        "rules",
+        "branching"
+      ],
+      "level": "extended",
+      "summary": "match/case performs structural pattern matching for multi-branch business rules.",
+      "syntax": "match value: case pattern: ...",
+      "description": "match/case performs structural pattern matching for multi-branch business rules. Use it for encoding business rules and routing logic explicitly and implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments.",
+      "overview": "match/case performs structural pattern matching for multi-branch business rules. Use match case when encoding business rules and routing logic explicitly. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: match case is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "match case official docs",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html#match-statements"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "Any",
+          "description": "Controls inputs in match case.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "match case step-by-step pattern",
+          "scenario": "match case is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply match case\n# match value: case pattern: ...\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply match case with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "match case additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = match records[0]: case pattern: ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run match case again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-json-loads-dumps",
+      "slug": "python-json-loads-dumps",
+      "name": "json loads dumps",
+      "library": "python",
+      "subtopic": "I/O",
+      "tags": [
+        "json",
+        "serialization",
+        "io"
+      ],
+      "level": "extended",
+      "summary": "json.loads() parses JSON strings and json.dumps() serializes Python objects to JSON.",
+      "syntax": "json.loads(s); json.dumps(obj)",
+      "description": "json.loads() parses JSON strings and json.dumps() serializes Python objects to JSON. Use it for ingesting exports and serializing clean outputs and implementing reliable data-cleaning and orchestration utilities. Key parameter: s.",
+      "overview": "json.loads() parses JSON strings and json.dumps() serializes Python objects to JSON. Use json loads dumps when ingesting exports and serializing clean outputs. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameter: s. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: json loads dumps is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "json loads dumps official docs",
+          "url": "https://docs.python.org/3/library/json.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "s",
+          "type": "Any",
+          "description": "Controls s in json loads dumps.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "json loads dumps step-by-step pattern",
+          "scenario": "json loads dumps is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply json loads dumps\n# json.loads(s); json.dumps(obj)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply json loads dumps with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "json loads dumps additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = json.loads(s)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run json loads dumps again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-csv-dictreader",
+      "slug": "python-csv-dictreader",
+      "name": "csv DictReader",
+      "library": "python",
+      "subtopic": "I/O",
+      "tags": [
+        "csv",
+        "ingestion",
+        "io"
+      ],
+      "level": "extended",
+      "summary": "csv.DictReader reads CSV rows as dictionaries keyed by header names.",
+      "syntax": "csv.DictReader(file_obj)",
+      "description": "csv.DictReader reads CSV rows as dictionaries keyed by header names. Use it for ingesting exports and serializing clean outputs and implementing reliable data-cleaning and orchestration utilities. Key parameter: file_obj.",
+      "overview": "csv.DictReader reads CSV rows as dictionaries keyed by header names. Use csv DictReader when ingesting exports and serializing clean outputs. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameter: file_obj. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: csv DictReader is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "csv DictReader official docs",
+          "url": "https://docs.python.org/3/library/csv.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "file_obj",
+          "type": "Any",
+          "description": "Controls file_obj in csv DictReader.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "csv DictReader step-by-step pattern",
+          "scenario": "csv DictReader is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply csv DictReader\n# csv.DictReader(file_obj)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply csv DictReader with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "csv DictReader additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = csv.DictReader(file_records)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run csv DictReader again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-pathlib-path",
+      "slug": "python-pathlib-path",
+      "name": "pathlib Path",
+      "library": "python",
+      "subtopic": "I/O",
+      "tags": [
+        "filesystem",
+        "paths",
+        "io"
+      ],
+      "level": "extended",
+      "summary": "pathlib.Path provides object-based filesystem paths for safer file operations.",
+      "syntax": "Path(path_str); path.exists(); path / 'child'",
+      "description": "pathlib.Path provides object-based filesystem paths for safer file operations. Use it for ingesting exports and serializing clean outputs and implementing reliable data-cleaning and orchestration utilities. Key parameter: path_str.",
+      "overview": "pathlib.Path provides object-based filesystem paths for safer file operations. Use pathlib Path when ingesting exports and serializing clean outputs. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameter: path_str. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: pathlib Path is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "pathlib Path official docs",
+          "url": "https://docs.python.org/3/library/pathlib.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "path_str",
+          "type": "Any",
+          "description": "Controls path_str in pathlib Path.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "pathlib Path step-by-step pattern",
+          "scenario": "pathlib Path is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply pathlib Path\n# Path(path_str); path.exists(); path / 'child'\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply pathlib Path with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "pathlib Path additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = Path('data/sales.csv')\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run pathlib Path again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-contextlib-suppress",
+      "slug": "python-contextlib-suppress",
+      "name": "contextlib suppress",
+      "library": "python",
+      "subtopic": "Error Handling",
+      "tags": [
+        "exceptions",
+        "context-managers",
+        "robustness"
+      ],
+      "level": "extended",
+      "summary": "contextlib.suppress ignores specific expected exceptions in controlled blocks.",
+      "syntax": "with suppress(ExceptionType): ...",
+      "description": "contextlib.suppress ignores specific expected exceptions in controlled blocks. Use it for hardening scripts against malformed records and runtime edge cases and implementing reliable data-cleaning and orchestration utilities. Key parameter: ExceptionType.",
+      "overview": "contextlib.suppress ignores specific expected exceptions in controlled blocks. Use contextlib suppress when hardening scripts against malformed records and runtime edge cases. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameter: ExceptionType. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: contextlib suppress is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "contextlib suppress official docs",
+          "url": "https://docs.python.org/3/library/contextlib.html#contextlib.suppress"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "ExceptionType",
+          "type": "Any",
+          "description": "Controls ExceptionType in contextlib suppress.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "contextlib suppress step-by-step pattern",
+          "scenario": "contextlib suppress is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply contextlib suppress\n# with suppress(ExceptionType): ...\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply contextlib suppress with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "contextlib suppress additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = with suppress(ExceptionType): ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run contextlib suppress again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-datetime-timedelta",
+      "slug": "python-datetime-timedelta",
+      "name": "datetime timedelta",
+      "library": "python",
+      "subtopic": "Datetime",
+      "tags": [
+        "datetime",
+        "time-deltas",
+        "time-series"
+      ],
+      "level": "extended",
+      "summary": "timedelta represents elapsed time for date offsets and window calculations.",
+      "syntax": "timedelta(days=0, seconds=0)",
+      "description": "timedelta represents elapsed time for date offsets and window calculations. Use it for building time-aware features and schedule calculations and tracking daily/weekly performance with lag and rolling signals. Key parameters: days, seconds.",
+      "overview": "timedelta represents elapsed time for date offsets and window calculations. Use datetime timedelta when building time-aware features and schedule calculations. Typical business pattern: tracking daily/weekly performance with lag and rolling signals. Key parameters: days, seconds. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: datetime timedelta is used for tracking daily/weekly performance with lag and rolling signals.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "datetime timedelta official docs",
+          "url": "https://docs.python.org/3/library/datetime.html#timedelta-objects"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "days",
+          "type": "Any",
+          "default": "0",
+          "description": "Controls days in datetime timedelta.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "seconds",
+          "type": "Any",
+          "default": "0",
+          "description": "Controls seconds in datetime timedelta.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "datetime timedelta step-by-step pattern",
+          "scenario": "datetime timedelta is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply datetime timedelta\n# timedelta(days=0, seconds=0)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply datetime timedelta with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "datetime timedelta additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = timedelta(days=0, seconds=0)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run datetime timedelta again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-datetime-timezone",
+      "slug": "python-datetime-timezone",
+      "name": "timezone-aware datetime",
+      "library": "python",
+      "subtopic": "Datetime",
+      "tags": [
+        "datetime",
+        "timezone",
+        "timestamps"
+      ],
+      "level": "extended",
+      "summary": "Timezone-aware datetime objects preserve absolute time across regions and systems.",
+      "syntax": "datetime.now(timezone.utc); dt.astimezone(tz)",
+      "description": "Timezone-aware datetime objects preserve absolute time across regions and systems. Use it for building time-aware features and schedule calculations and implementing reliable data-cleaning and orchestration utilities. Key parameter: timezone.utc.",
+      "overview": "Timezone-aware datetime objects preserve absolute time across regions and systems. Use timezone-aware datetime when building time-aware features and schedule calculations. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameter: timezone.utc. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: timezone-aware datetime is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "timezone-aware datetime official docs",
+          "url": "https://docs.python.org/3/library/datetime.html#aware-and-naive-objects"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "timezone.utc",
+          "type": "Any",
+          "description": "Controls timezone.utc in timezone-aware datetime.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "timezone-aware datetime step-by-step pattern",
+          "scenario": "timezone-aware datetime is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply timezone-aware datetime\n# datetime.now(timezone.utc); dt.astimezone(tz)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply timezone-aware datetime with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "timezone-aware datetime additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = datetime.now(timezone.utc)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run timezone-aware datetime again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-typing-typed-dict",
+      "slug": "python-typing-typed-dict",
+      "name": "typing TypedDict",
+      "library": "python",
+      "subtopic": "Typing",
+      "tags": [
+        "typing",
+        "schemas",
+        "contracts"
+      ],
+      "level": "extended",
+      "summary": "TypedDict defines dictionary key/value contracts for static type checking.",
+      "syntax": "class Row(TypedDict): ...",
+      "description": "TypedDict defines dictionary key/value contracts for static type checking. Use it for making utility functions safer for team reuse and implementing reliable data-cleaning and orchestration utilities. Key parameter: TypedDict.",
+      "overview": "TypedDict defines dictionary key/value contracts for static type checking. Use typing TypedDict when making utility functions safer for team reuse. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Key parameter: TypedDict. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: typing TypedDict is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "typing TypedDict official docs",
+          "url": "https://docs.python.org/3/library/typing.html#typing.TypedDict"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "TypedDict",
+          "type": "Any",
+          "description": "Controls TypedDict in typing TypedDict.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "typing TypedDict step-by-step pattern",
+          "scenario": "typing TypedDict is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply typing TypedDict\n# class Row(TypedDict): ...\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply typing TypedDict with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "typing TypedDict additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = class Row(TypedDict): ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run typing TypedDict again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "py-dataclass-basics",
+      "slug": "python-dataclass-basics",
+      "name": "dataclass",
+      "library": "python",
+      "subtopic": "Core Syntax",
+      "tags": [
+        "dataclass",
+        "typed-records",
+        "models"
+      ],
+      "level": "extended",
+      "summary": "dataclass generates boilerplate methods for structured, typed data records.",
+      "syntax": "@dataclass class Name: field: type",
+      "description": "dataclass generates boilerplate methods for structured, typed data records. Use it for writing concise, reliable Python script logic and implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments.",
+      "overview": "dataclass generates boilerplate methods for structured, typed data records. Use dataclass when writing concise, reliable Python script logic. Typical business pattern: implementing reliable data-cleaning and orchestration utilities. Most controls are optional keyword arguments. Returns Python object with shape depends on input.",
+      "applications": [
+        "Primary application: dataclass is used for implementing reliable data-cleaning and orchestration utilities.",
+        "Workflow application: treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "dataclass official docs",
+          "url": "https://docs.python.org/3/library/dataclasses.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "Any",
+          "description": "Controls inputs in dataclass.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "Python object",
+        "shape": "depends on input",
+        "description": "Return type depends on object and operation semantics."
+      },
+      "examples": [
+        {
+          "title": "dataclass step-by-step pattern",
+          "scenario": "dataclass is used in cleaning and validating exported business records before analytics steps.",
+          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply dataclass\n# @dataclass class Name: field: type\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dataclass with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "dataclass additional business case",
+          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
+          "code": "records = [120, 140, 160]\nresult = @dataclass class Name: field: type\nprint(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy business slice (different segment/time window).",
+            "Run dataclass again on this alternate slice to validate transferability.",
+            "Move the same pattern into your production notebook/script with assertions."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    }
+  ],
+  "overview": "Python fundamentals are the core execution language behind data science workflows: cleaning raw files, implementing business rules, shaping features, and orchestrating repeatable analysis scripts.",
+  "applications": [
+    "Data ingestion and preprocessing scripts for analytics pipelines.",
+    "Business-rule logic for risk, pricing, churn, and operations monitoring.",
+    "Reusable helpers for datetime handling, typing, exceptions, and file I/O."
+  ]
+}

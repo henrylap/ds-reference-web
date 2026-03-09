@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #e9eff1;
+  --bg-deep: #d8e4e7;
+  --surface: #ffffff;
+  --surface-alt: #edf5f8;
+  --surface-glass: #e9f0f4;
+  --ink: #17232a;
+  --muted: #5f7480;
+  --accent: #0f7a84;
+  --accent-strong: #08545f;
+  --accent-soft: #d6f0f2;
+  --border: #c7d7de;
+  --shadow: 0 10px 30px rgb(26 46 55 / 8%);
+  --lib-python: #2f4f8a;
+  --lib-numpy: #0b7f8b;
+  --lib-pandas: #6b4f82;
+  --lib-sklearn: #a55320;
+  --lib-matplotlib: #9b3f3f;
+  --lib-seaborn: #2c6397;`r`n  --lib-sql: #1b6f5e;`r`n  --lib-rstudio: #4f4c9d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 5% -10%, #f6fcff 0%, transparent 42%),
+    radial-gradient(circle at 88% 7%, #d7eaf0 0%, transparent 45%),
+    radial-gradient(circle at 40% 105%, #d6e8ee 0%, transparent 40%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  color: var(--ink);
+  font-family: "Aptos", "IBM Plex Sans", "Segoe UI", "Trebuchet MS", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  border-right: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 12% 0%, #fbfeff 0%, transparent 40%),
+    linear-gradient(180deg, #f3f8fa 0%, #e8f0f3 100%);
+}
+
+.main-pane {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: color-mix(in oklab, var(--surface) 90%, #f6fbfd 10%);
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  background:
+    radial-gradient(circle at 3% 5%, #f8fdff 0%, transparent 40%),
+    radial-gradient(circle at 95% 25%, #dbedf2 0%, transparent 44%),
+    linear-gradient(130deg, #ffffff 0%, #f5fafc 55%, #ebf3f6 100%);
+}
+
+.tab-strip {
+  background:
+    linear-gradient(90deg, #edf7fa 0%, #eaf3f7 100%);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  padding: 0.18rem 0.62rem;
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.stat-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 0.52rem 0.68rem;
+  font-weight: 600;
+}
+
+.subtle {
+  color: var(--muted);
+}
+
+.code-surface {
+  border-color: #c8d9e0;
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+.code-wrap pre {
+  font-family: "JetBrains Mono", "Consolas", "Cascadia Code", monospace !important;
+}
+
+.command-card {
+  transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.command-card:hover {
+  transform: translateY(-2px);
+  border-color: #91b9c7;
+  box-shadow: 0 14px 28px rgb(27 47 55 / 12%);
+}
+
+.chip-link {
+  background: #fff;
+  transition: border-color 120ms ease, transform 120ms ease, color 120ms ease;
+}
+
+.chip-link:hover {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+  transform: translateY(-1px);
+}
+
+.reveal-in {
+  animation: liftIn 220ms ease;
+}
+
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+@keyframes liftIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1080px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 48vh;
+  }
+}
+

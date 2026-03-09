@@ -1,0 +1,2995 @@
+{
+  "library": "numpy",
+  "title": "NumPy",
+  "officialDocs": "https://numpy.org/doc/stable/",
+  "subtopics": [
+    "Array Creation",
+    "Shape Operations",
+    "Selection",
+    "Statistics",
+    "Linear Algebra",
+    "Random"
+  ],
+  "commandGroups": [
+    {
+      "name": "Array Creation and Reshaping",
+      "docs": [
+        {
+          "label": "NumPy Array Creation",
+          "url": "https://numpy.org/doc/stable/reference/routines.array-creation.html"
+        }
+      ],
+      "commandIds": [
+        "np-array",
+        "np-arange",
+        "np-linspace",
+        "np-reshape",
+        "np-concatenate"
+      ]
+    },
+    {
+      "name": "Selection and Statistics",
+      "docs": [
+        {
+          "label": "NumPy Statistics",
+          "url": "https://numpy.org/doc/stable/reference/routines.statistics.html"
+        }
+      ],
+      "commandIds": [
+        "np-where",
+        "np-mean",
+        "np-std",
+        "np-percentile",
+        "np-isnan"
+      ]
+    },
+    {
+      "name": "Linear Algebra and Random",
+      "docs": [
+        {
+          "label": "NumPy linalg",
+          "url": "https://numpy.org/doc/stable/reference/routines.linalg.html"
+        },
+        {
+          "label": "NumPy random",
+          "url": "https://numpy.org/doc/stable/reference/random/index.html"
+        }
+      ],
+      "commandIds": [
+        "np-dot",
+        "np-random-default-rng"
+      ]
+    },
+    {
+      "name": "Extended APIs and Step-by-Step Patterns",
+      "docs": [
+        {
+          "label": "NumPy official docs",
+          "url": "https://numpy.org/doc/stable/"
+        }
+      ],
+      "commandIds": [
+        "np-zeros",
+        "np-ones",
+        "np-full",
+        "np-stack",
+        "np-vstack",
+        "np-hstack",
+        "np-split",
+        "np-unique",
+        "np-sort",
+        "np-argsort",
+        "np-argmax",
+        "np-sum",
+        "np-median",
+        "np-quantile",
+        "np-nanmean",
+        "np-clip",
+        "np-log",
+        "np-exp",
+        "np-transpose",
+        "np-linalg-solve"
+      ]
+    }
+  ],
+  "cheatSheet": [
+    "np-array",
+    "np-arange",
+    "np-linspace",
+    "np-reshape",
+    "np-concatenate",
+    "np-where",
+    "np-mean",
+    "np-std",
+    "np-percentile",
+    "np-dot",
+    "np-random-default-rng",
+    "np-isnan",
+    "np-zeros",
+    "np-ones",
+    "np-full",
+    "np-stack",
+    "np-vstack",
+    "np-hstack",
+    "np-split",
+    "np-unique",
+    "np-sort",
+    "np-argsort",
+    "np-argmax",
+    "np-sum",
+    "np-median",
+    "np-quantile",
+    "np-nanmean",
+    "np-clip",
+    "np-log",
+    "np-exp",
+    "np-transpose",
+    "np-linalg-solve"
+  ],
+  "coverageOutline": [
+    {
+      "topic": "Universal Functions",
+      "docUrl": "https://numpy.org/doc/stable/reference/ufuncs.html",
+      "status": "planned",
+      "highUsageApis": [
+        "np.log",
+        "np.exp",
+        "np.clip",
+        "np.round",
+        "np.abs"
+      ]
+    },
+    {
+      "topic": "Indexing",
+      "docUrl": "https://numpy.org/doc/stable/user/basics.indexing.html",
+      "status": "planned",
+      "highUsageApis": [
+        "boolean masks",
+        "fancy indexing",
+        "np.take"
+      ]
+    },
+    {
+      "topic": "Random Sampling",
+      "docUrl": "https://numpy.org/doc/stable/reference/random/generator.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "default_rng",
+        "normal",
+        "integers",
+        "choice"
+      ]
+    },
+    {
+      "topic": "Statistics",
+      "docUrl": "https://numpy.org/doc/stable/reference/routines.statistics.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "mean",
+        "std",
+        "percentile",
+        "nanmean",
+        "quantile"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "np-array",
+      "slug": "numpy-array",
+      "name": "numpy.array",
+      "library": "numpy",
+      "subtopic": "Array Creation",
+      "tags": [
+        "array",
+        "creation"
+      ],
+      "level": "core",
+      "summary": "Create an ndarray from Python sequences.",
+      "syntax": "np.array(object, dtype=None, copy=True, ndmin=0)",
+      "description": "Create an ndarray from Python sequences. Use it for initializing feature matrices and simulation arrays and engineering numeric features and matrix-ready inputs. Key parameters: object, dtype, ndmin.",
+      "docs": [
+        {
+          "label": "numpy.array",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.array.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "object",
+          "type": "array-like",
+          "description": "Input data source.",
+          "values": [
+            "list",
+            "tuple",
+            "nested list"
+          ],
+          "pitfalls": [
+            "Ragged nested lists create object dtype arrays"
+          ]
+        },
+        {
+          "name": "dtype",
+          "type": "data-type",
+          "default": "inferred",
+          "description": "Target element type.",
+          "values": [
+            "np.float64",
+            "np.int32",
+            "np.bool_"
+          ],
+          "pitfalls": [
+            "Forced int dtype truncates decimals"
+          ]
+        },
+        {
+          "name": "ndmin",
+          "type": "int",
+          "default": "0",
+          "description": "Minimum array dimensions.",
+          "values": [
+            "1",
+            "2"
+          ],
+          "pitfalls": [
+            "Adds leading singleton dimensions"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray",
+        "description": "Created array.",
+        "shape": "depends on input"
+      },
+      "examples": [
+        {
+          "title": "Create margin vector",
+          "scenario": "Retail analyst converts margin percentages to numeric array before scaling.",
+          "code": "import numpy as np\nmargin_pct = np.array([12.5, 18.0, 9.5], dtype=np.float64)\nprint(margin_pct.shape, margin_pct.dtype)",
+          "expectedOutput": "(3,) float64",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.array with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.array additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.array([1, 2, 3], dtype=float)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.array directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Use np.asarray when avoiding unnecessary copies."
+      ],
+      "related": [
+        "np-reshape",
+        "np-concatenate"
+      ],
+      "overview": "Create an ndarray from Python sequences. Use numpy.array when initializing feature matrices and simulation arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: object, dtype, ndmin. Returns numpy.ndarray with shape depends on input.",
+      "applications": [
+        "Primary application: numpy.array is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-arange",
+      "slug": "numpy-arange",
+      "name": "numpy.arange",
+      "library": "numpy",
+      "subtopic": "Array Creation",
+      "tags": [
+        "range",
+        "sequence"
+      ],
+      "level": "core",
+      "summary": "Return evenly spaced values within an interval using step size.",
+      "syntax": "np.arange([start,] stop[, step], dtype=None)",
+      "description": "Return evenly spaced values within an interval using step size. Use it for initializing feature matrices and simulation arrays and engineering numeric features and matrix-ready inputs. Key parameters: start, stop, step, dtype.",
+      "docs": [
+        {
+          "label": "numpy.arange",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.arange.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "start, stop, step",
+          "type": "number",
+          "description": "Interval bounds and increment.",
+          "values": [
+            "np.arange(10)",
+            "np.arange(1, 10, 2)"
+          ],
+          "pitfalls": [
+            "Floating step may produce precision surprises"
+          ]
+        },
+        {
+          "name": "dtype",
+          "type": "data-type",
+          "description": "Output dtype override.",
+          "values": [
+            "int",
+            "float"
+          ],
+          "pitfalls": [
+            "dtype conversion can hide precision issues"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray",
+        "description": "1D evenly spaced array.",
+        "shape": "(n,)"
+      },
+      "examples": [
+        {
+          "title": "Build hourly index IDs",
+          "scenario": "Ops team creates 24 hourly slots for staffing plan.",
+          "code": "import numpy as np\nhours = np.arange(0, 24, 1)\nprint(hours[:5], hours.shape)",
+          "expectedOutput": "[0 1 2 3 4] (24,)",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.arange with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.arange additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.arange(0, 10, 2, dtype=int)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.arange directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Prefer np.linspace when you need a fixed number of points."
+      ],
+      "related": [
+        "np-linspace"
+      ],
+      "overview": "Return evenly spaced values within an interval using step size. Use numpy.arange when initializing feature matrices and simulation arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: start, stop, step, dtype. Returns numpy.ndarray with shape (n,).",
+      "applications": [
+        "Primary application: numpy.arange is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-linspace",
+      "slug": "numpy-linspace",
+      "name": "numpy.linspace",
+      "library": "numpy",
+      "subtopic": "Array Creation",
+      "tags": [
+        "sequence",
+        "sampling"
+      ],
+      "level": "core",
+      "summary": "Return evenly spaced numbers over a closed interval by count.",
+      "syntax": "np.linspace(start, stop, num=50, endpoint=True, dtype=None)",
+      "description": "Return evenly spaced numbers over a closed interval by count. Use it for initializing feature matrices and simulation arrays and engineering numeric features and matrix-ready inputs. Key parameters: start, stop, num.",
+      "docs": [
+        {
+          "label": "numpy.linspace",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.linspace.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "start, stop",
+          "type": "float",
+          "description": "Range endpoints.",
+          "values": [
+            "0",
+            "1",
+            "-2",
+            "2"
+          ],
+          "pitfalls": [
+            "endpoint=True includes stop value"
+          ]
+        },
+        {
+          "name": "num",
+          "type": "int",
+          "default": "50",
+          "description": "Number of samples.",
+          "values": [
+            "10",
+            "100",
+            "500"
+          ],
+          "pitfalls": [
+            "num<2 may be invalid for some downstream uses"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray",
+        "description": "1D sampled values.",
+        "shape": "(num,)"
+      },
+      "examples": [
+        {
+          "title": "Generate candidate discount rates",
+          "scenario": "Pricing experiment tests 8 discount points from 0% to 35%.",
+          "code": "import numpy as np\ndiscount_grid = np.linspace(0.0, 0.35, num=8)\nprint(discount_grid.round(3))",
+          "expectedOutput": "[0.    0.05  0.1   0.15  0.2   0.25  0.3   0.35 ]",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.linspace with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.linspace additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.linspace(0, 1, num=5)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.linspace directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Set endpoint=False for periodic intervals."
+      ],
+      "related": [
+        "np-arange"
+      ],
+      "overview": "Return evenly spaced numbers over a closed interval by count. Use numpy.linspace when initializing feature matrices and simulation arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: start, stop, num. Returns numpy.ndarray with shape (num,).",
+      "applications": [
+        "Primary application: numpy.linspace is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-reshape",
+      "slug": "numpy-reshape",
+      "name": "numpy.reshape",
+      "library": "numpy",
+      "subtopic": "Shape Operations",
+      "tags": [
+        "shape",
+        "transform"
+      ],
+      "level": "core",
+      "summary": "Give a new shape to an array without changing data values.",
+      "syntax": "np.reshape(a, newshape, order='C')",
+      "description": "Give a new shape to an array without changing data values. Use it for reshaping model-ready matrices and batch tensors and engineering numeric features and matrix-ready inputs. Key parameters: a, newshape, order.",
+      "docs": [
+        {
+          "label": "numpy.reshape",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.reshape.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "array-like",
+          "description": "Input data.",
+          "values": [
+            "1D",
+            "2D",
+            "3D"
+          ],
+          "pitfalls": [
+            "Total size must remain constant"
+          ]
+        },
+        {
+          "name": "newshape",
+          "type": "tuple[int, ...]",
+          "description": "Target dimensions.",
+          "values": [
+            "(n, m)",
+            "(-1, 1)",
+            "(2, 3, 4)"
+          ],
+          "pitfalls": [
+            "Only one dimension can be -1"
+          ]
+        },
+        {
+          "name": "order",
+          "type": "{'C','F','A'}",
+          "default": "'C'",
+          "description": "Memory traversal order.",
+          "values": [
+            "'C'",
+            "'F'"
+          ],
+          "pitfalls": [
+            "Unexpected ordering can misalign model inputs"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray",
+        "description": "Reshaped view or copy.",
+        "shape": "newshape"
+      },
+      "examples": [
+        {
+          "title": "Build weekly demand matrix",
+          "scenario": "Forecasting converts flat sales vector into 4 weeks x 7 days table.",
+          "code": "import numpy as np\nsales = np.arange(28)\nweekly = sales.reshape(4, 7)\nprint(weekly.shape)",
+          "expectedOutput": "(4, 7)",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.reshape with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.reshape additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.arange(12).reshape(3, 4)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.reshape directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Use arr.reshape(...) method for readability on existing arrays."
+      ],
+      "related": [
+        "np-array",
+        "np-concatenate"
+      ],
+      "overview": "Give a new shape to an array without changing data values. Use numpy.reshape when reshaping model-ready matrices and batch tensors. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: a, newshape, order. Returns numpy.ndarray with shape newshape.",
+      "applications": [
+        "Primary application: numpy.reshape is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-concatenate",
+      "slug": "numpy-concatenate",
+      "name": "numpy.concatenate",
+      "library": "numpy",
+      "subtopic": "Shape Operations",
+      "tags": [
+        "combine",
+        "stack"
+      ],
+      "level": "core",
+      "summary": "Join arrays along an existing axis.",
+      "syntax": "np.concatenate((a1, a2, ...), axis=0)",
+      "description": "Join arrays along an existing axis. Use it for reshaping model-ready matrices and batch tensors and engineering numeric features and matrix-ready inputs. Key parameters: (a1, a2, ...), axis.",
+      "docs": [
+        {
+          "label": "numpy.concatenate",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.concatenate.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "(a1, a2, ...)",
+          "type": "sequence of ndarrays",
+          "description": "Arrays with same shape except concat axis.",
+          "values": [
+            "(n, m)+(k, m)",
+            "(m,)+(m,)"
+          ],
+          "pitfalls": [
+            "Mismatched dimensions raise ValueError"
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "0",
+          "description": "Axis to join on.",
+          "values": [
+            "0",
+            "1",
+            "None"
+          ],
+          "pitfalls": [
+            "axis=None flattens arrays first"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray",
+        "description": "Combined array.",
+        "shape": "depends on axis and inputs"
+      },
+      "examples": [
+        {
+          "title": "Append monthly revenue batches",
+          "scenario": "Finance team combines two month-level arrays for quarter rollup.",
+          "code": "import numpy as np\njan_feb = np.array([120, 132])\nmar = np.array([141])\nq1 = np.concatenate((jan_feb, mar))\nprint(q1)",
+          "expectedOutput": "[120 132 141]",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.concatenate with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.concatenate additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.concatenate([arr1, arr2])\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.concatenate directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "For new axis insertion, prefer np.stack."
+      ],
+      "related": [
+        "np-reshape"
+      ],
+      "overview": "Join arrays along an existing axis. Use numpy.concatenate when reshaping model-ready matrices and batch tensors. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: (a1, a2, ...), axis. Returns numpy.ndarray with shape depends on axis and inputs.",
+      "applications": [
+        "Primary application: numpy.concatenate is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-where",
+      "slug": "numpy-where",
+      "name": "numpy.where",
+      "library": "numpy",
+      "subtopic": "Selection",
+      "tags": [
+        "conditional",
+        "mask"
+      ],
+      "level": "core",
+      "summary": "Select elements from x or y based on condition.",
+      "syntax": "np.where(condition, x, y)",
+      "description": "Select elements from x or y based on condition. Use it for filtering and selecting numeric values efficiently and engineering numeric features and matrix-ready inputs. Key parameters: condition, x, y.",
+      "docs": [
+        {
+          "label": "numpy.where",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.where.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "condition",
+          "type": "array_like[bool]",
+          "description": "Boolean mask.",
+          "values": [
+            "arr > 0",
+            "np.isnan(arr)"
+          ],
+          "pitfalls": [
+            "Shape must broadcast with x and y"
+          ]
+        },
+        {
+          "name": "x, y",
+          "type": "array_like",
+          "description": "Values for true/false positions.",
+          "values": [
+            "scalar",
+            "array",
+            "mixed"
+          ],
+          "pitfalls": [
+            "Type coercion may upcast output dtype"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray",
+        "description": "Element-wise selected values.",
+        "shape": "broadcasted shape"
+      },
+      "examples": [
+        {
+          "title": "Flag high-value users",
+          "scenario": "Growth analytics tags users spending over threshold for VIP offers.",
+          "code": "import numpy as np\nspend = np.array([45, 120, 75, 210])\nsegment = np.where(spend >= 100, 'VIP', 'STD')\nprint(segment)",
+          "expectedOutput": "['STD' 'VIP' 'STD' 'VIP']",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.where with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.where additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.where(arr > 20, 'high', 'low')\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.where directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Use boolean indexing when only filtering rows, not assigning alternate values."
+      ],
+      "related": [
+        "np-isnan",
+        "np-mean"
+      ],
+      "overview": "Select elements from x or y based on condition. Use numpy.where when filtering and selecting numeric values efficiently. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: condition, x, y. Returns numpy.ndarray with shape broadcasted shape.",
+      "applications": [
+        "Primary application: numpy.where is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-mean",
+      "slug": "numpy-mean",
+      "name": "numpy.mean",
+      "library": "numpy",
+      "subtopic": "Statistics",
+      "tags": [
+        "aggregation",
+        "mean"
+      ],
+      "level": "core",
+      "summary": "Compute arithmetic mean along specified axis.",
+      "syntax": "np.mean(a, axis=None, dtype=None, keepdims=False)",
+      "description": "Compute arithmetic mean along specified axis. Use it for computing robust summary metrics across arrays and summarizing raw events into decision-ready KPIs. Key parameters: a, axis.",
+      "docs": [
+        {
+          "label": "numpy.mean",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.mean.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "array-like",
+          "description": "Input numeric data.",
+          "values": [
+            "1D",
+            "2D",
+            "3D"
+          ],
+          "pitfalls": [
+            "NaN propagates unless using np.nanmean"
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int | tuple[int] | None",
+          "default": "None",
+          "description": "Axis to reduce.",
+          "values": [
+            "None",
+            "0",
+            "1"
+          ],
+          "pitfalls": [
+            "Wrong axis flips row/column semantics"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.floating | numpy.ndarray",
+        "description": "Mean value(s).",
+        "shape": "scalar or reduced array"
+      },
+      "examples": [
+        {
+          "title": "Average ticket value",
+          "scenario": "Support ops tracks mean handling cost by channel.",
+          "code": "import numpy as np\ncost = np.array([[12, 14, 11], [20, 19, 22]])\nprint(np.mean(cost, axis=1))",
+          "expectedOutput": "[12.33333333 20.33333333]",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.mean with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.mean additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.mean(arr)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.mean directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Specify dtype for large integer arrays to avoid overflow risk."
+      ],
+      "related": [
+        "np-std",
+        "np-percentile"
+      ],
+      "overview": "Compute arithmetic mean along specified axis. Use numpy.mean when computing robust summary metrics across arrays. Typical business pattern: summarizing raw events into decision-ready KPIs. Key parameters: a, axis. Returns numpy.floating | numpy.ndarray with shape scalar or reduced array.",
+      "applications": [
+        "Primary application: numpy.mean is used for summarizing raw events into decision-ready KPIs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-std",
+      "slug": "numpy-std",
+      "name": "numpy.std",
+      "library": "numpy",
+      "subtopic": "Statistics",
+      "tags": [
+        "dispersion",
+        "std"
+      ],
+      "level": "core",
+      "summary": "Compute standard deviation along a given axis.",
+      "syntax": "np.std(a, axis=None, ddof=0, keepdims=False)",
+      "description": "Compute standard deviation along a given axis. Use it for computing robust summary metrics across arrays and engineering numeric features and matrix-ready inputs. Key parameters: ddof, axis.",
+      "docs": [
+        {
+          "label": "numpy.std",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.std.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "ddof",
+          "type": "int",
+          "default": "0",
+          "description": "Delta degrees of freedom.",
+          "values": [
+            "0",
+            "1"
+          ],
+          "pitfalls": [
+            "Use ddof=1 for sample std in many statistical reports"
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int | None",
+          "default": "None",
+          "description": "Reduction axis.",
+          "values": [
+            "None",
+            "0",
+            "1"
+          ],
+          "pitfalls": [
+            "Axis errors are common in 2D feature matrices"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.floating | numpy.ndarray",
+        "description": "Standard deviation value(s).",
+        "shape": "scalar or reduced array"
+      },
+      "examples": [
+        {
+          "title": "Demand volatility by store",
+          "scenario": "Inventory team evaluates which stores have unstable weekly demand.",
+          "code": "import numpy as np\nweekly = np.array([[50, 52, 49, 51], [20, 35, 18, 40]])\nprint(np.std(weekly, axis=1, ddof=1).round(2))",
+          "expectedOutput": "[ 1.29 10.53]",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.std with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.std additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.std(arr)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.std directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair with mean to contextualize relative variability."
+      ],
+      "related": [
+        "np-mean"
+      ],
+      "overview": "Compute standard deviation along a given axis. Use numpy.std when computing robust summary metrics across arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: ddof, axis. Returns numpy.floating | numpy.ndarray with shape scalar or reduced array.",
+      "applications": [
+        "Primary application: numpy.std is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-percentile",
+      "slug": "numpy-percentile",
+      "name": "numpy.percentile",
+      "library": "numpy",
+      "subtopic": "Statistics",
+      "tags": [
+        "quantile",
+        "percentile"
+      ],
+      "level": "core",
+      "summary": "Compute q-th percentile of array values.",
+      "syntax": "np.percentile(a, q, axis=None, method='linear')",
+      "description": "Compute q-th percentile of array values. Use it for computing robust summary metrics across arrays and engineering numeric features and matrix-ready inputs. Key parameters: q, method.",
+      "docs": [
+        {
+          "label": "numpy.percentile",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.percentile.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "type": "float | array-like",
+          "description": "Percentile(s) in [0, 100].",
+          "values": [
+            "50",
+            "90",
+            "[25, 50, 75]"
+          ],
+          "pitfalls": [
+            "Values outside range raise errors"
+          ]
+        },
+        {
+          "name": "method",
+          "type": "str",
+          "default": "'linear'",
+          "description": "Interpolation method.",
+          "values": [
+            "'linear'",
+            "'nearest'",
+            "'lower'"
+          ],
+          "pitfalls": [
+            "Method choice can slightly alter tail metrics"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "description": "Percentile estimate(s).",
+        "shape": "scalar or (len(q), ...)"
+      },
+      "examples": [
+        {
+          "title": "Set fraud review threshold",
+          "scenario": "Risk team sets manual review at top 5% risk score.",
+          "code": "import numpy as np\nscores = np.array([0.1, 0.3, 0.8, 0.2, 0.9, 0.7])\nthreshold = np.percentile(scores, 95)\nprint(round(float(threshold), 3))",
+          "expectedOutput": "0.875",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.percentile with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.percentile additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.percentile(arr, 90)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.percentile directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Document percentile method in regulated reporting contexts."
+      ],
+      "related": [
+        "np-where",
+        "np-mean"
+      ],
+      "overview": "Compute q-th percentile of array values. Use numpy.percentile when computing robust summary metrics across arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: q, method. Returns numpy.ndarray | scalar with shape scalar or (len(q), ...).",
+      "applications": [
+        "Primary application: numpy.percentile is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-dot",
+      "slug": "numpy-dot",
+      "name": "numpy.dot",
+      "library": "numpy",
+      "subtopic": "Linear Algebra",
+      "tags": [
+        "matrix",
+        "dot-product"
+      ],
+      "level": "core",
+      "summary": "Dot product of two arrays (vector inner product / matrix multiplication behavior by rank).",
+      "syntax": "np.dot(a, b)",
+      "description": "Dot product of two arrays (vector inner product / matrix multiplication behavior by rank). Use it for solving matrix operations used in optimization and regression and engineering numeric features and matrix-ready inputs. Key parameter: a, b.",
+      "docs": [
+        {
+          "label": "numpy.dot",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.dot.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a, b",
+          "type": "array-like",
+          "description": "Input vectors/matrices.",
+          "values": [
+            "(n,) dot (n,)",
+            "(m,n) dot (n,k)"
+          ],
+          "pitfalls": [
+            "Inner dimensions must align"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "scalar | numpy.ndarray",
+        "description": "Dot product result.",
+        "shape": "depends on operand ranks"
+      },
+      "examples": [
+        {
+          "title": "Weighted credit score",
+          "scenario": "Fintech model computes weighted sum of normalized risk features.",
+          "code": "import numpy as np\nfeatures = np.array([0.7, 0.2, 0.9])\nweights = np.array([0.5, 0.3, 0.2])\nscore = np.dot(features, weights)\nprint(round(float(score), 3))",
+          "expectedOutput": "0.59",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.dot with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.dot additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.dot(arr1, arr2)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.dot directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Use @ operator for readable matrix multiplication in modern code."
+      ],
+      "related": [
+        "np-mean"
+      ],
+      "overview": "Dot product of two arrays (vector inner product / matrix multiplication behavior by rank). Use numpy.dot when solving matrix operations used in optimization and regression. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameter: a, b. Returns scalar | numpy.ndarray with shape depends on operand ranks.",
+      "applications": [
+        "Primary application: numpy.dot is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-random-default-rng",
+      "slug": "numpy-random-default-rng",
+      "name": "numpy.random.default_rng",
+      "library": "numpy",
+      "subtopic": "Random",
+      "tags": [
+        "random",
+        "simulation",
+        "seed"
+      ],
+      "level": "core",
+      "summary": "Create a Generator instance for reproducible random sampling.",
+      "syntax": "rng = np.random.default_rng(seed=None); rng.normal(...); rng.integers(...)",
+      "description": "Create a Generator instance for reproducible random sampling. Use it for sampling reproducibly for experiments and simulations and engineering numeric features and matrix-ready inputs. Key parameter: seed.",
+      "docs": [
+        {
+          "label": "default_rng",
+          "url": "https://numpy.org/doc/stable/reference/random/generated/numpy.random.default_rng.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "seed",
+          "type": "int | array_like | None",
+          "default": "None",
+          "description": "Random seed initializer.",
+          "values": [
+            "42",
+            "None"
+          ],
+          "pitfalls": [
+            "No fixed seed means non-reproducible experiments"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.random.Generator",
+        "description": "Generator object with sampling methods.",
+        "shape": "n/a"
+      },
+      "examples": [
+        {
+          "title": "Simulate daily transaction counts",
+          "scenario": "Ops planning uses Poisson simulation for staffing scenarios.",
+          "code": "import numpy as np\nrng = np.random.default_rng(7)\nsamples = rng.poisson(lam=120, size=5)\nprint(samples.shape)",
+          "expectedOutput": "(5,)",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.random.default_rng with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.random.default_rng additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.random.default_rng(42).normal(loc=0, scale=1, size=3)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.random.default_rng directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Prefer Generator API over legacy np.random.* functions."
+      ],
+      "related": [
+        "np-arange",
+        "np-mean"
+      ],
+      "overview": "Create a Generator instance for reproducible random sampling. Use numpy.random.default_rng when sampling reproducibly for experiments and simulations. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameter: seed. Returns numpy.random.Generator with shape n/a.",
+      "applications": [
+        "Primary application: numpy.random.default_rng is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-isnan",
+      "slug": "numpy-isnan",
+      "name": "numpy.isnan",
+      "library": "numpy",
+      "subtopic": "Selection",
+      "tags": [
+        "missing",
+        "nan",
+        "mask"
+      ],
+      "level": "core",
+      "summary": "Test element-wise for NaN and return boolean mask.",
+      "syntax": "np.isnan(x)",
+      "description": "Test element-wise for NaN and return boolean mask. Use it for filtering and selecting numeric values efficiently and engineering numeric features and matrix-ready inputs. Key parameter: x.",
+      "docs": [
+        {
+          "label": "numpy.isnan",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.isnan.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "x",
+          "type": "array-like",
+          "description": "Input numeric array.",
+          "values": [
+            "float array",
+            "scalar float"
+          ],
+          "pitfalls": [
+            "Object/string arrays may error or upcast unexpectedly"
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray[bool] | bool",
+        "description": "Boolean indicator for NaN positions.",
+        "shape": "same as x"
+      },
+      "examples": [
+        {
+          "title": "Count missing fulfillment times",
+          "scenario": "Logistics dashboard tracks missing SLA timestamps.",
+          "code": "import numpy as np\nlatency = np.array([1.2, np.nan, 0.9, np.nan])\nmissing = np.isnan(latency).sum()\nprint(int(missing))",
+          "expectedOutput": "2",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply numpy.isnan with explicit parameters shown in the snippet, then verify shapes/dtypes.",
+            "Transfer the same pattern to your full dataset and rerun your validation checks."
+          ]
+        },
+        {
+          "title": "numpy.isnan additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.isnan(np.array([1.0, np.nan, 2.0]))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.isnan directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Combine with np.where or boolean masking to impute values."
+      ],
+      "related": [
+        "np-where",
+        "np-mean"
+      ],
+      "overview": "Test element-wise for NaN and return boolean mask. Use numpy.isnan when filtering and selecting numeric values efficiently. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameter: x. Returns numpy.ndarray[bool] | bool with shape same as x.",
+      "applications": [
+        "Primary application: numpy.isnan is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "np-zeros",
+      "slug": "numpy-zeros",
+      "name": "numpy.zeros",
+      "library": "numpy",
+      "subtopic": "Array Creation",
+      "tags": [
+        "array-creation",
+        "initialization"
+      ],
+      "level": "extended",
+      "summary": "numpy.zeros creates an array filled with zeros for initialization and placeholders.",
+      "syntax": "np.zeros(shape, dtype=float)",
+      "description": "numpy.zeros creates an array filled with zeros for initialization and placeholders. Use it for initializing feature matrices and simulation arrays and engineering numeric features and matrix-ready inputs. Key parameters: shape, dtype.",
+      "overview": "numpy.zeros creates an array filled with zeros for initialization and placeholders. Use numpy.zeros when initializing feature matrices and simulation arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: shape, dtype. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.zeros is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.zeros official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.zeros.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "shape",
+          "type": "Any",
+          "description": "Controls shape in numpy.zeros.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "dtype",
+          "type": "Any",
+          "default": "float",
+          "description": "Controls dtype in numpy.zeros.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.zeros for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.zeros((2, 3), dtype=float)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.zeros as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.zeros additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.zeros((2, 3))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.zeros directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-ones",
+      "slug": "numpy-ones",
+      "name": "numpy.ones",
+      "library": "numpy",
+      "subtopic": "Array Creation",
+      "tags": [
+        "array-creation",
+        "initialization"
+      ],
+      "level": "extended",
+      "summary": "numpy.ones creates an array filled with ones for scaling masks and baselines.",
+      "syntax": "np.ones(shape, dtype=float)",
+      "description": "numpy.ones creates an array filled with ones for scaling masks and baselines. Use it for initializing feature matrices and simulation arrays and engineering numeric features and matrix-ready inputs. Key parameters: shape, dtype.",
+      "overview": "numpy.ones creates an array filled with ones for scaling masks and baselines. Use numpy.ones when initializing feature matrices and simulation arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: shape, dtype. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.ones is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.ones official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.ones.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "shape",
+          "type": "Any",
+          "description": "Controls shape in numpy.ones.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "dtype",
+          "type": "Any",
+          "default": "float",
+          "description": "Controls dtype in numpy.ones.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.ones for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.ones((2, 3), dtype=float)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.ones as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.ones additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.ones((2, 3))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.ones directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-full",
+      "slug": "numpy-full",
+      "name": "numpy.full",
+      "library": "numpy",
+      "subtopic": "Array Creation",
+      "tags": [
+        "array-creation",
+        "constants"
+      ],
+      "level": "extended",
+      "summary": "numpy.full creates an array filled with a constant value.",
+      "syntax": "np.full(shape, fill_value, dtype=None)",
+      "description": "numpy.full creates an array filled with a constant value. Use it for initializing feature matrices and simulation arrays and engineering numeric features and matrix-ready inputs. Key parameters: shape, fill_value, dtype.",
+      "overview": "numpy.full creates an array filled with a constant value. Use numpy.full when initializing feature matrices and simulation arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: shape, fill_value, dtype. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.full is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.full official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.full.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "shape",
+          "type": "Any",
+          "description": "Controls shape in numpy.full.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "fill_value",
+          "type": "Any",
+          "description": "Controls fill_value in numpy.full.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "dtype",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls dtype in numpy.full.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.full for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.full((2, 3), 0.5, dtype=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.full as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.full additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.full((2, 3), 0.5)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.full directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-stack",
+      "slug": "numpy-stack",
+      "name": "numpy.stack",
+      "library": "numpy",
+      "subtopic": "Shape Operations",
+      "tags": [
+        "stack",
+        "shape"
+      ],
+      "level": "extended",
+      "summary": "numpy.stack joins arrays along a new axis.",
+      "syntax": "np.stack(arrays, axis=0)",
+      "description": "numpy.stack joins arrays along a new axis. Use it for reshaping model-ready matrices and batch tensors and engineering numeric features and matrix-ready inputs. Key parameter: axis.",
+      "overview": "numpy.stack joins arrays along a new axis. Use numpy.stack when reshaping model-ready matrices and batch tensors. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameter: axis. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.stack is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.stack official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.stack.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "arrays",
+          "type": "Any",
+          "description": "Controls arrays in numpy.stack.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "0",
+          "description": "Controls axis in numpy.stack.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.stack for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.stack([arr1, arr2], axis=0)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.stack as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.stack additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.stack([arr1, arr2], axis=0)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.stack directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-vstack",
+      "slug": "numpy-vstack",
+      "name": "numpy.vstack",
+      "library": "numpy",
+      "subtopic": "Shape Operations",
+      "tags": [
+        "stack",
+        "rows"
+      ],
+      "level": "extended",
+      "summary": "numpy.vstack stacks arrays vertically (row-wise).",
+      "syntax": "np.vstack(tup)",
+      "description": "numpy.vstack stacks arrays vertically (row-wise). Use it for reshaping model-ready matrices and batch tensors and engineering numeric features and matrix-ready inputs. Key parameter: tup.",
+      "overview": "numpy.vstack stacks arrays vertically (row-wise). Use numpy.vstack when reshaping model-ready matrices and batch tensors. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameter: tup. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.vstack is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.vstack official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.vstack.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "tup",
+          "type": "Any",
+          "description": "Controls tup in numpy.vstack.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.vstack for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.vstack((arr1, arr2))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.vstack as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.vstack additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.vstack((arr1, arr2))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.vstack directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-hstack",
+      "slug": "numpy-hstack",
+      "name": "numpy.hstack",
+      "library": "numpy",
+      "subtopic": "Shape Operations",
+      "tags": [
+        "stack",
+        "columns"
+      ],
+      "level": "extended",
+      "summary": "numpy.hstack stacks arrays horizontally (column-wise).",
+      "syntax": "np.hstack(tup)",
+      "description": "numpy.hstack stacks arrays horizontally (column-wise). Use it for reshaping model-ready matrices and batch tensors and engineering numeric features and matrix-ready inputs. Key parameter: tup.",
+      "overview": "numpy.hstack stacks arrays horizontally (column-wise). Use numpy.hstack when reshaping model-ready matrices and batch tensors. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameter: tup. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.hstack is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.hstack official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.hstack.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "tup",
+          "type": "Any",
+          "description": "Controls tup in numpy.hstack.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.hstack for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.hstack((arr1, arr2))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.hstack as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.hstack additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.hstack((arr1, arr2))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.hstack directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-split",
+      "slug": "numpy-split",
+      "name": "numpy.split",
+      "library": "numpy",
+      "subtopic": "Shape Operations",
+      "tags": [
+        "split",
+        "windows"
+      ],
+      "level": "extended",
+      "summary": "numpy.split divides an array into equal sections or index-based segments.",
+      "syntax": "np.split(ary, indices_or_sections, axis=0)",
+      "description": "numpy.split divides an array into equal sections or index-based segments. Use it for reshaping model-ready matrices and batch tensors and engineering numeric features and matrix-ready inputs. Key parameters: ary, indices_or_sections, axis.",
+      "overview": "numpy.split divides an array into equal sections or index-based segments. Use numpy.split when reshaping model-ready matrices and batch tensors. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: ary, indices_or_sections, axis. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.split is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.split official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.split.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "ary",
+          "type": "Any",
+          "description": "Controls ary in numpy.split.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "indices_or_sections",
+          "type": "Any",
+          "description": "Controls indices_or_sections in numpy.split.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "0",
+          "description": "Controls axis in numpy.split.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.split for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.split(np.arange(8), 4, axis=0)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.split as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.split additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.split(np.arange(8), 4)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.split directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-unique",
+      "slug": "numpy-unique",
+      "name": "numpy.unique",
+      "library": "numpy",
+      "subtopic": "Selection",
+      "tags": [
+        "uniqueness",
+        "categorical"
+      ],
+      "level": "extended",
+      "summary": "numpy.unique returns sorted unique values and optional counts/indices.",
+      "syntax": "np.unique(ar, return_counts=False)",
+      "description": "numpy.unique returns sorted unique values and optional counts/indices. Use it for filtering and selecting numeric values efficiently and engineering numeric features and matrix-ready inputs. Key parameters: ar, return_counts.",
+      "overview": "numpy.unique returns sorted unique values and optional counts/indices. Use numpy.unique when filtering and selecting numeric values efficiently. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: ar, return_counts. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.unique is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.unique official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.unique.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "ar",
+          "type": "Any",
+          "description": "Controls ar in numpy.unique.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "return_counts",
+          "type": "int",
+          "default": "False",
+          "description": "Controls return_counts in numpy.unique.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.unique for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.unique(np.array([1, 1, 2, 3]), return_counts=False)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.unique as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.unique additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.unique(np.array([1, 1, 2, 3]), return_counts=True)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.unique directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-sort",
+      "slug": "numpy-sort",
+      "name": "numpy.sort",
+      "library": "numpy",
+      "subtopic": "Selection",
+      "tags": [
+        "sorting",
+        "ordering"
+      ],
+      "level": "extended",
+      "summary": "numpy.sort returns a sorted copy of an array along an axis.",
+      "syntax": "np.sort(a, axis=-1)",
+      "description": "numpy.sort returns a sorted copy of an array along an axis. Use it for filtering and selecting numeric values efficiently and engineering numeric features and matrix-ready inputs. Key parameters: a, axis.",
+      "overview": "numpy.sort returns a sorted copy of an array along an axis. Use numpy.sort when filtering and selecting numeric values efficiently. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: a, axis. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.sort is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.sort official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.sort.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Controls a in numpy.sort.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "-1",
+          "description": "Controls axis in numpy.sort.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.sort for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.sort(arr, axis=-1)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.sort as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.sort additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.sort(arr)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.sort directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-argsort",
+      "slug": "numpy-argsort",
+      "name": "numpy.argsort",
+      "library": "numpy",
+      "subtopic": "Selection",
+      "tags": [
+        "sorting",
+        "indexing"
+      ],
+      "level": "extended",
+      "summary": "numpy.argsort returns index positions that would sort an array.",
+      "syntax": "np.argsort(a, axis=-1)",
+      "description": "numpy.argsort returns index positions that would sort an array. Use it for filtering and selecting numeric values efficiently and engineering numeric features and matrix-ready inputs. Key parameters: a, axis.",
+      "overview": "numpy.argsort returns index positions that would sort an array. Use numpy.argsort when filtering and selecting numeric values efficiently. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: a, axis. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.argsort is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.argsort official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.argsort.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Controls a in numpy.argsort.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "-1",
+          "description": "Controls axis in numpy.argsort.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.argsort for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.argsort(arr, axis=-1)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.argsort as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.argsort additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.argsort(arr)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.argsort directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-argmax",
+      "slug": "numpy-argmax",
+      "name": "numpy.argmax and argmin",
+      "library": "numpy",
+      "subtopic": "Selection",
+      "tags": [
+        "indexing",
+        "selection"
+      ],
+      "level": "extended",
+      "summary": "numpy.argmax/argmin returns index positions of max/min values.",
+      "syntax": "np.argmax(a, axis=None); np.argmin(a, axis=None)",
+      "description": "numpy.argmax/argmin returns index positions of max/min values. Use it for filtering and selecting numeric values efficiently and engineering numeric features and matrix-ready inputs. Key parameters: a, axis.",
+      "overview": "numpy.argmax/argmin returns index positions of max/min values. Use numpy.argmax and argmin when filtering and selecting numeric values efficiently. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: a, axis. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.argmax and argmin is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.argmax and argmin official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.argmax.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Controls a in numpy.argmax and argmin.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "None",
+          "description": "Controls axis in numpy.argmax and argmin.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.argmax and argmin for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.argmax(arr, axis=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.argmax and argmin as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.argmax and argmin additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.argmax(arr)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.argmax and argmin directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-sum",
+      "slug": "numpy-sum",
+      "name": "numpy.sum",
+      "library": "numpy",
+      "subtopic": "Statistics",
+      "tags": [
+        "aggregation",
+        "statistics"
+      ],
+      "level": "extended",
+      "summary": "numpy.sum aggregates values across an array axis.",
+      "syntax": "np.sum(a, axis=None)",
+      "description": "numpy.sum aggregates values across an array axis. Use it for computing robust summary metrics across arrays and summarizing raw events into decision-ready KPIs. Key parameters: a, axis.",
+      "overview": "numpy.sum aggregates values across an array axis. Use numpy.sum when computing robust summary metrics across arrays. Typical business pattern: summarizing raw events into decision-ready KPIs. Key parameters: a, axis. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.sum is used for summarizing raw events into decision-ready KPIs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.sum official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.sum.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Controls a in numpy.sum.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "None",
+          "description": "Controls axis in numpy.sum.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.sum for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.sum(arr, axis=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.sum as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.sum additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.sum(arr)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.sum directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-median",
+      "slug": "numpy-median",
+      "name": "numpy.median",
+      "library": "numpy",
+      "subtopic": "Statistics",
+      "tags": [
+        "statistics",
+        "robustness"
+      ],
+      "level": "extended",
+      "summary": "numpy.median computes the median, which is robust to outliers.",
+      "syntax": "np.median(a, axis=None)",
+      "description": "numpy.median computes the median, which is robust to outliers. Use it for computing robust summary metrics across arrays and engineering numeric features and matrix-ready inputs. Key parameters: a, axis.",
+      "overview": "numpy.median computes the median, which is robust to outliers. Use numpy.median when computing robust summary metrics across arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: a, axis. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.median is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.median official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.median.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Controls a in numpy.median.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "None",
+          "description": "Controls axis in numpy.median.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.median for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.median(arr, axis=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.median as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.median additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.median(arr)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.median directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-quantile",
+      "slug": "numpy-quantile",
+      "name": "numpy.quantile",
+      "library": "numpy",
+      "subtopic": "Statistics",
+      "tags": [
+        "quantiles",
+        "risk"
+      ],
+      "level": "extended",
+      "summary": "numpy.quantile computes quantile cut points for distribution analysis.",
+      "syntax": "np.quantile(a, q, axis=None)",
+      "description": "numpy.quantile computes quantile cut points for distribution analysis. Use it for computing robust summary metrics across arrays and engineering numeric features and matrix-ready inputs. Key parameters: a, q, axis.",
+      "overview": "numpy.quantile computes quantile cut points for distribution analysis. Use numpy.quantile when computing robust summary metrics across arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: a, q, axis. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.quantile is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.quantile official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.quantile.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Controls a in numpy.quantile.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "q",
+          "type": "Any",
+          "description": "Controls q in numpy.quantile.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "None",
+          "description": "Controls axis in numpy.quantile.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.quantile for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.quantile(arr, 0.9, axis=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.quantile as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.quantile additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.quantile(arr, 0.9)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.quantile directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-nanmean",
+      "slug": "numpy-nanmean",
+      "name": "numpy.nanmean",
+      "library": "numpy",
+      "subtopic": "Statistics",
+      "tags": [
+        "missing-data",
+        "statistics"
+      ],
+      "level": "extended",
+      "summary": "numpy.nanmean computes the mean while ignoring NaN values.",
+      "syntax": "np.nanmean(a, axis=None)",
+      "description": "numpy.nanmean computes the mean while ignoring NaN values. Use it for computing robust summary metrics across arrays and handling null-heavy CRM, finance, and operations exports. Key parameters: a, axis.",
+      "overview": "numpy.nanmean computes the mean while ignoring NaN values. Use numpy.nanmean when computing robust summary metrics across arrays. Typical business pattern: handling null-heavy CRM, finance, and operations exports. Key parameters: a, axis. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.nanmean is used for handling null-heavy CRM, finance, and operations exports.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.nanmean official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.nanmean.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Controls a in numpy.nanmean.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "default": "None",
+          "description": "Controls axis in numpy.nanmean.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.nanmean for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.nanmean(arr, axis=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.nanmean as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.nanmean additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.nanmean(np.array([1.0, np.nan, 3.0]))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.nanmean directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-clip",
+      "slug": "numpy-clip",
+      "name": "numpy.clip",
+      "library": "numpy",
+      "subtopic": "Selection",
+      "tags": [
+        "outliers",
+        "bounds"
+      ],
+      "level": "extended",
+      "summary": "numpy.clip bounds array values between lower and upper limits.",
+      "syntax": "np.clip(a, a_min, a_max)",
+      "description": "numpy.clip bounds array values between lower and upper limits. Use it for filtering and selecting numeric values efficiently and engineering numeric features and matrix-ready inputs. Key parameters: a, a_min, a_max.",
+      "overview": "numpy.clip bounds array values between lower and upper limits. Use numpy.clip when filtering and selecting numeric values efficiently. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: a, a_min, a_max. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.clip is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.clip official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.clip.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Controls a in numpy.clip.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "a_min",
+          "type": "Any",
+          "description": "Controls a_min in numpy.clip.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "a_max",
+          "type": "Any",
+          "description": "Controls a_max in numpy.clip.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.clip for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.clip(arr, 0, 25)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.clip as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.clip additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.clip(arr, 12, 28)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.clip directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-log",
+      "slug": "numpy-log",
+      "name": "numpy.log",
+      "library": "numpy",
+      "subtopic": "Statistics",
+      "tags": [
+        "transform",
+        "math"
+      ],
+      "level": "extended",
+      "summary": "numpy.log applies the natural logarithm elementwise.",
+      "syntax": "np.log(x)",
+      "description": "numpy.log applies the natural logarithm elementwise. Use it for computing robust summary metrics across arrays and engineering numeric features and matrix-ready inputs. Key parameter: x.",
+      "overview": "numpy.log applies the natural logarithm elementwise. Use numpy.log when computing robust summary metrics across arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameter: x. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.log is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.log official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.log.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "x",
+          "type": "Any",
+          "description": "Controls x in numpy.log.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.log for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.log(arr)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.log as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.log additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.log(np.array([1.0, 10.0, 100.0]))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.log directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-exp",
+      "slug": "numpy-exp",
+      "name": "numpy.exp",
+      "library": "numpy",
+      "subtopic": "Statistics",
+      "tags": [
+        "transform",
+        "math"
+      ],
+      "level": "extended",
+      "summary": "numpy.exp applies the exponential function elementwise.",
+      "syntax": "np.exp(x)",
+      "description": "numpy.exp applies the exponential function elementwise. Use it for computing robust summary metrics across arrays and engineering numeric features and matrix-ready inputs. Key parameter: x.",
+      "overview": "numpy.exp applies the exponential function elementwise. Use numpy.exp when computing robust summary metrics across arrays. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameter: x. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.exp is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.exp official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.exp.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "x",
+          "type": "Any",
+          "description": "Controls x in numpy.exp.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.exp for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.exp(arr)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.exp as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.exp additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.exp(np.array([0.0, 1.0, 2.0]))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.exp directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-transpose",
+      "slug": "numpy-transpose",
+      "name": "numpy.transpose",
+      "library": "numpy",
+      "subtopic": "Shape Operations",
+      "tags": [
+        "matrix",
+        "shape"
+      ],
+      "level": "extended",
+      "summary": "numpy.transpose reorders array axes, commonly rows <-> columns.",
+      "syntax": "np.transpose(a, axes=None)",
+      "description": "numpy.transpose reorders array axes, commonly rows <-> columns. Use it for reshaping model-ready matrices and batch tensors and engineering numeric features and matrix-ready inputs. Key parameters: a, axes.",
+      "overview": "numpy.transpose reorders array axes, commonly rows <-> columns. Use numpy.transpose when reshaping model-ready matrices and batch tensors. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: a, axes. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.transpose is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.transpose official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.transpose.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Controls a in numpy.transpose.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "axes",
+          "type": "Any",
+          "default": "None",
+          "description": "Controls axes in numpy.transpose.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.transpose for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.transpose(arr, None=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.transpose as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.transpose additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.transpose(np.array([[1, 2, 3], [4, 5, 6]]))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.transpose directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    },
+    {
+      "id": "np-linalg-solve",
+      "slug": "numpy-linalg-solve",
+      "name": "numpy.linalg.solve",
+      "library": "numpy",
+      "subtopic": "Linear Algebra",
+      "tags": [
+        "linear-algebra",
+        "solvers"
+      ],
+      "level": "extended",
+      "summary": "numpy.linalg.solve solves linear systems of the form Ax = b.",
+      "syntax": "np.linalg.solve(a, b)",
+      "description": "numpy.linalg.solve solves linear systems of the form Ax = b. Use it for solving matrix operations used in optimization and regression and engineering numeric features and matrix-ready inputs. Key parameters: a, b.",
+      "overview": "numpy.linalg.solve solves linear systems of the form Ax = b. Use numpy.linalg.solve when solving matrix operations used in optimization and regression. Typical business pattern: engineering numeric features and matrix-ready inputs. Key parameters: a, b. Returns numpy.ndarray | scalar with shape depends on operation.",
+      "applications": [
+        "Primary application: numpy.linalg.solve is used for engineering numeric features and matrix-ready inputs.",
+        "Workflow application: treat this command as a vectorized numeric operation that scales better than Python loops.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ],
+      "docs": [
+        {
+          "label": "numpy.linalg.solve official docs",
+          "url": "https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Controls a in numpy.linalg.solve.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        },
+        {
+          "name": "b",
+          "type": "Any",
+          "description": "Controls b in numpy.linalg.solve.",
+          "values": [
+            "data-specific"
+          ],
+          "pitfalls": [
+            "Verify defaults and accepted values in the official docs for your installed version."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numpy.ndarray | scalar",
+        "shape": "depends on operation",
+        "description": "Numeric array/scalar output from vectorized computation."
+      },
+      "examples": [
+        {
+          "title": "numpy.linalg.solve for pricing feature matrix prep",
+          "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.linalg.solve(arr, b)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
+          "walkthrough": [
+            "Build a toy numeric array matching your feature scale and dimensionality.",
+            "Execute numpy.linalg.solve as an active code line and capture output in result.",
+            "Validate result shape/value, then apply identical logic to full production arrays."
+          ]
+        },
+        {
+          "title": "numpy.linalg.solve additional business case",
+          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
+          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.linalg.solve(np.array([[3, 1], [1, 2]]), np.array([9, 8]))\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "walkthrough": [
+            "Create a second toy numeric slice with realistic magnitudes.",
+            "Execute numpy.linalg.solve directly and inspect output type/shape/value.",
+            "Reuse the same code pattern in your production feature engineering step."
+          ]
+        }
+      ],
+      "notes": [
+        "Start with toy data and explicit parameters, then scale to full datasets.",
+        "Always verify version-specific defaults in official docs before production deployment."
+      ],
+      "related": []
+    }
+  ],
+  "overview": "NumPy provides high-performance array programming primitives for numerical computing, vectorized transformations, and matrix operations used by most DS/ML stacks.",
+  "applications": [
+    "Numeric feature engineering at scale.",
+    "Fast statistics and distribution calculations.",
+    "Linear algebra and simulation workflows."
+  ]
+}

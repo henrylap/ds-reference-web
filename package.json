@@ -1,0 +1,42 @@
+{
+  "name": "ds-reference",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run content:prepare && next dev",
+    "build": "npm run content:prepare && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "content:validate": "tsx scripts/validate-content.ts",
+    "content:index": "tsx scripts/build-search-index.ts",
+    "content:expand": "tsx scripts/expand-content.ts",
+    "content:revise-examples": "tsx scripts/revise-examples.ts",
+    "content:revise-sklearn": "tsx scripts/revise-sklearn-workflows.ts",
+    "content:fix-second-examples": "tsx scripts/fix-second-examples.ts",
+    "content:repair-numpy": "tsx scripts/repair-numpy-examples.ts",
+    "content:normalize-numpy-second": "tsx scripts/normalize-numpy-second.ts",
+    "content:rewrite-context": "tsx scripts/rewrite-command-context.ts",
+    "content:prepare": "npm run content:validate && npm run content:index",
+    "validate-content": "npm run content:validate",
+    "build-search-index": "npm run content:index"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "fuse.js": "^7.1.0",
+    "next": "15.2.4",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-syntax-highlighter": "^15.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "zod": "^3.24.2"
+  }
+}
