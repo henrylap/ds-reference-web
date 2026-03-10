@@ -5247,6 +5247,1517 @@
     "keywords": "dataclass py dataclass basics python dataclass basics python core syntax typed records models inputs dataclass class name field type dataclass generates boilerplate methods for structured typed data records dataclass generates boilerplate methods for structured typed data records use it for writing concise reliable python script logic and implementing reliable data cleaning and orchestration utilities most controls are optional keyword arguments dataclass generates boilerplate methods for structured typed data records use dataclass when writing concise reliable python script logic typical business pattern implementing reliable data cleaning and orchestration utilities most controls are optional keyword arguments returns python object with shape depends on input primary application dataclass is used for implementing reliable data cleaning and orchestration utilities workflow application treat this command as a reusable script utility that can be moved from notebook prototypes into production jobs delivery application document chosen parameters and output checks so teammates can reproduce results pydataclassbasics class name field type"
   },
   {
+    "id": "rstudio-readr-read-csv",
+    "slug": "rstudio-readr-read-csv",
+    "name": "readr::read_csv",
+    "library": "rstudio",
+    "subtopic": "Data Import",
+    "tags": [
+      "rstudio",
+      "data-import",
+      "reference"
+    ],
+    "summary": "Read CSV files into typed tibbles with fast parsing.",
+    "syntax": "df <- readr::read_csv('data/orders.csv')",
+    "description": "Read CSV files into typed tibbles with fast parsing. Use it for ingesting flat-file extracts into reproducible R workflows and loading recurring operational exports for weekly analysis. Key parameters: file_path, col_types.",
+    "overview": "Read CSV files into typed tibbles with fast parsing. Use readr::read_csv when ingesting flat-file extracts into reproducible R workflows. Typical business pattern: loading recurring operational exports for weekly analysis. Key parameters: file_path, col_types. Returns tibble with shape rows and columns inferred from file schema.",
+    "applications": [
+      "Primary application: readr::read_csv is used for loading recurring operational exports for weekly analysis.",
+      "Workflow application: pin parsing options and column types so ingestion remains stable across runs.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "readr read csv",
+      "rstudio readr read csv",
+      "readr readcsv",
+      "rstudioreadrreadcsv",
+      "readr read",
+      "csv",
+      "rstudio",
+      "data import",
+      "reference",
+      "df",
+      "data",
+      "orders"
+    ],
+    "keywords": "readr read csv rstudio readr read csv rstudio data import reference inputs df readr read csv data orders csv read csv files into typed tibbles with fast parsing read csv files into typed tibbles with fast parsing use it for ingesting flat file extracts into reproducible r workflows and loading recurring operational exports for weekly analysis key parameters file path col types read csv files into typed tibbles with fast parsing use readr read csv when ingesting flat file extracts into reproducible r workflows typical business pattern loading recurring operational exports for weekly analysis key parameters file path col types returns tibble with shape rows and columns inferred from file schema primary application readr read csv is used for loading recurring operational exports for weekly analysis workflow application pin parsing options and column types so ingestion remains stable across runs delivery application document chosen parameters and output checks so teammates can reproduce results readr readcsv rstudioreadrreadcsv readr read csv df data orders"
+  },
+  {
+    "id": "rstudio-dplyr-select",
+    "slug": "rstudio-dplyr-select",
+    "name": "dplyr::select",
+    "library": "rstudio",
+    "subtopic": "Wrangling",
+    "tags": [
+      "rstudio",
+      "wrangling",
+      "reference"
+    ],
+    "summary": "Select and optionally rename columns needed for analysis.",
+    "syntax": "df_selected <- df %>% dplyr::select(customer_id, revenue, order_date)",
+    "description": "Select and optionally rename columns needed for analysis. Use it for reducing wide tables to a focused modeling/reporting schema and keeping only business keys, measures, and date fields for downstream steps. Key parameters: data, columns.",
+    "overview": "Select and optionally rename columns needed for analysis. Use dplyr::select when reducing wide tables to a focused modeling/reporting schema. Typical business pattern: keeping only business keys, measures, and date fields for downstream steps. Key parameters: data, columns. Returns tibble with shape same row count with selected columns.",
+    "applications": [
+      "Primary application: dplyr::select is used for keeping only business keys, measures, and date fields for downstream steps.",
+      "Workflow application: apply select early to simplify subsequent mutate/filter/join logic.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "dplyr select",
+      "rstudio dplyr select",
+      "rstudiodplyrselect",
+      "rstudio",
+      "wrangling",
+      "reference",
+      "df",
+      "selected",
+      "customer",
+      "id",
+      "revenue",
+      "order",
+      "date"
+    ],
+    "keywords": "dplyr select rstudio dplyr select rstudio wrangling reference inputs df selected df dplyr select customer id revenue order date select and optionally rename columns needed for analysis select and optionally rename columns needed for analysis use it for reducing wide tables to a focused modeling reporting schema and keeping only business keys measures and date fields for downstream steps key parameters data columns select and optionally rename columns needed for analysis use dplyr select when reducing wide tables to a focused modeling reporting schema typical business pattern keeping only business keys measures and date fields for downstream steps key parameters data columns returns tibble with shape same row count with selected columns primary application dplyr select is used for keeping only business keys measures and date fields for downstream steps workflow application apply select early to simplify subsequent mutate filter join logic delivery application document chosen parameters and output checks so teammates can reproduce results rstudiodplyrselect df selected customer id revenue order date"
+  },
+  {
+    "id": "rstudio-dplyr-filter",
+    "slug": "rstudio-dplyr-filter",
+    "name": "dplyr::filter",
+    "library": "rstudio",
+    "subtopic": "Wrangling",
+    "tags": [
+      "rstudio",
+      "wrangling",
+      "reference"
+    ],
+    "summary": "Keep rows that satisfy boolean predicates.",
+    "syntax": "df_filtered <- df %>% dplyr::filter(revenue > 100, region == \"West\")",
+    "description": "Keep rows that satisfy boolean predicates. Use it for scoping datasets to target segments, windows, or rule-compliant records and excluding low-quality, out-of-window, or non-target observations. Key parameters: data, conditions.",
+    "overview": "Keep rows that satisfy boolean predicates. Use dplyr::filter when scoping datasets to target segments, windows, or rule-compliant records. Typical business pattern: excluding low-quality, out-of-window, or non-target observations. Key parameters: data, conditions. Returns tibble with shape subset of input rows with same columns.",
+    "applications": [
+      "Primary application: dplyr::filter is used for excluding low-quality, out-of-window, or non-target observations.",
+      "Workflow application: place filter before heavy joins/aggregations to reduce compute and noise.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "dplyr filter",
+      "rstudio dplyr filter",
+      "rstudiodplyrfilter",
+      "dplyr filt",
+      "rstudio",
+      "wrangling",
+      "reference",
+      "df",
+      "filtered",
+      "revenue",
+      "100",
+      "region",
+      "west"
+    ],
+    "keywords": "dplyr filter rstudio dplyr filter rstudio wrangling reference inputs df filtered df dplyr filter revenue 100 region west keep rows that satisfy boolean predicates keep rows that satisfy boolean predicates use it for scoping datasets to target segments windows or rule compliant records and excluding low quality out of window or non target observations key parameters data conditions keep rows that satisfy boolean predicates use dplyr filter when scoping datasets to target segments windows or rule compliant records typical business pattern excluding low quality out of window or non target observations key parameters data conditions returns tibble with shape subset of input rows with same columns primary application dplyr filter is used for excluding low quality out of window or non target observations workflow application place filter before heavy joins aggregations to reduce compute and noise delivery application document chosen parameters and output checks so teammates can reproduce results rstudiodplyrfilter dplyr filt df filtered revenue 100 region west"
+  },
+  {
+    "id": "rstudio-dplyr-mutate",
+    "slug": "rstudio-dplyr-mutate",
+    "name": "dplyr::mutate",
+    "library": "rstudio",
+    "subtopic": "Wrangling",
+    "tags": [
+      "rstudio",
+      "wrangling",
+      "reference"
+    ],
+    "summary": "Create or transform columns with vectorized expressions.",
+    "syntax": "df_features <- df %>% dplyr::mutate(aov = revenue / pmax(orders, 1))",
+    "description": "Create or transform columns with vectorized expressions. Use it for engineering derived features used in reporting and modeling and building ratios, flags, and normalized metrics from raw measures. Key parameters: data, new_columns.",
+    "overview": "Create or transform columns with vectorized expressions. Use dplyr::mutate when engineering derived features used in reporting and modeling. Typical business pattern: building ratios, flags, and normalized metrics from raw measures. Key parameters: data, new_columns. Returns tibble with shape same row count with added or updated columns.",
+    "applications": [
+      "Primary application: dplyr::mutate is used for building ratios, flags, and normalized metrics from raw measures.",
+      "Workflow application: chain mutate steps with clear names so feature logic stays auditable.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "dplyr mutate",
+      "rstudio dplyr mutate",
+      "rstudiodplyrmutate",
+      "rstudio",
+      "wrangling",
+      "reference",
+      "df",
+      "features",
+      "aov",
+      "revenue",
+      "pmax",
+      "orders",
+      "1"
+    ],
+    "keywords": "dplyr mutate rstudio dplyr mutate rstudio wrangling reference inputs df features df dplyr mutate aov revenue pmax orders 1 create or transform columns with vectorized expressions create or transform columns with vectorized expressions use it for engineering derived features used in reporting and modeling and building ratios flags and normalized metrics from raw measures key parameters data new columns create or transform columns with vectorized expressions use dplyr mutate when engineering derived features used in reporting and modeling typical business pattern building ratios flags and normalized metrics from raw measures key parameters data new columns returns tibble with shape same row count with added or updated columns primary application dplyr mutate is used for building ratios flags and normalized metrics from raw measures workflow application chain mutate steps with clear names so feature logic stays auditable delivery application document chosen parameters and output checks so teammates can reproduce results rstudiodplyrmutate df features aov revenue pmax orders 1"
+  },
+  {
+    "id": "rstudio-dplyr-arrange",
+    "slug": "rstudio-dplyr-arrange",
+    "name": "dplyr::arrange",
+    "library": "rstudio",
+    "subtopic": "Wrangling",
+    "tags": [
+      "rstudio",
+      "wrangling",
+      "reference"
+    ],
+    "summary": "Sort rows by one or more columns.",
+    "syntax": "df_sorted <- df %>% dplyr::arrange(dplyr::desc(revenue))",
+    "description": "Sort rows by one or more columns. Use it for creating deterministic ranked outputs for review and export and ordering entities by revenue, score, or recency. Key parameters: data, sort_columns.",
+    "overview": "Sort rows by one or more columns. Use dplyr::arrange when creating deterministic ranked outputs for review and export. Typical business pattern: ordering entities by revenue, score, or recency. Key parameters: data, sort_columns. Returns tibble with shape same rows reordered by sort keys.",
+    "applications": [
+      "Primary application: dplyr::arrange is used for ordering entities by revenue, score, or recency.",
+      "Workflow application: apply arrange near output boundaries when order matters to consumers.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "dplyr arrange",
+      "rstudio dplyr arrange",
+      "rstudiodplyrarrange",
+      "rstudio",
+      "wrangling",
+      "reference",
+      "df",
+      "sorted",
+      "dplyr desc",
+      "revenue"
+    ],
+    "keywords": "dplyr arrange rstudio dplyr arrange rstudio wrangling reference inputs df sorted df dplyr arrange dplyr desc revenue sort rows by one or more columns sort rows by one or more columns use it for creating deterministic ranked outputs for review and export and ordering entities by revenue score or recency key parameters data sort columns sort rows by one or more columns use dplyr arrange when creating deterministic ranked outputs for review and export typical business pattern ordering entities by revenue score or recency key parameters data sort columns returns tibble with shape same rows reordered by sort keys primary application dplyr arrange is used for ordering entities by revenue score or recency workflow application apply arrange near output boundaries when order matters to consumers delivery application document chosen parameters and output checks so teammates can reproduce results rstudiodplyrarrange df sorted dplyr desc revenue"
+  },
+  {
+    "id": "rstudio-dplyr-summarise",
+    "slug": "rstudio-dplyr-summarise",
+    "name": "dplyr::summarise",
+    "library": "rstudio",
+    "subtopic": "Wrangling",
+    "tags": [
+      "rstudio",
+      "wrangling",
+      "reference"
+    ],
+    "summary": "Collapse rows into aggregate summary metrics.",
+    "syntax": "kpi <- df %>% dplyr::summarise(total_revenue = sum(revenue), avg_revenue = mean(revenue))",
+    "description": "Collapse rows into aggregate summary metrics. Use it for building compact KPI outputs from transactional datasets and computing totals, averages, and counts for management reporting. Key parameters: data, summary_expressions.",
+    "overview": "Collapse rows into aggregate summary metrics. Use dplyr::summarise when building compact KPI outputs from transactional datasets. Typical business pattern: computing totals, averages, and counts for management reporting. Key parameters: data, summary_expressions. Returns tibble with shape one row per group (or one row total if ungrouped).",
+    "applications": [
+      "Primary application: dplyr::summarise is used for computing totals, averages, and counts for management reporting.",
+      "Workflow application: pair with group_by when you need segmented KPI tables.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "dplyr summarise",
+      "rstudio dplyr summarise",
+      "rstudiodplyrsummarise",
+      "rstudio",
+      "wrangling",
+      "reference",
+      "kpi",
+      "df",
+      "total",
+      "revenue",
+      "sum",
+      "avg",
+      "mean"
+    ],
+    "keywords": "dplyr summarise rstudio dplyr summarise rstudio wrangling reference inputs kpi df dplyr summarise total revenue sum revenue avg revenue mean revenue collapse rows into aggregate summary metrics collapse rows into aggregate summary metrics use it for building compact kpi outputs from transactional datasets and computing totals averages and counts for management reporting key parameters data summary expressions collapse rows into aggregate summary metrics use dplyr summarise when building compact kpi outputs from transactional datasets typical business pattern computing totals averages and counts for management reporting key parameters data summary expressions returns tibble with shape one row per group or one row total if ungrouped primary application dplyr summarise is used for computing totals averages and counts for management reporting workflow application pair with group by when you need segmented kpi tables delivery application document chosen parameters and output checks so teammates can reproduce results rstudiodplyrsummarise kpi df total revenue sum avg mean"
+  },
+  {
+    "id": "rstudio-dplyr-group-by",
+    "slug": "rstudio-dplyr-group-by",
+    "name": "dplyr::group_by",
+    "library": "rstudio",
+    "subtopic": "Wrangling",
+    "tags": [
+      "rstudio",
+      "wrangling",
+      "reference"
+    ],
+    "summary": "Define grouping keys for grouped summaries and transformations.",
+    "syntax": "seg_kpi <- df %>% dplyr::group_by(region) %>% dplyr::summarise(revenue = sum(revenue), .groups = \"drop\")",
+    "description": "Define grouping keys for grouped summaries and transformations. Use it for setting the analysis grain before summarise or grouped mutate and segmenting calculations by region, cohort, or channel. Key parameters: data, group_columns.",
+    "overview": "Define grouping keys for grouped summaries and transformations. Use dplyr::group_by when setting the analysis grain before summarise or grouped mutate. Typical business pattern: segmenting calculations by region, cohort, or channel. Key parameters: data, group_columns. Returns grouped tibble with shape same rows with grouping metadata attached.",
+    "applications": [
+      "Primary application: dplyr::group_by is used for segmenting calculations by region, cohort, or channel.",
+      "Workflow application: explicitly ungroup or set .groups behavior to avoid accidental carryover.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "dplyr group by",
+      "rstudio dplyr group by",
+      "dplyr groupby",
+      "rstudiodplyrgroupby",
+      "dplyr group",
+      "by",
+      "rstudio",
+      "wrangling",
+      "reference",
+      "seg",
+      "kpi",
+      "df",
+      "region",
+      "dplyr summarise",
+      "revenue",
+      "sum",
+      "groups"
+    ],
+    "keywords": "dplyr group by rstudio dplyr group by rstudio wrangling reference inputs seg kpi df dplyr group by region dplyr summarise revenue sum revenue groups drop define grouping keys for grouped summaries and transformations define grouping keys for grouped summaries and transformations use it for setting the analysis grain before summarise or grouped mutate and segmenting calculations by region cohort or channel key parameters data group columns define grouping keys for grouped summaries and transformations use dplyr group by when setting the analysis grain before summarise or grouped mutate typical business pattern segmenting calculations by region cohort or channel key parameters data group columns returns grouped tibble with shape same rows with grouping metadata attached primary application dplyr group by is used for segmenting calculations by region cohort or channel workflow application explicitly ungroup or set groups behavior to avoid accidental carryover delivery application document chosen parameters and output checks so teammates can reproduce results dplyr groupby rstudiodplyrgroupby dplyr group by seg kpi df region dplyr summarise revenue sum groups"
+  },
+  {
+    "id": "rstudio-dplyr-left-join",
+    "slug": "rstudio-dplyr-left-join",
+    "name": "dplyr::left_join",
+    "library": "rstudio",
+    "subtopic": "Wrangling",
+    "tags": [
+      "rstudio",
+      "wrangling",
+      "reference"
+    ],
+    "summary": "Join tables while preserving all rows from the left side.",
+    "syntax": "orders_enriched <- orders %>% dplyr::left_join(customers, by = \"customer_id\")",
+    "description": "Join tables while preserving all rows from the left side. Use it for enriching a base fact table with optional dimension attributes and adding customer or product context to transaction records. Key parameters: x, y, by.",
+    "overview": "Join tables while preserving all rows from the left side. Use dplyr::left_join when enriching a base fact table with optional dimension attributes. Typical business pattern: adding customer or product context to transaction records. Key parameters: x, y, by. Returns tibble with shape left-side row count with nullable right-side columns.",
+    "applications": [
+      "Primary application: dplyr::left_join is used for adding customer or product context to transaction records.",
+      "Workflow application: check key uniqueness in lookup tables to prevent unintended row expansion.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "dplyr left join",
+      "rstudio dplyr left join",
+      "dplyr leftjoin",
+      "rstudiodplyrleftjoin",
+      "dplyr left",
+      "join",
+      "rstudio",
+      "wrangling",
+      "reference",
+      "orders",
+      "enriched",
+      "customers",
+      "by",
+      "customer",
+      "id"
+    ],
+    "keywords": "dplyr left join rstudio dplyr left join rstudio wrangling reference inputs orders enriched orders dplyr left join customers by customer id join tables while preserving all rows from the left side join tables while preserving all rows from the left side use it for enriching a base fact table with optional dimension attributes and adding customer or product context to transaction records key parameters x y by join tables while preserving all rows from the left side use dplyr left join when enriching a base fact table with optional dimension attributes typical business pattern adding customer or product context to transaction records key parameters x y by returns tibble with shape left side row count with nullable right side columns primary application dplyr left join is used for adding customer or product context to transaction records workflow application check key uniqueness in lookup tables to prevent unintended row expansion delivery application document chosen parameters and output checks so teammates can reproduce results dplyr leftjoin rstudiodplyrleftjoin dplyr left join orders enriched customers by customer id"
+  },
+  {
+    "id": "rstudio-dplyr-inner-join",
+    "slug": "rstudio-dplyr-inner-join",
+    "name": "dplyr::inner_join",
+    "library": "rstudio",
+    "subtopic": "Wrangling",
+    "tags": [
+      "rstudio",
+      "wrangling",
+      "reference"
+    ],
+    "summary": "Join tables and keep only matching keys in both tables.",
+    "syntax": "matched <- orders %>% dplyr::inner_join(payments, by = \"order_id\")",
+    "description": "Join tables and keep only matching keys in both tables. Use it for restricting analysis to records present across required sources and retaining only transactions that also have confirmed payment records. Key parameters: x, y, by.",
+    "overview": "Join tables and keep only matching keys in both tables. Use dplyr::inner_join when restricting analysis to records present across required sources. Typical business pattern: retaining only transactions that also have confirmed payment records. Key parameters: x, y, by. Returns tibble with shape matched row pairs based on join keys.",
+    "applications": [
+      "Primary application: dplyr::inner_join is used for retaining only transactions that also have confirmed payment records.",
+      "Workflow application: use inner_join when missing matches should be excluded by design.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "dplyr inner join",
+      "rstudio dplyr inner join",
+      "dplyr innerjoin",
+      "rstudiodplyrinnerjoin",
+      "dplyr inn",
+      "join",
+      "rstudio",
+      "wrangling",
+      "reference",
+      "matched",
+      "orders",
+      "dplyr inner",
+      "payments",
+      "by",
+      "order",
+      "id"
+    ],
+    "keywords": "dplyr inner join rstudio dplyr inner join rstudio wrangling reference inputs matched orders dplyr inner join payments by order id join tables and keep only matching keys in both tables join tables and keep only matching keys in both tables use it for restricting analysis to records present across required sources and retaining only transactions that also have confirmed payment records key parameters x y by join tables and keep only matching keys in both tables use dplyr inner join when restricting analysis to records present across required sources typical business pattern retaining only transactions that also have confirmed payment records key parameters x y by returns tibble with shape matched row pairs based on join keys primary application dplyr inner join is used for retaining only transactions that also have confirmed payment records workflow application use inner join when missing matches should be excluded by design delivery application document chosen parameters and output checks so teammates can reproduce results dplyr innerjoin rstudiodplyrinnerjoin dplyr inn join matched orders dplyr inner payments by order id"
+  },
+  {
+    "id": "rstudio-tidyr-pivot-longer",
+    "slug": "rstudio-tidyr-pivot-longer",
+    "name": "tidyr::pivot_longer",
+    "library": "rstudio",
+    "subtopic": "Reshaping",
+    "tags": [
+      "rstudio",
+      "reshaping",
+      "reference"
+    ],
+    "summary": "Reshape wide columns into tidy key-value rows.",
+    "syntax": "long_df <- wide_df %>% tidyr::pivot_longer(cols = starts_with(\"m_\"), names_to = \"metric\", values_to = \"value\")",
+    "description": "Reshape wide columns into tidy key-value rows. Use it for normalizing spreadsheet-style wide data for tidy analysis and converting month columns into a single metric and period column. Key parameters: data, cols, names_to, values_to.",
+    "overview": "Reshape wide columns into tidy key-value rows. Use tidyr::pivot_longer when normalizing spreadsheet-style wide data for tidy analysis. Typical business pattern: converting month columns into a single metric and period column. Key parameters: data, cols, names_to, values_to. Returns tibble with shape more rows and fewer metric columns than input.",
+    "applications": [
+      "Primary application: tidyr::pivot_longer is used for converting month columns into a single metric and period column.",
+      "Workflow application: pivot_longer early when downstream steps expect tidy long format.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "tidyr pivot longer",
+      "rstudio tidyr pivot longer",
+      "tidyr pivotlonger",
+      "rstudiotidyrpivotlonger",
+      "tidyr pivot",
+      "long",
+      "rstudio",
+      "reshaping",
+      "reference",
+      "df",
+      "wide",
+      "longer",
+      "cols",
+      "starts",
+      "with",
+      "m",
+      "names"
+    ],
+    "keywords": "tidyr pivot longer rstudio tidyr pivot longer rstudio reshaping reference inputs long df wide df tidyr pivot longer cols starts with m names to metric values to value reshape wide columns into tidy key value rows reshape wide columns into tidy key value rows use it for normalizing spreadsheet style wide data for tidy analysis and converting month columns into a single metric and period column key parameters data cols names to values to reshape wide columns into tidy key value rows use tidyr pivot longer when normalizing spreadsheet style wide data for tidy analysis typical business pattern converting month columns into a single metric and period column key parameters data cols names to values to returns tibble with shape more rows and fewer metric columns than input primary application tidyr pivot longer is used for converting month columns into a single metric and period column workflow application pivot longer early when downstream steps expect tidy long format delivery application document chosen parameters and output checks so teammates can reproduce results tidyr pivotlonger rstudiotidyrpivotlonger tidyr pivot long df wide longer cols starts with m names"
+  },
+  {
+    "id": "rstudio-tidyr-pivot-wider",
+    "slug": "rstudio-tidyr-pivot-wider",
+    "name": "tidyr::pivot_wider",
+    "library": "rstudio",
+    "subtopic": "Reshaping",
+    "tags": [
+      "rstudio",
+      "reshaping",
+      "reference"
+    ],
+    "summary": "Spread key-value rows into wide columns.",
+    "syntax": "wide_df <- long_df %>% tidyr::pivot_wider(names_from = metric, values_from = value)",
+    "description": "Spread key-value rows into wide columns. Use it for producing presentation-friendly wide tables from tidy long data and turning metric labels into separate columns for dashboard export. Key parameters: data, names_from, values_from.",
+    "overview": "Spread key-value rows into wide columns. Use tidyr::pivot_wider when producing presentation-friendly wide tables from tidy long data. Typical business pattern: turning metric labels into separate columns for dashboard export. Key parameters: data, names_from, values_from. Returns tibble with shape fewer rows and more columns than input.",
+    "applications": [
+      "Primary application: tidyr::pivot_wider is used for turning metric labels into separate columns for dashboard export.",
+      "Workflow application: use pivot_wider near output/report steps after transformations are complete.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "tidyr pivot wider",
+      "rstudio tidyr pivot wider",
+      "tidyr pivotwider",
+      "rstudiotidyrpivotwider",
+      "tidyr pivot",
+      "wid",
+      "rstudio",
+      "reshaping",
+      "reference",
+      "wide",
+      "df",
+      "long",
+      "wider",
+      "names",
+      "from",
+      "metric",
+      "values",
+      "value"
+    ],
+    "keywords": "tidyr pivot wider rstudio tidyr pivot wider rstudio reshaping reference inputs wide df long df tidyr pivot wider names from metric values from value spread key value rows into wide columns spread key value rows into wide columns use it for producing presentation friendly wide tables from tidy long data and turning metric labels into separate columns for dashboard export key parameters data names from values from spread key value rows into wide columns use tidyr pivot wider when producing presentation friendly wide tables from tidy long data typical business pattern turning metric labels into separate columns for dashboard export key parameters data names from values from returns tibble with shape fewer rows and more columns than input primary application tidyr pivot wider is used for turning metric labels into separate columns for dashboard export workflow application use pivot wider near output report steps after transformations are complete delivery application document chosen parameters and output checks so teammates can reproduce results tidyr pivotwider rstudiotidyrpivotwider tidyr pivot wid wide df long wider names from metric values value"
+  },
+  {
+    "id": "rstudio-tidyr-drop-na",
+    "slug": "rstudio-tidyr-drop-na",
+    "name": "tidyr::drop_na",
+    "library": "rstudio",
+    "subtopic": "Reshaping",
+    "tags": [
+      "rstudio",
+      "reshaping",
+      "reference"
+    ],
+    "summary": "Remove rows with missing values in required fields.",
+    "syntax": "clean_df <- df %>% tidyr::drop_na(revenue, order_date)",
+    "description": "Remove rows with missing values in required fields. Use it for enforcing minimum data completeness before modeling or KPI aggregation and excluding records missing key measures such as revenue or date. Key parameters: data, required_columns.",
+    "overview": "Remove rows with missing values in required fields. Use tidyr::drop_na when enforcing minimum data completeness before modeling or KPI aggregation. Typical business pattern: excluding records missing key measures such as revenue or date. Key parameters: data, required_columns. Returns tibble with shape subset of input rows with non-missing required values.",
+    "applications": [
+      "Primary application: tidyr::drop_na is used for excluding records missing key measures such as revenue or date.",
+      "Workflow application: document which columns are mandatory so drop rules remain transparent.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "tidyr drop na",
+      "rstudio tidyr drop na",
+      "tidyr dropna",
+      "rstudiotidyrdropna",
+      "tidyr drop",
+      "na",
+      "rstudio",
+      "reshaping",
+      "reference",
+      "clean",
+      "df",
+      "revenue",
+      "order",
+      "date"
+    ],
+    "keywords": "tidyr drop na rstudio tidyr drop na rstudio reshaping reference inputs clean df df tidyr drop na revenue order date remove rows with missing values in required fields remove rows with missing values in required fields use it for enforcing minimum data completeness before modeling or kpi aggregation and excluding records missing key measures such as revenue or date key parameters data required columns remove rows with missing values in required fields use tidyr drop na when enforcing minimum data completeness before modeling or kpi aggregation typical business pattern excluding records missing key measures such as revenue or date key parameters data required columns returns tibble with shape subset of input rows with non missing required values primary application tidyr drop na is used for excluding records missing key measures such as revenue or date workflow application document which columns are mandatory so drop rules remain transparent delivery application document chosen parameters and output checks so teammates can reproduce results tidyr dropna rstudiotidyrdropna tidyr drop na clean df revenue order date"
+  },
+  {
+    "id": "rstudio-tidyr-replace-na",
+    "slug": "rstudio-tidyr-replace-na",
+    "name": "tidyr::replace_na",
+    "library": "rstudio",
+    "subtopic": "Reshaping",
+    "tags": [
+      "rstudio",
+      "reshaping",
+      "reference"
+    ],
+    "summary": "Fill missing values with explicit replacements.",
+    "syntax": "df_filled <- df %>% tidyr::replace_na(list(revenue = 0, region = \"Unknown\"))",
+    "description": "Fill missing values with explicit replacements. Use it for stabilizing downstream calculations that cannot tolerate NA values and defaulting missing numerics to 0 and unknown categories to labels. Key parameters: data, replacements.",
+    "overview": "Fill missing values with explicit replacements. Use tidyr::replace_na when stabilizing downstream calculations that cannot tolerate NA values. Typical business pattern: defaulting missing numerics to 0 and unknown categories to labels. Key parameters: data, replacements. Returns tibble with shape same rows/columns with NA values replaced.",
+    "applications": [
+      "Primary application: tidyr::replace_na is used for defaulting missing numerics to 0 and unknown categories to labels.",
+      "Workflow application: set replacement policy centrally to keep imputation consistent across analyses.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "tidyr replace na",
+      "rstudio tidyr replace na",
+      "tidyr replacena",
+      "rstudiotidyrreplacena",
+      "tidyr replace",
+      "na",
+      "rstudio",
+      "reshaping",
+      "reference",
+      "df",
+      "filled",
+      "list",
+      "revenue",
+      "0",
+      "region",
+      "unknown"
+    ],
+    "keywords": "tidyr replace na rstudio tidyr replace na rstudio reshaping reference inputs df filled df tidyr replace na list revenue 0 region unknown fill missing values with explicit replacements fill missing values with explicit replacements use it for stabilizing downstream calculations that cannot tolerate na values and defaulting missing numerics to 0 and unknown categories to labels key parameters data replacements fill missing values with explicit replacements use tidyr replace na when stabilizing downstream calculations that cannot tolerate na values typical business pattern defaulting missing numerics to 0 and unknown categories to labels key parameters data replacements returns tibble with shape same rows columns with na values replaced primary application tidyr replace na is used for defaulting missing numerics to 0 and unknown categories to labels workflow application set replacement policy centrally to keep imputation consistent across analyses delivery application document chosen parameters and output checks so teammates can reproduce results tidyr replacena rstudiotidyrreplacena tidyr replace na df filled list revenue 0 region unknown"
+  },
+  {
+    "id": "rstudio-ggplot-geom-line",
+    "slug": "rstudio-ggplot-geom-line",
+    "name": "ggplot2::geom_line",
+    "library": "rstudio",
+    "subtopic": "Visualization",
+    "tags": [
+      "rstudio",
+      "visualization",
+      "reference"
+    ],
+    "summary": "Draw connected line marks to show trends over ordered x-values.",
+    "syntax": "ggplot2::ggplot(df, ggplot2::aes(order_date, revenue)) + ggplot2::geom_line()",
+    "description": "Draw connected line marks to show trends over ordered x-values. Use it for visualizing movement over time for KPI monitoring and plotting daily or weekly revenue trends and detecting inflection points. Key parameters: data, aes(x,y), grouping.",
+    "overview": "Draw connected line marks to show trends over ordered x-values. Use ggplot2::geom_line when visualizing movement over time for KPI monitoring. Typical business pattern: plotting daily or weekly revenue trends and detecting inflection points. Key parameters: data, aes(x,y), grouping. Returns ggplot object with shape plot layer rendered from input rows.",
+    "applications": [
+      "Primary application: ggplot2::geom_line is used for plotting daily or weekly revenue trends and detecting inflection points.",
+      "Workflow application: use with date-based x and sorted data to avoid misleading line paths.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "ggplot2 geom line",
+      "rstudio ggplot geom line",
+      "ggplot2 geomline",
+      "rstudioggplotgeomline",
+      "ggplot2 geom",
+      "line",
+      "rstudio",
+      "visualization",
+      "reference",
+      "ggplot2 ggplot",
+      "df",
+      "ggplot2 aes",
+      "order",
+      "date",
+      "revenue"
+    ],
+    "keywords": "ggplot2 geom line rstudio ggplot geom line rstudio visualization reference inputs ggplot2 ggplot df ggplot2 aes order date revenue ggplot2 geom line draw connected line marks to show trends over ordered x values draw connected line marks to show trends over ordered x values use it for visualizing movement over time for kpi monitoring and plotting daily or weekly revenue trends and detecting inflection points key parameters data aes x y grouping draw connected line marks to show trends over ordered x values use ggplot2 geom line when visualizing movement over time for kpi monitoring typical business pattern plotting daily or weekly revenue trends and detecting inflection points key parameters data aes x y grouping returns ggplot object with shape plot layer rendered from input rows primary application ggplot2 geom line is used for plotting daily or weekly revenue trends and detecting inflection points workflow application use with date based x and sorted data to avoid misleading line paths delivery application document chosen parameters and output checks so teammates can reproduce results ggplot2 geomline rstudioggplotgeomline ggplot2 geom line ggplot2 ggplot df ggplot2 aes order date revenue"
+  },
+  {
+    "id": "rstudio-ggplot-geom-col",
+    "slug": "rstudio-ggplot-geom-col",
+    "name": "ggplot2::geom_col",
+    "library": "rstudio",
+    "subtopic": "Visualization",
+    "tags": [
+      "rstudio",
+      "visualization",
+      "reference"
+    ],
+    "summary": "Render bar heights from pre-aggregated values.",
+    "syntax": "ggplot2::ggplot(seg_kpi, ggplot2::aes(region, revenue)) + ggplot2::geom_col()",
+    "description": "Render bar heights from pre-aggregated values. Use it for comparing magnitudes across categories in KPI summaries and displaying revenue by region or channel from summarized tables. Key parameters: data, aes(category,value).",
+    "overview": "Render bar heights from pre-aggregated values. Use ggplot2::geom_col when comparing magnitudes across categories in KPI summaries. Typical business pattern: displaying revenue by region or channel from summarized tables. Key parameters: data, aes(category,value). Returns ggplot object with shape bar chart with one bar per category-row.",
+    "applications": [
+      "Primary application: ggplot2::geom_col is used for displaying revenue by region or channel from summarized tables.",
+      "Workflow application: pre-aggregate with summarise before geom_col to control metric definitions.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "ggplot2 geom col",
+      "rstudio ggplot geom col",
+      "ggplot2 geomcol",
+      "rstudioggplotgeomcol",
+      "ggplot2 geom",
+      "col",
+      "rstudio",
+      "visualization",
+      "reference",
+      "ggplot2 ggplot",
+      "seg",
+      "kpi",
+      "ggplot2 aes",
+      "region",
+      "revenue"
+    ],
+    "keywords": "ggplot2 geom col rstudio ggplot geom col rstudio visualization reference inputs ggplot2 ggplot seg kpi ggplot2 aes region revenue ggplot2 geom col render bar heights from pre aggregated values render bar heights from pre aggregated values use it for comparing magnitudes across categories in kpi summaries and displaying revenue by region or channel from summarized tables key parameters data aes category value render bar heights from pre aggregated values use ggplot2 geom col when comparing magnitudes across categories in kpi summaries typical business pattern displaying revenue by region or channel from summarized tables key parameters data aes category value returns ggplot object with shape bar chart with one bar per category row primary application ggplot2 geom col is used for displaying revenue by region or channel from summarized tables workflow application pre aggregate with summarise before geom col to control metric definitions delivery application document chosen parameters and output checks so teammates can reproduce results ggplot2 geomcol rstudioggplotgeomcol ggplot2 geom col ggplot2 ggplot seg kpi ggplot2 aes region revenue"
+  },
+  {
+    "id": "rstudio-ggplot-geom-point",
+    "slug": "rstudio-ggplot-geom-point",
+    "name": "ggplot2::geom_point",
+    "library": "rstudio",
+    "subtopic": "Visualization",
+    "tags": [
+      "rstudio",
+      "visualization",
+      "reference"
+    ],
+    "summary": "Plot individual observations as points for relationship analysis.",
+    "syntax": "ggplot2::ggplot(df, ggplot2::aes(ad_spend, revenue)) + ggplot2::geom_point()",
+    "description": "Plot individual observations as points for relationship analysis. Use it for checking association patterns and outliers between numeric variables and exploring spend vs revenue or feature vs target relationships. Key parameters: data, aes(x,y), color/group.",
+    "overview": "Plot individual observations as points for relationship analysis. Use ggplot2::geom_point when checking association patterns and outliers between numeric variables. Typical business pattern: exploring spend vs revenue or feature vs target relationships. Key parameters: data, aes(x,y), color/group. Returns ggplot object with shape scatter layer with one point per input row.",
+    "applications": [
+      "Primary application: ggplot2::geom_point is used for exploring spend vs revenue or feature vs target relationships.",
+      "Workflow application: combine with faceting or smoothing when comparing multiple segments.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "ggplot2 geom point",
+      "rstudio ggplot geom point",
+      "ggplot2 geompoint",
+      "rstudioggplotgeompoint",
+      "ggplot2 geom",
+      "point",
+      "rstudio",
+      "visualization",
+      "reference",
+      "ggplot2 ggplot",
+      "df",
+      "ggplot2 aes",
+      "ad",
+      "spend",
+      "revenue"
+    ],
+    "keywords": "ggplot2 geom point rstudio ggplot geom point rstudio visualization reference inputs ggplot2 ggplot df ggplot2 aes ad spend revenue ggplot2 geom point plot individual observations as points for relationship analysis plot individual observations as points for relationship analysis use it for checking association patterns and outliers between numeric variables and exploring spend vs revenue or feature vs target relationships key parameters data aes x y color group plot individual observations as points for relationship analysis use ggplot2 geom point when checking association patterns and outliers between numeric variables typical business pattern exploring spend vs revenue or feature vs target relationships key parameters data aes x y color group returns ggplot object with shape scatter layer with one point per input row primary application ggplot2 geom point is used for exploring spend vs revenue or feature vs target relationships workflow application combine with faceting or smoothing when comparing multiple segments delivery application document chosen parameters and output checks so teammates can reproduce results ggplot2 geompoint rstudioggplotgeompoint ggplot2 geom point ggplot2 ggplot df ggplot2 aes ad spend revenue"
+  },
+  {
+    "id": "rstudio-lubridate-ymd",
+    "slug": "rstudio-lubridate-ymd",
+    "name": "lubridate::ymd",
+    "library": "rstudio",
+    "subtopic": "Dates and Time",
+    "tags": [
+      "rstudio",
+      "dates-and-time",
+      "reference"
+    ],
+    "summary": "Parse year-month-day strings into Date objects.",
+    "syntax": "df <- df %>% dplyr::mutate(order_date = lubridate::ymd(order_date_raw))",
+    "description": "Parse year-month-day strings into Date objects. Use it for standardizing raw date text before time-based grouping and converting ingest columns into valid dates for weekly/monthly reporting. Key parameters: date_text, orders.",
+    "overview": "Parse year-month-day strings into Date objects. Use lubridate::ymd when standardizing raw date text before time-based grouping. Typical business pattern: converting ingest columns into valid dates for weekly/monthly reporting. Key parameters: date_text, orders. Returns Date vector with shape same length as input date strings.",
+    "applications": [
+      "Primary application: lubridate::ymd is used for converting ingest columns into valid dates for weekly/monthly reporting.",
+      "Workflow application: parse dates immediately after ingest to avoid downstream type ambiguity.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "lubridate ymd",
+      "rstudio lubridate ymd",
+      "rstudiolubridateymd",
+      "rstudio",
+      "dates and time",
+      "reference",
+      "df",
+      "dplyr mutate",
+      "order",
+      "date",
+      "raw"
+    ],
+    "keywords": "lubridate ymd rstudio lubridate ymd rstudio dates and time reference inputs df df dplyr mutate order date lubridate ymd order date raw parse year month day strings into date objects parse year month day strings into date objects use it for standardizing raw date text before time based grouping and converting ingest columns into valid dates for weekly monthly reporting key parameters date text orders parse year month day strings into date objects use lubridate ymd when standardizing raw date text before time based grouping typical business pattern converting ingest columns into valid dates for weekly monthly reporting key parameters date text orders returns date vector with shape same length as input date strings primary application lubridate ymd is used for converting ingest columns into valid dates for weekly monthly reporting workflow application parse dates immediately after ingest to avoid downstream type ambiguity delivery application document chosen parameters and output checks so teammates can reproduce results rstudiolubridateymd df dplyr mutate order date raw"
+  },
+  {
+    "id": "rstudio-lubridate-floor-date",
+    "slug": "rstudio-lubridate-floor-date",
+    "name": "lubridate::floor_date",
+    "library": "rstudio",
+    "subtopic": "Dates and Time",
+    "tags": [
+      "rstudio",
+      "dates-and-time",
+      "reference"
+    ],
+    "summary": "Round dates/timestamps down to a specified calendar unit.",
+    "syntax": "weekly <- df %>% dplyr::mutate(week = lubridate::floor_date(order_date, unit = \"week\"))",
+    "description": "Round dates/timestamps down to a specified calendar unit. Use it for creating consistent time buckets for aggregation and assigning each event to week-start or month-start bins. Key parameters: date_column, unit.",
+    "overview": "Round dates/timestamps down to a specified calendar unit. Use lubridate::floor_date when creating consistent time buckets for aggregation. Typical business pattern: assigning each event to week-start or month-start bins. Key parameters: date_column, unit. Returns Date/POSIXct vector with shape same length as input date column.",
+    "applications": [
+      "Primary application: lubridate::floor_date is used for assigning each event to week-start or month-start bins.",
+      "Workflow application: align bucket unit with reporting cadence to keep time series comparable.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "lubridate floor date",
+      "rstudio lubridate floor date",
+      "lubridate floordate",
+      "rstudiolubridatefloordate",
+      "lubridate floor",
+      "date",
+      "rstudio",
+      "dates and time",
+      "reference",
+      "weekly",
+      "df",
+      "dplyr mutate",
+      "week",
+      "order",
+      "unit"
+    ],
+    "keywords": "lubridate floor date rstudio lubridate floor date rstudio dates and time reference inputs weekly df dplyr mutate week lubridate floor date order date unit week round dates timestamps down to a specified calendar unit round dates timestamps down to a specified calendar unit use it for creating consistent time buckets for aggregation and assigning each event to week start or month start bins key parameters date column unit round dates timestamps down to a specified calendar unit use lubridate floor date when creating consistent time buckets for aggregation typical business pattern assigning each event to week start or month start bins key parameters date column unit returns date posixct vector with shape same length as input date column primary application lubridate floor date is used for assigning each event to week start or month start bins workflow application align bucket unit with reporting cadence to keep time series comparable delivery application document chosen parameters and output checks so teammates can reproduce results lubridate floordate rstudiolubridatefloordate lubridate floor date weekly df dplyr mutate week order unit"
+  },
+  {
+    "id": "rstudio-stringr-str-detect",
+    "slug": "rstudio-stringr-str-detect",
+    "name": "stringr::str_detect",
+    "library": "rstudio",
+    "subtopic": "Strings and Factors",
+    "tags": [
+      "rstudio",
+      "strings-and-factors",
+      "reference"
+    ],
+    "summary": "Detect whether strings match a regex or fixed pattern.",
+    "syntax": "df <- df %>% dplyr::mutate(is_promo = stringr::str_detect(campaign_name, \"promo\"))",
+    "description": "Detect whether strings match a regex or fixed pattern. Use it for building boolean flags from unstructured text columns and identifying promo, error, or keyword-bearing records. Key parameters: string, pattern.",
+    "overview": "Detect whether strings match a regex or fixed pattern. Use stringr::str_detect when building boolean flags from unstructured text columns. Typical business pattern: identifying promo, error, or keyword-bearing records. Key parameters: string, pattern. Returns logical vector with shape one TRUE/FALSE per input string.",
+    "applications": [
+      "Primary application: stringr::str_detect is used for identifying promo, error, or keyword-bearing records.",
+      "Workflow application: store pattern definitions in shared config when rules are business-critical.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "stringr str detect",
+      "rstudio stringr str detect",
+      "stringr strdetect",
+      "rstudiostringrstrdetect",
+      "stringr str",
+      "detect",
+      "rstudio",
+      "strings and factors",
+      "reference",
+      "df",
+      "dplyr mutate",
+      "is",
+      "promo",
+      "campaign",
+      "name"
+    ],
+    "keywords": "stringr str detect rstudio stringr str detect rstudio strings and factors reference inputs df df dplyr mutate is promo stringr str detect campaign name promo detect whether strings match a regex or fixed pattern detect whether strings match a regex or fixed pattern use it for building boolean flags from unstructured text columns and identifying promo error or keyword bearing records key parameters string pattern detect whether strings match a regex or fixed pattern use stringr str detect when building boolean flags from unstructured text columns typical business pattern identifying promo error or keyword bearing records key parameters string pattern returns logical vector with shape one true false per input string primary application stringr str detect is used for identifying promo error or keyword bearing records workflow application store pattern definitions in shared config when rules are business critical delivery application document chosen parameters and output checks so teammates can reproduce results stringr strdetect rstudiostringrstrdetect stringr str detect df dplyr mutate is promo campaign name"
+  },
+  {
+    "id": "rstudio-stringr-str-replace-all",
+    "slug": "rstudio-stringr-str-replace-all",
+    "name": "stringr::str_replace_all",
+    "library": "rstudio",
+    "subtopic": "Strings and Factors",
+    "tags": [
+      "rstudio",
+      "strings-and-factors",
+      "reference"
+    ],
+    "summary": "Replace all pattern matches in each string.",
+    "syntax": "df <- df %>% dplyr::mutate(clean = stringr::str_replace_all(raw_text, \"[^A-Za-z0-9 ]\", \"\"))",
+    "description": "Replace all pattern matches in each string. Use it for cleaning noisy text fields before grouping or joining and removing punctuation and normalizing textual IDs/categories. Key parameters: string, pattern_replacement.",
+    "overview": "Replace all pattern matches in each string. Use stringr::str_replace_all when cleaning noisy text fields before grouping or joining. Typical business pattern: removing punctuation and normalizing textual IDs/categories. Key parameters: string, pattern_replacement. Returns character vector with shape same length as input string vector.",
+    "applications": [
+      "Primary application: stringr::str_replace_all is used for removing punctuation and normalizing textual IDs/categories.",
+      "Workflow application: normalize casing/whitespace in the same text-cleaning stage for consistency.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "stringr str replace all",
+      "rstudio stringr str replace all",
+      "stringr strreplaceall",
+      "rstudiostringrstrreplaceall",
+      "stringr str",
+      "replace",
+      "all",
+      "rstudio",
+      "strings and factors",
+      "reference",
+      "df",
+      "dplyr mutate",
+      "clean",
+      "raw",
+      "text",
+      "a",
+      "za",
+      "z0",
+      "9"
+    ],
+    "keywords": "stringr str replace all rstudio stringr str replace all rstudio strings and factors reference inputs df df dplyr mutate clean stringr str replace all raw text a za z0 9 replace all pattern matches in each string replace all pattern matches in each string use it for cleaning noisy text fields before grouping or joining and removing punctuation and normalizing textual ids categories key parameters string pattern replacement replace all pattern matches in each string use stringr str replace all when cleaning noisy text fields before grouping or joining typical business pattern removing punctuation and normalizing textual ids categories key parameters string pattern replacement returns character vector with shape same length as input string vector primary application stringr str replace all is used for removing punctuation and normalizing textual ids categories workflow application normalize casing whitespace in the same text cleaning stage for consistency delivery application document chosen parameters and output checks so teammates can reproduce results stringr strreplaceall rstudiostringrstrreplaceall stringr str replace all df dplyr mutate clean raw text a za z0 9"
+  },
+  {
+    "id": "rstudio-forcats-fct-reorder",
+    "slug": "rstudio-forcats-fct-reorder",
+    "name": "forcats::fct_reorder",
+    "library": "rstudio",
+    "subtopic": "Strings and Factors",
+    "tags": [
+      "rstudio",
+      "strings-and-factors",
+      "reference"
+    ],
+    "summary": "Reorder factor levels using a summary of another variable.",
+    "syntax": "df <- df %>% dplyr::mutate(region = forcats::fct_reorder(region, revenue, .fun = mean))",
+    "description": "Reorder factor levels using a summary of another variable. Use it for controlling category order in plots and tables and sorting regions by mean revenue for readable bar charts. Key parameters: factor_column, numeric_column, .fun.",
+    "overview": "Reorder factor levels using a summary of another variable. Use forcats::fct_reorder when controlling category order in plots and tables. Typical business pattern: sorting regions by mean revenue for readable bar charts. Key parameters: factor_column, numeric_column, .fun. Returns factor vector with shape same length as input factor column.",
+    "applications": [
+      "Primary application: forcats::fct_reorder is used for sorting regions by mean revenue for readable bar charts.",
+      "Workflow application: reorder factors immediately before visualization to preserve semantic ordering.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "forcats fct reorder",
+      "rstudio forcats fct reorder",
+      "forcats fctreorder",
+      "rstudioforcatsfctreorder",
+      "forcats fct",
+      "reord",
+      "rstudio",
+      "strings and factors",
+      "reference",
+      "df",
+      "dplyr mutate",
+      "region",
+      "reorder",
+      "revenue",
+      "fun",
+      "mean"
+    ],
+    "keywords": "forcats fct reorder rstudio forcats fct reorder rstudio strings and factors reference inputs df df dplyr mutate region forcats fct reorder region revenue fun mean reorder factor levels using a summary of another variable reorder factor levels using a summary of another variable use it for controlling category order in plots and tables and sorting regions by mean revenue for readable bar charts key parameters factor column numeric column fun reorder factor levels using a summary of another variable use forcats fct reorder when controlling category order in plots and tables typical business pattern sorting regions by mean revenue for readable bar charts key parameters factor column numeric column fun returns factor vector with shape same length as input factor column primary application forcats fct reorder is used for sorting regions by mean revenue for readable bar charts workflow application reorder factors immediately before visualization to preserve semantic ordering delivery application document chosen parameters and output checks so teammates can reproduce results forcats fctreorder rstudioforcatsfctreorder forcats fct reord df dplyr mutate region reorder revenue fun mean"
+  },
+  {
+    "id": "rstudio-purrr-map",
+    "slug": "rstudio-purrr-map",
+    "name": "purrr::map",
+    "library": "rstudio",
+    "subtopic": "Functional Patterns",
+    "tags": [
+      "rstudio",
+      "functional-patterns",
+      "reference"
+    ],
+    "summary": "Apply a function over list-like inputs and collect results.",
+    "syntax": "means <- purrr::map_dbl(split_df, ~ mean(.x$revenue, na.rm = TRUE))",
+    "description": "Apply a function over list-like inputs and collect results. Use it for iterating over grouped datasets or parameter grids functionally and running repeated summary/model steps across many segments. Key parameters: .x, .f.",
+    "overview": "Apply a function over list-like inputs and collect results. Use purrr::map when iterating over grouped datasets or parameter grids functionally. Typical business pattern: running repeated summary/model steps across many segments. Key parameters: .x, .f. Returns list or typed vector (map_dbl/map_chr/etc.) with shape one output element per input element.",
+    "applications": [
+      "Primary application: purrr::map is used for running repeated summary/model steps across many segments.",
+      "Workflow application: use typed map variants to enforce stable output types in pipelines.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "purrr map",
+      "rstudio purrr map",
+      "rstudiopurrrmap",
+      "rstudio",
+      "functional patterns",
+      "reference",
+      "means",
+      "dbl",
+      "split",
+      "df",
+      "mean",
+      "x revenue",
+      "na",
+      "rm",
+      "true"
+    ],
+    "keywords": "purrr map rstudio purrr map rstudio functional patterns reference inputs means purrr map dbl split df mean x revenue na rm true apply a function over list like inputs and collect results apply a function over list like inputs and collect results use it for iterating over grouped datasets or parameter grids functionally and running repeated summary model steps across many segments key parameters x f apply a function over list like inputs and collect results use purrr map when iterating over grouped datasets or parameter grids functionally typical business pattern running repeated summary model steps across many segments key parameters x f returns list or typed vector map dbl map chr etc with shape one output element per input element primary application purrr map is used for running repeated summary model steps across many segments workflow application use typed map variants to enforce stable output types in pipelines delivery application document chosen parameters and output checks so teammates can reproduce results rstudiopurrrmap means dbl split df mean x revenue na rm true"
+  },
+  {
+    "id": "rstudio-readr-write-csv",
+    "slug": "rstudio-readr-write-csv",
+    "name": "readr::write_csv",
+    "library": "rstudio",
+    "subtopic": "Data Import",
+    "tags": [
+      "rstudio",
+      "data-import",
+      "reference"
+    ],
+    "summary": "Write a data frame to CSV for sharing or downstream systems.",
+    "syntax": "readr::write_csv(kpi, 'outputs/weekly_kpi.csv')",
+    "description": "Write a data frame to CSV for sharing or downstream systems. Use it for exporting validated outputs from reproducible workflows and publishing weekly KPI tables for BI or stakeholder delivery. Key parameters: data, file_path.",
+    "overview": "Write a data frame to CSV for sharing or downstream systems. Use readr::write_csv when exporting validated outputs from reproducible workflows. Typical business pattern: publishing weekly KPI tables for BI or stakeholder delivery. Key parameters: data, file_path. Returns file output (side effect) with shape CSV with one row per data frame row.",
+    "applications": [
+      "Primary application: readr::write_csv is used for publishing weekly KPI tables for BI or stakeholder delivery.",
+      "Workflow application: export from a finalized pipeline step and version the output path convention.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "readr write csv",
+      "rstudio readr write csv",
+      "readr writecsv",
+      "rstudioreadrwritecsv",
+      "readr write",
+      "csv",
+      "rstudio",
+      "data import",
+      "reference",
+      "kpi",
+      "outputs",
+      "weekly"
+    ],
+    "keywords": "readr write csv rstudio readr write csv rstudio data import reference inputs readr write csv kpi outputs weekly kpi csv write a data frame to csv for sharing or downstream systems write a data frame to csv for sharing or downstream systems use it for exporting validated outputs from reproducible workflows and publishing weekly kpi tables for bi or stakeholder delivery key parameters data file path write a data frame to csv for sharing or downstream systems use readr write csv when exporting validated outputs from reproducible workflows typical business pattern publishing weekly kpi tables for bi or stakeholder delivery key parameters data file path returns file output side effect with shape csv with one row per data frame row primary application readr write csv is used for publishing weekly kpi tables for bi or stakeholder delivery workflow application export from a finalized pipeline step and version the output path convention delivery application document chosen parameters and output checks so teammates can reproduce results readr writecsv rstudioreadrwritecsv readr write csv kpi outputs weekly"
+  },
+  {
+    "id": "rstudio-case-when",
+    "slug": "rstudio-case-when",
+    "name": "dplyr::case_when",
+    "library": "rstudio",
+    "subtopic": "Functional Patterns",
+    "tags": [
+      "rstudio",
+      "functional-patterns",
+      "reference"
+    ],
+    "summary": "Create multi-branch conditional outputs with readable rule order.",
+    "syntax": "df <- df %>% dplyr::mutate(segment = dplyr::case_when(revenue >= 200 ~ 'High', revenue >= 100 ~ 'Mid', TRUE ~ 'Low'))",
+    "description": "Create multi-branch conditional outputs with readable rule order. Use it for encoding hierarchical business logic into derived categories and assigning lifecycle or risk segments from threshold rules. Key parameters: conditions, labels.",
+    "overview": "Create multi-branch conditional outputs with readable rule order. Use dplyr::case_when when encoding hierarchical business logic into derived categories. Typical business pattern: assigning lifecycle or risk segments from threshold rules. Key parameters: conditions, labels. Returns vector with shape same length as input rows.",
+    "applications": [
+      "Primary application: dplyr::case_when is used for assigning lifecycle or risk segments from threshold rules.",
+      "Workflow application: order conditions from most specific to most general to avoid overlaps.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "dplyr case when",
+      "rstudio case when",
+      "dplyr casewhen",
+      "rstudiocasewhen",
+      "dplyr case",
+      "when",
+      "rstudio",
+      "functional patterns",
+      "reference",
+      "df",
+      "dplyr mutate",
+      "segment",
+      "revenue",
+      "200",
+      "high"
+    ],
+    "keywords": "dplyr case when rstudio case when rstudio functional patterns reference inputs df df dplyr mutate segment dplyr case when revenue 200 high revenue 100 mid true low create multi branch conditional outputs with readable rule order create multi branch conditional outputs with readable rule order use it for encoding hierarchical business logic into derived categories and assigning lifecycle or risk segments from threshold rules key parameters conditions labels create multi branch conditional outputs with readable rule order use dplyr case when when encoding hierarchical business logic into derived categories typical business pattern assigning lifecycle or risk segments from threshold rules key parameters conditions labels returns vector with shape same length as input rows primary application dplyr case when is used for assigning lifecycle or risk segments from threshold rules workflow application order conditions from most specific to most general to avoid overlaps delivery application document chosen parameters and output checks so teammates can reproduce results dplyr casewhen rstudiocasewhen dplyr case when df dplyr mutate segment revenue 200 high"
+  },
+  {
+    "id": "rstudio-if-else",
+    "slug": "rstudio-if-else",
+    "name": "dplyr::if_else",
+    "library": "rstudio",
+    "subtopic": "Functional Patterns",
+    "tags": [
+      "rstudio",
+      "functional-patterns",
+      "reference"
+    ],
+    "summary": "Return one of two typed values based on a condition vector.",
+    "syntax": "df <- df %>% dplyr::mutate(is_target = dplyr::if_else(revenue >= 100, 'Y', 'N'))",
+    "description": "Return one of two typed values based on a condition vector. Use it for creating strict binary flags or values in pipelines and building yes/no eligibility indicators for reporting and models. Key parameters: condition, true_value, false_value.",
+    "overview": "Return one of two typed values based on a condition vector. Use dplyr::if_else when creating strict binary flags or values in pipelines. Typical business pattern: building yes/no eligibility indicators for reporting and models. Key parameters: condition, true_value, false_value. Returns typed vector with shape same length as condition vector.",
+    "applications": [
+      "Primary application: dplyr::if_else is used for building yes/no eligibility indicators for reporting and models.",
+      "Workflow application: prefer if_else over base ifelse when type stability matters.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "dplyr if else",
+      "rstudio if else",
+      "dplyr ifelse",
+      "rstudioifelse",
+      "dplyr if",
+      "else",
+      "rstudio",
+      "functional patterns",
+      "reference",
+      "df",
+      "dplyr mutate",
+      "is",
+      "target",
+      "revenue",
+      "100",
+      "y",
+      "n"
+    ],
+    "keywords": "dplyr if else rstudio if else rstudio functional patterns reference inputs df df dplyr mutate is target dplyr if else revenue 100 y n return one of two typed values based on a condition vector return one of two typed values based on a condition vector use it for creating strict binary flags or values in pipelines and building yes no eligibility indicators for reporting and models key parameters condition true value false value return one of two typed values based on a condition vector use dplyr if else when creating strict binary flags or values in pipelines typical business pattern building yes no eligibility indicators for reporting and models key parameters condition true value false value returns typed vector with shape same length as condition vector primary application dplyr if else is used for building yes no eligibility indicators for reporting and models workflow application prefer if else over base ifelse when type stability matters delivery application document chosen parameters and output checks so teammates can reproduce results dplyr ifelse rstudioifelse dplyr if else df dplyr mutate is target revenue 100 y n"
+  },
+  {
+    "id": "rstudio-across",
+    "slug": "rstudio-across",
+    "name": "dplyr::across",
+    "library": "rstudio",
+    "subtopic": "Functional Patterns",
+    "tags": [
+      "rstudio",
+      "functional-patterns",
+      "reference"
+    ],
+    "summary": "Apply the same transformation to multiple columns inside dplyr verbs.",
+    "syntax": "scaled <- df %>% dplyr::mutate(dplyr::across(c(revenue, orders), ~ .x / max(.x, na.rm = TRUE)))",
+    "description": "Apply the same transformation to multiple columns inside dplyr verbs. Use it for standardizing repeated column-wise operations with less boilerplate and scaling or cleaning several numeric features in one mutate step. Key parameters: columns, function.",
+    "overview": "Apply the same transformation to multiple columns inside dplyr verbs. Use dplyr::across when standardizing repeated column-wise operations with less boilerplate. Typical business pattern: scaling or cleaning several numeric features in one mutate step. Key parameters: columns, function. Returns tibble with shape same row count with transformed selected columns.",
+    "applications": [
+      "Primary application: dplyr::across is used for scaling or cleaning several numeric features in one mutate step.",
+      "Workflow application: pair across with tidy-select helpers to keep multi-column logic concise.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "dplyr across",
+      "rstudio across",
+      "rstudioacross",
+      "rstudio",
+      "functional patterns",
+      "reference",
+      "scaled",
+      "df",
+      "dplyr mutate",
+      "c",
+      "revenue",
+      "orders",
+      "x",
+      "max",
+      "na",
+      "rm"
+    ],
+    "keywords": "dplyr across rstudio across rstudio functional patterns reference inputs scaled df dplyr mutate dplyr across c revenue orders x max x na rm true apply the same transformation to multiple columns inside dplyr verbs apply the same transformation to multiple columns inside dplyr verbs use it for standardizing repeated column wise operations with less boilerplate and scaling or cleaning several numeric features in one mutate step key parameters columns function apply the same transformation to multiple columns inside dplyr verbs use dplyr across when standardizing repeated column wise operations with less boilerplate typical business pattern scaling or cleaning several numeric features in one mutate step key parameters columns function returns tibble with shape same row count with transformed selected columns primary application dplyr across is used for scaling or cleaning several numeric features in one mutate step workflow application pair across with tidy select helpers to keep multi column logic concise delivery application document chosen parameters and output checks so teammates can reproduce results rstudioacross scaled df dplyr mutate c revenue orders x max na rm"
+  },
+  {
+    "id": "rstudio-psych-describe",
+    "slug": "rstudio-psych-describe",
+    "name": "psych::describe",
+    "library": "rstudio",
+    "subtopic": "Statistical Inference",
+    "tags": [
+      "statistics",
+      "descriptive-stats",
+      "diagnostics"
+    ],
+    "summary": "Generate descriptive statistics for numeric variables in one pass.",
+    "syntax": "psych::describe(df)",
+    "description": "Generate descriptive statistics for numeric variables in one pass. Use it for auditing distribution shape, spread, and missingness before inference and descriptive-statistics checks before A/B tests, ANOVA, and regression. Key parameters: data.",
+    "overview": "Generate descriptive statistics for numeric variables in one pass. Use psych::describe when auditing distribution shape, spread, and missingness before inference. Typical business pattern: descriptive-statistics checks before A/B tests, ANOVA, and regression. Key parameters: data. Returns data.frame with shape rows = variables, columns = descriptive metrics.",
+    "applications": [
+      "Primary application: psych::describe is used for descriptive-statistics checks before A/B tests, ANOVA, and regression.",
+      "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+      "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+    ],
+    "parameters": [
+      "data"
+    ],
+    "aliases": [
+      "psych describe",
+      "rstudio psych describe",
+      "rstudiopsychdescribe",
+      "statistics",
+      "descriptive stats",
+      "diagnostics",
+      "df"
+    ],
+    "keywords": "psych describe rstudio psych describe rstudio statistical inference statistics descriptive stats diagnostics data psych describe df generate descriptive statistics for numeric variables in one pass generate descriptive statistics for numeric variables in one pass use it for auditing distribution shape spread and missingness before inference and descriptive statistics checks before a b tests anova and regression key parameters data generate descriptive statistics for numeric variables in one pass use psych describe when auditing distribution shape spread and missingness before inference typical business pattern descriptive statistics checks before a b tests anova and regression key parameters data returns data frame with shape rows variables columns descriptive metrics primary application psych describe is used for descriptive statistics checks before a b tests anova and regression workflow application treat this as a repeatable analytics step with explicit assumptions and validation checks delivery application document parameters uncertainty and business implications so teammates can reproduce decisions rstudiopsychdescribe df"
+  },
+  {
+    "id": "rstudio-t-test",
+    "slug": "rstudio-t-test",
+    "name": "stats::t.test",
+    "library": "rstudio",
+    "subtopic": "Statistical Inference",
+    "tags": [
+      "statistics",
+      "t-test",
+      "ab-testing"
+    ],
+    "summary": "Compare two-group means with significance and confidence intervals.",
+    "syntax": "t.test(outcome ~ group, data = df)",
+    "description": "Compare two-group means with significance and confidence intervals. Use it for evaluating treatment vs control effects in experiments and A/B mean comparisons for conversion, spend, or engagement outcomes. Key parameters: formula, var.equal.",
+    "overview": "Compare two-group means with significance and confidence intervals. Use stats::t.test when evaluating treatment vs control effects in experiments. Typical business pattern: A/B mean comparisons for conversion, spend, or engagement outcomes. Key parameters: formula, var.equal. Returns htest with shape single result object with p-value and confidence interval.",
+    "applications": [
+      "Primary application: stats::t.test is used for A/B mean comparisons for conversion, spend, or engagement outcomes.",
+      "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+      "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+    ],
+    "parameters": [
+      "formula",
+      "var.equal"
+    ],
+    "aliases": [
+      "stats t test",
+      "rstudio t test",
+      "stats ttest",
+      "rstudiottest",
+      "stats t",
+      "test",
+      "statistics",
+      "t test",
+      "ab testing",
+      "t",
+      "outcome",
+      "group",
+      "data",
+      "df"
+    ],
+    "keywords": "stats t test rstudio t test rstudio statistical inference statistics t test ab testing formula var equal t test outcome group data df compare two group means with significance and confidence intervals compare two group means with significance and confidence intervals use it for evaluating treatment vs control effects in experiments and a b mean comparisons for conversion spend or engagement outcomes key parameters formula var equal compare two group means with significance and confidence intervals use stats t test when evaluating treatment vs control effects in experiments typical business pattern a b mean comparisons for conversion spend or engagement outcomes key parameters formula var equal returns htest with shape single result object with p value and confidence interval primary application stats t test is used for a b mean comparisons for conversion spend or engagement outcomes workflow application treat this as a repeatable analytics step with explicit assumptions and validation checks delivery application document parameters uncertainty and business implications so teammates can reproduce decisions stats ttest rstudiottest stats t test t outcome group data df"
+  },
+  {
+    "id": "rstudio-anova-aov",
+    "slug": "rstudio-anova-aov",
+    "name": "stats::aov",
+    "library": "rstudio",
+    "subtopic": "Statistical Inference",
+    "tags": [
+      "statistics",
+      "anova",
+      "experiments"
+    ],
+    "summary": "Test mean differences across three or more groups with ANOVA.",
+    "syntax": "model <- aov(outcome ~ factor, data = df)",
+    "description": "Test mean differences across three or more groups with ANOVA. Use it for multi-condition experimental analysis without pairwise error inflation and message, offer, or pricing-condition comparisons across several groups. Key parameters: formula.",
+    "overview": "Test mean differences across three or more groups with ANOVA. Use stats::aov when multi-condition experimental analysis without pairwise error inflation. Typical business pattern: message, offer, or pricing-condition comparisons across several groups. Key parameters: formula. Returns aov with shape model object for summary tables and post hoc testing.",
+    "applications": [
+      "Primary application: stats::aov is used for message, offer, or pricing-condition comparisons across several groups.",
+      "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+      "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+    ],
+    "parameters": [
+      "formula"
+    ],
+    "aliases": [
+      "stats aov",
+      "rstudio anova aov",
+      "rstudioanovaaov",
+      "statistics",
+      "anova",
+      "experiments",
+      "model",
+      "aov",
+      "outcome",
+      "factor",
+      "data",
+      "df"
+    ],
+    "keywords": "stats aov rstudio anova aov rstudio statistical inference statistics anova experiments formula model aov outcome factor data df test mean differences across three or more groups with anova test mean differences across three or more groups with anova use it for multi condition experimental analysis without pairwise error inflation and message offer or pricing condition comparisons across several groups key parameters formula test mean differences across three or more groups with anova use stats aov when multi condition experimental analysis without pairwise error inflation typical business pattern message offer or pricing condition comparisons across several groups key parameters formula returns aov with shape model object for summary tables and post hoc testing primary application stats aov is used for message offer or pricing condition comparisons across several groups workflow application treat this as a repeatable analytics step with explicit assumptions and validation checks delivery application document parameters uncertainty and business implications so teammates can reproduce decisions rstudioanovaaov model aov outcome factor data df"
+  },
+  {
+    "id": "rstudio-lm-stats",
+    "slug": "rstudio-lm-stats",
+    "name": "stats::lm (Inference + LinReg)",
+    "library": "rstudio",
+    "subtopic": "Regression and Forecasting",
+    "tags": [
+      "regression",
+      "linreg",
+      "customer-analytics"
+    ],
+    "summary": "Fit linear regression for effect estimation and forecasting.",
+    "syntax": "model <- lm(y ~ x1 + x2, data = df)",
+    "description": "Fit linear regression for effect estimation and forecasting. Use it for quantifying predictor impact on outcomes such as sales or conversion and elasticity estimation, baseline forecasting, and treatment-adjusted modeling. Key parameters: formula.",
+    "overview": "Fit linear regression for effect estimation and forecasting. Use stats::lm (Inference + LinReg) when quantifying predictor impact on outcomes such as sales or conversion. Typical business pattern: elasticity estimation, baseline forecasting, and treatment-adjusted modeling. Key parameters: formula. Returns lm with shape model object with coefficients, residuals, and fitted values.",
+    "applications": [
+      "Primary application: stats::lm (Inference + LinReg) is used for elasticity estimation, baseline forecasting, and treatment-adjusted modeling.",
+      "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+      "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+    ],
+    "parameters": [
+      "formula"
+    ],
+    "aliases": [
+      "stats lm inference linreg",
+      "rstudio lm stats",
+      "stats lm inference lin reg",
+      "stats lminference linreg",
+      "rstudiolmstats",
+      "stats lm",
+      "inference",
+      "lin",
+      "reg",
+      "regression",
+      "linreg",
+      "customer analytics",
+      "model",
+      "lm",
+      "y",
+      "x1",
+      "x2",
+      "data",
+      "df"
+    ],
+    "keywords": "stats lm inference linreg rstudio lm stats rstudio regression and forecasting regression linreg customer analytics formula model lm y x1 x2 data df fit linear regression for effect estimation and forecasting fit linear regression for effect estimation and forecasting use it for quantifying predictor impact on outcomes such as sales or conversion and elasticity estimation baseline forecasting and treatment adjusted modeling key parameters formula fit linear regression for effect estimation and forecasting use stats lm inference linreg when quantifying predictor impact on outcomes such as sales or conversion typical business pattern elasticity estimation baseline forecasting and treatment adjusted modeling key parameters formula returns lm with shape model object with coefficients residuals and fitted values primary application stats lm inference linreg is used for elasticity estimation baseline forecasting and treatment adjusted modeling workflow application treat this as a repeatable analytics step with explicit assumptions and validation checks delivery application document parameters uncertainty and business implications so teammates can reproduce decisions stats lm inference lin reg stats lminference linreg rstudiolmstats stats lm inference lin reg model lm y x1 x2 data df"
+  },
+  {
+    "id": "rstudio-predict-stats",
+    "slug": "rstudio-predict-stats",
+    "name": "stats::predict (Scenario Scoring)",
+    "library": "rstudio",
+    "subtopic": "Regression and Forecasting",
+    "tags": [
+      "prediction",
+      "forecasting",
+      "pricing"
+    ],
+    "summary": "Score new scenarios from trained statistical models.",
+    "syntax": "predict(model, newdata = scenarios)",
+    "description": "Score new scenarios from trained statistical models. Use it for translating fitted models into operational what-if forecasts and demand or conversion forecasting at candidate price/treatment levels. Key parameters: newdata.",
+    "overview": "Score new scenarios from trained statistical models. Use stats::predict (Scenario Scoring) when translating fitted models into operational what-if forecasts. Typical business pattern: demand or conversion forecasting at candidate price/treatment levels. Key parameters: newdata. Returns numeric vector | matrix with shape one prediction per scenario row.",
+    "applications": [
+      "Primary application: stats::predict (Scenario Scoring) is used for demand or conversion forecasting at candidate price/treatment levels.",
+      "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+      "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+    ],
+    "parameters": [
+      "newdata"
+    ],
+    "aliases": [
+      "stats predict scenario scoring",
+      "rstudio predict stats",
+      "stats predictscenarioscoring",
+      "rstudiopredictstats",
+      "stats predict",
+      "scenario",
+      "scoring",
+      "prediction",
+      "forecasting",
+      "pricing",
+      "predict",
+      "model",
+      "newdata",
+      "scenarios"
+    ],
+    "keywords": "stats predict scenario scoring rstudio predict stats rstudio regression and forecasting prediction forecasting pricing newdata predict model newdata scenarios score new scenarios from trained statistical models score new scenarios from trained statistical models use it for translating fitted models into operational what if forecasts and demand or conversion forecasting at candidate price treatment levels key parameters newdata score new scenarios from trained statistical models use stats predict scenario scoring when translating fitted models into operational what if forecasts typical business pattern demand or conversion forecasting at candidate price treatment levels key parameters newdata returns numeric vector matrix with shape one prediction per scenario row primary application stats predict scenario scoring is used for demand or conversion forecasting at candidate price treatment levels workflow application treat this as a repeatable analytics step with explicit assumptions and validation checks delivery application document parameters uncertainty and business implications so teammates can reproduce decisions stats predictscenarioscoring rstudiopredictstats stats predict scenario scoring predict model scenarios"
+  },
+  {
+    "id": "rstudio-kmeans-segmentation",
+    "slug": "rstudio-kmeans-segmentation",
+    "name": "stats::kmeans",
+    "library": "rstudio",
+    "subtopic": "Segmentation",
+    "tags": [
+      "kmeans",
+      "clustering",
+      "customer-analytics"
+    ],
+    "summary": "Cluster customers into behavior/value-based segments.",
+    "syntax": "res <- kmeans(df_scaled, centers = k, nstart = 30)",
+    "description": "Cluster customers into behavior/value-based segments. Use it for building actionable segments from standardized customer features and RFM-style or behavioral segmentation for targeting and retention strategy. Key parameters: centers, nstart.",
+    "overview": "Cluster customers into behavior/value-based segments. Use stats::kmeans when building actionable segments from standardized customer features. Typical business pattern: RFM-style or behavioral segmentation for targeting and retention strategy. Key parameters: centers, nstart. Returns kmeans with shape cluster labels plus centroid/fit statistics.",
+    "applications": [
+      "Primary application: stats::kmeans is used for RFM-style or behavioral segmentation for targeting and retention strategy.",
+      "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+      "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+    ],
+    "parameters": [
+      "centers",
+      "nstart"
+    ],
+    "aliases": [
+      "stats kmeans",
+      "rstudio kmeans segmentation",
+      "rstudiokmeanssegmentation",
+      "kmeans",
+      "clustering",
+      "customer analytics",
+      "res",
+      "df",
+      "scaled",
+      "centers",
+      "k",
+      "nstart",
+      "30"
+    ],
+    "keywords": "stats kmeans rstudio kmeans segmentation rstudio segmentation kmeans clustering customer analytics centers nstart res kmeans df scaled centers k nstart 30 cluster customers into behavior value based segments cluster customers into behavior value based segments use it for building actionable segments from standardized customer features and rfm style or behavioral segmentation for targeting and retention strategy key parameters centers nstart cluster customers into behavior value based segments use stats kmeans when building actionable segments from standardized customer features typical business pattern rfm style or behavioral segmentation for targeting and retention strategy key parameters centers nstart returns kmeans with shape cluster labels plus centroid fit statistics primary application stats kmeans is used for rfm style or behavioral segmentation for targeting and retention strategy workflow application treat this as a repeatable analytics step with explicit assumptions and validation checks delivery application document parameters uncertainty and business implications so teammates can reproduce decisions rstudiokmeanssegmentation res df scaled k 30"
+  },
+  {
+    "id": "rstudio-scale-segmentation",
+    "slug": "rstudio-scale-segmentation",
+    "name": "base::scale (Pre-clustering Standardization)",
+    "library": "rstudio",
+    "subtopic": "Segmentation",
+    "tags": [
+      "scale",
+      "standardization",
+      "kmeans"
+    ],
+    "summary": "Standardize numeric variables before distance-based modeling.",
+    "syntax": "df_scaled <- scale(df_numeric)",
+    "description": "Standardize numeric variables before distance-based modeling. Use it for preventing high-magnitude variables from dominating cluster distance and feature normalization before k-means or similarity-based profiling. Key parameters: x.",
+    "overview": "Standardize numeric variables before distance-based modeling. Use base::scale (Pre-clustering Standardization) when preventing high-magnitude variables from dominating cluster distance. Typical business pattern: feature normalization before k-means or similarity-based profiling. Key parameters: x. Returns matrix with shape same rows and selected numeric columns, standardized.",
+    "applications": [
+      "Primary application: base::scale (Pre-clustering Standardization) is used for feature normalization before k-means or similarity-based profiling.",
+      "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+      "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+    ],
+    "parameters": [
+      "x"
+    ],
+    "aliases": [
+      "base scale pre clustering standardization",
+      "rstudio scale segmentation",
+      "base scalepreclusteringstandardization",
+      "rstudioscalesegmentation",
+      "base scale",
+      "pre",
+      "clustering",
+      "standardization",
+      "scale",
+      "kmeans",
+      "df",
+      "scaled",
+      "numeric"
+    ],
+    "keywords": "base scale pre clustering standardization rstudio scale segmentation rstudio segmentation scale standardization kmeans x df scaled scale df numeric standardize numeric variables before distance based modeling standardize numeric variables before distance based modeling use it for preventing high magnitude variables from dominating cluster distance and feature normalization before k means or similarity based profiling key parameters x standardize numeric variables before distance based modeling use base scale pre clustering standardization when preventing high magnitude variables from dominating cluster distance typical business pattern feature normalization before k means or similarity based profiling key parameters x returns matrix with shape same rows and selected numeric columns standardized primary application base scale pre clustering standardization is used for feature normalization before k means or similarity based profiling workflow application treat this as a repeatable analytics step with explicit assumptions and validation checks delivery application document parameters uncertainty and business implications so teammates can reproduce decisions base scalepreclusteringstandardization rstudioscalesegmentation base scale pre clustering df scaled numeric"
+  },
+  {
+    "id": "rstudio-pricing-profit-curve",
+    "slug": "rstudio-pricing-profit-curve",
+    "name": "Pricing Profit Curve Pattern",
+    "library": "rstudio",
+    "subtopic": "Pricing and Forecasting",
+    "tags": [
+      "pricing",
+      "optimization",
+      "profit"
+    ],
+    "summary": "Optimize price by evaluating predicted demand and profit over a candidate grid.",
+    "syntax": "price_grid <- seq(0.5, 3, 0.01); best <- profit_df[which.max(profit_df$profit), ]",
+    "description": "Optimize price by evaluating predicted demand and profit over a candidate grid. Use it for finding profit-maximizing prices under estimated demand elasticity and price-grid simulation with demand predictions and margin assumptions. Key parameters: price_grid, profit_formula.",
+    "overview": "Optimize price by evaluating predicted demand and profit over a candidate grid. Use Pricing Profit Curve Pattern when finding profit-maximizing prices under estimated demand elasticity. Typical business pattern: price-grid simulation with demand predictions and margin assumptions. Key parameters: price_grid, profit_formula. Returns data.frame + optimal row with shape rows = candidate prices with predicted quantity/profit.",
+    "applications": [
+      "Primary application: Pricing Profit Curve Pattern is used for price-grid simulation with demand predictions and margin assumptions.",
+      "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+      "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+    ],
+    "parameters": [
+      "price_grid",
+      "profit_formula"
+    ],
+    "aliases": [
+      "pricing profit curve pattern",
+      "rstudio pricing profit curve",
+      "pricingprofitcurvepattern",
+      "rstudiopricingprofitcurve",
+      "pricing",
+      "profit",
+      "curve",
+      "pattern",
+      "optimization",
+      "price",
+      "grid",
+      "seq",
+      "0",
+      "5",
+      "3",
+      "01",
+      "best",
+      "df which",
+      "max"
+    ],
+    "keywords": "pricing profit curve pattern rstudio pricing profit curve rstudio pricing and forecasting pricing optimization profit price grid profit formula price grid seq 0 5 3 0 01 best profit df which max profit df profit optimize price by evaluating predicted demand and profit over a candidate grid optimize price by evaluating predicted demand and profit over a candidate grid use it for finding profit maximizing prices under estimated demand elasticity and price grid simulation with demand predictions and margin assumptions key parameters price grid profit formula optimize price by evaluating predicted demand and profit over a candidate grid use pricing profit curve pattern when finding profit maximizing prices under estimated demand elasticity typical business pattern price grid simulation with demand predictions and margin assumptions key parameters price grid profit formula returns data frame optimal row with shape rows candidate prices with predicted quantity profit primary application pricing profit curve pattern is used for price grid simulation with demand predictions and margin assumptions workflow application treat this as a repeatable analytics step with explicit assumptions and validation checks delivery application document parameters uncertainty and business implications so teammates can reproduce decisions pricingprofitcurvepattern rstudiopricingprofitcurve curve pattern price grid seq 0 5 3 01 best df which max"
+  },
+  {
+    "id": "rstudio-ab-lift-roi",
+    "slug": "rstudio-ab-lift-roi",
+    "name": "A/B Lift and ROI Pattern",
+    "library": "rstudio",
+    "subtopic": "Customer Analytics",
+    "tags": [
+      "ab-testing",
+      "roi",
+      "incrementality"
+    ],
+    "summary": "Translate experimental lift into incremental profit and ROI.",
+    "syntax": "ATE <- mean(y[test==1]) - mean(y[test==0]); ROI <- 100*(inc_profit-cost)/cost",
+    "description": "Translate experimental lift into incremental profit and ROI. Use it for making go/no-go scaling decisions from experiment outcomes and ATE -> incremental conversions -> incremental profit -> ROI pipeline. Key parameters: ATE, campaign_cost.",
+    "overview": "Translate experimental lift into incremental profit and ROI. Use A/B Lift and ROI Pattern when making go/no-go scaling decisions from experiment outcomes. Typical business pattern: ATE -> incremental conversions -> incremental profit -> ROI pipeline. Key parameters: ATE, campaign_cost. Returns numeric KPIs with shape scalar metrics: lift, incremental profit, ROI.",
+    "applications": [
+      "Primary application: A/B Lift and ROI Pattern is used for ATE -> incremental conversions -> incremental profit -> ROI pipeline.",
+      "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+      "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+    ],
+    "parameters": [
+      "ATE",
+      "campaign_cost"
+    ],
+    "aliases": [
+      "a b lift and roi pattern",
+      "rstudio ab lift roi",
+      "abliftandroipattern",
+      "rstudioabliftroi",
+      "a",
+      "b",
+      "lift",
+      "and",
+      "roi",
+      "pattern",
+      "ab testing",
+      "incrementality",
+      "ate",
+      "mean",
+      "y test 1",
+      "y test 0",
+      "100",
+      "inc",
+      "profit",
+      "cost"
+    ],
+    "keywords": "a b lift and roi pattern rstudio ab lift roi rstudio customer analytics ab testing roi incrementality ate campaign cost ate mean y test 1 mean y test 0 roi 100 inc profit cost cost translate experimental lift into incremental profit and roi translate experimental lift into incremental profit and roi use it for making go no go scaling decisions from experiment outcomes and ate incremental conversions incremental profit roi pipeline key parameters ate campaign cost translate experimental lift into incremental profit and roi use a b lift and roi pattern when making go no go scaling decisions from experiment outcomes typical business pattern ate incremental conversions incremental profit roi pipeline key parameters ate campaign cost returns numeric kpis with shape scalar metrics lift incremental profit roi primary application a b lift and roi pattern is used for ate incremental conversions incremental profit roi pipeline workflow application treat this as a repeatable analytics step with explicit assumptions and validation checks delivery application document parameters uncertainty and business implications so teammates can reproduce decisions abliftandroipattern rstudioabliftroi a b lift and pattern mean y test 1 y test 0 100 inc profit cost"
+  },
+  {
+    "id": "rstudio-clv-discounted-sum",
+    "slug": "rstudio-clv-discounted-sum",
+    "name": "CLV Discounted Sum Pattern",
+    "library": "rstudio",
+    "subtopic": "Customer Analytics",
+    "tags": [
+      "clv",
+      "retention",
+      "lifetime-value"
+    ],
+    "summary": "Estimate CLV from margin, retention, discount rate, and time horizon.",
+    "syntax": "CLV <- sum(sapply(0:(T-1), function(t) M * (alpha/(1+r))^t))",
+    "description": "Estimate CLV from margin, retention, discount rate, and time horizon. Use it for setting acquisition ceilings and segment-level investment priorities and discounted cash-flow CLV modeling by customer segment. Key parameters: M, alpha, r, T.",
+    "overview": "Estimate CLV from margin, retention, discount rate, and time horizon. Use CLV Discounted Sum Pattern when setting acquisition ceilings and segment-level investment priorities. Typical business pattern: discounted cash-flow CLV modeling by customer segment. Key parameters: M, alpha, r, T. Returns numeric with shape scalar CLV per segment/profile.",
+    "applications": [
+      "Primary application: CLV Discounted Sum Pattern is used for discounted cash-flow CLV modeling by customer segment.",
+      "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+      "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+    ],
+    "parameters": [
+      "M",
+      "alpha",
+      "r",
+      "T"
+    ],
+    "aliases": [
+      "clv discounted sum pattern",
+      "rstudio clv discounted sum",
+      "clvdiscountedsumpattern",
+      "rstudioclvdiscountedsum",
+      "clv",
+      "discounted",
+      "sum",
+      "pattern",
+      "retention",
+      "lifetime value",
+      "sapply",
+      "0",
+      "t",
+      "1",
+      "function",
+      "m",
+      "alpha",
+      "1 r"
+    ],
+    "keywords": "clv discounted sum pattern rstudio clv discounted sum rstudio customer analytics clv retention lifetime value m alpha r t clv sum sapply 0 t 1 function t m alpha 1 r t estimate clv from margin retention discount rate and time horizon estimate clv from margin retention discount rate and time horizon use it for setting acquisition ceilings and segment level investment priorities and discounted cash flow clv modeling by customer segment key parameters m alpha r t estimate clv from margin retention discount rate and time horizon use clv discounted sum pattern when setting acquisition ceilings and segment level investment priorities typical business pattern discounted cash flow clv modeling by customer segment key parameters m alpha r t returns numeric with shape scalar clv per segment profile primary application clv discounted sum pattern is used for discounted cash flow clv modeling by customer segment workflow application treat this as a repeatable analytics step with explicit assumptions and validation checks delivery application document parameters uncertainty and business implications so teammates can reproduce decisions clvdiscountedsumpattern rstudioclvdiscountedsum discounted sum pattern sapply 0 1 function 1 r"
+  },
+  {
     "id": "sns-set-theme",
     "slug": "seaborn-set-theme",
     "name": "sns.set_theme",
@@ -7702,5 +9213,1172 @@
       "transform"
     ],
     "keywords": "pca sklearn pca sklearn preprocessing dimensionality reduction features n components pca n components none fit x transform x pca projects features into orthogonal components that capture maximal variance pca projects features into orthogonal components that capture maximal variance use it for standardizing and encoding raw features before model fit and cleaning raw feature columns before model fitting key parameter n components pca projects features into orthogonal components that capture maximal variance use pca when standardizing and encoding raw features before model fit typical business pattern cleaning raw feature columns before model fitting key parameter n components returns estimator array metric with shape depends on estimator and data primary application pca is used for cleaning raw feature columns before model fitting workflow application treat this command as a train validation inference workflow that should be wrapped in pipelines delivery application document chosen parameters and output checks so teammates can reproduce results sklearnpca n components none fit x transform"
+  },
+  {
+    "id": "sql-select-from",
+    "slug": "sql-select-from",
+    "name": "SELECT and FROM",
+    "library": "sql",
+    "subtopic": "Query Basics",
+    "tags": [
+      "sql",
+      "query-basics",
+      "reference"
+    ],
+    "summary": "Project specific columns and expressions from source tables.",
+    "syntax": "SELECT column_list\nFROM table_name;",
+    "description": "Project specific columns and expressions from source tables. Use it for building the base dataset for analysis before applying joins, filters, or aggregations and curating a clean reporting extract with only required fields. Key parameters: column_list, table_name.",
+    "overview": "Project specific columns and expressions from source tables. Use SELECT and FROM when building the base dataset for analysis before applying joins, filters, or aggregations. Typical business pattern: curating a clean reporting extract with only required fields. Key parameters: column_list, table_name. Returns result set with shape rows that satisfy the query scope with selected columns.",
+    "applications": [
+      "Primary application: SELECT and FROM is used for curating a clean reporting extract with only required fields.",
+      "Workflow application: use this as the first query stage, then layer filtering, joins, and aggregations.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "select and from",
+      "sql select from",
+      "selectandfrom",
+      "sqlselectfrom",
+      "select",
+      "and",
+      "from",
+      "sql",
+      "query basics",
+      "reference",
+      "column",
+      "list",
+      "table",
+      "name"
+    ],
+    "keywords": "select and from sql select from sql query basics reference inputs select column list from table name project specific columns and expressions from source tables project specific columns and expressions from source tables use it for building the base dataset for analysis before applying joins filters or aggregations and curating a clean reporting extract with only required fields key parameters column list table name project specific columns and expressions from source tables use select and from when building the base dataset for analysis before applying joins filters or aggregations typical business pattern curating a clean reporting extract with only required fields key parameters column list table name returns result set with shape rows that satisfy the query scope with selected columns primary application select and from is used for curating a clean reporting extract with only required fields workflow application use this as the first query stage then layer filtering joins and aggregations delivery application document chosen parameters and output checks so teammates can reproduce results selectandfrom sqlselectfrom select and from column list table name"
+  },
+  {
+    "id": "sql-distinct",
+    "slug": "sql-distinct",
+    "name": "DISTINCT",
+    "library": "sql",
+    "subtopic": "Query Basics",
+    "tags": [
+      "sql",
+      "query-basics",
+      "reference"
+    ],
+    "summary": "Return unique values or unique row combinations for selected columns.",
+    "syntax": "SELECT DISTINCT column_list\nFROM table_name;",
+    "description": "Return unique values or unique row combinations for selected columns. Use it for checking cardinality and removing duplicate combinations in exploratory queries and profiling unique customer IDs, regions, or product categories. Key parameters: column_list, table_name.",
+    "overview": "Return unique values or unique row combinations for selected columns. Use DISTINCT when checking cardinality and removing duplicate combinations in exploratory queries. Typical business pattern: profiling unique customer IDs, regions, or product categories. Key parameters: column_list, table_name. Returns result set with shape deduplicated rows over selected columns.",
+    "applications": [
+      "Primary application: DISTINCT is used for profiling unique customer IDs, regions, or product categories.",
+      "Workflow application: run DISTINCT early in profiling queries to validate key uniqueness assumptions.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "distinct",
+      "sql distinct",
+      "sqldistinct",
+      "sql",
+      "query basics",
+      "reference",
+      "select",
+      "column",
+      "list",
+      "from",
+      "table",
+      "name"
+    ],
+    "keywords": "distinct sql distinct sql query basics reference inputs select distinct column list from table name return unique values or unique row combinations for selected columns return unique values or unique row combinations for selected columns use it for checking cardinality and removing duplicate combinations in exploratory queries and profiling unique customer ids regions or product categories key parameters column list table name return unique values or unique row combinations for selected columns use distinct when checking cardinality and removing duplicate combinations in exploratory queries typical business pattern profiling unique customer ids regions or product categories key parameters column list table name returns result set with shape deduplicated rows over selected columns primary application distinct is used for profiling unique customer ids regions or product categories workflow application run distinct early in profiling queries to validate key uniqueness assumptions delivery application document chosen parameters and output checks so teammates can reproduce results sqldistinct select column list from table name"
+  },
+  {
+    "id": "sql-where",
+    "slug": "sql-where",
+    "name": "WHERE",
+    "library": "sql",
+    "subtopic": "Filtering",
+    "tags": [
+      "sql",
+      "filtering",
+      "reference"
+    ],
+    "summary": "Filter rows using boolean conditions before aggregation.",
+    "syntax": "SELECT column_list\nFROM table_name\nWHERE condition;",
+    "description": "Filter rows using boolean conditions before aggregation. Use it for restricting analysis to a target time window, segment, or business rule and scoping KPI queries to active users, paid orders, or valid events. Key parameters: condition, table_name.",
+    "overview": "Filter rows using boolean conditions before aggregation. Use WHERE when restricting analysis to a target time window, segment, or business rule. Typical business pattern: scoping KPI queries to active users, paid orders, or valid events. Key parameters: condition, table_name. Returns result set with shape subset of rows matching filter predicates.",
+    "applications": [
+      "Primary application: WHERE is used for scoping KPI queries to active users, paid orders, or valid events.",
+      "Workflow application: place WHERE before GROUP BY to avoid aggregating irrelevant records.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "where",
+      "sql where",
+      "sqlwhere",
+      "sql",
+      "filtering",
+      "reference",
+      "select",
+      "column",
+      "list",
+      "from",
+      "table",
+      "name",
+      "condition"
+    ],
+    "keywords": "where sql where sql filtering reference inputs select column list from table name where condition filter rows using boolean conditions before aggregation filter rows using boolean conditions before aggregation use it for restricting analysis to a target time window segment or business rule and scoping kpi queries to active users paid orders or valid events key parameters condition table name filter rows using boolean conditions before aggregation use where when restricting analysis to a target time window segment or business rule typical business pattern scoping kpi queries to active users paid orders or valid events key parameters condition table name returns result set with shape subset of rows matching filter predicates primary application where is used for scoping kpi queries to active users paid orders or valid events workflow application place where before group by to avoid aggregating irrelevant records delivery application document chosen parameters and output checks so teammates can reproduce results sqlwhere select column list from table name condition"
+  },
+  {
+    "id": "sql-order-by",
+    "slug": "sql-order-by",
+    "name": "ORDER BY",
+    "library": "sql",
+    "subtopic": "Filtering",
+    "tags": [
+      "sql",
+      "filtering",
+      "reference"
+    ],
+    "summary": "Sort query output by one or more expressions.",
+    "syntax": "SELECT column_list\nFROM table_name\nORDER BY sort_expression DESC;",
+    "description": "Sort query output by one or more expressions. Use it for ranking entities and making output deterministic for review or export and sorting top customers by revenue or newest records by timestamp. Key parameters: sort_expression, sort_direction.",
+    "overview": "Sort query output by one or more expressions. Use ORDER BY when ranking entities and making output deterministic for review or export. Typical business pattern: sorting top customers by revenue or newest records by timestamp. Key parameters: sort_expression, sort_direction. Returns result set with shape same rows reordered by sort keys.",
+    "applications": [
+      "Primary application: ORDER BY is used for sorting top customers by revenue or newest records by timestamp.",
+      "Workflow application: apply ORDER BY as the final presentation step, often with LIMIT.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "order by",
+      "sql order by",
+      "orderby",
+      "sqlorderby",
+      "ord",
+      "by",
+      "sql",
+      "filtering",
+      "reference",
+      "select",
+      "column",
+      "list",
+      "from",
+      "table",
+      "name",
+      "order",
+      "sort",
+      "expression",
+      "desc"
+    ],
+    "keywords": "order by sql order by sql filtering reference inputs select column list from table name order by sort expression desc sort query output by one or more expressions sort query output by one or more expressions use it for ranking entities and making output deterministic for review or export and sorting top customers by revenue or newest records by timestamp key parameters sort expression sort direction sort query output by one or more expressions use order by when ranking entities and making output deterministic for review or export typical business pattern sorting top customers by revenue or newest records by timestamp key parameters sort expression sort direction returns result set with shape same rows reordered by sort keys primary application order by is used for sorting top customers by revenue or newest records by timestamp workflow application apply order by as the final presentation step often with limit delivery application document chosen parameters and output checks so teammates can reproduce results orderby sqlorderby ord by select column list from table name order sort expression desc"
+  },
+  {
+    "id": "sql-limit-offset",
+    "slug": "sql-limit-offset",
+    "name": "LIMIT and OFFSET",
+    "library": "sql",
+    "subtopic": "Filtering",
+    "tags": [
+      "sql",
+      "filtering",
+      "reference"
+    ],
+    "summary": "Return a bounded slice of rows for sampling or pagination.",
+    "syntax": "SELECT column_list\nFROM table_name\nLIMIT n OFFSET m;",
+    "description": "Return a bounded slice of rows for sampling or pagination. Use it for previewing data quickly and paginating large result sets and inspecting the first n ranked rows during query development. Key parameters: n, m.",
+    "overview": "Return a bounded slice of rows for sampling or pagination. Use LIMIT and OFFSET when previewing data quickly and paginating large result sets. Typical business pattern: inspecting the first n ranked rows during query development. Key parameters: n, m. Returns result set with shape at most n rows after ordering with optional offset.",
+    "applications": [
+      "Primary application: LIMIT and OFFSET is used for inspecting the first n ranked rows during query development.",
+      "Workflow application: combine with ORDER BY to keep sampled rows stable across runs.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "limit and offset",
+      "sql limit offset",
+      "limitandoffset",
+      "sqllimitoffset",
+      "limit",
+      "and",
+      "offset",
+      "sql",
+      "filtering",
+      "reference",
+      "select",
+      "column",
+      "list",
+      "from",
+      "table",
+      "name",
+      "n",
+      "m"
+    ],
+    "keywords": "limit and offset sql limit offset sql filtering reference inputs select column list from table name limit n offset m return a bounded slice of rows for sampling or pagination return a bounded slice of rows for sampling or pagination use it for previewing data quickly and paginating large result sets and inspecting the first n ranked rows during query development key parameters n m return a bounded slice of rows for sampling or pagination use limit and offset when previewing data quickly and paginating large result sets typical business pattern inspecting the first n ranked rows during query development key parameters n m returns result set with shape at most n rows after ordering with optional offset primary application limit and offset is used for inspecting the first n ranked rows during query development workflow application combine with order by to keep sampled rows stable across runs delivery application document chosen parameters and output checks so teammates can reproduce results limitandoffset sqllimitoffset limit and offset select column list from table name n m"
+  },
+  {
+    "id": "sql-like-ilike",
+    "slug": "sql-like-ilike",
+    "name": "LIKE and ILIKE",
+    "library": "sql",
+    "subtopic": "Filtering",
+    "tags": [
+      "sql",
+      "filtering",
+      "reference"
+    ],
+    "summary": "Match text values with wildcard patterns using case-sensitive or insensitive search.",
+    "syntax": "SELECT column_list\nFROM table_name\nWHERE text_column LIKE 'pattern%';",
+    "description": "Match text values with wildcard patterns using case-sensitive or insensitive search. Use it for filtering free-text columns for prefixes, suffixes, or contains patterns and finding campaign names containing promo terms or channel tags. Key parameters: text_column, pattern.",
+    "overview": "Match text values with wildcard patterns using case-sensitive or insensitive search. Use LIKE and ILIKE when filtering free-text columns for prefixes, suffixes, or contains patterns. Typical business pattern: finding campaign names containing promo terms or channel tags. Key parameters: text_column, pattern. Returns result set with shape rows whose text fields match the wildcard pattern.",
+    "applications": [
+      "Primary application: LIKE and ILIKE is used for finding campaign names containing promo terms or channel tags.",
+      "Workflow application: use targeted patterns first to avoid overly broad scans on large tables.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "like and ilike",
+      "sql like ilike",
+      "likeandilike",
+      "sqllikeilike",
+      "like",
+      "and",
+      "ilike",
+      "sql",
+      "filtering",
+      "reference",
+      "select",
+      "column",
+      "list",
+      "from",
+      "table",
+      "name",
+      "where",
+      "text",
+      "pattern"
+    ],
+    "keywords": "like and ilike sql like ilike sql filtering reference inputs select column list from table name where text column like pattern match text values with wildcard patterns using case sensitive or insensitive search match text values with wildcard patterns using case sensitive or insensitive search use it for filtering free text columns for prefixes suffixes or contains patterns and finding campaign names containing promo terms or channel tags key parameters text column pattern match text values with wildcard patterns using case sensitive or insensitive search use like and ilike when filtering free text columns for prefixes suffixes or contains patterns typical business pattern finding campaign names containing promo terms or channel tags key parameters text column pattern returns result set with shape rows whose text fields match the wildcard pattern primary application like and ilike is used for finding campaign names containing promo terms or channel tags workflow application use targeted patterns first to avoid overly broad scans on large tables delivery application document chosen parameters and output checks so teammates can reproduce results likeandilike sqllikeilike like and ilike select column list from table name where text pattern"
+  },
+  {
+    "id": "sql-in-between",
+    "slug": "sql-in-between",
+    "name": "IN and BETWEEN",
+    "library": "sql",
+    "subtopic": "Filtering",
+    "tags": [
+      "sql",
+      "filtering",
+      "reference"
+    ],
+    "summary": "Filter by membership lists and inclusive numeric/date ranges.",
+    "syntax": "SELECT column_list\nFROM table_name\nWHERE value IN (a, b, c) OR metric BETWEEN low AND high;",
+    "description": "Filter by membership lists and inclusive numeric/date ranges. Use it for applying explicit allowlists and bounded thresholds in business logic and selecting target regions and transactions within approved value ranges. Key parameters: value_list, range_bounds.",
+    "overview": "Filter by membership lists and inclusive numeric/date ranges. Use IN and BETWEEN when applying explicit allowlists and bounded thresholds in business logic. Typical business pattern: selecting target regions and transactions within approved value ranges. Key parameters: value_list, range_bounds. Returns result set with shape rows matching list membership or bounded intervals.",
+    "applications": [
+      "Primary application: IN and BETWEEN is used for selecting target regions and transactions within approved value ranges.",
+      "Workflow application: combine IN/BETWEEN with WHERE clauses to encode business constraints clearly.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "in and between",
+      "sql in between",
+      "inandbetween",
+      "sqlinbetween",
+      "in",
+      "and",
+      "between",
+      "sql",
+      "filtering",
+      "reference",
+      "select",
+      "column",
+      "list",
+      "from",
+      "table",
+      "name",
+      "where",
+      "value",
+      "a",
+      "b",
+      "c",
+      "or",
+      "metric",
+      "low"
+    ],
+    "keywords": "in and between sql in between sql filtering reference inputs select column list from table name where value in a b c or metric between low and high filter by membership lists and inclusive numeric date ranges filter by membership lists and inclusive numeric date ranges use it for applying explicit allowlists and bounded thresholds in business logic and selecting target regions and transactions within approved value ranges key parameters value list range bounds filter by membership lists and inclusive numeric date ranges use in and between when applying explicit allowlists and bounded thresholds in business logic typical business pattern selecting target regions and transactions within approved value ranges key parameters value list range bounds returns result set with shape rows matching list membership or bounded intervals primary application in and between is used for selecting target regions and transactions within approved value ranges workflow application combine in between with where clauses to encode business constraints clearly delivery application document chosen parameters and output checks so teammates can reproduce results inandbetween sqlinbetween in and between select column list from table name where value a b c or metric low"
+  },
+  {
+    "id": "sql-group-by",
+    "slug": "sql-group-by",
+    "name": "GROUP BY",
+    "library": "sql",
+    "subtopic": "Aggregation",
+    "tags": [
+      "sql",
+      "aggregation",
+      "reference"
+    ],
+    "summary": "Aggregate rows by one or more dimensions.",
+    "syntax": "SELECT dimension, SUM(metric)\nFROM table_name\nGROUP BY dimension;",
+    "description": "Aggregate rows by one or more dimensions. Use it for computing KPI tables at segment, cohort, or geographic levels and summarizing revenue and volume by region, channel, or week. Key parameters: dimension, aggregate_fn.",
+    "overview": "Aggregate rows by one or more dimensions. Use GROUP BY when computing KPI tables at segment, cohort, or geographic levels. Typical business pattern: summarizing revenue and volume by region, channel, or week. Key parameters: dimension, aggregate_fn. Returns result set with shape one row per group with aggregate columns.",
+    "applications": [
+      "Primary application: GROUP BY is used for summarizing revenue and volume by region, channel, or week.",
+      "Workflow application: define grouping keys intentionally to match the exact reporting grain.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "group by",
+      "sql group by",
+      "groupby",
+      "sqlgroupby",
+      "group",
+      "by",
+      "sql",
+      "aggregation",
+      "reference",
+      "select",
+      "dimension",
+      "sum",
+      "metric",
+      "from",
+      "table",
+      "name"
+    ],
+    "keywords": "group by sql group by sql aggregation reference inputs select dimension sum metric from table name group by dimension aggregate rows by one or more dimensions aggregate rows by one or more dimensions use it for computing kpi tables at segment cohort or geographic levels and summarizing revenue and volume by region channel or week key parameters dimension aggregate fn aggregate rows by one or more dimensions use group by when computing kpi tables at segment cohort or geographic levels typical business pattern summarizing revenue and volume by region channel or week key parameters dimension aggregate fn returns result set with shape one row per group with aggregate columns primary application group by is used for summarizing revenue and volume by region channel or week workflow application define grouping keys intentionally to match the exact reporting grain delivery application document chosen parameters and output checks so teammates can reproduce results groupby sqlgroupby group by select dimension sum metric from table name"
+  },
+  {
+    "id": "sql-having",
+    "slug": "sql-having",
+    "name": "HAVING",
+    "library": "sql",
+    "subtopic": "Aggregation",
+    "tags": [
+      "sql",
+      "aggregation",
+      "reference"
+    ],
+    "summary": "Filter grouped results using aggregate conditions.",
+    "syntax": "SELECT dimension, COUNT(*) AS n\nFROM table_name\nGROUP BY dimension\nHAVING COUNT(*) >= threshold;",
+    "description": "Filter grouped results using aggregate conditions. Use it for keeping only groups that meet minimum volume or threshold rules and retaining segments with at least a target count of events. Key parameters: aggregate_condition, threshold.",
+    "overview": "Filter grouped results using aggregate conditions. Use HAVING when keeping only groups that meet minimum volume or threshold rules. Typical business pattern: retaining segments with at least a target count of events. Key parameters: aggregate_condition, threshold. Returns result set with shape subset of grouped rows that pass aggregate filters.",
+    "applications": [
+      "Primary application: HAVING is used for retaining segments with at least a target count of events.",
+      "Workflow application: use HAVING after GROUP BY when filter logic depends on aggregates.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "having",
+      "sql having",
+      "sqlhaving",
+      "sql",
+      "aggregation",
+      "reference",
+      "select",
+      "dimension",
+      "count",
+      "as",
+      "n",
+      "from",
+      "table",
+      "name",
+      "group",
+      "by"
+    ],
+    "keywords": "having sql having sql aggregation reference inputs select dimension count as n from table name group by dimension having count threshold filter grouped results using aggregate conditions filter grouped results using aggregate conditions use it for keeping only groups that meet minimum volume or threshold rules and retaining segments with at least a target count of events key parameters aggregate condition threshold filter grouped results using aggregate conditions use having when keeping only groups that meet minimum volume or threshold rules typical business pattern retaining segments with at least a target count of events key parameters aggregate condition threshold returns result set with shape subset of grouped rows that pass aggregate filters primary application having is used for retaining segments with at least a target count of events workflow application use having after group by when filter logic depends on aggregates delivery application document chosen parameters and output checks so teammates can reproduce results sqlhaving select dimension count as n from table name group by"
+  },
+  {
+    "id": "sql-count-sum-avg",
+    "slug": "sql-count-sum-avg",
+    "name": "COUNT, SUM, AVG",
+    "library": "sql",
+    "subtopic": "Aggregation",
+    "tags": [
+      "sql",
+      "aggregation",
+      "reference"
+    ],
+    "summary": "Compute core aggregate metrics for volume and central tendency.",
+    "syntax": "SELECT COUNT(*) AS rows, SUM(metric) AS total, AVG(metric) AS mean\nFROM table_name;",
+    "description": "Compute core aggregate metrics for volume and central tendency. Use it for building compact KPI summaries for dashboards and validation checks and reporting row count, total revenue, and average order value in one query. Key parameters: metric, table_name.",
+    "overview": "Compute core aggregate metrics for volume and central tendency. Use COUNT, SUM, AVG when building compact KPI summaries for dashboards and validation checks. Typical business pattern: reporting row count, total revenue, and average order value in one query. Key parameters: metric, table_name. Returns result set with shape single-row summary or grouped summary when used with GROUP BY.",
+    "applications": [
+      "Primary application: COUNT, SUM, AVG is used for reporting row count, total revenue, and average order value in one query.",
+      "Workflow application: pair these aggregates with GROUP BY for segmented KPI reporting.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "count sum avg",
+      "sql count sum avg",
+      "sqlcountsumavg",
+      "count",
+      "sum",
+      "avg",
+      "sql",
+      "aggregation",
+      "reference",
+      "select",
+      "as",
+      "rows",
+      "metric",
+      "total",
+      "mean",
+      "from",
+      "table",
+      "name"
+    ],
+    "keywords": "count sum avg sql count sum avg sql aggregation reference inputs select count as rows sum metric as total avg metric as mean from table name compute core aggregate metrics for volume and central tendency compute core aggregate metrics for volume and central tendency use it for building compact kpi summaries for dashboards and validation checks and reporting row count total revenue and average order value in one query key parameters metric table name compute core aggregate metrics for volume and central tendency use count sum avg when building compact kpi summaries for dashboards and validation checks typical business pattern reporting row count total revenue and average order value in one query key parameters metric table name returns result set with shape single row summary or grouped summary when used with group by primary application count sum avg is used for reporting row count total revenue and average order value in one query workflow application pair these aggregates with group by for segmented kpi reporting delivery application document chosen parameters and output checks so teammates can reproduce results sqlcountsumavg count sum avg select as rows metric total mean from table name"
+  },
+  {
+    "id": "sql-case-when",
+    "slug": "sql-case-when",
+    "name": "CASE WHEN",
+    "library": "sql",
+    "subtopic": "Aggregation",
+    "tags": [
+      "sql",
+      "aggregation",
+      "reference"
+    ],
+    "summary": "Encode conditional business rules into labeled categories.",
+    "syntax": "SELECT CASE WHEN condition THEN 'A' ELSE 'B' END AS bucket\nFROM table_name;",
+    "description": "Encode conditional business rules into labeled categories. Use it for creating interpretable buckets directly in SQL transformations and mapping customers to High/Mid/Low value segments by thresholds. Key parameters: condition_branches, output_labels.",
+    "overview": "Encode conditional business rules into labeled categories. Use CASE WHEN when creating interpretable buckets directly in SQL transformations. Typical business pattern: mapping customers to High/Mid/Low value segments by thresholds. Key parameters: condition_branches, output_labels. Returns result set with shape input rows with derived categorical columns.",
+    "applications": [
+      "Primary application: CASE WHEN is used for mapping customers to High/Mid/Low value segments by thresholds.",
+      "Workflow application: centralize segmentation logic in CASE blocks to keep definitions consistent.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "case when",
+      "sql case when",
+      "casewhen",
+      "sqlcasewhen",
+      "case",
+      "when",
+      "sql",
+      "aggregation",
+      "reference",
+      "select",
+      "condition",
+      "then",
+      "a",
+      "else",
+      "b",
+      "end",
+      "as",
+      "bucket",
+      "from",
+      "table",
+      "name"
+    ],
+    "keywords": "case when sql case when sql aggregation reference inputs select case when condition then a else b end as bucket from table name encode conditional business rules into labeled categories encode conditional business rules into labeled categories use it for creating interpretable buckets directly in sql transformations and mapping customers to high mid low value segments by thresholds key parameters condition branches output labels encode conditional business rules into labeled categories use case when when creating interpretable buckets directly in sql transformations typical business pattern mapping customers to high mid low value segments by thresholds key parameters condition branches output labels returns result set with shape input rows with derived categorical columns primary application case when is used for mapping customers to high mid low value segments by thresholds workflow application centralize segmentation logic in case blocks to keep definitions consistent delivery application document chosen parameters and output checks so teammates can reproduce results casewhen sqlcasewhen case when select condition then a else b end as bucket from table name"
+  },
+  {
+    "id": "sql-coalesce-nullif",
+    "slug": "sql-coalesce-nullif",
+    "name": "COALESCE and NULLIF",
+    "library": "sql",
+    "subtopic": "Data Cleaning",
+    "tags": [
+      "sql",
+      "data-cleaning",
+      "reference"
+    ],
+    "summary": "Standardize missing or sentinel values with null-handling helpers.",
+    "syntax": "SELECT COALESCE(metric, 0), NULLIF(text_col, \"\")\nFROM table_name;",
+    "description": "Standardize missing or sentinel values with null-handling helpers. Use it for cleaning null-heavy extracts before aggregation or joins and replacing null metrics with defaults and blank strings with NULL. Key parameters: metric, fallback_value.",
+    "overview": "Standardize missing or sentinel values with null-handling helpers. Use COALESCE and NULLIF when cleaning null-heavy extracts before aggregation or joins. Typical business pattern: replacing null metrics with defaults and blank strings with NULL. Key parameters: metric, fallback_value. Returns result set with shape input rows with normalized null behavior in selected expressions.",
+    "applications": [
+      "Primary application: COALESCE and NULLIF is used for replacing null metrics with defaults and blank strings with NULL.",
+      "Workflow application: apply COALESCE/NULLIF during staging so downstream logic sees clean values.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "coalesce and nullif",
+      "sql coalesce nullif",
+      "coalesceandnullif",
+      "sqlcoalescenullif",
+      "coalesce",
+      "and",
+      "nullif",
+      "sql",
+      "data cleaning",
+      "reference",
+      "select",
+      "metric",
+      "0",
+      "text",
+      "col",
+      "from",
+      "table",
+      "name"
+    ],
+    "keywords": "coalesce and nullif sql coalesce nullif sql data cleaning reference inputs select coalesce metric 0 nullif text col from table name standardize missing or sentinel values with null handling helpers standardize missing or sentinel values with null handling helpers use it for cleaning null heavy extracts before aggregation or joins and replacing null metrics with defaults and blank strings with null key parameters metric fallback value standardize missing or sentinel values with null handling helpers use coalesce and nullif when cleaning null heavy extracts before aggregation or joins typical business pattern replacing null metrics with defaults and blank strings with null key parameters metric fallback value returns result set with shape input rows with normalized null behavior in selected expressions primary application coalesce and nullif is used for replacing null metrics with defaults and blank strings with null workflow application apply coalesce nullif during staging so downstream logic sees clean values delivery application document chosen parameters and output checks so teammates can reproduce results coalesceandnullif sqlcoalescenullif coalesce and nullif select metric 0 text col from table name"
+  },
+  {
+    "id": "sql-cast-convert",
+    "slug": "sql-cast-convert",
+    "name": "CAST",
+    "library": "sql",
+    "subtopic": "Data Cleaning",
+    "tags": [
+      "sql",
+      "data-cleaning",
+      "reference"
+    ],
+    "summary": "Convert values to explicit target data types.",
+    "syntax": "SELECT CAST(text_col AS NUMERIC) AS metric_num\nFROM table_name;",
+    "description": "Convert values to explicit target data types. Use it for normalizing schema inconsistencies across source systems and casting text numeric fields before arithmetic and aggregations. Key parameters: source_value, target_type.",
+    "overview": "Convert values to explicit target data types. Use CAST when normalizing schema inconsistencies across source systems. Typical business pattern: casting text numeric fields before arithmetic and aggregations. Key parameters: source_value, target_type. Returns result set with shape same rows with converted expression data types.",
+    "applications": [
+      "Primary application: CAST is used for casting text numeric fields before arithmetic and aggregations.",
+      "Workflow application: cast at ingestion/staging boundaries to avoid repeated ad hoc conversion.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "cast",
+      "sql cast convert",
+      "sqlcastconvert",
+      "sql",
+      "data cleaning",
+      "reference",
+      "select",
+      "text",
+      "col",
+      "as",
+      "numeric",
+      "metric",
+      "num",
+      "from",
+      "table",
+      "name"
+    ],
+    "keywords": "cast sql cast convert sql data cleaning reference inputs select cast text col as numeric as metric num from table name convert values to explicit target data types convert values to explicit target data types use it for normalizing schema inconsistencies across source systems and casting text numeric fields before arithmetic and aggregations key parameters source value target type convert values to explicit target data types use cast when normalizing schema inconsistencies across source systems typical business pattern casting text numeric fields before arithmetic and aggregations key parameters source value target type returns result set with shape same rows with converted expression data types primary application cast is used for casting text numeric fields before arithmetic and aggregations workflow application cast at ingestion staging boundaries to avoid repeated ad hoc conversion delivery application document chosen parameters and output checks so teammates can reproduce results sqlcastconvert select text col as numeric metric num from table name"
+  },
+  {
+    "id": "sql-inner-join",
+    "slug": "sql-inner-join",
+    "name": "INNER JOIN",
+    "library": "sql",
+    "subtopic": "Joins",
+    "tags": [
+      "sql",
+      "joins",
+      "reference"
+    ],
+    "summary": "Join two tables and keep only matching keys from both sides.",
+    "syntax": "SELECT a.*, b.*\nFROM table_a a\nINNER JOIN table_b b ON a.key = b.key;",
+    "description": "Join two tables and keep only matching keys from both sides. Use it for combining fact and dimension data when key presence is required and linking orders to customer attributes for enriched analysis. Key parameters: left_table, right_table, join_key.",
+    "overview": "Join two tables and keep only matching keys from both sides. Use INNER JOIN when combining fact and dimension data when key presence is required. Typical business pattern: linking orders to customer attributes for enriched analysis. Key parameters: left_table, right_table, join_key. Returns result set with shape matched row pairs based on join condition.",
+    "applications": [
+      "Primary application: INNER JOIN is used for linking orders to customer attributes for enriched analysis.",
+      "Workflow application: validate join cardinality to prevent unintended row multiplication.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "inner join",
+      "sql inner join",
+      "innerjoin",
+      "sqlinnerjoin",
+      "inn",
+      "join",
+      "sql",
+      "joins",
+      "reference",
+      "select",
+      "a",
+      "b",
+      "from",
+      "table",
+      "inner",
+      "on"
+    ],
+    "keywords": "inner join sql inner join sql joins reference inputs select a b from table a a inner join table b b on a key b key join two tables and keep only matching keys from both sides join two tables and keep only matching keys from both sides use it for combining fact and dimension data when key presence is required and linking orders to customer attributes for enriched analysis key parameters left table right table join key join two tables and keep only matching keys from both sides use inner join when combining fact and dimension data when key presence is required typical business pattern linking orders to customer attributes for enriched analysis key parameters left table right table join key returns result set with shape matched row pairs based on join condition primary application inner join is used for linking orders to customer attributes for enriched analysis workflow application validate join cardinality to prevent unintended row multiplication delivery application document chosen parameters and output checks so teammates can reproduce results innerjoin sqlinnerjoin inn join select a b from table inner on"
+  },
+  {
+    "id": "sql-left-join",
+    "slug": "sql-left-join",
+    "name": "LEFT JOIN",
+    "library": "sql",
+    "subtopic": "Joins",
+    "tags": [
+      "sql",
+      "joins",
+      "reference"
+    ],
+    "summary": "Keep all rows from the left table while enriching with right-table columns.",
+    "syntax": "SELECT a.*, b.*\nFROM table_a a\nLEFT JOIN table_b b ON a.key = b.key;",
+    "description": "Keep all rows from the left table while enriching with right-table columns. Use it for preserving base populations even when dimension matches are missing and retaining all orders and adding optional customer metadata. Key parameters: left_table, right_table, join_key.",
+    "overview": "Keep all rows from the left table while enriching with right-table columns. Use LEFT JOIN when preserving base populations even when dimension matches are missing. Typical business pattern: retaining all orders and adding optional customer metadata. Key parameters: left_table, right_table, join_key. Returns result set with shape left-table row count with nullable right-side columns.",
+    "applications": [
+      "Primary application: LEFT JOIN is used for retaining all orders and adding optional customer metadata.",
+      "Workflow application: use LEFT JOIN for enrichment when drop-off of base rows is unacceptable.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "left join",
+      "sql left join",
+      "leftjoin",
+      "sqlleftjoin",
+      "left",
+      "join",
+      "sql",
+      "joins",
+      "reference",
+      "select",
+      "a",
+      "b",
+      "from",
+      "table",
+      "on"
+    ],
+    "keywords": "left join sql left join sql joins reference inputs select a b from table a a left join table b b on a key b key keep all rows from the left table while enriching with right table columns keep all rows from the left table while enriching with right table columns use it for preserving base populations even when dimension matches are missing and retaining all orders and adding optional customer metadata key parameters left table right table join key keep all rows from the left table while enriching with right table columns use left join when preserving base populations even when dimension matches are missing typical business pattern retaining all orders and adding optional customer metadata key parameters left table right table join key returns result set with shape left table row count with nullable right side columns primary application left join is used for retaining all orders and adding optional customer metadata workflow application use left join for enrichment when drop off of base rows is unacceptable delivery application document chosen parameters and output checks so teammates can reproduce results leftjoin sqlleftjoin left join select a b from table on"
+  },
+  {
+    "id": "sql-full-outer-join",
+    "slug": "sql-full-outer-join",
+    "name": "FULL OUTER JOIN",
+    "library": "sql",
+    "subtopic": "Joins",
+    "tags": [
+      "sql",
+      "joins",
+      "reference"
+    ],
+    "summary": "Return matched and unmatched rows from both joined tables.",
+    "syntax": "SELECT a.key, b.key\nFROM table_a a\nFULL OUTER JOIN table_b b ON a.key = b.key;",
+    "description": "Return matched and unmatched rows from both joined tables. Use it for reconciling coverage gaps between two data sources and auditing key mismatches between warehouse and operational exports. Key parameters: left_table, right_table, join_key.",
+    "overview": "Return matched and unmatched rows from both joined tables. Use FULL OUTER JOIN when reconciling coverage gaps between two data sources. Typical business pattern: auditing key mismatches between warehouse and operational exports. Key parameters: left_table, right_table, join_key. Returns result set with shape union of both key spaces with nulls on non-matching sides.",
+    "applications": [
+      "Primary application: FULL OUTER JOIN is used for auditing key mismatches between warehouse and operational exports.",
+      "Workflow application: use FULL OUTER JOIN in QA checks to surface missing keys on either side.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "full outer join",
+      "sql full outer join",
+      "fullouterjoin",
+      "sqlfullouterjoin",
+      "full",
+      "out",
+      "join",
+      "sql",
+      "joins",
+      "reference",
+      "select",
+      "a",
+      "key",
+      "b",
+      "from",
+      "table",
+      "outer",
+      "on"
+    ],
+    "keywords": "full outer join sql full outer join sql joins reference inputs select a key b key from table a a full outer join table b b on a key b key return matched and unmatched rows from both joined tables return matched and unmatched rows from both joined tables use it for reconciling coverage gaps between two data sources and auditing key mismatches between warehouse and operational exports key parameters left table right table join key return matched and unmatched rows from both joined tables use full outer join when reconciling coverage gaps between two data sources typical business pattern auditing key mismatches between warehouse and operational exports key parameters left table right table join key returns result set with shape union of both key spaces with nulls on non matching sides primary application full outer join is used for auditing key mismatches between warehouse and operational exports workflow application use full outer join in qa checks to surface missing keys on either side delivery application document chosen parameters and output checks so teammates can reproduce results fullouterjoin sqlfullouterjoin full out join select a key b from table outer on"
+  },
+  {
+    "id": "sql-union-union-all",
+    "slug": "sql-union-union-all",
+    "name": "UNION and UNION ALL",
+    "library": "sql",
+    "subtopic": "Joins",
+    "tags": [
+      "sql",
+      "joins",
+      "reference"
+    ],
+    "summary": "Stack compatible result sets vertically with optional deduplication.",
+    "syntax": "SELECT column_list FROM table_a\nUNION ALL\nSELECT column_list FROM table_b;",
+    "description": "Stack compatible result sets vertically with optional deduplication. Use it for combining partitioned or source-specific queries into one table and appending monthly extracts into a unified analytics view. Key parameters: query_a, query_b, dedup_mode.",
+    "overview": "Stack compatible result sets vertically with optional deduplication. Use UNION and UNION ALL when combining partitioned or source-specific queries into one table. Typical business pattern: appending monthly extracts into a unified analytics view. Key parameters: query_a, query_b, dedup_mode. Returns result set with shape concatenated rows sharing the same selected schema.",
+    "applications": [
+      "Primary application: UNION and UNION ALL is used for appending monthly extracts into a unified analytics view.",
+      "Workflow application: use UNION ALL for performance unless you explicitly need duplicate removal.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "union and union all",
+      "sql union union all",
+      "unionandunionall",
+      "sqlunionunionall",
+      "union",
+      "and",
+      "all",
+      "sql",
+      "joins",
+      "reference",
+      "select",
+      "column",
+      "list",
+      "from",
+      "table",
+      "a",
+      "b"
+    ],
+    "keywords": "union and union all sql union union all sql joins reference inputs select column list from table a union all select column list from table b stack compatible result sets vertically with optional deduplication stack compatible result sets vertically with optional deduplication use it for combining partitioned or source specific queries into one table and appending monthly extracts into a unified analytics view key parameters query a query b dedup mode stack compatible result sets vertically with optional deduplication use union and union all when combining partitioned or source specific queries into one table typical business pattern appending monthly extracts into a unified analytics view key parameters query a query b dedup mode returns result set with shape concatenated rows sharing the same selected schema primary application union and union all is used for appending monthly extracts into a unified analytics view workflow application use union all for performance unless you explicitly need duplicate removal delivery application document chosen parameters and output checks so teammates can reproduce results unionandunionall sqlunionunionall union and all select column list from table a b"
+  },
+  {
+    "id": "sql-subquery",
+    "slug": "sql-subquery",
+    "name": "Subqueries",
+    "library": "sql",
+    "subtopic": "Joins",
+    "tags": [
+      "sql",
+      "joins",
+      "reference"
+    ],
+    "summary": "Embed one query inside another to drive filters or derived logic.",
+    "syntax": "SELECT *\nFROM table_name\nWHERE metric > (SELECT AVG(metric) FROM table_name);",
+    "description": "Embed one query inside another to drive filters or derived logic. Use it for composing multi-step logic without creating temporary tables and filtering rows above a dynamic threshold computed by an inner query. Key parameters: outer_query, inner_query.",
+    "overview": "Embed one query inside another to drive filters or derived logic. Use Subqueries when composing multi-step logic without creating temporary tables. Typical business pattern: filtering rows above a dynamic threshold computed by an inner query. Key parameters: outer_query, inner_query. Returns result set with shape rows from outer query constrained by nested query results.",
+    "applications": [
+      "Primary application: Subqueries is used for filtering rows above a dynamic threshold computed by an inner query.",
+      "Workflow application: use subqueries for local logic; refactor to CTEs when readability declines.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "subqueries",
+      "sql subquery",
+      "sqlsubquery",
+      "sql",
+      "joins",
+      "reference",
+      "select",
+      "from",
+      "table",
+      "name",
+      "where",
+      "metric",
+      "avg"
+    ],
+    "keywords": "subqueries sql subquery sql joins reference inputs select from table name where metric select avg metric from table name embed one query inside another to drive filters or derived logic embed one query inside another to drive filters or derived logic use it for composing multi step logic without creating temporary tables and filtering rows above a dynamic threshold computed by an inner query key parameters outer query inner query embed one query inside another to drive filters or derived logic use subqueries when composing multi step logic without creating temporary tables typical business pattern filtering rows above a dynamic threshold computed by an inner query key parameters outer query inner query returns result set with shape rows from outer query constrained by nested query results primary application subqueries is used for filtering rows above a dynamic threshold computed by an inner query workflow application use subqueries for local logic refactor to ctes when readability declines delivery application document chosen parameters and output checks so teammates can reproduce results sqlsubquery select from table name where metric avg"
+  },
+  {
+    "id": "sql-cte-with",
+    "slug": "sql-cte-with",
+    "name": "CTE WITH",
+    "library": "sql",
+    "subtopic": "Joins",
+    "tags": [
+      "sql",
+      "joins",
+      "reference"
+    ],
+    "summary": "Define named intermediate query blocks for modular SQL.",
+    "syntax": "WITH step AS (SELECT * FROM table_name)\nSELECT * FROM step;",
+    "description": "Define named intermediate query blocks for modular SQL. Use it for breaking long transformations into readable, testable stages and building staged pipelines for cleaning, joining, and aggregating in one statement. Key parameters: cte_name, cte_query.",
+    "overview": "Define named intermediate query blocks for modular SQL. Use CTE WITH when breaking long transformations into readable, testable stages. Typical business pattern: building staged pipelines for cleaning, joining, and aggregating in one statement. Key parameters: cte_name, cte_query. Returns result set with shape final query output built from one or more named CTE steps.",
+    "applications": [
+      "Primary application: CTE WITH is used for building staged pipelines for cleaning, joining, and aggregating in one statement.",
+      "Workflow application: adopt CTE layers to document intent and simplify debugging.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "cte with",
+      "sql cte with",
+      "ctewith",
+      "sqlctewith",
+      "cte",
+      "with",
+      "sql",
+      "joins",
+      "reference",
+      "step",
+      "as",
+      "select",
+      "from",
+      "table",
+      "name"
+    ],
+    "keywords": "cte with sql cte with sql joins reference inputs with step as select from table name select from step define named intermediate query blocks for modular sql define named intermediate query blocks for modular sql use it for breaking long transformations into readable testable stages and building staged pipelines for cleaning joining and aggregating in one statement key parameters cte name cte query define named intermediate query blocks for modular sql use cte with when breaking long transformations into readable testable stages typical business pattern building staged pipelines for cleaning joining and aggregating in one statement key parameters cte name cte query returns result set with shape final query output built from one or more named cte steps primary application cte with is used for building staged pipelines for cleaning joining and aggregating in one statement workflow application adopt cte layers to document intent and simplify debugging delivery application document chosen parameters and output checks so teammates can reproduce results ctewith sqlctewith cte with step as select from table name"
+  },
+  {
+    "id": "sql-row-number",
+    "slug": "sql-row-number",
+    "name": "ROW_NUMBER",
+    "library": "sql",
+    "subtopic": "Window Functions",
+    "tags": [
+      "sql",
+      "window-functions",
+      "reference"
+    ],
+    "summary": "Assign sequential row numbers within ordered partitions.",
+    "syntax": "SELECT *, ROW_NUMBER() OVER (PARTITION BY key ORDER BY metric DESC) AS rn\nFROM table_name;",
+    "description": "Assign sequential row numbers within ordered partitions. Use it for deduplicating records and selecting latest rows per entity and keeping the most recent event per customer by ordering on timestamp. Key parameters: partition_key, order_by_expression.",
+    "overview": "Assign sequential row numbers within ordered partitions. Use ROW_NUMBER when deduplicating records and selecting latest rows per entity. Typical business pattern: keeping the most recent event per customer by ordering on timestamp. Key parameters: partition_key, order_by_expression. Returns result set with shape input rows with an added integer sequence column.",
+    "applications": [
+      "Primary application: ROW_NUMBER is used for keeping the most recent event per customer by ordering on timestamp.",
+      "Workflow application: combine ROW_NUMBER with a filter on rn = 1 for deterministic deduplication.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "row number",
+      "sql row number",
+      "rownumber",
+      "sqlrownumber",
+      "row",
+      "numb",
+      "sql",
+      "window functions",
+      "reference",
+      "select",
+      "number",
+      "over",
+      "partition",
+      "by",
+      "key",
+      "order",
+      "metric",
+      "desc",
+      "as",
+      "rn",
+      "from",
+      "table"
+    ],
+    "keywords": "row number sql row number sql window functions reference inputs select row number over partition by key order by metric desc as rn from table name assign sequential row numbers within ordered partitions assign sequential row numbers within ordered partitions use it for deduplicating records and selecting latest rows per entity and keeping the most recent event per customer by ordering on timestamp key parameters partition key order by expression assign sequential row numbers within ordered partitions use row number when deduplicating records and selecting latest rows per entity typical business pattern keeping the most recent event per customer by ordering on timestamp key parameters partition key order by expression returns result set with shape input rows with an added integer sequence column primary application row number is used for keeping the most recent event per customer by ordering on timestamp workflow application combine row number with a filter on rn 1 for deterministic deduplication delivery application document chosen parameters and output checks so teammates can reproduce results rownumber sqlrownumber row numb select number over partition by key order metric desc as rn from table"
+  },
+  {
+    "id": "sql-rank-dense-rank",
+    "slug": "sql-rank-dense-rank",
+    "name": "RANK and DENSE_RANK",
+    "library": "sql",
+    "subtopic": "Window Functions",
+    "tags": [
+      "sql",
+      "window-functions",
+      "reference"
+    ],
+    "summary": "Compute rank positions with tie handling options.",
+    "syntax": "SELECT *, RANK() OVER (PARTITION BY key ORDER BY metric DESC) AS rnk\nFROM table_name;",
+    "description": "Compute rank positions with tie handling options. Use it for building leaderboards and percentile-like ordering outputs and ranking products or reps by revenue within each region. Key parameters: partition_key, sort_metric.",
+    "overview": "Compute rank positions with tie handling options. Use RANK and DENSE_RANK when building leaderboards and percentile-like ordering outputs. Typical business pattern: ranking products or reps by revenue within each region. Key parameters: partition_key, sort_metric. Returns result set with shape input rows with ranking columns that respect sort order and ties.",
+    "applications": [
+      "Primary application: RANK and DENSE_RANK is used for ranking products or reps by revenue within each region.",
+      "Workflow application: choose RANK vs DENSE_RANK based on whether gaps after ties are desired.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "rank and dense rank",
+      "sql rank dense rank",
+      "rankanddenserank",
+      "sqlrankdenserank",
+      "rank",
+      "and",
+      "dense",
+      "sql",
+      "window functions",
+      "reference",
+      "select",
+      "over",
+      "partition",
+      "by",
+      "key",
+      "order",
+      "metric",
+      "desc",
+      "as",
+      "rnk",
+      "from",
+      "table",
+      "name"
+    ],
+    "keywords": "rank and dense rank sql rank dense rank sql window functions reference inputs select rank over partition by key order by metric desc as rnk from table name compute rank positions with tie handling options compute rank positions with tie handling options use it for building leaderboards and percentile like ordering outputs and ranking products or reps by revenue within each region key parameters partition key sort metric compute rank positions with tie handling options use rank and dense rank when building leaderboards and percentile like ordering outputs typical business pattern ranking products or reps by revenue within each region key parameters partition key sort metric returns result set with shape input rows with ranking columns that respect sort order and ties primary application rank and dense rank is used for ranking products or reps by revenue within each region workflow application choose rank vs dense rank based on whether gaps after ties are desired delivery application document chosen parameters and output checks so teammates can reproduce results rankanddenserank sqlrankdenserank rank and dense select over partition by key order metric desc as rnk from table name"
+  },
+  {
+    "id": "sql-lag-lead",
+    "slug": "sql-lag-lead",
+    "name": "LAG and LEAD",
+    "library": "sql",
+    "subtopic": "Window Functions",
+    "tags": [
+      "sql",
+      "window-functions",
+      "reference"
+    ],
+    "summary": "Access previous or next row values within an ordered partition.",
+    "syntax": "SELECT ts, metric, LAG(metric) OVER (PARTITION BY key ORDER BY ts) AS prev_metric\nFROM table_name;",
+    "description": "Access previous or next row values within an ordered partition. Use it for calculating period-over-period changes and sequential comparisons and computing day-over-day deltas in traffic, revenue, or conversion metrics. Key parameters: metric, ordering_column, partition_key.",
+    "overview": "Access previous or next row values within an ordered partition. Use LAG and LEAD when calculating period-over-period changes and sequential comparisons. Typical business pattern: computing day-over-day deltas in traffic, revenue, or conversion metrics. Key parameters: metric, ordering_column, partition_key. Returns result set with shape input rows with shifted reference columns for adjacent observations.",
+    "applications": [
+      "Primary application: LAG and LEAD is used for computing day-over-day deltas in traffic, revenue, or conversion metrics.",
+      "Workflow application: use LAG/LEAD before deriving deltas to keep change logic explicit.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "lag and lead",
+      "sql lag lead",
+      "lagandlead",
+      "sqllaglead",
+      "lag",
+      "and",
+      "lead",
+      "sql",
+      "window functions",
+      "reference",
+      "select",
+      "ts",
+      "metric",
+      "over",
+      "partition",
+      "by",
+      "key",
+      "order",
+      "as",
+      "prev",
+      "from"
+    ],
+    "keywords": "lag and lead sql lag lead sql window functions reference inputs select ts metric lag metric over partition by key order by ts as prev metric from table name access previous or next row values within an ordered partition access previous or next row values within an ordered partition use it for calculating period over period changes and sequential comparisons and computing day over day deltas in traffic revenue or conversion metrics key parameters metric ordering column partition key access previous or next row values within an ordered partition use lag and lead when calculating period over period changes and sequential comparisons typical business pattern computing day over day deltas in traffic revenue or conversion metrics key parameters metric ordering column partition key returns result set with shape input rows with shifted reference columns for adjacent observations primary application lag and lead is used for computing day over day deltas in traffic revenue or conversion metrics workflow application use lag lead before deriving deltas to keep change logic explicit delivery application document chosen parameters and output checks so teammates can reproduce results lagandlead sqllaglead lag and lead select ts metric over partition by key order as prev from"
+  },
+  {
+    "id": "sql-partition-by",
+    "slug": "sql-partition-by",
+    "name": "PARTITION BY",
+    "library": "sql",
+    "subtopic": "Window Functions",
+    "tags": [
+      "sql",
+      "window-functions",
+      "reference"
+    ],
+    "summary": "Scope window calculations independently within each segment.",
+    "syntax": "SELECT *, SUM(metric) OVER (PARTITION BY segment) AS segment_total\nFROM table_name;",
+    "description": "Scope window calculations independently within each segment. Use it for computing running metrics without collapsing row-level detail and calculating per-segment totals or moving stats while keeping original rows. Key parameters: partition_key, window_function.",
+    "overview": "Scope window calculations independently within each segment. Use PARTITION BY when computing running metrics without collapsing row-level detail. Typical business pattern: calculating per-segment totals or moving stats while keeping original rows. Key parameters: partition_key, window_function. Returns result set with shape input rows with segment-scoped window outputs.",
+    "applications": [
+      "Primary application: PARTITION BY is used for calculating per-segment totals or moving stats while keeping original rows.",
+      "Workflow application: define partition keys carefully to match the business entity boundary.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "partition by",
+      "sql partition by",
+      "partitionby",
+      "sqlpartitionby",
+      "partition",
+      "by",
+      "sql",
+      "window functions",
+      "reference",
+      "select",
+      "sum",
+      "metric",
+      "over",
+      "segment",
+      "as",
+      "total",
+      "from",
+      "table",
+      "name"
+    ],
+    "keywords": "partition by sql partition by sql window functions reference inputs select sum metric over partition by segment as segment total from table name scope window calculations independently within each segment scope window calculations independently within each segment use it for computing running metrics without collapsing row level detail and calculating per segment totals or moving stats while keeping original rows key parameters partition key window function scope window calculations independently within each segment use partition by when computing running metrics without collapsing row level detail typical business pattern calculating per segment totals or moving stats while keeping original rows key parameters partition key window function returns result set with shape input rows with segment scoped window outputs primary application partition by is used for calculating per segment totals or moving stats while keeping original rows workflow application define partition keys carefully to match the business entity boundary delivery application document chosen parameters and output checks so teammates can reproduce results partitionby sqlpartitionby partition by select sum metric over segment as total from table name"
+  },
+  {
+    "id": "sql-date-trunc",
+    "slug": "sql-date-trunc",
+    "name": "DATE_TRUNC",
+    "library": "sql",
+    "subtopic": "Dates and Time",
+    "tags": [
+      "sql",
+      "dates-and-time",
+      "reference"
+    ],
+    "summary": "Bucket timestamps to a fixed calendar grain such as day, week, or month.",
+    "syntax": "SELECT DATE_TRUNC('week', timestamp_col) AS week_start, COUNT(*)\nFROM table_name\nGROUP BY 1;",
+    "description": "Bucket timestamps to a fixed calendar grain such as day, week, or month. Use it for creating consistent time buckets for trend and cohort reporting and rolling event-level data into weekly KPI tables. Key parameters: timestamp_col, granularity.",
+    "overview": "Bucket timestamps to a fixed calendar grain such as day, week, or month. Use DATE_TRUNC when creating consistent time buckets for trend and cohort reporting. Typical business pattern: rolling event-level data into weekly KPI tables. Key parameters: timestamp_col, granularity. Returns result set with shape aggregated or transformed rows grouped by truncated timestamp.",
+    "applications": [
+      "Primary application: DATE_TRUNC is used for rolling event-level data into weekly KPI tables.",
+      "Workflow application: align granularity with dashboard cadence to avoid mismatched time grains.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "date trunc",
+      "sql date trunc",
+      "datetrunc",
+      "sqldatetrunc",
+      "date",
+      "trunc",
+      "sql",
+      "dates and time",
+      "reference",
+      "select",
+      "week",
+      "timestamp",
+      "col",
+      "as",
+      "start",
+      "count",
+      "from",
+      "table",
+      "name",
+      "group",
+      "by"
+    ],
+    "keywords": "date trunc sql date trunc sql dates and time reference inputs select date trunc week timestamp col as week start count from table name group by 1 bucket timestamps to a fixed calendar grain such as day week or month bucket timestamps to a fixed calendar grain such as day week or month use it for creating consistent time buckets for trend and cohort reporting and rolling event level data into weekly kpi tables key parameters timestamp col granularity bucket timestamps to a fixed calendar grain such as day week or month use date trunc when creating consistent time buckets for trend and cohort reporting typical business pattern rolling event level data into weekly kpi tables key parameters timestamp col granularity returns result set with shape aggregated or transformed rows grouped by truncated timestamp primary application date trunc is used for rolling event level data into weekly kpi tables workflow application align granularity with dashboard cadence to avoid mismatched time grains delivery application document chosen parameters and output checks so teammates can reproduce results datetrunc sqldatetrunc date trunc select week timestamp col as start count from table name group by"
+  },
+  {
+    "id": "sql-date-diff",
+    "slug": "sql-date-diff",
+    "name": "Date Difference",
+    "library": "sql",
+    "subtopic": "Dates and Time",
+    "tags": [
+      "sql",
+      "dates-and-time",
+      "reference"
+    ],
+    "summary": "Measure elapsed time between two dates or timestamps.",
+    "syntax": "SELECT EXTRACT(EPOCH FROM (end_ts - start_ts)) / 3600 AS hours_between\nFROM table_name;",
+    "description": "Measure elapsed time between two dates or timestamps. Use it for analyzing latency, cycle time, and SLA performance and tracking fulfillment or response-time intervals across workflows. Key parameters: start_ts, end_ts, unit.",
+    "overview": "Measure elapsed time between two dates or timestamps. Use Date Difference when analyzing latency, cycle time, and SLA performance. Typical business pattern: tracking fulfillment or response-time intervals across workflows. Key parameters: start_ts, end_ts, unit. Returns result set with shape input rows with numeric duration expressions.",
+    "applications": [
+      "Primary application: Date Difference is used for tracking fulfillment or response-time intervals across workflows.",
+      "Workflow application: standardize units (hours/days) early so downstream metrics stay comparable.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "date difference",
+      "sql date diff",
+      "datedifference",
+      "sqldatediff",
+      "date",
+      "difference",
+      "sql",
+      "dates and time",
+      "reference",
+      "select",
+      "extract",
+      "epoch",
+      "from",
+      "end",
+      "ts",
+      "start",
+      "3600",
+      "as",
+      "hours",
+      "between",
+      "table",
+      "name"
+    ],
+    "keywords": "date difference sql date diff sql dates and time reference inputs select extract epoch from end ts start ts 3600 as hours between from table name measure elapsed time between two dates or timestamps measure elapsed time between two dates or timestamps use it for analyzing latency cycle time and sla performance and tracking fulfillment or response time intervals across workflows key parameters start ts end ts unit measure elapsed time between two dates or timestamps use date difference when analyzing latency cycle time and sla performance typical business pattern tracking fulfillment or response time intervals across workflows key parameters start ts end ts unit returns result set with shape input rows with numeric duration expressions primary application date difference is used for tracking fulfillment or response time intervals across workflows workflow application standardize units hours days early so downstream metrics stay comparable delivery application document chosen parameters and output checks so teammates can reproduce results datedifference sqldatediff date difference select extract epoch from end ts start 3600 as hours between table name"
+  },
+  {
+    "id": "sql-string-functions",
+    "slug": "sql-string-functions",
+    "name": "String Functions",
+    "library": "sql",
+    "subtopic": "Data Cleaning",
+    "tags": [
+      "sql",
+      "data-cleaning",
+      "reference"
+    ],
+    "summary": "Normalize and parse text fields with string transformations.",
+    "syntax": "SELECT LOWER(TRIM(text_col)) AS text_norm\nFROM table_name;",
+    "description": "Normalize and parse text fields with string transformations. Use it for cleaning messy categorical text before joins or grouping and standardizing campaign names, codes, and tokenized identifiers. Key parameters: text_col, transformation_function.",
+    "overview": "Normalize and parse text fields with string transformations. Use String Functions when cleaning messy categorical text before joins or grouping. Typical business pattern: standardizing campaign names, codes, and tokenized identifiers. Key parameters: text_col, transformation_function. Returns result set with shape input rows with cleaned or extracted string expressions.",
+    "applications": [
+      "Primary application: String Functions is used for standardizing campaign names, codes, and tokenized identifiers.",
+      "Workflow application: apply consistent string normalization in staging to reduce category drift.",
+      "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+    ],
+    "parameters": [
+      "inputs"
+    ],
+    "aliases": [
+      "string functions",
+      "sql string functions",
+      "stringfunctions",
+      "sqlstringfunctions",
+      "string",
+      "functions",
+      "sql",
+      "data cleaning",
+      "reference",
+      "select",
+      "lower",
+      "trim",
+      "text",
+      "col",
+      "as",
+      "norm",
+      "from",
+      "table",
+      "name"
+    ],
+    "keywords": "string functions sql string functions sql data cleaning reference inputs select lower trim text col as text norm from table name normalize and parse text fields with string transformations normalize and parse text fields with string transformations use it for cleaning messy categorical text before joins or grouping and standardizing campaign names codes and tokenized identifiers key parameters text col transformation function normalize and parse text fields with string transformations use string functions when cleaning messy categorical text before joins or grouping typical business pattern standardizing campaign names codes and tokenized identifiers key parameters text col transformation function returns result set with shape input rows with cleaned or extracted string expressions primary application string functions is used for standardizing campaign names codes and tokenized identifiers workflow application apply consistent string normalization in staging to reduce category drift delivery application document chosen parameters and output checks so teammates can reproduce results stringfunctions sqlstringfunctions string functions select lower trim text col as norm from table name"
   }
 ]

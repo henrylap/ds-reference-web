@@ -1,4 +1,4 @@
-import { promises as fs } from "node:fs";
+﻿import { promises as fs } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { CommandEntry, LibraryContent, LibraryId } from "../lib/types";
@@ -77,6 +77,26 @@ const libraryMeta: Record<LibraryId, { overview: string; applications: string[];
       "Consistent style and faceting for notebook storytelling."
     ],
     defaultsDoc: "https://seaborn.pydata.org/"
+  },
+  sql: {
+    overview:
+      "SQL is the core query language for analytics warehouses: selecting, joining, aggregating, and windowing data for reporting and feature extraction.",
+    applications: [
+      "KPI and dashboard queries for recurring business reporting.",
+      "Feature extraction and labeling for machine learning workflows.",
+      "Data quality checks and reconciliation across source systems."
+    ],
+    defaultsDoc: "https://www.postgresql.org/docs/current/"
+  },
+  rstudio: {
+    overview:
+      "R Studio workflows with tidyverse provide concise, expressive pipelines for data import, wrangling, visualization, and reproducible analysis.",
+    applications: [
+      "Analyst-friendly wrangling and exploratory analysis in scripts and notebooks.",
+      "Rapid KPI prototyping with grouped summaries and visualization.",
+      "Reusable tidyverse pipelines for recurring business reporting."
+    ],
+    defaultsDoc: "https://www.tidyverse.org/"
   }
 };
 
@@ -212,7 +232,9 @@ const extras: Record<LibraryId, Compact[]> = {
     { id: "sns-set-context", name: "seaborn.set_context", subtopic: "Styling", syntax: "sns.set_context(context, font_scale=1)", docs: "https://seaborn.pydata.org/generated/seaborn.set_context.html", tags: ["theme", "styling", "scale"] },
     { id: "sns-set-style", name: "seaborn.set_style", subtopic: "Styling", syntax: "sns.set_style(style='darkgrid')", docs: "https://seaborn.pydata.org/generated/seaborn.set_style.html", tags: ["theme", "style", "formatting"] },
     { id: "sns-residplot", name: "seaborn.residplot", subtopic: "Relational", syntax: "sns.residplot(data=None, x=None, y=None)", docs: "https://seaborn.pydata.org/generated/seaborn.residplot.html", tags: ["residuals", "diagnostics", "regression"] }
-  ]
+  ],
+  sql: [],
+  rstudio: []
 };
 
 function slugFromId(id: string): string {
@@ -232,7 +254,9 @@ function exampleScenario(library: LibraryId, name: string): string {
     pandas: "preparing tabular business data for reporting and modeling",
     sklearn: "training and evaluating a reproducible ML pipeline",
     matplotlib: "producing publication-quality KPI visuals",
-    seaborn: "running exploratory statistical visualization workflows"
+    seaborn: "running exploratory statistical visualization workflows",
+    sql: "composing analytics queries for warehouse reporting and feature extraction",
+    rstudio: "building tidyverse pipelines for wrangling and reproducible analysis"
   };
   return `${name} is used in ${scenarios[library]}.`;
 }
@@ -284,6 +308,22 @@ function codeTemplate(library: LibraryId, name: string, syntax: string): string 
       `# Apply ${name}`,
       `# ${syntax}`,
       "print(df.shape)"
+    ],
+    sql: [
+      "WITH orders AS (",
+      "  SELECT 1 AS order_id, 'West' AS region, 120.0 AS revenue",
+      ")",
+      `-- Apply ${name}`,
+      `${syntax}`,
+      "-- Run this query in your SQL editor and validate row-level output."
+    ],
+    rstudio: [
+      "library(dplyr)",
+      "library(tidyr)",
+      "orders <- tibble::tibble(region = c('West', 'East'), revenue = c(120, 90))",
+      `# Apply ${name}`,
+      `${syntax}`,
+      "print(orders)"
     ]
   };
 
@@ -463,3 +503,4 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+

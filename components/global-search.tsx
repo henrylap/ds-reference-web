@@ -93,7 +93,7 @@ export function GlobalSearch() {
       return filteredDocs.slice(0, SEARCH_LIMIT);
     }
 
-    const exact = filteredDocs.filter((doc) => doc.keywords.includes(q));
+    const exact = filteredDocs.filter((doc) => (doc.keywords ?? "").includes(q));
     const fuzzy = fuse.search(q).map((entry) => entry.item);
 
     const combined = [...exact, ...fuzzy];

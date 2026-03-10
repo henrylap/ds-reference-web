@@ -2,8 +2,16 @@
   {
     "id": "recipe-etl-csv-clean-aggregate",
     "title": "ETL: CSV Ingest, Clean, Aggregate",
-    "libraries": ["python", "pandas", "numpy"],
-    "tags": ["etl", "reporting", "aggregation"],
+    "libraries": [
+      "python",
+      "pandas",
+      "numpy"
+    ],
+    "tags": [
+      "etl",
+      "reporting",
+      "aggregation"
+    ],
     "goal": "Load raw sales rows, clean missing values, and produce a regional KPI table.",
     "steps": [
       "Read raw CSV with typed columns and parsed dates.",
@@ -16,8 +24,16 @@
   {
     "id": "recipe-eda-distribution-outlier",
     "title": "EDA: Distribution and Outlier Pass",
-    "libraries": ["pandas", "matplotlib", "seaborn"],
-    "tags": ["eda", "distribution", "outliers"],
+    "libraries": [
+      "pandas",
+      "matplotlib",
+      "seaborn"
+    ],
+    "tags": [
+      "eda",
+      "distribution",
+      "outliers"
+    ],
     "goal": "Understand metric distribution and identify suspicious extremes.",
     "steps": [
       "Compute summary stats and percentile thresholds.",
@@ -30,8 +46,16 @@
   {
     "id": "recipe-feature-engineering-churn",
     "title": "Feature Engineering for Churn",
-    "libraries": ["python", "pandas", "sklearn"],
-    "tags": ["feature-engineering", "churn", "classification"],
+    "libraries": [
+      "python",
+      "pandas",
+      "sklearn"
+    ],
+    "tags": [
+      "feature-engineering",
+      "churn",
+      "classification"
+    ],
     "goal": "Build reusable churn features and prepare a model-ready matrix.",
     "steps": [
       "Create ratio and recency features in pandas.",
@@ -44,8 +68,15 @@
   {
     "id": "recipe-model-train-evaluate",
     "title": "Model Train + Evaluate Loop",
-    "libraries": ["sklearn", "numpy"],
-    "tags": ["modeling", "evaluation", "baseline"],
+    "libraries": [
+      "sklearn",
+      "numpy"
+    ],
+    "tags": [
+      "modeling",
+      "evaluation",
+      "baseline"
+    ],
     "goal": "Train a baseline classifier and evaluate with CV and AUC.",
     "steps": [
       "Split data into train/test with stratification.",
@@ -58,8 +89,16 @@
   {
     "id": "recipe-timeseries-weekly-kpi",
     "title": "Weekly Time-Series KPI",
-    "libraries": ["pandas", "matplotlib", "seaborn"],
-    "tags": ["timeseries", "kpi", "forecasting"],
+    "libraries": [
+      "pandas",
+      "matplotlib",
+      "seaborn"
+    ],
+    "tags": [
+      "timeseries",
+      "kpi",
+      "forecasting"
+    ],
     "goal": "Build weekly KPI series from event-level transactions and plot trend.",
     "steps": [
       "Convert timestamp column to datetime.",
@@ -72,8 +111,14 @@
   {
     "id": "recipe-compare-merge-vs-concat",
     "title": "Join Patterns: merge vs concat",
-    "libraries": ["pandas"],
-    "tags": ["join", "data-wrangling", "comparison"],
+    "libraries": [
+      "pandas"
+    ],
+    "tags": [
+      "join",
+      "data-wrangling",
+      "comparison"
+    ],
     "goal": "Understand when to use merge for key joins vs concat for stacking/appending.",
     "steps": [
       "Use merge when combining by keys.",
@@ -82,5 +127,199 @@
     ],
     "code": "import pandas as pd\norders = pd.DataFrame({'order_id':[1,2], 'customer_id':[10,20]})\ncustomers = pd.DataFrame({'customer_id':[10,20], 'tier':['Pro','Basic']})\nmerged = orders.merge(customers, on='customer_id', how='left', validate='1:1')\npart_a = pd.DataFrame({'order_id':[1], 'amount':[120]})\npart_b = pd.DataFrame({'order_id':[2], 'amount':[90]})\nstacked = pd.concat([part_a, part_b], ignore_index=True)\nprint(merged.shape, stacked.shape)",
     "outputHint": "Two outputs: key-based joined table and vertically stacked table."
+  },
+  {
+    "id": "recipe-end-to-end-churn-classification",
+    "title": "End-to-End Workflow: Churn Classification (Import -> Clean -> EDA -> Model -> Predict)",
+    "libraries": [
+      "python",
+      "pandas",
+      "sklearn",
+      "seaborn"
+    ],
+    "tags": [
+      "workflow",
+      "classification",
+      "churn",
+      "end-to-end"
+    ],
+    "goal": "Build a complete churn-risk workflow from raw customer rows to ranked at-risk predictions.",
+    "steps": [
+      "Import: load raw customer-level data and parse types (dates, numerics, categoricals).",
+      "Clean: handle null values, remove duplicate customer rows, and cap impossible values.",
+      "EDA: inspect churn rate by plan/region, and compare tenure/ticket distributions by churn outcome.",
+      "Feature engineering: create behavior ratios (tickets_per_month, avg_monthly_spend) and recency features.",
+      "Modeling: split train/test, build preprocessing + logistic regression pipeline, and fit baseline model.",
+      "Evaluation: report AUC + precision/recall and inspect threshold tradeoffs for intervention capacity.",
+      "Predict: score current active customers and produce top-N outreach list with churn probabilities."
+    ],
+    "code": "import pandas as pd\nimport numpy as np\nfrom io import StringIO\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.metrics import roc_auc_score, classification_report\n\n# 1) Import\nraw = StringIO('customer_id,tenure_months,tickets,last_30d_spend,plan,region,churn\\n1,3,4,35,basic,west,1\\n2,24,1,120,pro,east,0\\n3,5,3,45,basic,west,1\\n4,36,0,210,enterprise,south,0\\n5,12,2,,pro,east,0\\n6,2,5,30,basic,north,1')\ndf = pd.read_csv(raw)\n\n# 2) Clean\ndf['last_30d_spend'] = pd.to_numeric(df['last_30d_spend'], errors='coerce').fillna(df['last_30d_spend'].median())\ndf = df.drop_duplicates(subset=['customer_id'])\n\n# 3) EDA-like quick checks\nprint('churn rate:', round(df['churn'].mean(), 3))\nprint(df.groupby('plan', as_index=False)['churn'].mean())\n\n# 4) Feature engineering\ndf['tickets_per_month'] = df['tickets'] / df['tenure_months'].clip(lower=1)\ndf['avg_monthly_spend'] = df['last_30d_spend']\n\n# 5) Model\nX = df[['tenure_months', 'tickets', 'last_30d_spend', 'tickets_per_month', 'plan', 'region']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42, stratify=y)\n\nnum_cols = ['tenure_months', 'tickets', 'last_30d_spend', 'tickets_per_month']\ncat_cols = ['plan', 'region']\npre = ColumnTransformer([\n  ('num', StandardScaler(), num_cols),\n  ('cat', OneHotEncoder(handle_unknown='ignore'), cat_cols)\n])\npipe = Pipeline([('pre', pre), ('model', LogisticRegression(max_iter=500))])\npipe.fit(X_train, y_train)\n\n# 6) Evaluate\nproba = pipe.predict_proba(X_test)[:, 1]\npred = (proba >= 0.5).astype(int)\nprint('AUC:', round(roc_auc_score(y_test, proba), 3))\nprint(classification_report(y_test, pred, zero_division=0))\n\n# 7) Predict + rank\ndf['churn_risk'] = pipe.predict_proba(X)[:, 1]\nprint(df.sort_values('churn_risk', ascending=False)[['customer_id', 'churn_risk']].head(3))",
+    "outputHint": "A reproducible pipeline outputting model metrics and a ranked top-risk customer list."
+  },
+  {
+    "id": "recipe-end-to-end-sales-regression",
+    "title": "End-to-End Workflow: Revenue Regression (Import -> Clean -> EDA -> Model -> Predict)",
+    "libraries": [
+      "python",
+      "pandas",
+      "sklearn",
+      "matplotlib"
+    ],
+    "tags": [
+      "workflow",
+      "regression",
+      "forecasting",
+      "end-to-end"
+    ],
+    "goal": "Estimate and predict revenue from marketing and customer drivers with a transparent baseline model.",
+    "steps": [
+      "Import: ingest campaign-level and account-level fields into a tidy modeling table.",
+      "Clean: coerce numerics, handle missing predictors, and remove obvious data-entry outliers.",
+      "EDA: inspect correlations and univariate distributions for target and major predictors.",
+      "Feature engineering: add interaction/ratio features and encode categorical channels.",
+      "Modeling: train a regularized regression pipeline with preprocessing included.",
+      "Evaluation: compute MAE and R2 on holdout; inspect residual patterns for bias.",
+      "Predict: score next-week scenarios and return predicted revenue for planning."
+    ],
+    "code": "import pandas as pd\nimport numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.linear_model import Ridge\nfrom sklearn.metrics import mean_absolute_error, r2_score\n\ndf = pd.DataFrame({\n    'ad_spend': [5, 8, 10, 12, 15, 18, 22, 25],\n    'email_clicks': [120, 150, 180, 210, 240, 250, 300, 320],\n    'site_visits': [800, 900, 1000, 1100, 1300, 1450, 1600, 1750],\n    'channel': ['search', 'search', 'social', 'social', 'search', 'social', 'affiliate', 'affiliate'],\n    'revenue': [40, 52, 59, 66, 81, 90, 105, 118]\n})\n\n# Clean\ndf['ad_spend'] = pd.to_numeric(df['ad_spend'], errors='coerce')\ndf = df.dropna()\n\n# Feature engineering\ndf['ctr_proxy'] = df['email_clicks'] / df['site_visits']\n\nX = df[['ad_spend', 'email_clicks', 'site_visits', 'ctr_proxy', 'channel']]\ny = df['revenue']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)\n\nnum_cols = ['ad_spend', 'email_clicks', 'site_visits', 'ctr_proxy']\ncat_cols = ['channel']\npre = ColumnTransformer([\n    ('num', StandardScaler(), num_cols),\n    ('cat', OneHotEncoder(handle_unknown='ignore'), cat_cols)\n])\nmodel = Pipeline([('pre', pre), ('ridge', Ridge(alpha=1.0))])\nmodel.fit(X_train, y_train)\n\npred = model.predict(X_test)\nprint('MAE:', round(mean_absolute_error(y_test, pred), 2))\nprint('R2:', round(r2_score(y_test, pred), 3))\n\n# Scenario prediction\nnext_week = pd.DataFrame({\n    'ad_spend': [20, 14],\n    'email_clicks': [280, 220],\n    'site_visits': [1500, 1250],\n    'ctr_proxy': [280/1500, 220/1250],\n    'channel': ['search', 'social']\n})\nprint('next_week_pred_revenue:', model.predict(next_week))",
+    "outputHint": "Holdout error metrics plus scenario-level revenue predictions for planning."
+  },
+  {
+    "id": "recipe-end-to-end-ab-testing-roi",
+    "title": "End-to-End Workflow: A/B Testing with Lift and ROI",
+    "libraries": [
+      "python",
+      "pandas",
+      "numpy"
+    ],
+    "tags": [
+      "workflow",
+      "ab-testing",
+      "statistics",
+      "roi"
+    ],
+    "goal": "Take an experiment from randomization checks through lift significance and financial decisioning.",
+    "steps": [
+      "Import: load user-level experimental data (assignment, outcomes, impressions/cost).",
+      "Clean: verify binary treatment coding, remove duplicate IDs, and enforce valid outcome range.",
+      "EDA and QA: run randomization checks on pre-treatment covariates and traffic balance.",
+      "Inference: compute treatment lift with standard error and confidence interval.",
+      "Financialization: convert lift to incremental conversions/profit and subtract campaign cost.",
+      "Decisioning: report ROI with assumptions and recommend scale/stop/test-further action."
+    ],
+    "code": "import pandas as pd\nimport numpy as np\n\n# Toy experiment data\ndf = pd.DataFrame({\n    'user_id': range(1, 11),\n    'test': [1,1,1,1,1,0,0,0,0,0],\n    'converted': [1,0,1,0,1,0,0,1,0,0],\n    'tot_impr': [20,25,18,22,24,21,19,23,20,22]\n})\n\n# Clean\ndf = df.drop_duplicates('user_id')\ndf = df[df['converted'].isin([0,1])]\n\n# Lift\np_test = df.loc[df.test==1, 'converted'].mean()\np_ctrl = df.loc[df.test==0, 'converted'].mean()\nlift = p_test - p_ctrl\n\n# Normal-approx CI for difference in proportions\nn1 = (df.test==1).sum()\nn0 = (df.test==0).sum()\nse = np.sqrt((p_test*(1-p_test)/n1) + (p_ctrl*(1-p_ctrl)/n0))\nci_low, ci_high = lift - 1.96*se, lift + 1.96*se\n\n# ROI\nunit_profit = 40\ncpm = 9\ncost = df.loc[df.test==1, 'tot_impr'].sum() * (cpm/1000)\ninc_conv = n1 * lift\ninc_profit = inc_conv * unit_profit\nroi = 100 * (inc_profit - cost) / max(cost, 1e-9)\n\nprint({'p_test': round(p_test,4), 'p_ctrl': round(p_ctrl,4), 'lift': round(lift,4)})\nprint({'ci_95': (round(ci_low,4), round(ci_high,4))})\nprint({'incremental_profit': round(float(inc_profit),2), 'campaign_cost': round(float(cost),2), 'roi_pct': round(float(roi),2)})",
+    "outputHint": "Lift estimate, confidence interval, incremental profit, and ROI percentage in one decision-ready summary."
+  },
+  {
+    "id": "recipe-end-to-end-rfm-kmeans-segmentation",
+    "title": "End-to-End Workflow: Customer Segmentation (RFM + K-Means)",
+    "libraries": [
+      "python",
+      "pandas",
+      "sklearn",
+      "seaborn"
+    ],
+    "tags": [
+      "workflow",
+      "segmentation",
+      "kmeans",
+      "customer-analytics"
+    ],
+    "goal": "Build actionable customer segments from transaction logs and profile each segment for strategy.",
+    "steps": [
+      "Import: load transaction-level data with customer ID, date, quantity, and amount fields.",
+      "Clean: parse dates, drop invalid quantities/prices, and resolve duplicate transaction IDs.",
+      "Feature engineering: compute Recency, Frequency, and Monetary (RFM) by customer.",
+      "Prepare: transform skewed variables (log) and standardize features for distance-based clustering.",
+      "Modeling: fit K-Means for multiple k values and pick practical k using elbow + interpretability.",
+      "Profiling: summarize centroid profiles and segment share for business naming and activation."
+    ],
+    "code": "import pandas as pd\nimport numpy as np\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.cluster import KMeans\n\n# Toy transaction log\ndf = pd.DataFrame({\n    'customer_id': [1,1,2,2,2,3,4,4,5,5,5],\n    'invoice_date': pd.to_datetime(['2026-01-01','2026-02-01','2026-01-10','2026-02-11','2026-02-20','2026-02-22','2026-01-05','2026-03-01','2026-01-03','2026-02-03','2026-03-03']),\n    'quantity': [2,1,4,3,2,1,5,1,1,2,1],\n    'unit_price': [20,25,8,10,11,45,6,7,30,28,29]\n})\n\n# Clean + RFM\ndf['line_value'] = df['quantity'] * df['unit_price']\nmax_date = df['invoice_date'].max()\nrfm = df.groupby('customer_id').agg(\n    recency=('invoice_date', lambda s: (max_date - s.max()).days),\n    frequency=('invoice_date', 'count'),\n    monetary=('line_value', 'sum')\n).reset_index()\n\n# Transform + scale\nrfm['frequency_log'] = np.log1p(rfm['frequency'])\nrfm['monetary_log'] = np.log1p(rfm['monetary'])\nX = rfm[['recency', 'frequency_log', 'monetary_log']]\nXs = StandardScaler().fit_transform(X)\n\n# Fit KMeans\nkm = KMeans(n_clusters=3, n_init=30, random_state=42)\nrfm['segment'] = km.fit_predict(Xs) + 1\n\nprofile = rfm.groupby('segment', as_index=False).agg(\n    customers=('customer_id', 'count'),\n    recency_mean=('recency', 'mean'),\n    frequency_mean=('frequency', 'mean'),\n    monetary_mean=('monetary', 'mean')\n)\nprofile['share'] = profile['customers'] / profile['customers'].sum()\nprint(profile)",
+    "outputHint": "Segment assignments plus centroid-style profile table (size/share/behavior) for strategy activation."
+  },
+  {
+    "id": "recipe-end-to-end-pricing-optimization",
+    "title": "End-to-End Workflow: Pricing Optimization with Elasticity + Profit Curve",
+    "libraries": [
+      "python",
+      "pandas",
+      "numpy",
+      "sklearn",
+      "matplotlib"
+    ],
+    "tags": [
+      "workflow",
+      "pricing",
+      "optimization",
+      "regression"
+    ],
+    "goal": "Estimate demand response and recommend a profit-maximizing price using scenario simulation.",
+    "steps": [
+      "Import: load historical price, demand, and time controls (seasonality/trend).",
+      "Clean: remove impossible prices/quantities and impute/clip noisy records.",
+      "EDA: inspect price-demand relationship and check for nonlinearity/outliers.",
+      "Modeling: fit log-log demand model (elasticity-friendly) with time controls.",
+      "Prediction: score dense candidate price grid at target period context.",
+      "Optimization: compute expected profit per candidate and select argmax price.",
+      "Sensitivity: compare near-optimal alternatives to avoid brittle single-point decisions."
+    ],
+    "code": "import pandas as pd\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n\n# Toy demand data\ndf = pd.DataFrame({\n    'price': [0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5],\n    'sales': [520,480,450,420,390,360,340,320],\n    'day': [100,200,300,400,500,600,700,800]\n})\n\n# Log-log model: log(sales) ~ log(price) + day\nX = pd.DataFrame({'log_price': np.log(df['price']), 'day': df['day']})\ny = np.log(df['sales'])\nlm = LinearRegression().fit(X, y)\n\n# Candidate price grid for target day\ntarget_day = 1095\nprice_grid = np.arange(0.5, 3.01, 0.01)\nXg = pd.DataFrame({'log_price': np.log(price_grid), 'day': target_day})\nlog_pred = lm.predict(Xg)\nq_pred = np.exp(log_pred)\n\n# Profit model\nmargin_factor = 0.85\nunit_cost = 0.50\nprofit = q_pred * (price_grid * margin_factor - unit_cost)\nout = pd.DataFrame({'price': price_grid, 'q_pred': q_pred, 'profit': profit})\nbest = out.loc[out['profit'].idxmax()]\nprint(best[['price','q_pred','profit']])",
+    "outputHint": "Recommended price with expected demand/profit, plus full profit curve table for sensitivity review."
+  },
+  {
+    "id": "recipe-end-to-end-time-series-forecast",
+    "title": "End-to-End Workflow: Time-Series Demand Forecast (Feature-Based Baseline)",
+    "libraries": [
+      "python",
+      "pandas",
+      "numpy",
+      "sklearn",
+      "matplotlib"
+    ],
+    "tags": [
+      "workflow",
+      "time-series",
+      "forecasting",
+      "modeling"
+    ],
+    "goal": "Create a practical baseline demand forecast with lag features and rolling validation.",
+    "steps": [
+      "Import: read daily demand history with calendar metadata and exogenous drivers if available.",
+      "Clean: fill missing dates, impute short gaps, and remove impossible negative demand rows.",
+      "EDA: inspect trend/seasonality and identify regime changes or special-event spikes.",
+      "Feature engineering: build lag, rolling mean, and calendar features (dow, month).",
+      "Modeling: train a regression baseline on historical window and reserve last horizon for test.",
+      "Evaluation: report MAE/MAPE on holdout horizon and inspect error concentration by date.",
+      "Predict: generate next-period forecasts to support inventory/staffing decisions."
+    ],
+    "code": "import pandas as pd\nimport numpy as np\nfrom sklearn.ensemble import RandomForestRegressor\nfrom sklearn.metrics import mean_absolute_error\n\n# Toy daily demand\ndf = pd.DataFrame({\n    'ds': pd.date_range('2026-01-01', periods=40, freq='D'),\n    'y': [120,118,122,130,128,140,145,142,138,150,148,152,155,151,149,160,158,162,166,163,161,170,168,172,175,173,171,178,176,180,184,182,181,188,186,190,193,191,189,195]\n})\n\n# Features\ndf['lag1'] = df['y'].shift(1)\ndf['lag7'] = df['y'].shift(7)\ndf['roll7'] = df['y'].shift(1).rolling(7).mean()\ndf['dow'] = df['ds'].dt.dayofweek\nmodel_df = df.dropna().copy()\n\nX = model_df[['lag1','lag7','roll7','dow']]\ny = model_df['y']\ntrain_idx = int(len(model_df)*0.8)\nX_train, X_test = X.iloc[:train_idx], X.iloc[train_idx:]\ny_train, y_test = y.iloc[:train_idx], y.iloc[train_idx:]\n\nrf = RandomForestRegressor(n_estimators=300, random_state=42)\nrf.fit(X_train, y_train)\npred = rf.predict(X_test)\nprint('MAE:', round(mean_absolute_error(y_test, pred), 2))\n\n# Next-day style prediction from latest row\nlatest = X.tail(1)\nprint('next_pred:', round(float(rf.predict(latest)[0]), 2))",
+    "outputHint": "Forecast baseline with holdout error metric and next-period prediction scaffold."
+  },
+  {
+    "id": "recipe-end-to-end-sql-to-model-handoff",
+    "title": "End-to-End Workflow: SQL Extraction -> Python Modeling Handoff",
+    "libraries": [
+      "sql",
+      "python",
+      "pandas",
+      "sklearn"
+    ],
+    "tags": [
+      "workflow",
+      "sql",
+      "etl",
+      "modeling"
+    ],
+    "goal": "Show a realistic handoff from warehouse SQL feature extraction to local model training/prediction.",
+    "steps": [
+      "SQL import stage: define extraction query with joins, filters, and feature aggregations at customer grain.",
+      "Quality checks: validate row counts, key uniqueness, and null rates before export/handoff.",
+      "Python ingest: load extracted dataset, enforce dtypes, and run schema assertions.",
+      "Cleaning + EDA: fix missing values, inspect target balance, and spot suspicious feature ranges.",
+      "Modeling: fit a baseline classifier/regressor with train-test split and preprocessing pipeline.",
+      "Predict + export: score current entities and export predictions back for BI/activation workflows."
+    ],
+    "code": "# 1) SQL extraction template (run in warehouse)\n# WITH base AS (\n#   SELECT o.customer_id,\n#          COUNT(*) AS orders_90d,\n#          SUM(o.revenue) AS revenue_90d,\n#          AVG(o.discount_pct) AS avg_discount_90d,\n#          MAX(o.order_date) AS last_order_date\n#   FROM orders o\n#   WHERE o.order_date >= CURRENT_DATE - INTERVAL '90 day'\n#   GROUP BY 1\n# )\n# SELECT * FROM base;\n\nimport pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.ensemble import RandomForestClassifier\n\n# 2) Python handoff dataset (toy)\ndf = pd.DataFrame({\n    'customer_id':[1,2,3,4,5,6],\n    'orders_90d':[1,6,2,8,3,7],\n    'revenue_90d':[40,520,85,710,120,640],\n    'avg_discount_90d':[0.02,0.08,0.03,0.12,0.05,0.10],\n    'churn_next_30d':[1,0,1,0,1,0]\n})\n\nX = df[['orders_90d','revenue_90d','avg_discount_90d']]\ny = df['churn_next_30d']\nXtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.33, random_state=42, stratify=y)\n\npre = ColumnTransformer([('num', StandardScaler(), X.columns.tolist())])\nmodel = Pipeline([('pre', pre), ('rf', RandomForestClassifier(n_estimators=250, random_state=42))])\nmodel.fit(Xtr, ytr)\n\n# 3) Score and handoff\ndf['churn_risk'] = model.predict_proba(X)[:,1]\nscored = df[['customer_id','churn_risk']].sort_values('churn_risk', ascending=False)\nprint(scored)",
+    "outputHint": "A reproducible pattern for warehouse feature extraction, model training, and scored output table."
   }
 ]

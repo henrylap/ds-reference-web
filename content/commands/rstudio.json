@@ -1,0 +1,2859 @@
+{
+  "library": "rstudio",
+  "title": "R Studio (R + tidyverse)",
+  "officialDocs": "https://www.tidyverse.org/",
+  "subtopics": [
+    "Data Import",
+    "Wrangling",
+    "Reshaping",
+    "Visualization",
+    "Dates and Time",
+    "Strings and Factors",
+    "Functional Patterns",
+    "Statistical Inference",
+    "Regression and Forecasting",
+    "Segmentation",
+    "Pricing and Forecasting",
+    "Customer Analytics"
+  ],
+  "commandGroups": [
+    {
+      "name": "Data Import and Wrangling",
+      "docs": [
+        {
+          "label": "dplyr reference",
+          "url": "https://dplyr.tidyverse.org/reference/index.html"
+        }
+      ],
+      "commandIds": [
+        "rstudio-readr-read-csv",
+        "rstudio-dplyr-select",
+        "rstudio-dplyr-filter",
+        "rstudio-dplyr-mutate",
+        "rstudio-dplyr-arrange",
+        "rstudio-dplyr-summarise",
+        "rstudio-dplyr-group-by",
+        "rstudio-dplyr-left-join",
+        "rstudio-dplyr-inner-join",
+        "rstudio-readr-write-csv"
+      ]
+    },
+    {
+      "name": "Reshaping and Missing Data",
+      "docs": [
+        {
+          "label": "tidyr reference",
+          "url": "https://tidyr.tidyverse.org/reference/index.html"
+        }
+      ],
+      "commandIds": [
+        "rstudio-tidyr-pivot-longer",
+        "rstudio-tidyr-pivot-wider",
+        "rstudio-tidyr-drop-na",
+        "rstudio-tidyr-replace-na"
+      ]
+    },
+    {
+      "name": "Visualization and Time Handling",
+      "docs": [
+        {
+          "label": "ggplot2 reference",
+          "url": "https://ggplot2.tidyverse.org/reference/"
+        }
+      ],
+      "commandIds": [
+        "rstudio-ggplot-geom-line",
+        "rstudio-ggplot-geom-col",
+        "rstudio-ggplot-geom-point",
+        "rstudio-lubridate-ymd",
+        "rstudio-lubridate-floor-date"
+      ]
+    },
+    {
+      "name": "Strings, Factors, and Functional Patterns",
+      "docs": [
+        {
+          "label": "stringr/purrr reference",
+          "url": "https://stringr.tidyverse.org/reference/"
+        }
+      ],
+      "commandIds": [
+        "rstudio-stringr-str-detect",
+        "rstudio-stringr-str-replace-all",
+        "rstudio-forcats-fct-reorder",
+        "rstudio-purrr-map",
+        "rstudio-case-when",
+        "rstudio-if-else",
+        "rstudio-across"
+      ]
+    },
+    {
+      "name": "Statistical Inference and Testing",
+      "docs": [
+        {
+          "label": "R stats docs",
+          "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html"
+        }
+      ],
+      "commandIds": [
+        "rstudio-psych-describe",
+        "rstudio-t-test",
+        "rstudio-anova-aov"
+      ]
+    },
+    {
+      "name": "Modeling and Segmentation",
+      "docs": [
+        {
+          "label": "R modeling docs",
+          "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html"
+        }
+      ],
+      "commandIds": [
+        "rstudio-lm-stats",
+        "rstudio-predict-stats",
+        "rstudio-kmeans-segmentation",
+        "rstudio-scale-segmentation"
+      ]
+    },
+    {
+      "name": "Customer Analytics and Optimization",
+      "docs": [
+        {
+          "label": "Customer analytics patterns",
+          "url": "https://www.tidyverse.org/"
+        }
+      ],
+      "commandIds": [
+        "rstudio-pricing-profit-curve",
+        "rstudio-ab-lift-roi",
+        "rstudio-clv-discounted-sum"
+      ]
+    }
+  ],
+  "cheatSheet": [
+    "rstudio-readr-read-csv",
+    "rstudio-dplyr-select",
+    "rstudio-dplyr-filter",
+    "rstudio-dplyr-mutate",
+    "rstudio-dplyr-arrange",
+    "rstudio-dplyr-summarise",
+    "rstudio-dplyr-group-by",
+    "rstudio-dplyr-left-join",
+    "rstudio-dplyr-inner-join",
+    "rstudio-tidyr-pivot-longer",
+    "rstudio-tidyr-pivot-wider",
+    "rstudio-tidyr-drop-na",
+    "rstudio-tidyr-replace-na",
+    "rstudio-ggplot-geom-line",
+    "rstudio-ggplot-geom-col",
+    "rstudio-ggplot-geom-point",
+    "rstudio-lubridate-ymd",
+    "rstudio-lubridate-floor-date",
+    "rstudio-stringr-str-detect",
+    "rstudio-stringr-str-replace-all",
+    "rstudio-forcats-fct-reorder",
+    "rstudio-purrr-map",
+    "rstudio-readr-write-csv",
+    "rstudio-case-when",
+    "rstudio-if-else",
+    "rstudio-across",
+    "rstudio-psych-describe",
+    "rstudio-t-test",
+    "rstudio-anova-aov",
+    "rstudio-lm-stats",
+    "rstudio-predict-stats",
+    "rstudio-kmeans-segmentation",
+    "rstudio-scale-segmentation",
+    "rstudio-pricing-profit-curve",
+    "rstudio-ab-lift-roi",
+    "rstudio-clv-discounted-sum"
+  ],
+  "coverageOutline": [
+    {
+      "topic": "Descriptive and Inferential Statistics",
+      "docUrl": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "describe",
+        "t.test",
+        "aov"
+      ]
+    },
+    {
+      "topic": "Regression and Prediction",
+      "docUrl": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "lm",
+        "predict"
+      ]
+    },
+    {
+      "topic": "Segmentation and Clustering",
+      "docUrl": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/kmeans.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "scale",
+        "kmeans"
+      ]
+    },
+    {
+      "topic": "Experiment Financialization",
+      "docUrl": "https://en.wikipedia.org/wiki/A/B_testing",
+      "status": "seeded",
+      "highUsageApis": [
+        "ATE",
+        "ROI"
+      ]
+    },
+    {
+      "topic": "CLV and Pricing Optimization",
+      "docUrl": "https://en.wikipedia.org/wiki/Customer_lifetime_value",
+      "status": "planned",
+      "highUsageApis": [
+        "discounted CLV",
+        "profit curve"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "rstudio-readr-read-csv",
+      "slug": "rstudio-readr-read-csv",
+      "name": "readr::read_csv",
+      "library": "rstudio",
+      "subtopic": "Data Import",
+      "tags": [
+        "rstudio",
+        "data-import",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Read CSV files into typed tibbles with fast parsing.",
+      "syntax": "df <- readr::read_csv('data/orders.csv')",
+      "description": "Read CSV files into typed tibbles with fast parsing. Use it for ingesting flat-file extracts into reproducible R workflows and loading recurring operational exports for weekly analysis. Key parameters: file_path, col_types.",
+      "docs": [
+        {
+          "label": "readr::read_csv official docs",
+          "url": "https://readr.tidyverse.org/reference/read_delim.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how readr::read_csv is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "readr::read_csv primary workflow",
+          "scenario": "readr::read_csv is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply readr::read_csv\ndf <- readr::read_csv('data/orders.csv')",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply readr::read_csv with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "readr::read_csv alternate business slice",
+          "scenario": "Second realistic usage variant for readr::read_csv on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse readr::read_csv on a second slice\ndf <- readr::read_csv('data/orders.csv')",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply readr::read_csv with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Read CSV files into typed tibbles with fast parsing. Use readr::read_csv when ingesting flat-file extracts into reproducible R workflows. Typical business pattern: loading recurring operational exports for weekly analysis. Key parameters: file_path, col_types. Returns tibble with shape rows and columns inferred from file schema.",
+      "applications": [
+        "Primary application: readr::read_csv is used for loading recurring operational exports for weekly analysis.",
+        "Workflow application: pin parsing options and column types so ingestion remains stable across runs.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-dplyr-select",
+      "slug": "rstudio-dplyr-select",
+      "name": "dplyr::select",
+      "library": "rstudio",
+      "subtopic": "Wrangling",
+      "tags": [
+        "rstudio",
+        "wrangling",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Select and optionally rename columns needed for analysis.",
+      "syntax": "df_selected <- df %>% dplyr::select(customer_id, revenue, order_date)",
+      "description": "Select and optionally rename columns needed for analysis. Use it for reducing wide tables to a focused modeling/reporting schema and keeping only business keys, measures, and date fields for downstream steps. Key parameters: data, columns.",
+      "docs": [
+        {
+          "label": "dplyr::select official docs",
+          "url": "https://dplyr.tidyverse.org/reference/select.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how dplyr::select is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "dplyr::select primary workflow",
+          "scenario": "dplyr::select is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply dplyr::select\ndf_selected <- df %>% dplyr::select(customer_id, revenue, order_date)",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::select with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "dplyr::select alternate business slice",
+          "scenario": "Second realistic usage variant for dplyr::select on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse dplyr::select on a second slice\ndf_selected <- df %>% dplyr::select(customer_id, revenue, order_date)",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::select with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Select and optionally rename columns needed for analysis. Use dplyr::select when reducing wide tables to a focused modeling/reporting schema. Typical business pattern: keeping only business keys, measures, and date fields for downstream steps. Key parameters: data, columns. Returns tibble with shape same row count with selected columns.",
+      "applications": [
+        "Primary application: dplyr::select is used for keeping only business keys, measures, and date fields for downstream steps.",
+        "Workflow application: apply select early to simplify subsequent mutate/filter/join logic.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-dplyr-filter",
+      "slug": "rstudio-dplyr-filter",
+      "name": "dplyr::filter",
+      "library": "rstudio",
+      "subtopic": "Wrangling",
+      "tags": [
+        "rstudio",
+        "wrangling",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Keep rows that satisfy boolean predicates.",
+      "syntax": "df_filtered <- df %>% dplyr::filter(revenue > 100, region == \"West\")",
+      "description": "Keep rows that satisfy boolean predicates. Use it for scoping datasets to target segments, windows, or rule-compliant records and excluding low-quality, out-of-window, or non-target observations. Key parameters: data, conditions.",
+      "docs": [
+        {
+          "label": "dplyr::filter official docs",
+          "url": "https://dplyr.tidyverse.org/reference/filter.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how dplyr::filter is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "dplyr::filter primary workflow",
+          "scenario": "dplyr::filter is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply dplyr::filter\ndf_filtered <- df %>% dplyr::filter(revenue > 100, region == \"West\")",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::filter with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "dplyr::filter alternate business slice",
+          "scenario": "Second realistic usage variant for dplyr::filter on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse dplyr::filter on a second slice\ndf_filtered <- df %>% dplyr::filter(revenue > 100, region == \"West\")",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::filter with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Keep rows that satisfy boolean predicates. Use dplyr::filter when scoping datasets to target segments, windows, or rule-compliant records. Typical business pattern: excluding low-quality, out-of-window, or non-target observations. Key parameters: data, conditions. Returns tibble with shape subset of input rows with same columns.",
+      "applications": [
+        "Primary application: dplyr::filter is used for excluding low-quality, out-of-window, or non-target observations.",
+        "Workflow application: place filter before heavy joins/aggregations to reduce compute and noise.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-dplyr-mutate",
+      "slug": "rstudio-dplyr-mutate",
+      "name": "dplyr::mutate",
+      "library": "rstudio",
+      "subtopic": "Wrangling",
+      "tags": [
+        "rstudio",
+        "wrangling",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Create or transform columns with vectorized expressions.",
+      "syntax": "df_features <- df %>% dplyr::mutate(aov = revenue / pmax(orders, 1))",
+      "description": "Create or transform columns with vectorized expressions. Use it for engineering derived features used in reporting and modeling and building ratios, flags, and normalized metrics from raw measures. Key parameters: data, new_columns.",
+      "docs": [
+        {
+          "label": "dplyr::mutate official docs",
+          "url": "https://dplyr.tidyverse.org/reference/mutate.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how dplyr::mutate is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "dplyr::mutate primary workflow",
+          "scenario": "dplyr::mutate is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply dplyr::mutate\ndf_features <- df %>% dplyr::mutate(aov = revenue / pmax(orders, 1))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::mutate with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "dplyr::mutate alternate business slice",
+          "scenario": "Second realistic usage variant for dplyr::mutate on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse dplyr::mutate on a second slice\ndf_features <- df %>% dplyr::mutate(aov = revenue / pmax(orders, 1))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::mutate with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Create or transform columns with vectorized expressions. Use dplyr::mutate when engineering derived features used in reporting and modeling. Typical business pattern: building ratios, flags, and normalized metrics from raw measures. Key parameters: data, new_columns. Returns tibble with shape same row count with added or updated columns.",
+      "applications": [
+        "Primary application: dplyr::mutate is used for building ratios, flags, and normalized metrics from raw measures.",
+        "Workflow application: chain mutate steps with clear names so feature logic stays auditable.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-dplyr-arrange",
+      "slug": "rstudio-dplyr-arrange",
+      "name": "dplyr::arrange",
+      "library": "rstudio",
+      "subtopic": "Wrangling",
+      "tags": [
+        "rstudio",
+        "wrangling",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Sort rows by one or more columns.",
+      "syntax": "df_sorted <- df %>% dplyr::arrange(dplyr::desc(revenue))",
+      "description": "Sort rows by one or more columns. Use it for creating deterministic ranked outputs for review and export and ordering entities by revenue, score, or recency. Key parameters: data, sort_columns.",
+      "docs": [
+        {
+          "label": "dplyr::arrange official docs",
+          "url": "https://dplyr.tidyverse.org/reference/arrange.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how dplyr::arrange is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "dplyr::arrange primary workflow",
+          "scenario": "dplyr::arrange is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply dplyr::arrange\ndf_sorted <- df %>% dplyr::arrange(dplyr::desc(revenue))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::arrange with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "dplyr::arrange alternate business slice",
+          "scenario": "Second realistic usage variant for dplyr::arrange on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse dplyr::arrange on a second slice\ndf_sorted <- df %>% dplyr::arrange(dplyr::desc(revenue))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::arrange with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Sort rows by one or more columns. Use dplyr::arrange when creating deterministic ranked outputs for review and export. Typical business pattern: ordering entities by revenue, score, or recency. Key parameters: data, sort_columns. Returns tibble with shape same rows reordered by sort keys.",
+      "applications": [
+        "Primary application: dplyr::arrange is used for ordering entities by revenue, score, or recency.",
+        "Workflow application: apply arrange near output boundaries when order matters to consumers.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-dplyr-summarise",
+      "slug": "rstudio-dplyr-summarise",
+      "name": "dplyr::summarise",
+      "library": "rstudio",
+      "subtopic": "Wrangling",
+      "tags": [
+        "rstudio",
+        "wrangling",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Collapse rows into aggregate summary metrics.",
+      "syntax": "kpi <- df %>% dplyr::summarise(total_revenue = sum(revenue), avg_revenue = mean(revenue))",
+      "description": "Collapse rows into aggregate summary metrics. Use it for building compact KPI outputs from transactional datasets and computing totals, averages, and counts for management reporting. Key parameters: data, summary_expressions.",
+      "docs": [
+        {
+          "label": "dplyr::summarise official docs",
+          "url": "https://dplyr.tidyverse.org/reference/summarise.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how dplyr::summarise is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "dplyr::summarise primary workflow",
+          "scenario": "dplyr::summarise is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply dplyr::summarise\nkpi <- df %>% dplyr::summarise(total_revenue = sum(revenue), avg_revenue = mean(revenue))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::summarise with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "dplyr::summarise alternate business slice",
+          "scenario": "Second realistic usage variant for dplyr::summarise on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse dplyr::summarise on a second slice\nkpi <- df %>% dplyr::summarise(total_revenue = sum(revenue), avg_revenue = mean(revenue))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::summarise with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Collapse rows into aggregate summary metrics. Use dplyr::summarise when building compact KPI outputs from transactional datasets. Typical business pattern: computing totals, averages, and counts for management reporting. Key parameters: data, summary_expressions. Returns tibble with shape one row per group (or one row total if ungrouped).",
+      "applications": [
+        "Primary application: dplyr::summarise is used for computing totals, averages, and counts for management reporting.",
+        "Workflow application: pair with group_by when you need segmented KPI tables.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-dplyr-group-by",
+      "slug": "rstudio-dplyr-group-by",
+      "name": "dplyr::group_by",
+      "library": "rstudio",
+      "subtopic": "Wrangling",
+      "tags": [
+        "rstudio",
+        "wrangling",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Define grouping keys for grouped summaries and transformations.",
+      "syntax": "seg_kpi <- df %>% dplyr::group_by(region) %>% dplyr::summarise(revenue = sum(revenue), .groups = \"drop\")",
+      "description": "Define grouping keys for grouped summaries and transformations. Use it for setting the analysis grain before summarise or grouped mutate and segmenting calculations by region, cohort, or channel. Key parameters: data, group_columns.",
+      "docs": [
+        {
+          "label": "dplyr::group_by official docs",
+          "url": "https://dplyr.tidyverse.org/reference/group_by.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how dplyr::group_by is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "dplyr::group_by primary workflow",
+          "scenario": "dplyr::group_by is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply dplyr::group_by\nseg_kpi <- df %>% dplyr::group_by(region) %>% dplyr::summarise(revenue = sum(revenue), .groups = \"drop\")",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::group_by with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "dplyr::group_by alternate business slice",
+          "scenario": "Second realistic usage variant for dplyr::group_by on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse dplyr::group_by on a second slice\nseg_kpi <- df %>% dplyr::group_by(region) %>% dplyr::summarise(revenue = sum(revenue), .groups = \"drop\")",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::group_by with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Define grouping keys for grouped summaries and transformations. Use dplyr::group_by when setting the analysis grain before summarise or grouped mutate. Typical business pattern: segmenting calculations by region, cohort, or channel. Key parameters: data, group_columns. Returns grouped tibble with shape same rows with grouping metadata attached.",
+      "applications": [
+        "Primary application: dplyr::group_by is used for segmenting calculations by region, cohort, or channel.",
+        "Workflow application: explicitly ungroup or set .groups behavior to avoid accidental carryover.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-dplyr-left-join",
+      "slug": "rstudio-dplyr-left-join",
+      "name": "dplyr::left_join",
+      "library": "rstudio",
+      "subtopic": "Wrangling",
+      "tags": [
+        "rstudio",
+        "wrangling",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Join tables while preserving all rows from the left side.",
+      "syntax": "orders_enriched <- orders %>% dplyr::left_join(customers, by = \"customer_id\")",
+      "description": "Join tables while preserving all rows from the left side. Use it for enriching a base fact table with optional dimension attributes and adding customer or product context to transaction records. Key parameters: x, y, by.",
+      "docs": [
+        {
+          "label": "dplyr::left_join official docs",
+          "url": "https://dplyr.tidyverse.org/reference/mutate-joins.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how dplyr::left_join is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "dplyr::left_join primary workflow",
+          "scenario": "dplyr::left_join is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply dplyr::left_join\norders_enriched <- orders %>% dplyr::left_join(customers, by = \"customer_id\")",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::left_join with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "dplyr::left_join alternate business slice",
+          "scenario": "Second realistic usage variant for dplyr::left_join on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse dplyr::left_join on a second slice\norders_enriched <- orders %>% dplyr::left_join(customers, by = \"customer_id\")",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::left_join with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Join tables while preserving all rows from the left side. Use dplyr::left_join when enriching a base fact table with optional dimension attributes. Typical business pattern: adding customer or product context to transaction records. Key parameters: x, y, by. Returns tibble with shape left-side row count with nullable right-side columns.",
+      "applications": [
+        "Primary application: dplyr::left_join is used for adding customer or product context to transaction records.",
+        "Workflow application: check key uniqueness in lookup tables to prevent unintended row expansion.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-dplyr-inner-join",
+      "slug": "rstudio-dplyr-inner-join",
+      "name": "dplyr::inner_join",
+      "library": "rstudio",
+      "subtopic": "Wrangling",
+      "tags": [
+        "rstudio",
+        "wrangling",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Join tables and keep only matching keys in both tables.",
+      "syntax": "matched <- orders %>% dplyr::inner_join(payments, by = \"order_id\")",
+      "description": "Join tables and keep only matching keys in both tables. Use it for restricting analysis to records present across required sources and retaining only transactions that also have confirmed payment records. Key parameters: x, y, by.",
+      "docs": [
+        {
+          "label": "dplyr::inner_join official docs",
+          "url": "https://dplyr.tidyverse.org/reference/mutate-joins.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how dplyr::inner_join is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "dplyr::inner_join primary workflow",
+          "scenario": "dplyr::inner_join is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply dplyr::inner_join\nmatched <- orders %>% dplyr::inner_join(payments, by = \"order_id\")",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::inner_join with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "dplyr::inner_join alternate business slice",
+          "scenario": "Second realistic usage variant for dplyr::inner_join on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse dplyr::inner_join on a second slice\nmatched <- orders %>% dplyr::inner_join(payments, by = \"order_id\")",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::inner_join with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Join tables and keep only matching keys in both tables. Use dplyr::inner_join when restricting analysis to records present across required sources. Typical business pattern: retaining only transactions that also have confirmed payment records. Key parameters: x, y, by. Returns tibble with shape matched row pairs based on join keys.",
+      "applications": [
+        "Primary application: dplyr::inner_join is used for retaining only transactions that also have confirmed payment records.",
+        "Workflow application: use inner_join when missing matches should be excluded by design.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-tidyr-pivot-longer",
+      "slug": "rstudio-tidyr-pivot-longer",
+      "name": "tidyr::pivot_longer",
+      "library": "rstudio",
+      "subtopic": "Reshaping",
+      "tags": [
+        "rstudio",
+        "reshaping",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Reshape wide columns into tidy key-value rows.",
+      "syntax": "long_df <- wide_df %>% tidyr::pivot_longer(cols = starts_with(\"m_\"), names_to = \"metric\", values_to = \"value\")",
+      "description": "Reshape wide columns into tidy key-value rows. Use it for normalizing spreadsheet-style wide data for tidy analysis and converting month columns into a single metric and period column. Key parameters: data, cols, names_to, values_to.",
+      "docs": [
+        {
+          "label": "tidyr::pivot_longer official docs",
+          "url": "https://tidyr.tidyverse.org/reference/pivot_longer.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how tidyr::pivot_longer is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "tidyr::pivot_longer primary workflow",
+          "scenario": "tidyr::pivot_longer is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply tidyr::pivot_longer\nlong_df <- wide_df %>% tidyr::pivot_longer(cols = starts_with(\"m_\"), names_to = \"metric\", values_to = \"value\")",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply tidyr::pivot_longer with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "tidyr::pivot_longer alternate business slice",
+          "scenario": "Second realistic usage variant for tidyr::pivot_longer on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse tidyr::pivot_longer on a second slice\nlong_df <- wide_df %>% tidyr::pivot_longer(cols = starts_with(\"m_\"), names_to = \"metric\", values_to = \"value\")",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply tidyr::pivot_longer with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Reshape wide columns into tidy key-value rows. Use tidyr::pivot_longer when normalizing spreadsheet-style wide data for tidy analysis. Typical business pattern: converting month columns into a single metric and period column. Key parameters: data, cols, names_to, values_to. Returns tibble with shape more rows and fewer metric columns than input.",
+      "applications": [
+        "Primary application: tidyr::pivot_longer is used for converting month columns into a single metric and period column.",
+        "Workflow application: pivot_longer early when downstream steps expect tidy long format.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-tidyr-pivot-wider",
+      "slug": "rstudio-tidyr-pivot-wider",
+      "name": "tidyr::pivot_wider",
+      "library": "rstudio",
+      "subtopic": "Reshaping",
+      "tags": [
+        "rstudio",
+        "reshaping",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Spread key-value rows into wide columns.",
+      "syntax": "wide_df <- long_df %>% tidyr::pivot_wider(names_from = metric, values_from = value)",
+      "description": "Spread key-value rows into wide columns. Use it for producing presentation-friendly wide tables from tidy long data and turning metric labels into separate columns for dashboard export. Key parameters: data, names_from, values_from.",
+      "docs": [
+        {
+          "label": "tidyr::pivot_wider official docs",
+          "url": "https://tidyr.tidyverse.org/reference/pivot_wider.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how tidyr::pivot_wider is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "tidyr::pivot_wider primary workflow",
+          "scenario": "tidyr::pivot_wider is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply tidyr::pivot_wider\nwide_df <- long_df %>% tidyr::pivot_wider(names_from = metric, values_from = value)",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply tidyr::pivot_wider with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "tidyr::pivot_wider alternate business slice",
+          "scenario": "Second realistic usage variant for tidyr::pivot_wider on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse tidyr::pivot_wider on a second slice\nwide_df <- long_df %>% tidyr::pivot_wider(names_from = metric, values_from = value)",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply tidyr::pivot_wider with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Spread key-value rows into wide columns. Use tidyr::pivot_wider when producing presentation-friendly wide tables from tidy long data. Typical business pattern: turning metric labels into separate columns for dashboard export. Key parameters: data, names_from, values_from. Returns tibble with shape fewer rows and more columns than input.",
+      "applications": [
+        "Primary application: tidyr::pivot_wider is used for turning metric labels into separate columns for dashboard export.",
+        "Workflow application: use pivot_wider near output/report steps after transformations are complete.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-tidyr-drop-na",
+      "slug": "rstudio-tidyr-drop-na",
+      "name": "tidyr::drop_na",
+      "library": "rstudio",
+      "subtopic": "Reshaping",
+      "tags": [
+        "rstudio",
+        "reshaping",
+        "reference"
+      ],
+      "level": "core",
+      "summary": "Remove rows with missing values in required fields.",
+      "syntax": "clean_df <- df %>% tidyr::drop_na(revenue, order_date)",
+      "description": "Remove rows with missing values in required fields. Use it for enforcing minimum data completeness before modeling or KPI aggregation and excluding records missing key measures such as revenue or date. Key parameters: data, required_columns.",
+      "docs": [
+        {
+          "label": "tidyr::drop_na official docs",
+          "url": "https://tidyr.tidyverse.org/reference/drop_na.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how tidyr::drop_na is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "tidyr::drop_na primary workflow",
+          "scenario": "tidyr::drop_na is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply tidyr::drop_na\nclean_df <- df %>% tidyr::drop_na(revenue, order_date)",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply tidyr::drop_na with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "tidyr::drop_na alternate business slice",
+          "scenario": "Second realistic usage variant for tidyr::drop_na on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse tidyr::drop_na on a second slice\nclean_df <- df %>% tidyr::drop_na(revenue, order_date)",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply tidyr::drop_na with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Remove rows with missing values in required fields. Use tidyr::drop_na when enforcing minimum data completeness before modeling or KPI aggregation. Typical business pattern: excluding records missing key measures such as revenue or date. Key parameters: data, required_columns. Returns tibble with shape subset of input rows with non-missing required values.",
+      "applications": [
+        "Primary application: tidyr::drop_na is used for excluding records missing key measures such as revenue or date.",
+        "Workflow application: document which columns are mandatory so drop rules remain transparent.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-tidyr-replace-na",
+      "slug": "rstudio-tidyr-replace-na",
+      "name": "tidyr::replace_na",
+      "library": "rstudio",
+      "subtopic": "Reshaping",
+      "tags": [
+        "rstudio",
+        "reshaping",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Fill missing values with explicit replacements.",
+      "syntax": "df_filled <- df %>% tidyr::replace_na(list(revenue = 0, region = \"Unknown\"))",
+      "description": "Fill missing values with explicit replacements. Use it for stabilizing downstream calculations that cannot tolerate NA values and defaulting missing numerics to 0 and unknown categories to labels. Key parameters: data, replacements.",
+      "docs": [
+        {
+          "label": "tidyr::replace_na official docs",
+          "url": "https://tidyr.tidyverse.org/reference/replace_na.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how tidyr::replace_na is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "tidyr::replace_na primary workflow",
+          "scenario": "tidyr::replace_na is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply tidyr::replace_na\ndf_filled <- df %>% tidyr::replace_na(list(revenue = 0, region = \"Unknown\"))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply tidyr::replace_na with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "tidyr::replace_na alternate business slice",
+          "scenario": "Second realistic usage variant for tidyr::replace_na on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse tidyr::replace_na on a second slice\ndf_filled <- df %>% tidyr::replace_na(list(revenue = 0, region = \"Unknown\"))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply tidyr::replace_na with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Fill missing values with explicit replacements. Use tidyr::replace_na when stabilizing downstream calculations that cannot tolerate NA values. Typical business pattern: defaulting missing numerics to 0 and unknown categories to labels. Key parameters: data, replacements. Returns tibble with shape same rows/columns with NA values replaced.",
+      "applications": [
+        "Primary application: tidyr::replace_na is used for defaulting missing numerics to 0 and unknown categories to labels.",
+        "Workflow application: set replacement policy centrally to keep imputation consistent across analyses.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-ggplot-geom-line",
+      "slug": "rstudio-ggplot-geom-line",
+      "name": "ggplot2::geom_line",
+      "library": "rstudio",
+      "subtopic": "Visualization",
+      "tags": [
+        "rstudio",
+        "visualization",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Draw connected line marks to show trends over ordered x-values.",
+      "syntax": "ggplot2::ggplot(df, ggplot2::aes(order_date, revenue)) + ggplot2::geom_line()",
+      "description": "Draw connected line marks to show trends over ordered x-values. Use it for visualizing movement over time for KPI monitoring and plotting daily or weekly revenue trends and detecting inflection points. Key parameters: data, aes(x,y), grouping.",
+      "docs": [
+        {
+          "label": "ggplot2::geom_line official docs",
+          "url": "https://ggplot2.tidyverse.org/reference/geom_path.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how ggplot2::geom_line is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "ggplot2::geom_line primary workflow",
+          "scenario": "ggplot2::geom_line is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply ggplot2::geom_line\nggplot2::ggplot(df, ggplot2::aes(order_date, revenue)) + ggplot2::geom_line()",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply ggplot2::geom_line with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "ggplot2::geom_line alternate business slice",
+          "scenario": "Second realistic usage variant for ggplot2::geom_line on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse ggplot2::geom_line on a second slice\nggplot2::ggplot(df, ggplot2::aes(order_date, revenue)) + ggplot2::geom_line()",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply ggplot2::geom_line with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Draw connected line marks to show trends over ordered x-values. Use ggplot2::geom_line when visualizing movement over time for KPI monitoring. Typical business pattern: plotting daily or weekly revenue trends and detecting inflection points. Key parameters: data, aes(x,y), grouping. Returns ggplot object with shape plot layer rendered from input rows.",
+      "applications": [
+        "Primary application: ggplot2::geom_line is used for plotting daily or weekly revenue trends and detecting inflection points.",
+        "Workflow application: use with date-based x and sorted data to avoid misleading line paths.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-ggplot-geom-col",
+      "slug": "rstudio-ggplot-geom-col",
+      "name": "ggplot2::geom_col",
+      "library": "rstudio",
+      "subtopic": "Visualization",
+      "tags": [
+        "rstudio",
+        "visualization",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Render bar heights from pre-aggregated values.",
+      "syntax": "ggplot2::ggplot(seg_kpi, ggplot2::aes(region, revenue)) + ggplot2::geom_col()",
+      "description": "Render bar heights from pre-aggregated values. Use it for comparing magnitudes across categories in KPI summaries and displaying revenue by region or channel from summarized tables. Key parameters: data, aes(category,value).",
+      "docs": [
+        {
+          "label": "ggplot2::geom_col official docs",
+          "url": "https://ggplot2.tidyverse.org/reference/geom_bar.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how ggplot2::geom_col is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "ggplot2::geom_col primary workflow",
+          "scenario": "ggplot2::geom_col is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply ggplot2::geom_col\nggplot2::ggplot(seg_kpi, ggplot2::aes(region, revenue)) + ggplot2::geom_col()",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply ggplot2::geom_col with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "ggplot2::geom_col alternate business slice",
+          "scenario": "Second realistic usage variant for ggplot2::geom_col on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse ggplot2::geom_col on a second slice\nggplot2::ggplot(seg_kpi, ggplot2::aes(region, revenue)) + ggplot2::geom_col()",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply ggplot2::geom_col with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Render bar heights from pre-aggregated values. Use ggplot2::geom_col when comparing magnitudes across categories in KPI summaries. Typical business pattern: displaying revenue by region or channel from summarized tables. Key parameters: data, aes(category,value). Returns ggplot object with shape bar chart with one bar per category-row.",
+      "applications": [
+        "Primary application: ggplot2::geom_col is used for displaying revenue by region or channel from summarized tables.",
+        "Workflow application: pre-aggregate with summarise before geom_col to control metric definitions.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-ggplot-geom-point",
+      "slug": "rstudio-ggplot-geom-point",
+      "name": "ggplot2::geom_point",
+      "library": "rstudio",
+      "subtopic": "Visualization",
+      "tags": [
+        "rstudio",
+        "visualization",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Plot individual observations as points for relationship analysis.",
+      "syntax": "ggplot2::ggplot(df, ggplot2::aes(ad_spend, revenue)) + ggplot2::geom_point()",
+      "description": "Plot individual observations as points for relationship analysis. Use it for checking association patterns and outliers between numeric variables and exploring spend vs revenue or feature vs target relationships. Key parameters: data, aes(x,y), color/group.",
+      "docs": [
+        {
+          "label": "ggplot2::geom_point official docs",
+          "url": "https://ggplot2.tidyverse.org/reference/geom_point.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how ggplot2::geom_point is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "ggplot2::geom_point primary workflow",
+          "scenario": "ggplot2::geom_point is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply ggplot2::geom_point\nggplot2::ggplot(df, ggplot2::aes(ad_spend, revenue)) + ggplot2::geom_point()",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply ggplot2::geom_point with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "ggplot2::geom_point alternate business slice",
+          "scenario": "Second realistic usage variant for ggplot2::geom_point on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse ggplot2::geom_point on a second slice\nggplot2::ggplot(df, ggplot2::aes(ad_spend, revenue)) + ggplot2::geom_point()",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply ggplot2::geom_point with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Plot individual observations as points for relationship analysis. Use ggplot2::geom_point when checking association patterns and outliers between numeric variables. Typical business pattern: exploring spend vs revenue or feature vs target relationships. Key parameters: data, aes(x,y), color/group. Returns ggplot object with shape scatter layer with one point per input row.",
+      "applications": [
+        "Primary application: ggplot2::geom_point is used for exploring spend vs revenue or feature vs target relationships.",
+        "Workflow application: combine with faceting or smoothing when comparing multiple segments.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-lubridate-ymd",
+      "slug": "rstudio-lubridate-ymd",
+      "name": "lubridate::ymd",
+      "library": "rstudio",
+      "subtopic": "Dates and Time",
+      "tags": [
+        "rstudio",
+        "dates-and-time",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Parse year-month-day strings into Date objects.",
+      "syntax": "df <- df %>% dplyr::mutate(order_date = lubridate::ymd(order_date_raw))",
+      "description": "Parse year-month-day strings into Date objects. Use it for standardizing raw date text before time-based grouping and converting ingest columns into valid dates for weekly/monthly reporting. Key parameters: date_text, orders.",
+      "docs": [
+        {
+          "label": "lubridate::ymd official docs",
+          "url": "https://lubridate.tidyverse.org/reference/ymd.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how lubridate::ymd is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "lubridate::ymd primary workflow",
+          "scenario": "lubridate::ymd is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply lubridate::ymd\ndf <- df %>% dplyr::mutate(order_date = lubridate::ymd(order_date_raw))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply lubridate::ymd with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "lubridate::ymd alternate business slice",
+          "scenario": "Second realistic usage variant for lubridate::ymd on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse lubridate::ymd on a second slice\ndf <- df %>% dplyr::mutate(order_date = lubridate::ymd(order_date_raw))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply lubridate::ymd with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Parse year-month-day strings into Date objects. Use lubridate::ymd when standardizing raw date text before time-based grouping. Typical business pattern: converting ingest columns into valid dates for weekly/monthly reporting. Key parameters: date_text, orders. Returns Date vector with shape same length as input date strings.",
+      "applications": [
+        "Primary application: lubridate::ymd is used for converting ingest columns into valid dates for weekly/monthly reporting.",
+        "Workflow application: parse dates immediately after ingest to avoid downstream type ambiguity.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-lubridate-floor-date",
+      "slug": "rstudio-lubridate-floor-date",
+      "name": "lubridate::floor_date",
+      "library": "rstudio",
+      "subtopic": "Dates and Time",
+      "tags": [
+        "rstudio",
+        "dates-and-time",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Round dates/timestamps down to a specified calendar unit.",
+      "syntax": "weekly <- df %>% dplyr::mutate(week = lubridate::floor_date(order_date, unit = \"week\"))",
+      "description": "Round dates/timestamps down to a specified calendar unit. Use it for creating consistent time buckets for aggregation and assigning each event to week-start or month-start bins. Key parameters: date_column, unit.",
+      "docs": [
+        {
+          "label": "lubridate::floor_date official docs",
+          "url": "https://lubridate.tidyverse.org/reference/round_date.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how lubridate::floor_date is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "lubridate::floor_date primary workflow",
+          "scenario": "lubridate::floor_date is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply lubridate::floor_date\nweekly <- df %>% dplyr::mutate(week = lubridate::floor_date(order_date, unit = \"week\"))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply lubridate::floor_date with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "lubridate::floor_date alternate business slice",
+          "scenario": "Second realistic usage variant for lubridate::floor_date on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse lubridate::floor_date on a second slice\nweekly <- df %>% dplyr::mutate(week = lubridate::floor_date(order_date, unit = \"week\"))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply lubridate::floor_date with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Round dates/timestamps down to a specified calendar unit. Use lubridate::floor_date when creating consistent time buckets for aggregation. Typical business pattern: assigning each event to week-start or month-start bins. Key parameters: date_column, unit. Returns Date/POSIXct vector with shape same length as input date column.",
+      "applications": [
+        "Primary application: lubridate::floor_date is used for assigning each event to week-start or month-start bins.",
+        "Workflow application: align bucket unit with reporting cadence to keep time series comparable.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-stringr-str-detect",
+      "slug": "rstudio-stringr-str-detect",
+      "name": "stringr::str_detect",
+      "library": "rstudio",
+      "subtopic": "Strings and Factors",
+      "tags": [
+        "rstudio",
+        "strings-and-factors",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Detect whether strings match a regex or fixed pattern.",
+      "syntax": "df <- df %>% dplyr::mutate(is_promo = stringr::str_detect(campaign_name, \"promo\"))",
+      "description": "Detect whether strings match a regex or fixed pattern. Use it for building boolean flags from unstructured text columns and identifying promo, error, or keyword-bearing records. Key parameters: string, pattern.",
+      "docs": [
+        {
+          "label": "stringr::str_detect official docs",
+          "url": "https://stringr.tidyverse.org/reference/str_detect.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how stringr::str_detect is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "stringr::str_detect primary workflow",
+          "scenario": "stringr::str_detect is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply stringr::str_detect\ndf <- df %>% dplyr::mutate(is_promo = stringr::str_detect(campaign_name, \"promo\"))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply stringr::str_detect with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "stringr::str_detect alternate business slice",
+          "scenario": "Second realistic usage variant for stringr::str_detect on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse stringr::str_detect on a second slice\ndf <- df %>% dplyr::mutate(is_promo = stringr::str_detect(campaign_name, \"promo\"))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply stringr::str_detect with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Detect whether strings match a regex or fixed pattern. Use stringr::str_detect when building boolean flags from unstructured text columns. Typical business pattern: identifying promo, error, or keyword-bearing records. Key parameters: string, pattern. Returns logical vector with shape one TRUE/FALSE per input string.",
+      "applications": [
+        "Primary application: stringr::str_detect is used for identifying promo, error, or keyword-bearing records.",
+        "Workflow application: store pattern definitions in shared config when rules are business-critical.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-stringr-str-replace-all",
+      "slug": "rstudio-stringr-str-replace-all",
+      "name": "stringr::str_replace_all",
+      "library": "rstudio",
+      "subtopic": "Strings and Factors",
+      "tags": [
+        "rstudio",
+        "strings-and-factors",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Replace all pattern matches in each string.",
+      "syntax": "df <- df %>% dplyr::mutate(clean = stringr::str_replace_all(raw_text, \"[^A-Za-z0-9 ]\", \"\"))",
+      "description": "Replace all pattern matches in each string. Use it for cleaning noisy text fields before grouping or joining and removing punctuation and normalizing textual IDs/categories. Key parameters: string, pattern_replacement.",
+      "docs": [
+        {
+          "label": "stringr::str_replace_all official docs",
+          "url": "https://stringr.tidyverse.org/reference/str_replace.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how stringr::str_replace_all is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "stringr::str_replace_all primary workflow",
+          "scenario": "stringr::str_replace_all is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply stringr::str_replace_all\ndf <- df %>% dplyr::mutate(clean = stringr::str_replace_all(raw_text, \"[^A-Za-z0-9 ]\", \"\"))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply stringr::str_replace_all with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "stringr::str_replace_all alternate business slice",
+          "scenario": "Second realistic usage variant for stringr::str_replace_all on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse stringr::str_replace_all on a second slice\ndf <- df %>% dplyr::mutate(clean = stringr::str_replace_all(raw_text, \"[^A-Za-z0-9 ]\", \"\"))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply stringr::str_replace_all with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Replace all pattern matches in each string. Use stringr::str_replace_all when cleaning noisy text fields before grouping or joining. Typical business pattern: removing punctuation and normalizing textual IDs/categories. Key parameters: string, pattern_replacement. Returns character vector with shape same length as input string vector.",
+      "applications": [
+        "Primary application: stringr::str_replace_all is used for removing punctuation and normalizing textual IDs/categories.",
+        "Workflow application: normalize casing/whitespace in the same text-cleaning stage for consistency.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-forcats-fct-reorder",
+      "slug": "rstudio-forcats-fct-reorder",
+      "name": "forcats::fct_reorder",
+      "library": "rstudio",
+      "subtopic": "Strings and Factors",
+      "tags": [
+        "rstudio",
+        "strings-and-factors",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Reorder factor levels using a summary of another variable.",
+      "syntax": "df <- df %>% dplyr::mutate(region = forcats::fct_reorder(region, revenue, .fun = mean))",
+      "description": "Reorder factor levels using a summary of another variable. Use it for controlling category order in plots and tables and sorting regions by mean revenue for readable bar charts. Key parameters: factor_column, numeric_column, .fun.",
+      "docs": [
+        {
+          "label": "forcats::fct_reorder official docs",
+          "url": "https://forcats.tidyverse.org/reference/fct_reorder.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how forcats::fct_reorder is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "forcats::fct_reorder primary workflow",
+          "scenario": "forcats::fct_reorder is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply forcats::fct_reorder\ndf <- df %>% dplyr::mutate(region = forcats::fct_reorder(region, revenue, .fun = mean))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply forcats::fct_reorder with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "forcats::fct_reorder alternate business slice",
+          "scenario": "Second realistic usage variant for forcats::fct_reorder on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse forcats::fct_reorder on a second slice\ndf <- df %>% dplyr::mutate(region = forcats::fct_reorder(region, revenue, .fun = mean))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply forcats::fct_reorder with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Reorder factor levels using a summary of another variable. Use forcats::fct_reorder when controlling category order in plots and tables. Typical business pattern: sorting regions by mean revenue for readable bar charts. Key parameters: factor_column, numeric_column, .fun. Returns factor vector with shape same length as input factor column.",
+      "applications": [
+        "Primary application: forcats::fct_reorder is used for sorting regions by mean revenue for readable bar charts.",
+        "Workflow application: reorder factors immediately before visualization to preserve semantic ordering.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-purrr-map",
+      "slug": "rstudio-purrr-map",
+      "name": "purrr::map",
+      "library": "rstudio",
+      "subtopic": "Functional Patterns",
+      "tags": [
+        "rstudio",
+        "functional-patterns",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Apply a function over list-like inputs and collect results.",
+      "syntax": "means <- purrr::map_dbl(split_df, ~ mean(.x$revenue, na.rm = TRUE))",
+      "description": "Apply a function over list-like inputs and collect results. Use it for iterating over grouped datasets or parameter grids functionally and running repeated summary/model steps across many segments. Key parameters: .x, .f.",
+      "docs": [
+        {
+          "label": "purrr::map official docs",
+          "url": "https://purrr.tidyverse.org/reference/map.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how purrr::map is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "purrr::map primary workflow",
+          "scenario": "purrr::map is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply purrr::map\nmeans <- purrr::map_dbl(split_df, ~ mean(.x$revenue, na.rm = TRUE))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply purrr::map with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "purrr::map alternate business slice",
+          "scenario": "Second realistic usage variant for purrr::map on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse purrr::map on a second slice\nmeans <- purrr::map_dbl(split_df, ~ mean(.x$revenue, na.rm = TRUE))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply purrr::map with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Apply a function over list-like inputs and collect results. Use purrr::map when iterating over grouped datasets or parameter grids functionally. Typical business pattern: running repeated summary/model steps across many segments. Key parameters: .x, .f. Returns list or typed vector (map_dbl/map_chr/etc.) with shape one output element per input element.",
+      "applications": [
+        "Primary application: purrr::map is used for running repeated summary/model steps across many segments.",
+        "Workflow application: use typed map variants to enforce stable output types in pipelines.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-readr-write-csv",
+      "slug": "rstudio-readr-write-csv",
+      "name": "readr::write_csv",
+      "library": "rstudio",
+      "subtopic": "Data Import",
+      "tags": [
+        "rstudio",
+        "data-import",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Write a data frame to CSV for sharing or downstream systems.",
+      "syntax": "readr::write_csv(kpi, 'outputs/weekly_kpi.csv')",
+      "description": "Write a data frame to CSV for sharing or downstream systems. Use it for exporting validated outputs from reproducible workflows and publishing weekly KPI tables for BI or stakeholder delivery. Key parameters: data, file_path.",
+      "docs": [
+        {
+          "label": "readr::write_csv official docs",
+          "url": "https://readr.tidyverse.org/reference/write_delim.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how readr::write_csv is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "readr::write_csv primary workflow",
+          "scenario": "readr::write_csv is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply readr::write_csv\nreadr::write_csv(kpi, 'outputs/weekly_kpi.csv')",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply readr::write_csv with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "readr::write_csv alternate business slice",
+          "scenario": "Second realistic usage variant for readr::write_csv on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse readr::write_csv on a second slice\nreadr::write_csv(kpi, 'outputs/weekly_kpi.csv')",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply readr::write_csv with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Write a data frame to CSV for sharing or downstream systems. Use readr::write_csv when exporting validated outputs from reproducible workflows. Typical business pattern: publishing weekly KPI tables for BI or stakeholder delivery. Key parameters: data, file_path. Returns file output (side effect) with shape CSV with one row per data frame row.",
+      "applications": [
+        "Primary application: readr::write_csv is used for publishing weekly KPI tables for BI or stakeholder delivery.",
+        "Workflow application: export from a finalized pipeline step and version the output path convention.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-case-when",
+      "slug": "rstudio-case-when",
+      "name": "dplyr::case_when",
+      "library": "rstudio",
+      "subtopic": "Functional Patterns",
+      "tags": [
+        "rstudio",
+        "functional-patterns",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Create multi-branch conditional outputs with readable rule order.",
+      "syntax": "df <- df %>% dplyr::mutate(segment = dplyr::case_when(revenue >= 200 ~ 'High', revenue >= 100 ~ 'Mid', TRUE ~ 'Low'))",
+      "description": "Create multi-branch conditional outputs with readable rule order. Use it for encoding hierarchical business logic into derived categories and assigning lifecycle or risk segments from threshold rules. Key parameters: conditions, labels.",
+      "docs": [
+        {
+          "label": "dplyr::case_when official docs",
+          "url": "https://dplyr.tidyverse.org/reference/case_when.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how dplyr::case_when is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "dplyr::case_when primary workflow",
+          "scenario": "dplyr::case_when is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply dplyr::case_when\ndf <- df %>% dplyr::mutate(segment = dplyr::case_when(revenue >= 200 ~ 'High', revenue >= 100 ~ 'Mid', TRUE ~ 'Low'))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::case_when with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "dplyr::case_when alternate business slice",
+          "scenario": "Second realistic usage variant for dplyr::case_when on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse dplyr::case_when on a second slice\ndf <- df %>% dplyr::mutate(segment = dplyr::case_when(revenue >= 200 ~ 'High', revenue >= 100 ~ 'Mid', TRUE ~ 'Low'))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::case_when with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Create multi-branch conditional outputs with readable rule order. Use dplyr::case_when when encoding hierarchical business logic into derived categories. Typical business pattern: assigning lifecycle or risk segments from threshold rules. Key parameters: conditions, labels. Returns vector with shape same length as input rows.",
+      "applications": [
+        "Primary application: dplyr::case_when is used for assigning lifecycle or risk segments from threshold rules.",
+        "Workflow application: order conditions from most specific to most general to avoid overlaps.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-if-else",
+      "slug": "rstudio-if-else",
+      "name": "dplyr::if_else",
+      "library": "rstudio",
+      "subtopic": "Functional Patterns",
+      "tags": [
+        "rstudio",
+        "functional-patterns",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Return one of two typed values based on a condition vector.",
+      "syntax": "df <- df %>% dplyr::mutate(is_target = dplyr::if_else(revenue >= 100, 'Y', 'N'))",
+      "description": "Return one of two typed values based on a condition vector. Use it for creating strict binary flags or values in pipelines and building yes/no eligibility indicators for reporting and models. Key parameters: condition, true_value, false_value.",
+      "docs": [
+        {
+          "label": "dplyr::if_else official docs",
+          "url": "https://dplyr.tidyverse.org/reference/if_else.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how dplyr::if_else is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "dplyr::if_else primary workflow",
+          "scenario": "dplyr::if_else is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply dplyr::if_else\ndf <- df %>% dplyr::mutate(is_target = dplyr::if_else(revenue >= 100, 'Y', 'N'))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::if_else with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "dplyr::if_else alternate business slice",
+          "scenario": "Second realistic usage variant for dplyr::if_else on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse dplyr::if_else on a second slice\ndf <- df %>% dplyr::mutate(is_target = dplyr::if_else(revenue >= 100, 'Y', 'N'))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::if_else with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Return one of two typed values based on a condition vector. Use dplyr::if_else when creating strict binary flags or values in pipelines. Typical business pattern: building yes/no eligibility indicators for reporting and models. Key parameters: condition, true_value, false_value. Returns typed vector with shape same length as condition vector.",
+      "applications": [
+        "Primary application: dplyr::if_else is used for building yes/no eligibility indicators for reporting and models.",
+        "Workflow application: prefer if_else over base ifelse when type stability matters.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-across",
+      "slug": "rstudio-across",
+      "name": "dplyr::across",
+      "library": "rstudio",
+      "subtopic": "Functional Patterns",
+      "tags": [
+        "rstudio",
+        "functional-patterns",
+        "reference"
+      ],
+      "level": "extended",
+      "summary": "Apply the same transformation to multiple columns inside dplyr verbs.",
+      "syntax": "scaled <- df %>% dplyr::mutate(dplyr::across(c(revenue, orders), ~ .x / max(.x, na.rm = TRUE)))",
+      "description": "Apply the same transformation to multiple columns inside dplyr verbs. Use it for standardizing repeated column-wise operations with less boilerplate and scaling or cleaning several numeric features in one mutate step. Key parameters: columns, function.",
+      "docs": [
+        {
+          "label": "dplyr::across official docs",
+          "url": "https://dplyr.tidyverse.org/reference/across.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "inputs",
+          "type": "data.frame | tibble and function arguments",
+          "description": "Inputs that control how dplyr::across is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Confirm column names, data types, and package versions before production deployment."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "tibble | vector | ggplot object | list",
+        "shape": "depends on operation",
+        "description": "Tidyverse output suitable for chaining in scripts and notebooks."
+      },
+      "examples": [
+        {
+          "title": "dplyr::across primary workflow",
+          "scenario": "dplyr::across is used in a reusable business analytics workflow.",
+          "code": "library(dplyr)\nlibrary(tidyr)\norders <- tibble::tibble(customer_id = c(101, 102), region = c('West', 'East'), revenue = c(120, 90), order_date = as.Date(c('2026-01-01', '2026-01-02')))\n# Apply dplyr::across\nscaled <- df %>% dplyr::mutate(dplyr::across(c(revenue, orders), ~ .x / max(.x, na.rm = TRUE)))",
+          "expectedOutput": "A valid output shape that can be adapted to production tables/files.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::across with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        },
+        {
+          "title": "dplyr::across alternate business slice",
+          "scenario": "Second realistic usage variant for dplyr::across on another dataset slice.",
+          "code": "library(dplyr)\nchannel_df <- tibble::tibble(channel = c('Email', 'Paid'), revenue = c(80, 150), orders = c(12, 20))\n# Reuse dplyr::across on a second slice\nscaled <- df %>% dplyr::mutate(dplyr::across(c(revenue, orders), ~ .x / max(.x, na.rm = TRUE)))",
+          "expectedOutput": "A second executable pattern for transfer to another reporting context.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Apply dplyr::across with explicit parameters shown in the snippet, then verify output shape and values.",
+            "Transfer the same pattern to your full dataset and rerun validation checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Validate on a small tibble first, then scale to full project data."
+      ],
+      "related": [],
+      "overview": "Apply the same transformation to multiple columns inside dplyr verbs. Use dplyr::across when standardizing repeated column-wise operations with less boilerplate. Typical business pattern: scaling or cleaning several numeric features in one mutate step. Key parameters: columns, function. Returns tibble with shape same row count with transformed selected columns.",
+      "applications": [
+        "Primary application: dplyr::across is used for scaling or cleaning several numeric features in one mutate step.",
+        "Workflow application: pair across with tidy-select helpers to keep multi-column logic concise.",
+        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+      ]
+    },
+    {
+      "id": "rstudio-psych-describe",
+      "slug": "rstudio-psych-describe",
+      "name": "psych::describe",
+      "library": "rstudio",
+      "subtopic": "Statistical Inference",
+      "tags": [
+        "statistics",
+        "descriptive-stats",
+        "diagnostics"
+      ],
+      "level": "extended",
+      "summary": "Generate descriptive statistics for numeric variables in one pass.",
+      "syntax": "psych::describe(df)",
+      "description": "Generate descriptive statistics for numeric variables in one pass. Use it for auditing distribution shape, spread, and missingness before inference and descriptive-statistics checks before A/B tests, ANOVA, and regression. Key parameters: data.",
+      "docs": [
+        {
+          "label": "psych::describe docs",
+          "url": "https://www.rdocumentation.org/packages/psych/topics/describe"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "numeric",
+          "description": "data controls how psych::describe is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "data.frame",
+        "shape": "rows = variables, columns = descriptive metrics",
+        "description": "Output from psych::describe for downstream analysis and decisioning."
+      },
+      "examples": [
+        {
+          "title": "psych::describe applied workflow",
+          "scenario": "psych::describe in a customer-analytics/statistics workflow.",
+          "code": "# Core pattern\npsych::describe(df)",
+          "expectedOutput": "A valid output object that supports inference, forecasting, or segmentation decisions.",
+          "walkthrough": [
+            "Prepare data and assumptions required by the method.",
+            "Apply psych::describe with explicit inputs and inspect diagnostics/output.",
+            "Translate statistical output into a business recommendation with documented assumptions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair statistical significance with practical business impact before actioning results."
+      ],
+      "related": [],
+      "overview": "Generate descriptive statistics for numeric variables in one pass. Use psych::describe when auditing distribution shape, spread, and missingness before inference. Typical business pattern: descriptive-statistics checks before A/B tests, ANOVA, and regression. Key parameters: data. Returns data.frame with shape rows = variables, columns = descriptive metrics.",
+      "applications": [
+        "Primary application: psych::describe is used for descriptive-statistics checks before A/B tests, ANOVA, and regression.",
+        "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+        "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+      ]
+    },
+    {
+      "id": "rstudio-t-test",
+      "slug": "rstudio-t-test",
+      "name": "stats::t.test",
+      "library": "rstudio",
+      "subtopic": "Statistical Inference",
+      "tags": [
+        "statistics",
+        "t-test",
+        "ab-testing"
+      ],
+      "level": "extended",
+      "summary": "Compare two-group means with significance and confidence intervals.",
+      "syntax": "t.test(outcome ~ group, data = df)",
+      "description": "Compare two-group means with significance and confidence intervals. Use it for evaluating treatment vs control effects in experiments and A/B mean comparisons for conversion, spend, or engagement outcomes. Key parameters: formula, var.equal.",
+      "docs": [
+        {
+          "label": "stats::t.test docs",
+          "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "formula",
+          "type": "formula",
+          "description": "formula controls how stats::t.test is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        },
+        {
+          "name": "var.equal",
+          "type": "numeric",
+          "description": "var.equal controls how stats::t.test is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "htest",
+        "shape": "single result object with p-value and confidence interval",
+        "description": "Output from stats::t.test for downstream analysis and decisioning."
+      },
+      "examples": [
+        {
+          "title": "stats::t.test applied workflow",
+          "scenario": "stats::t.test in a customer-analytics/statistics workflow.",
+          "code": "# Core pattern\nt.test(outcome ~ group, data = df)",
+          "expectedOutput": "A valid output object that supports inference, forecasting, or segmentation decisions.",
+          "walkthrough": [
+            "Prepare data and assumptions required by the method.",
+            "Apply stats::t.test with explicit inputs and inspect diagnostics/output.",
+            "Translate statistical output into a business recommendation with documented assumptions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair statistical significance with practical business impact before actioning results."
+      ],
+      "related": [],
+      "overview": "Compare two-group means with significance and confidence intervals. Use stats::t.test when evaluating treatment vs control effects in experiments. Typical business pattern: A/B mean comparisons for conversion, spend, or engagement outcomes. Key parameters: formula, var.equal. Returns htest with shape single result object with p-value and confidence interval.",
+      "applications": [
+        "Primary application: stats::t.test is used for A/B mean comparisons for conversion, spend, or engagement outcomes.",
+        "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+        "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+      ]
+    },
+    {
+      "id": "rstudio-anova-aov",
+      "slug": "rstudio-anova-aov",
+      "name": "stats::aov",
+      "library": "rstudio",
+      "subtopic": "Statistical Inference",
+      "tags": [
+        "statistics",
+        "anova",
+        "experiments"
+      ],
+      "level": "extended",
+      "summary": "Test mean differences across three or more groups with ANOVA.",
+      "syntax": "model <- aov(outcome ~ factor, data = df)",
+      "description": "Test mean differences across three or more groups with ANOVA. Use it for multi-condition experimental analysis without pairwise error inflation and message, offer, or pricing-condition comparisons across several groups. Key parameters: formula.",
+      "docs": [
+        {
+          "label": "stats::aov docs",
+          "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/aov.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "formula",
+          "type": "formula",
+          "description": "formula controls how stats::aov is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "aov",
+        "shape": "model object for summary tables and post hoc testing",
+        "description": "Output from stats::aov for downstream analysis and decisioning."
+      },
+      "examples": [
+        {
+          "title": "stats::aov applied workflow",
+          "scenario": "stats::aov in a customer-analytics/statistics workflow.",
+          "code": "# Core pattern\nmodel <- aov(outcome ~ factor, data = df)",
+          "expectedOutput": "A valid output object that supports inference, forecasting, or segmentation decisions.",
+          "walkthrough": [
+            "Prepare data and assumptions required by the method.",
+            "Apply stats::aov with explicit inputs and inspect diagnostics/output.",
+            "Translate statistical output into a business recommendation with documented assumptions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair statistical significance with practical business impact before actioning results."
+      ],
+      "related": [],
+      "overview": "Test mean differences across three or more groups with ANOVA. Use stats::aov when multi-condition experimental analysis without pairwise error inflation. Typical business pattern: message, offer, or pricing-condition comparisons across several groups. Key parameters: formula. Returns aov with shape model object for summary tables and post hoc testing.",
+      "applications": [
+        "Primary application: stats::aov is used for message, offer, or pricing-condition comparisons across several groups.",
+        "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+        "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+      ]
+    },
+    {
+      "id": "rstudio-lm-stats",
+      "slug": "rstudio-lm-stats",
+      "name": "stats::lm (Inference + LinReg)",
+      "library": "rstudio",
+      "subtopic": "Regression and Forecasting",
+      "tags": [
+        "regression",
+        "linreg",
+        "customer-analytics"
+      ],
+      "level": "extended",
+      "summary": "Fit linear regression for effect estimation and forecasting.",
+      "syntax": "model <- lm(y ~ x1 + x2, data = df)",
+      "description": "Fit linear regression for effect estimation and forecasting. Use it for quantifying predictor impact on outcomes such as sales or conversion and elasticity estimation, baseline forecasting, and treatment-adjusted modeling. Key parameters: formula.",
+      "docs": [
+        {
+          "label": "stats::lm (Inference + LinReg) docs",
+          "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "formula",
+          "type": "formula",
+          "description": "formula controls how stats::lm (Inference + LinReg) is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "lm",
+        "shape": "model object with coefficients, residuals, and fitted values",
+        "description": "Output from stats::lm (Inference + LinReg) for downstream analysis and decisioning."
+      },
+      "examples": [
+        {
+          "title": "stats::lm (Inference + LinReg) applied workflow",
+          "scenario": "stats::lm (Inference + LinReg) in a customer-analytics/statistics workflow.",
+          "code": "# Core pattern\nmodel <- lm(y ~ x1 + x2, data = df)",
+          "expectedOutput": "A valid output object that supports inference, forecasting, or segmentation decisions.",
+          "walkthrough": [
+            "Prepare data and assumptions required by the method.",
+            "Apply stats::lm (Inference + LinReg) with explicit inputs and inspect diagnostics/output.",
+            "Translate statistical output into a business recommendation with documented assumptions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair statistical significance with practical business impact before actioning results."
+      ],
+      "related": [],
+      "overview": "Fit linear regression for effect estimation and forecasting. Use stats::lm (Inference + LinReg) when quantifying predictor impact on outcomes such as sales or conversion. Typical business pattern: elasticity estimation, baseline forecasting, and treatment-adjusted modeling. Key parameters: formula. Returns lm with shape model object with coefficients, residuals, and fitted values.",
+      "applications": [
+        "Primary application: stats::lm (Inference + LinReg) is used for elasticity estimation, baseline forecasting, and treatment-adjusted modeling.",
+        "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+        "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+      ]
+    },
+    {
+      "id": "rstudio-predict-stats",
+      "slug": "rstudio-predict-stats",
+      "name": "stats::predict (Scenario Scoring)",
+      "library": "rstudio",
+      "subtopic": "Regression and Forecasting",
+      "tags": [
+        "prediction",
+        "forecasting",
+        "pricing"
+      ],
+      "level": "extended",
+      "summary": "Score new scenarios from trained statistical models.",
+      "syntax": "predict(model, newdata = scenarios)",
+      "description": "Score new scenarios from trained statistical models. Use it for translating fitted models into operational what-if forecasts and demand or conversion forecasting at candidate price/treatment levels. Key parameters: newdata.",
+      "docs": [
+        {
+          "label": "stats::predict (Scenario Scoring) docs",
+          "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/predict.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "newdata",
+          "type": "numeric",
+          "description": "newdata controls how stats::predict (Scenario Scoring) is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numeric vector | matrix",
+        "shape": "one prediction per scenario row",
+        "description": "Output from stats::predict (Scenario Scoring) for downstream analysis and decisioning."
+      },
+      "examples": [
+        {
+          "title": "stats::predict (Scenario Scoring) applied workflow",
+          "scenario": "stats::predict (Scenario Scoring) in a customer-analytics/statistics workflow.",
+          "code": "# Core pattern\npredict(model, newdata = scenarios)",
+          "expectedOutput": "A valid output object that supports inference, forecasting, or segmentation decisions.",
+          "walkthrough": [
+            "Prepare data and assumptions required by the method.",
+            "Apply stats::predict (Scenario Scoring) with explicit inputs and inspect diagnostics/output.",
+            "Translate statistical output into a business recommendation with documented assumptions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair statistical significance with practical business impact before actioning results."
+      ],
+      "related": [],
+      "overview": "Score new scenarios from trained statistical models. Use stats::predict (Scenario Scoring) when translating fitted models into operational what-if forecasts. Typical business pattern: demand or conversion forecasting at candidate price/treatment levels. Key parameters: newdata. Returns numeric vector | matrix with shape one prediction per scenario row.",
+      "applications": [
+        "Primary application: stats::predict (Scenario Scoring) is used for demand or conversion forecasting at candidate price/treatment levels.",
+        "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+        "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+      ]
+    },
+    {
+      "id": "rstudio-kmeans-segmentation",
+      "slug": "rstudio-kmeans-segmentation",
+      "name": "stats::kmeans",
+      "library": "rstudio",
+      "subtopic": "Segmentation",
+      "tags": [
+        "kmeans",
+        "clustering",
+        "customer-analytics"
+      ],
+      "level": "extended",
+      "summary": "Cluster customers into behavior/value-based segments.",
+      "syntax": "res <- kmeans(df_scaled, centers = k, nstart = 30)",
+      "description": "Cluster customers into behavior/value-based segments. Use it for building actionable segments from standardized customer features and RFM-style or behavioral segmentation for targeting and retention strategy. Key parameters: centers, nstart.",
+      "docs": [
+        {
+          "label": "stats::kmeans docs",
+          "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/kmeans.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "centers",
+          "type": "numeric",
+          "description": "centers controls how stats::kmeans is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        },
+        {
+          "name": "nstart",
+          "type": "numeric",
+          "description": "nstart controls how stats::kmeans is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "kmeans",
+        "shape": "cluster labels plus centroid/fit statistics",
+        "description": "Output from stats::kmeans for downstream analysis and decisioning."
+      },
+      "examples": [
+        {
+          "title": "stats::kmeans applied workflow",
+          "scenario": "stats::kmeans in a customer-analytics/statistics workflow.",
+          "code": "# Core pattern\nres <- kmeans(df_scaled, centers = k, nstart = 30)",
+          "expectedOutput": "A valid output object that supports inference, forecasting, or segmentation decisions.",
+          "walkthrough": [
+            "Prepare data and assumptions required by the method.",
+            "Apply stats::kmeans with explicit inputs and inspect diagnostics/output.",
+            "Translate statistical output into a business recommendation with documented assumptions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair statistical significance with practical business impact before actioning results."
+      ],
+      "related": [],
+      "overview": "Cluster customers into behavior/value-based segments. Use stats::kmeans when building actionable segments from standardized customer features. Typical business pattern: RFM-style or behavioral segmentation for targeting and retention strategy. Key parameters: centers, nstart. Returns kmeans with shape cluster labels plus centroid/fit statistics.",
+      "applications": [
+        "Primary application: stats::kmeans is used for RFM-style or behavioral segmentation for targeting and retention strategy.",
+        "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+        "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+      ]
+    },
+    {
+      "id": "rstudio-scale-segmentation",
+      "slug": "rstudio-scale-segmentation",
+      "name": "base::scale (Pre-clustering Standardization)",
+      "library": "rstudio",
+      "subtopic": "Segmentation",
+      "tags": [
+        "scale",
+        "standardization",
+        "kmeans"
+      ],
+      "level": "extended",
+      "summary": "Standardize numeric variables before distance-based modeling.",
+      "syntax": "df_scaled <- scale(df_numeric)",
+      "description": "Standardize numeric variables before distance-based modeling. Use it for preventing high-magnitude variables from dominating cluster distance and feature normalization before k-means or similarity-based profiling. Key parameters: x.",
+      "docs": [
+        {
+          "label": "base::scale (Pre-clustering Standardization) docs",
+          "url": "https://stat.ethz.ch/R-manual/R-devel/library/base/html/scale.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "x",
+          "type": "data.frame | matrix",
+          "description": "x controls how base::scale (Pre-clustering Standardization) is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "matrix",
+        "shape": "same rows and selected numeric columns, standardized",
+        "description": "Output from base::scale (Pre-clustering Standardization) for downstream analysis and decisioning."
+      },
+      "examples": [
+        {
+          "title": "base::scale (Pre-clustering Standardization) applied workflow",
+          "scenario": "base::scale (Pre-clustering Standardization) in a customer-analytics/statistics workflow.",
+          "code": "# Core pattern\ndf_scaled <- scale(df_numeric)",
+          "expectedOutput": "A valid output object that supports inference, forecasting, or segmentation decisions.",
+          "walkthrough": [
+            "Prepare data and assumptions required by the method.",
+            "Apply base::scale (Pre-clustering Standardization) with explicit inputs and inspect diagnostics/output.",
+            "Translate statistical output into a business recommendation with documented assumptions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair statistical significance with practical business impact before actioning results."
+      ],
+      "related": [],
+      "overview": "Standardize numeric variables before distance-based modeling. Use base::scale (Pre-clustering Standardization) when preventing high-magnitude variables from dominating cluster distance. Typical business pattern: feature normalization before k-means or similarity-based profiling. Key parameters: x. Returns matrix with shape same rows and selected numeric columns, standardized.",
+      "applications": [
+        "Primary application: base::scale (Pre-clustering Standardization) is used for feature normalization before k-means or similarity-based profiling.",
+        "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+        "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+      ]
+    },
+    {
+      "id": "rstudio-pricing-profit-curve",
+      "slug": "rstudio-pricing-profit-curve",
+      "name": "Pricing Profit Curve Pattern",
+      "library": "rstudio",
+      "subtopic": "Pricing and Forecasting",
+      "tags": [
+        "pricing",
+        "optimization",
+        "profit"
+      ],
+      "level": "extended",
+      "summary": "Optimize price by evaluating predicted demand and profit over a candidate grid.",
+      "syntax": "price_grid <- seq(0.5, 3, 0.01); best <- profit_df[which.max(profit_df$profit), ]",
+      "description": "Optimize price by evaluating predicted demand and profit over a candidate grid. Use it for finding profit-maximizing prices under estimated demand elasticity and price-grid simulation with demand predictions and margin assumptions. Key parameters: price_grid, profit_formula.",
+      "docs": [
+        {
+          "label": "Pricing Profit Curve Pattern docs",
+          "url": "https://stat.ethz.ch/R-manual/R-devel/library/base/html/which.min.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "price_grid",
+          "type": "numeric",
+          "description": "price_grid controls how Pricing Profit Curve Pattern is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        },
+        {
+          "name": "profit_formula",
+          "type": "formula",
+          "description": "profit_formula controls how Pricing Profit Curve Pattern is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "data.frame + optimal row",
+        "shape": "rows = candidate prices with predicted quantity/profit",
+        "description": "Output from Pricing Profit Curve Pattern for downstream analysis and decisioning."
+      },
+      "examples": [
+        {
+          "title": "Pricing Profit Curve Pattern applied workflow",
+          "scenario": "Pricing Profit Curve Pattern in a customer-analytics/statistics workflow.",
+          "code": "# Core pattern\nprice_grid <- seq(0.5, 3, 0.01); best <- profit_df[which.max(profit_df$profit), ]",
+          "expectedOutput": "A valid output object that supports inference, forecasting, or segmentation decisions.",
+          "walkthrough": [
+            "Prepare data and assumptions required by the method.",
+            "Apply Pricing Profit Curve Pattern with explicit inputs and inspect diagnostics/output.",
+            "Translate statistical output into a business recommendation with documented assumptions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair statistical significance with practical business impact before actioning results."
+      ],
+      "related": [],
+      "overview": "Optimize price by evaluating predicted demand and profit over a candidate grid. Use Pricing Profit Curve Pattern when finding profit-maximizing prices under estimated demand elasticity. Typical business pattern: price-grid simulation with demand predictions and margin assumptions. Key parameters: price_grid, profit_formula. Returns data.frame + optimal row with shape rows = candidate prices with predicted quantity/profit.",
+      "applications": [
+        "Primary application: Pricing Profit Curve Pattern is used for price-grid simulation with demand predictions and margin assumptions.",
+        "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+        "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+      ]
+    },
+    {
+      "id": "rstudio-ab-lift-roi",
+      "slug": "rstudio-ab-lift-roi",
+      "name": "A/B Lift and ROI Pattern",
+      "library": "rstudio",
+      "subtopic": "Customer Analytics",
+      "tags": [
+        "ab-testing",
+        "roi",
+        "incrementality"
+      ],
+      "level": "extended",
+      "summary": "Translate experimental lift into incremental profit and ROI.",
+      "syntax": "ATE <- mean(y[test==1]) - mean(y[test==0]); ROI <- 100*(inc_profit-cost)/cost",
+      "description": "Translate experimental lift into incremental profit and ROI. Use it for making go/no-go scaling decisions from experiment outcomes and ATE -> incremental conversions -> incremental profit -> ROI pipeline. Key parameters: ATE, campaign_cost.",
+      "docs": [
+        {
+          "label": "A/B Lift and ROI Pattern docs",
+          "url": "https://en.wikipedia.org/wiki/A/B_testing"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "ATE",
+          "type": "numeric",
+          "description": "ATE controls how A/B Lift and ROI Pattern is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        },
+        {
+          "name": "campaign_cost",
+          "type": "numeric",
+          "description": "campaign_cost controls how A/B Lift and ROI Pattern is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numeric KPIs",
+        "shape": "scalar metrics: lift, incremental profit, ROI",
+        "description": "Output from A/B Lift and ROI Pattern for downstream analysis and decisioning."
+      },
+      "examples": [
+        {
+          "title": "A/B Lift and ROI Pattern applied workflow",
+          "scenario": "A/B Lift and ROI Pattern in a customer-analytics/statistics workflow.",
+          "code": "# Core pattern\nATE <- mean(y[test==1]) - mean(y[test==0]); ROI <- 100*(inc_profit-cost)/cost",
+          "expectedOutput": "A valid output object that supports inference, forecasting, or segmentation decisions.",
+          "walkthrough": [
+            "Prepare data and assumptions required by the method.",
+            "Apply A/B Lift and ROI Pattern with explicit inputs and inspect diagnostics/output.",
+            "Translate statistical output into a business recommendation with documented assumptions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair statistical significance with practical business impact before actioning results."
+      ],
+      "related": [],
+      "overview": "Translate experimental lift into incremental profit and ROI. Use A/B Lift and ROI Pattern when making go/no-go scaling decisions from experiment outcomes. Typical business pattern: ATE -> incremental conversions -> incremental profit -> ROI pipeline. Key parameters: ATE, campaign_cost. Returns numeric KPIs with shape scalar metrics: lift, incremental profit, ROI.",
+      "applications": [
+        "Primary application: A/B Lift and ROI Pattern is used for ATE -> incremental conversions -> incremental profit -> ROI pipeline.",
+        "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+        "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+      ]
+    },
+    {
+      "id": "rstudio-clv-discounted-sum",
+      "slug": "rstudio-clv-discounted-sum",
+      "name": "CLV Discounted Sum Pattern",
+      "library": "rstudio",
+      "subtopic": "Customer Analytics",
+      "tags": [
+        "clv",
+        "retention",
+        "lifetime-value"
+      ],
+      "level": "extended",
+      "summary": "Estimate CLV from margin, retention, discount rate, and time horizon.",
+      "syntax": "CLV <- sum(sapply(0:(T-1), function(t) M * (alpha/(1+r))^t))",
+      "description": "Estimate CLV from margin, retention, discount rate, and time horizon. Use it for setting acquisition ceilings and segment-level investment priorities and discounted cash-flow CLV modeling by customer segment. Key parameters: M, alpha, r, T.",
+      "docs": [
+        {
+          "label": "CLV Discounted Sum Pattern docs",
+          "url": "https://en.wikipedia.org/wiki/Customer_lifetime_value"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "M",
+          "type": "numeric",
+          "description": "M controls how CLV Discounted Sum Pattern is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        },
+        {
+          "name": "alpha",
+          "type": "numeric",
+          "description": "alpha controls how CLV Discounted Sum Pattern is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        },
+        {
+          "name": "r",
+          "type": "numeric",
+          "description": "r controls how CLV Discounted Sum Pattern is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        },
+        {
+          "name": "T",
+          "type": "numeric",
+          "description": "T controls how CLV Discounted Sum Pattern is applied.",
+          "values": [
+            "project-specific"
+          ],
+          "pitfalls": [
+            "Validate assumptions and variable definitions before interpreting results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "numeric",
+        "shape": "scalar CLV per segment/profile",
+        "description": "Output from CLV Discounted Sum Pattern for downstream analysis and decisioning."
+      },
+      "examples": [
+        {
+          "title": "CLV Discounted Sum Pattern applied workflow",
+          "scenario": "CLV Discounted Sum Pattern in a customer-analytics/statistics workflow.",
+          "code": "# Core pattern\nCLV <- sum(sapply(0:(T-1), function(t) M * (alpha/(1+r))^t))",
+          "expectedOutput": "A valid output object that supports inference, forecasting, or segmentation decisions.",
+          "walkthrough": [
+            "Prepare data and assumptions required by the method.",
+            "Apply CLV Discounted Sum Pattern with explicit inputs and inspect diagnostics/output.",
+            "Translate statistical output into a business recommendation with documented assumptions."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair statistical significance with practical business impact before actioning results."
+      ],
+      "related": [],
+      "overview": "Estimate CLV from margin, retention, discount rate, and time horizon. Use CLV Discounted Sum Pattern when setting acquisition ceilings and segment-level investment priorities. Typical business pattern: discounted cash-flow CLV modeling by customer segment. Key parameters: M, alpha, r, T. Returns numeric with shape scalar CLV per segment/profile.",
+      "applications": [
+        "Primary application: CLV Discounted Sum Pattern is used for discounted cash-flow CLV modeling by customer segment.",
+        "Workflow application: treat this as a repeatable analytics step with explicit assumptions and validation checks.",
+        "Delivery application: document parameters, uncertainty, and business implications so teammates can reproduce decisions."
+      ]
+    }
+  ],
+  "overview": "R Studio (R + tidyverse) coverage emphasizes applied statistics and customer analytics from coursework: descriptive stats, t-tests, ANOVA, linear regression, A/B lift/ROI, k-means segmentation, pricing optimization, and CLV estimation.",
+  "applications": [
+    "Run inferential statistics for experiments and multi-condition business comparisons.",
+    "Build predictive and segmentation workflows for customer analytics decisions.",
+    "Convert model/test outputs into pricing, acquisition, and retention actions with ROI/CLV framing."
+  ]
+}
