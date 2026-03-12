@@ -8,6 +8,7 @@ type WorkflowTabId =
   | "all"
   | "feature-engineering"
   | "eda"
+  | "visualization"
   | "modeling"
   | "customer-analytics"
   | "data-prep";
@@ -28,7 +29,11 @@ const workflowTabs: { id: WorkflowTabId; label: string; description: string }[] 
     label: "EDA",
     description: "Structured exploratory analysis pipelines for new datasets."
   },
-  {
+    {
+    id: "visualization",
+    label: "Visualization",
+    description: "Beautiful chart design, dashboard layout, and visual storytelling workflows."
+  },{
     id: "modeling",
     label: "Modeling",
     description: "Train/evaluate/predict workflows across classification and regression tasks."
@@ -62,6 +67,12 @@ function recipesForTab(recipes: Recipe[], tabId: WorkflowTabId): Recipe[] {
 
   if (tabId === "eda") {
     return recipes.filter((recipe) => hasAnyTag(recipe, ["eda", "distribution", "outliers", "step-by-step"]));
+  }
+
+  if (tabId === "visualization") {
+    return recipes.filter((recipe) =>
+      hasAnyTag(recipe, ["visualization", "dashboard", "storytelling", "chart-design", "interactive"])
+    );
   }
 
   if (tabId === "modeling") {
@@ -189,3 +200,6 @@ export function WorkflowsBrowser({
     </div>
   );
 }
+
+
+

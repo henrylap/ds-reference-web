@@ -21,6 +21,19 @@ interface RelatedCommand {
   name: string;
 }
 
+function isVisualizationCommand(command: CommandEntry) {
+  if (command.library === "matplotlib" || command.library === "seaborn") {
+    return true;
+  }
+
+  if (command.library === "rstudio") {
+    return command.subtopic.toLowerCase() === "visualization" ||
+      command.tags.some((tag) => ["visualization", "ggplot2", "chart", "dashboard"].includes(tag.toLowerCase()));
+  }
+
+  return command.tags.some((tag) => ["visualization", "dashboard", "chart", "plot"].includes(tag.toLowerCase()));
+}
+
 function codeLanguageForLibrary(library: CommandEntry["library"]) {
   if (library === "sql") {
     return "sql";
@@ -66,6 +79,7 @@ export function CommandTabs({
 
   const codeLanguage = codeLanguageForLibrary(command.library);
   const runHint = runHintForLibrary(command.library);
+  const showVizChecklist = isVisualizationCommand(command);
 
   return (
     <section className="panel overflow-hidden reveal-in">
@@ -114,6 +128,19 @@ export function CommandTabs({
                 </ul>
               </article>
             </div>
+
+            {showVizChecklist ? (
+              <article className="rounded-xl border border-[var(--border)] bg-white/80 p-4">
+                <h3 className="text-base font-semibold">Visualization QA Checklist</h3>
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
+                  <li>State one message in the title and ensure the chart answers that exact question.</li>
+                  <li>Keep units, scales, and ordering explicit so comparisons are trustworthy.</li>
+                  <li>Use color intentionally: one highlight color, neutral context colors.</li>
+                  <li>Annotate thresholds, outliers, and events that drive business decisions.</li>
+                  <li>Check readability at final export size before sharing with stakeholders.</li>
+                </ul>
+              </article>
+            ) : null}
 
             <div>
               <h3 className="text-base font-semibold">Detailed Description</h3>

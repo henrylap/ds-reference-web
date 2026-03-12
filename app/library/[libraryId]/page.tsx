@@ -1,7 +1,7 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import { CommandCard } from "@/components/command-card";
-import { CodeBlock } from "@/components/code-block";
+import { VisualizationPlayground } from "@/components/visualization-playground";
 import {
   getLibrary,
   groupCommandsBySubtopic,
@@ -10,10 +10,42 @@ import {
 } from "@/lib/content";
 import type { LibraryId } from "@/lib/types";
 
-const vizStyleSnippets: Record<string, string> = {
-  matplotlib: `import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(9, 5), dpi=130)\n\nax.plot(months, revenue, color='#0f7a84', linewidth=2.8, marker='o')\nax.set_title('Monthly Revenue Trend', fontsize=15, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.grid(alpha=0.28)\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#eaf3f6')\n\nplt.tight_layout()`,
-  seaborn: `import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue by Channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\n\nsns.move_legend(ax, 'upper left', frameon=True)\nax.figure.set_facecolor('#edf5f8')\nplt.tight_layout()`
+const vizBestPractices: Record<"matplotlib" | "seaborn" | "rstudio", string[]> = {
+  matplotlib: [
+    "Design each chart around one explicit decision question (trend, ranking, distribution, relationship).",
+    "Use consistent axis scales and units across dashboard tiles to avoid misleading comparisons.",
+    "Highlight the key story with one accent color and keep all non-key marks muted.",
+    "Annotate thresholds, events, and top movers directly on the chart for stakeholder clarity.",
+    "Export figures with consistent dpi/size so slide and report layouts stay aligned."
+  ],
+  seaborn: [
+    "Start with tidy data and semantic mappings (x/y/hue/style) before styling tweaks.",
+    "Control category count and ordering to keep legends and facet grids readable.",
+    "Prefer confidence intervals and distribution overlays to communicate uncertainty honestly.",
+    "Standardize themes and palette choices once at the top of notebooks/scripts.",
+    "Use small multiples (FacetGrid/catplot) for comparison, not overloaded single charts."
+  ],
+  rstudio: [
+    "Use ggplot layers intentionally: data -> mapping -> geometry -> scale -> annotation -> theme.",
+    "Set factor ordering and labels early so business comparisons read in the right order.",
+    "Use minimal themes and direct labeling to reduce chartjunk in executive dashboards.",
+    "Facet by segment/cohort when comparing multiple groups instead of stacking too many legends.",
+    "Keep a reusable theme object for brand-consistent chart outputs across assignments/projects."
+  ]
 };
+
+function isVisualizationLibrary(
+  libraryId: LibraryId
+): libraryId is "matplotlib" | "seaborn" | "rstudio" {
+  return libraryId === "matplotlib" || libraryId === "seaborn" || libraryId === "rstudio";
+}
+
+function getVisualizationTips(libraryId: LibraryId): string[] {
+  if (libraryId === "matplotlib" || libraryId === "seaborn" || libraryId === "rstudio") {
+    return vizBestPractices[libraryId];
+  }
+  return [];
+}
 
 export function generateStaticParams() {
   return libraries.map((library) => ({ libraryId: library.library }));
@@ -32,6 +64,7 @@ export default async function LibraryPage({
   }
 
   const grouped = groupCommandsBySubtopic(library.commands);
+  const showVizSection = isVisualizationLibrary(library.library);
 
   return (
     <div className="space-y-5">
@@ -63,7 +96,9 @@ export default async function LibraryPage({
 
           <article className="rounded-xl border border-[var(--border)] bg-white/80 p-4">
             <h2 className="text-base font-semibold">Coverage Snapshot</h2>
-            <p className="mt-2 text-sm subtle">{library.commands.length} command references with parameter index, examples, and official docs links.</p>
+            <p className="mt-2 text-sm subtle">
+              {library.commands.length} command references with parameter index, examples, and official docs links.
+            </p>
             <div className="mt-2 flex flex-wrap gap-2">
               {library.subtopics.slice(0, 6).map((topic) => (
                 <span key={topic} className="badge">{topic}</span>
@@ -72,18 +107,24 @@ export default async function LibraryPage({
           </article>
         </div>
 
-        {library.library === "matplotlib" || library.library === "seaborn" ? (
-          <article className="mt-4 rounded-xl border border-[var(--border)] bg-white/75 p-4">
-            <h2 className="text-base font-semibold">Beautiful Chart Defaults Starter</h2>
-            <p className="mt-1 text-sm subtle">Use this styling baseline for stakeholder-ready charts, then adapt palette/labels to your brand.</p>
-            <div className="mt-3">
-              <CodeBlock
-                code={vizStyleSnippets[library.library]}
-                language="python"
-                showRunLocalHint={true}
-              />
-            </div>
+        {showVizSection ? (
+          <article className="mt-4 rounded-xl border border-[var(--border)] bg-white/80 p-4">
+            <h2 className="text-base font-semibold">Beautiful Visuals and Dashboard Best Practices</h2>
+            <p className="mt-1 text-sm subtle">
+              Apply this checklist as a QA gate before presenting charts in EDA reviews, model readouts, or executive dashboards.
+            </p>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
+              {getVisualizationTips(library.library).map((tip) => (
+                <li key={tip}>{tip}</li>
+              ))}
+            </ul>
           </article>
+        ) : null}
+
+        {showVizSection ? (
+          <div className="mt-4">
+            <VisualizationPlayground defaultLanguage={library.library === "rstudio" ? "r" : "python"} />
+          </div>
         ) : null}
 
         <div className="mt-4 grid gap-3 lg:grid-cols-2">

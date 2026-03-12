@@ -529,5 +529,88 @@
     ],
     "code": "import pandas as pd\n\n# Toy customer event stream\ndf = pd.DataFrame({\n    'customer_id':[1,1,1,2,2,2,3,3,3],\n    'event_date':pd.to_datetime(['2026-01-01','2026-01-05','2026-01-20','2026-01-02','2026-01-12','2026-01-25','2026-01-03','2026-01-10','2026-01-28']),\n    'spend':[20,35,40,10,15,50,12,18,22],\n    'tickets':[1,0,2,0,1,1,0,1,0]\n})\n\ndf = df.sort_values(['customer_id','event_date']).copy()\ng_spend = df.groupby('customer_id')['spend']\ng_tickets = df.groupby('customer_id')['tickets']\n\n# Historical-only features (shift first)\ndf['spend_lag1'] = g_spend.shift(1)\ndf['spend_roll3_mean_hist'] = g_spend.shift(1).rolling(3).mean()\ndf['tickets_roll3_sum_hist'] = g_tickets.shift(1).rolling(3).sum()\n\n# Cross-sectional relative feature on same timestamp slice\ndf['daily_spend_share'] = df['spend'] / df.groupby('event_date')['spend'].transform('sum')\n\n# Remove rows without enough history\nfeature_df = df.dropna().copy()\nprint(feature_df[['customer_id','event_date','spend','spend_lag1','spend_roll3_mean_hist','tickets_roll3_sum_hist','daily_spend_share']])",
     "outputHint": "A leakage-safe event feature table using lagged rolling aggregates and clear temporal guardrails."
+  },
+  {
+    "id": "recipe-viz-best-practices-chart-design",
+    "title": "Visualization Best Practices: Chart Design and Storytelling",
+    "libraries": [
+      "python",
+      "pandas",
+      "seaborn",
+      "matplotlib"
+    ],
+    "tags": [
+      "workflow",
+      "visualization",
+      "best-practices",
+      "storytelling",
+      "chart-design"
+    ],
+    "goal": "Turn raw exploratory charts into stakeholder-ready visuals with clear business messages and defensible design choices.",
+    "steps": [
+      "Define one chart-level question per visual (trend, comparison, distribution, relationship).",
+      "Pick chart forms that match the question and avoid overloading one figure with multiple narratives.",
+      "Standardize scales, units, and ordering before adding stylistic elements.",
+      "Use one accent color for emphasis and keep context series muted.",
+      "Annotate key events, targets, and outliers directly on the chart.",
+      "Apply readable typography and whitespace so charts survive slide/report compression.",
+      "Validate interpretation with a second reviewer before publishing.",
+      "Export in reproducible figure sizes for notebook, slide, and dashboard contexts."
+    ],
+    "code": "import pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n\n# Toy KPI table\ndf = pd.DataFrame({\n    'month': ['Jan','Feb','Mar','Apr','May','Jun'],\n    'revenue_k': [120,128,135,149,158,171],\n    'target_k': [130,130,130,145,150,160],\n    'channel': ['Paid','Paid','Paid','Organic','Organic','Organic']\n})\n\n# 1) Consistent visual defaults\nsns.set_theme(style='whitegrid', context='talk')\n\n# 2) Build chart around one question: Did revenue cross target and when?\nfig, ax = plt.subplots(figsize=(9,5), dpi=130)\nax.plot(df['month'], df['revenue_k'], color='#2f5d7c', linewidth=2.6, marker='o', label='Revenue')\nax.plot(df['month'], df['target_k'], color='#cc7a2f', linewidth=1.8, linestyle='--', label='Target')\n\n# 3) Annotate key insight\ncross_idx = (df['revenue_k'] >= df['target_k']).idxmax()\nax.annotate('Target crossed', xy=(cross_idx, df.loc[cross_idx, 'revenue_k']),\n            xytext=(cross_idx-0.2, df.loc[cross_idx, 'revenue_k']+12),\n            arrowprops={'arrowstyle': '->', 'color': '#111827'}, fontsize=10)\n\nax.set_title('Monthly Revenue vs Target (Single Message Visual)')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.legend(frameon=True)\nplt.tight_layout()\nprint(df[['month','revenue_k','target_k']])",
+    "outputHint": "A single-message trend visual with explicit target comparison and annotation that is presentation-ready."
+  },
+  {
+    "id": "recipe-interactive-dashboard-matplotlib-slider",
+    "title": "Interactive Dashboard Pattern: KPI Grid + Scenario Slider",
+    "libraries": [
+      "python",
+      "pandas",
+      "matplotlib",
+      "seaborn"
+    ],
+    "tags": [
+      "workflow",
+      "visualization",
+      "dashboard",
+      "interactive",
+      "kpi"
+    ],
+    "goal": "Prototype an interactive dashboard where scenario assumptions update KPI visuals in real time.",
+    "steps": [
+      "Assemble core KPI series (trend, volume, and rate) at a consistent time grain.",
+      "Create a 2x2 dashboard grid with shared styling and clear metric labeling.",
+      "Add scenario controls (slider) to test best/base/worst assumptions quickly.",
+      "Update only affected artists for smooth interaction and reproducibility.",
+      "Use annotations and threshold lines so decision criteria remain visible during interaction.",
+      "Document slider ranges and assumptions before promoting to BI/dashboard tooling."
+    ],
+    "code": "import numpy as np\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nfrom matplotlib.widgets import Slider\n\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({\n    'week': np.arange(1, 13),\n    'revenue_k': [96, 101, 107, 113, 118, 125, 132, 136, 142, 149, 155, 162],\n    'orders': [420, 436, 451, 468, 479, 495, 512, 520, 538, 552, 568, 583],\n    'conv_rate': [0.028,0.029,0.030,0.031,0.032,0.033,0.034,0.034,0.035,0.036,0.037,0.038]\n})\n\nfig, axes = plt.subplots(2, 2, figsize=(12, 7), dpi=130)\nplt.subplots_adjust(bottom=0.16, hspace=0.35, wspace=0.28)\n\n# Dashboard tiles\nline_ax = axes[0, 0]\nbar_ax = axes[0, 1]\nrate_ax = axes[1, 0]\nsummary_ax = axes[1, 1]\n\nline, = line_ax.plot(df['week'], df['revenue_k'], color='#2f5d7c', marker='o', linewidth=2.2)\nline_ax.axhline(150, color='#cc7a2f', linestyle='--', linewidth=1.4)\nline_ax.set_title('Revenue Trend')\nline_ax.set_xlabel('Week')\nline_ax.set_ylabel('Revenue (k USD)')\n\nbar_ax.bar(df['week'], df['orders'], color='#4a9ba6', alpha=0.9)\nbar_ax.set_title('Weekly Orders')\nbar_ax.set_xlabel('Week')\nbar_ax.set_ylabel('Orders')\n\nrate_ax.plot(df['week'], df['conv_rate'], color='#1f3a93', marker='o', linewidth=2.0)\nrate_ax.set_title('Conversion Rate')\nrate_ax.set_xlabel('Week')\nrate_ax.set_ylabel('Rate')\n\nsummary_text = summary_ax.text(0.02, 0.7, '', fontsize=11)\nsummary_ax.axis('off')\n\ndef render_summary(mult):\n    scaled_rev = df['revenue_k'] * mult\n    msg = (\n        f\"Scenario multiplier: {mult:.2f}\\n\"\n        f\"Avg revenue: {scaled_rev.mean():.1f}k\\n\"\n        f\"Peak revenue: {scaled_rev.max():.1f}k\\n\"\n        f\"Target hits: {(scaled_rev >= 150).sum()} / {len(df)}\"\n    )\n    summary_text.set_text(msg)\n\nslider_ax = fig.add_axes([0.2, 0.05, 0.6, 0.035])\nscenario = Slider(slider_ax, 'Demand Multiplier', 0.85, 1.20, valinit=1.00, valstep=0.01)\n\ndef update(mult):\n    scaled_rev = df['revenue_k'] * mult\n    line.set_ydata(scaled_rev)\n    line_ax.set_ylim(scaled_rev.min() - 6, scaled_rev.max() + 9)\n    render_summary(mult)\n    fig.canvas.draw_idle()\n\nrender_summary(1.0)\nscenario.on_changed(update)\nplt.show()",
+    "outputHint": "An interactive KPI dashboard mockup where a scenario slider updates revenue trend and summary metrics live."
+  },
+  {
+    "id": "recipe-rstudio-dashboard-ggplot2-facets",
+    "title": "R Dashboard Pattern: ggplot2 Small Multiples for Executive Readouts",
+    "libraries": [
+      "rstudio"
+    ],
+    "tags": [
+      "workflow",
+      "visualization",
+      "dashboard",
+      "ggplot2",
+      "storytelling"
+    ],
+    "goal": "Build a clean dashboard-style readout in R with consistent design, facet structure, and actionable annotations.",
+    "steps": [
+      "Reshape KPI data into tidy long format so one plotting grammar works across metrics.",
+      "Use facetting to present multiple KPI trends in a single coherent dashboard visual.",
+      "Apply a consistent theme, axis formatting, and color intent for readability.",
+      "Add threshold/reference lines and labels where decisions are made.",
+      "Order panels and legends to match business narrative flow (acquisition -> conversion -> revenue).",
+      "Export with fixed dimensions for predictable appearance in decks and reports."
+    ],
+    "code": "library(dplyr)\nlibrary(tidyr)\nlibrary(ggplot2)\n\n# Toy KPI table\ndf <- tibble::tibble(\n  week = 1:10,\n  leads = c(180, 192, 205, 213, 226, 239, 248, 254, 266, 275),\n  conversion_rate = c(0.021, 0.022, 0.023, 0.024, 0.025, 0.026, 0.026, 0.027, 0.028, 0.029),\n  revenue_k = c(88, 93, 97, 101, 108, 114, 119, 124, 131, 138)\n)\n\ndf_long <- df %>%\n  pivot_longer(cols = c(leads, conversion_rate, revenue_k), names_to = 'metric', values_to = 'value') %>%\n  mutate(metric = factor(metric, levels = c('leads', 'conversion_rate', 'revenue_k')))\n\nggplot(df_long, aes(x = week, y = value, group = metric)) +\n  geom_line(color = '#2f5d7c', linewidth = 1.1) +\n  geom_point(color = '#4a9ba6', size = 2.0) +\n  facet_wrap(~ metric, scales = 'free_y', ncol = 3) +\n  geom_hline(data = tibble::tibble(metric = factor('revenue_k', levels = levels(df_long$metric)), yint = 120),\n             aes(yintercept = yint), linetype = 'dashed', color = '#cc7a2f', inherit.aes = FALSE) +\n  labs(\n    title = 'Weekly KPI Dashboard (Small Multiples)',\n    subtitle = 'Consistent structure improves metric-to-metric comparison',\n    x = 'Week',\n    y = NULL\n  ) +\n  theme_minimal(base_size = 12) +\n  theme(\n    strip.text = element_text(face = 'bold'),\n    panel.grid.minor = element_blank(),\n    plot.title = element_text(face = 'bold')\n  )",
+    "outputHint": "A faceted ggplot dashboard visual with consistent style, clear panel ordering, and reference-line context."
   }
 ]
