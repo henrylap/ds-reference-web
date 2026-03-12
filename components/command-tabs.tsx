@@ -156,31 +156,86 @@ export function CommandTabs({
         ) : null}
 
         {activeTab === "parameters" ? (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[680px] border-collapse text-sm">
-              <thead>
-                <tr className="border-b border-[var(--border)] text-left">
-                  <th className="py-2 pr-3 font-semibold">Parameter</th>
-                  <th className="py-2 pr-3 font-semibold">Type</th>
-                  <th className="py-2 pr-3 font-semibold">Default</th>
-                  <th className="py-2 pr-3 font-semibold">Meaning</th>
-                  <th className="py-2 pr-3 font-semibold">Possible Values</th>
-                  <th className="py-2 font-semibold">Pitfalls</th>
-                </tr>
-              </thead>
-              <tbody>
-                {parameterRows.map((parameter) => (
-                  <tr key={parameter.name} className="border-b border-[var(--border)] align-top">
-                    <td className="py-3 pr-3 font-mono text-xs md:text-sm">{parameter.name}</td>
-                    <td className="py-3 pr-3">{parameter.type}</td>
-                    <td className="py-3 pr-3">{parameter.defaultValue}</td>
-                    <td className="py-3 pr-3">{parameter.description}</td>
-                    <td className="py-3 pr-3">{parameter.values.join(", ")}</td>
-                    <td className="py-3">{parameter.pitfalls.join("; ")}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="space-y-3">
+            {parameterRows.length === 0 ? (
+              <p className="text-sm subtle">No parameter details were provided for this command yet.</p>
+            ) : (
+              <div className="overflow-x-auto">
+                <div className="min-w-[900px] overflow-hidden rounded-xl border border-[var(--border)]">
+                  <div className="grid grid-cols-[1.2fr_1fr_0.9fr_2fr_1.8fr_1.8fr] gap-3 border-b border-[var(--border)] bg-[var(--surface-alt)] px-3 py-2 text-xs font-semibold uppercase tracking-wide subtle">
+                    <span>Parameter</span>
+                    <span>Type</span>
+                    <span>Default</span>
+                    <span>Meaning</span>
+                    <span>Possible Values</span>
+                    <span>Pitfalls and Notes</span>
+                  </div>
+
+                  {parameterRows.map((parameter, index) => {
+                    const values = parameter.values ?? [];
+                    const pitfalls = parameter.pitfalls ?? [];
+
+                    return (
+                      <article
+                        key={parameter.name}
+                        className={`grid grid-cols-[1.2fr_1fr_0.9fr_2fr_1.8fr_1.8fr] gap-3 px-3 py-3 text-sm ${
+                          index % 2 === 0 ? "bg-white/70" : "bg-[var(--surface-alt)]/55"
+                        } ${index !== parameterRows.length - 1 ? "border-b border-[var(--border)]" : ""}`}
+                      >
+                        <div>
+                          <p className="font-mono text-xs md:text-sm">{parameter.name}</p>
+                        </div>
+
+                        <div>
+                          <span className="inline-flex rounded-md border border-[var(--border)] bg-white px-2 py-1 text-xs font-medium">
+                            {parameter.type}
+                          </span>
+                        </div>
+
+                        <div>
+                          <span className="inline-flex rounded-md border border-[var(--border)] bg-white px-2 py-1 text-xs font-medium">
+                            {parameter.defaultValue}
+                          </span>
+                        </div>
+
+                        <p className="leading-relaxed">{parameter.description}</p>
+
+                        <div className="space-y-1">
+                          {values.length === 0 ? (
+                            <p className="text-xs subtle">No constrained values; follow API defaults.</p>
+                          ) : (
+                            values.map((value) => (
+                              <span
+                                key={value}
+                                className="mr-1 inline-flex rounded-md border border-[var(--border)] bg-white px-2 py-0.5 text-xs"
+                              >
+                                {value}
+                              </span>
+                            ))
+                          )}
+                        </div>
+
+                        <div>
+                          {pitfalls.length === 0 ? (
+                            <p className="text-xs subtle">No common pitfalls listed.</p>
+                          ) : (
+                            <ul className="list-disc space-y-1 pl-4 text-xs md:text-sm leading-relaxed">
+                              {pitfalls.map((pitfall) => (
+                                <li key={pitfall}>{pitfall}</li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            <p className="text-xs subtle">
+              Parameter behavior can vary by library version and data shape. Verify defaults in official docs when moving to production.
+            </p>
           </div>
         ) : null}
 

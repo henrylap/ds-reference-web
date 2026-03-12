@@ -1,7 +1,15 @@
-import { CodeBlock } from "@/components/code-block";
+import { RecipeWorkflowCard } from "@/components/recipe-workflow-card";
 import { recipeList, libraryLabels } from "@/lib/content";
 
 export default function RecipesPage() {
+  const featureEngineeringRecipes = recipeList.filter((recipe) =>
+    recipe.tags.includes("feature-engineering")
+  );
+
+  const otherRecipes = recipeList.filter(
+    (recipe) => !recipe.tags.includes("feature-engineering")
+  );
+
   return (
     <div className="space-y-4">
       <section className="panel p-5">
@@ -9,45 +17,48 @@ export default function RecipesPage() {
         <p className="mt-2 text-sm subtle">
           End-to-end patterns that combine multiple libraries for common DS workflows.
         </p>
+        <p className="mt-1 text-xs subtle">
+          New: interactive checklist + visual workflow previews to help you adapt each pattern quickly.
+        </p>
       </section>
 
-      {recipeList.map((recipe) => (
-        <article key={recipe.id} className="panel p-4 md:p-5">
-          <h2 className="text-xl font-semibold">{recipe.title}</h2>
-          <p className="mt-1 text-sm subtle">{recipe.goal}</p>
+      {featureEngineeringRecipes.length > 0 ? (
+        <section className="space-y-3">
+          <article className="panel p-4">
+            <h2 className="text-xl font-semibold">Feature Engineering Playbook</h2>
+            <p className="mt-2 text-sm subtle">
+              Step-by-step tutorials for designing, validating, and productionizing strong features
+              across numeric, categorical, datetime, and aggregated event data.
+            </p>
+          </article>
 
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {recipe.libraries.map((library) => (
-              <span key={library} className="badge">
-                {libraryLabels[library]}
-              </span>
-            ))}
-            {recipe.tags.map((tag) => (
-              <span key={tag} className="badge">
-                {tag}
-              </span>
-            ))}
-          </div>
+          {featureEngineeringRecipes.map((recipe) => (
+            <RecipeWorkflowCard
+              key={recipe.id}
+              recipe={recipe}
+              libraryLabels={libraryLabels}
+            />
+          ))}
+        </section>
+      ) : null}
 
-          <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_1.4fr]">
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wide subtle">Steps</h3>
-              <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm">
-                {recipe.steps.map((step) => (
-                  <li key={step}>{step}</li>
-                ))}
-              </ol>
-              <p className="mt-3 rounded-xl border border-[var(--border)] bg-[var(--surface-alt)] p-3 text-sm">
-                <strong>Output hint:</strong> {recipe.outputHint}
-              </p>
-            </div>
-
-            <div>
-              <CodeBlock code={recipe.code} language="python" showRunLocalHint={true} />
-            </div>
-          </div>
+      <section className="space-y-3">
+        <article className="panel p-4">
+          <h2 className="text-xl font-semibold">All Other Workflows</h2>
+          <p className="mt-1 text-sm subtle">
+            Complete examples for EDA, modeling, forecasting, experimentation, and deployment
+            handoffs.
+          </p>
         </article>
-      ))}
+
+        {otherRecipes.map((recipe) => (
+          <RecipeWorkflowCard
+            key={recipe.id}
+            recipe={recipe}
+            libraryLabels={libraryLabels}
+          />
+        ))}
+      </section>
     </div>
   );
 }

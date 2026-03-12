@@ -321,5 +321,213 @@
     ],
     "code": "# 1) SQL extraction template (run in warehouse)\n# WITH base AS (\n#   SELECT o.customer_id,\n#          COUNT(*) AS orders_90d,\n#          SUM(o.revenue) AS revenue_90d,\n#          AVG(o.discount_pct) AS avg_discount_90d,\n#          MAX(o.order_date) AS last_order_date\n#   FROM orders o\n#   WHERE o.order_date >= CURRENT_DATE - INTERVAL '90 day'\n#   GROUP BY 1\n# )\n# SELECT * FROM base;\n\nimport pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.ensemble import RandomForestClassifier\n\n# 2) Python handoff dataset (toy)\ndf = pd.DataFrame({\n    'customer_id':[1,2,3,4,5,6],\n    'orders_90d':[1,6,2,8,3,7],\n    'revenue_90d':[40,520,85,710,120,640],\n    'avg_discount_90d':[0.02,0.08,0.03,0.12,0.05,0.10],\n    'churn_next_30d':[1,0,1,0,1,0]\n})\n\nX = df[['orders_90d','revenue_90d','avg_discount_90d']]\ny = df['churn_next_30d']\nXtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.33, random_state=42, stratify=y)\n\npre = ColumnTransformer([('num', StandardScaler(), X.columns.tolist())])\nmodel = Pipeline([('pre', pre), ('rf', RandomForestClassifier(n_estimators=250, random_state=42))])\nmodel.fit(Xtr, ytr)\n\n# 3) Score and handoff\ndf['churn_risk'] = model.predict_proba(X)[:,1]\nscored = df[['customer_id','churn_risk']].sort_values('churn_risk', ascending=False)\nprint(scored)",
     "outputHint": "A reproducible pattern for warehouse feature extraction, model training, and scored output table."
+  },
+  {
+    "id": "recipe-full-eda-retail-transactions",
+    "title": "Full EDA Pipeline: Retail Transactions (Step-by-Step)",
+    "libraries": [
+      "python",
+      "pandas",
+      "seaborn",
+      "matplotlib"
+    ],
+    "tags": [
+      "workflow",
+      "eda",
+      "retail",
+      "step-by-step"
+    ],
+    "goal": "Run a complete first-pass EDA on a new transaction dataset and produce decision-ready findings.",
+    "steps": [
+      "Define business question, KPI, and analysis grain (row = order/transaction/customer-day).",
+      "Import data, parse dates, and assert expected schema and dtypes.",
+      "Audit data quality: null rates, duplicates, impossible values, date coverage gaps.",
+      "Run univariate diagnostics for core metrics (qty, price, revenue).",
+      "Create datetime features (year/month/weekday) and profile seasonality.",
+      "Build segment scorecards with groupby named aggregations (region/channel/category).",
+      "Add share-of-group metrics to identify concentration and top contributors.",
+      "Package outputs: quality table, trend table, segment KPI table, and actionable hypotheses."
+    ],
+    "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'order_id':[1,2,3,4,5,6],\n    'order_date':['2026-01-02','2026-01-03','2026-02-10','2026-02-14','2026-03-01','2026-03-05'],\n    'region':['West','West','East','South','South','West'],\n    'channel':['Store','Online','Store','Online','Store','Online'],\n    'qty':[2,1,3,1,4,2],\n    'unit_price':[35,50,20,55,18,65]\n})\n\ndf['order_date'] = pd.to_datetime(df['order_date'])\ndf['revenue'] = df['qty'] * df['unit_price']\n\nprint('null_rates', df.isna().mean().round(3).to_dict())\nprint('dup_orders', int(df['order_id'].duplicated().sum()))\n\ndf = df.assign(month=df['order_date'].dt.to_period('M').astype(str), weekday=df['order_date'].dt.day_name())\nmonthly = df.groupby('month', as_index=False).agg(total_revenue=('revenue','sum'), orders=('order_id','nunique'))\nsegment = df.groupby(['region','channel'], as_index=False).agg(total_revenue=('revenue','sum'), avg_order=('revenue','mean'))\ndf['share_in_region'] = df['revenue'] / df.groupby('region')['revenue'].transform('sum')\n\nprint(monthly)\nprint(segment)\nprint(df.sort_values('share_in_region', ascending=False))",
+    "outputHint": "You should end with clear quality diagnostics, monthly trend summaries, and region/channel KPI insights with contribution mix."
+  },
+  {
+    "id": "recipe-full-eda-saas-subscription",
+    "title": "Full EDA Pipeline: SaaS Subscription Health (Churn Prep)",
+    "libraries": [
+      "python",
+      "pandas",
+      "seaborn",
+      "matplotlib"
+    ],
+    "tags": [
+      "workflow",
+      "eda",
+      "saas",
+      "churn",
+      "step-by-step"
+    ],
+    "goal": "Structure a complete EDA for subscription data so churn modeling starts from validated, interpretable features.",
+    "steps": [
+      "Define target window and observation window clearly (avoid leakage).",
+      "Ingest and harmonize schema (dates, numerics, categoricals).",
+      "Audit nulls, duplicate IDs, and impossible tenure/spend values.",
+      "Measure base churn rate and compare by plan/region/channel.",
+      "Create datetime and tenure-bucket features for cohort analysis.",
+      "Build grouped KPI tables for churn rate, support load, and spend by segment.",
+      "Screen numeric relationships and document potential leakage/risk columns.",
+      "Deliver an EDA handoff with feature dictionary and prioritized modeling hypotheses."
+    ],
+    "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'customer_id':[101,102,103,104,105,106],\n    'signup_date':['2024-01-10','2024-04-21','2025-02-01','2023-12-03','2025-05-07','2024-09-15'],\n    'plan':['basic','pro','basic','enterprise','pro','basic'],\n    'region':['west','east','west','south','east','north'],\n    'tenure_months':[26,22,13,28,10,18],\n    'tickets_90d':[4,1,5,0,2,3],\n    'spend_90d':[120,340,95,460,280,170],\n    'churn_30d':[1,0,1,0,0,1]\n})\n\ndf['signup_date'] = pd.to_datetime(df['signup_date'])\ndf['signup_year'] = df['signup_date'].dt.year\ndf['tenure_bucket'] = pd.cut(df['tenure_months'], bins=[0,6,12,24,120], labels=['0-6','7-12','13-24','25+'])\ndf['tickets_per_month'] = df['tickets_90d'] / (df['tenure_months'].clip(lower=1)/3)\n\nplan_kpi = df.groupby('plan', as_index=False).agg(churn_rate=('churn_30d','mean'), avg_spend=('spend_90d','mean'), customers=('customer_id','nunique'))\nprint('overall_churn', df['churn_30d'].mean())\nprint(plan_kpi)\nprint(df[['tenure_months','tickets_90d','spend_90d','tickets_per_month','churn_30d']].corr(numeric_only=True))",
+    "outputHint": "You should end with churn base rates, segment KPI diagnostics, and engineered cohort features ready for model prep."
+  },
+  {
+    "id": "recipe-full-eda-pricing-response",
+    "title": "Full EDA Pipeline: Pricing Response (Optimization Prep)",
+    "libraries": [
+      "python",
+      "pandas",
+      "numpy",
+      "matplotlib"
+    ],
+    "tags": [
+      "workflow",
+      "eda",
+      "pricing",
+      "optimization",
+      "step-by-step"
+    ],
+    "goal": "Prepare historical price-response data for elasticity and profit-curve modeling with a disciplined EDA pipeline.",
+    "steps": [
+      "Define optimization target (revenue vs profit) and decision constraints.",
+      "Import and validate units/price/date fields for consistency.",
+      "Remove impossible rows and inspect missingness/duplicates.",
+      "Create time controls (month/weekday) and comparable analysis windows.",
+      "Build price-band summaries for units, revenue, and profit.",
+      "Compare response heterogeneity by channel and region.",
+      "Run monotonicity and outlier checks before model fitting.",
+      "Deliver cleaned modeling table plus assumptions and caveats."
+    ],
+    "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'date': pd.to_datetime(['2026-01-03','2026-01-10','2026-02-07','2026-02-14','2026-03-07','2026-03-14']),\n    'channel':['Store','Store','Online','Online','Store','Online'],\n    'region':['West','West','East','East','West','East'],\n    'price':[0.9,1.0,1.2,1.3,1.1,1.4],\n    'units':[540,505,430,390,460,350],\n    'unit_cost':[0.45,0.45,0.45,0.45,0.45,0.45]\n})\n\ndf = df[(df['price'] > 0) & (df['units'] >= 0)].copy()\ndf['revenue'] = df['price'] * df['units']\ndf['profit'] = (df['price'] - df['unit_cost']) * df['units']\ndf['month'] = df['date'].dt.to_period('M').astype(str)\ndf['price_band'] = pd.cut(df['price'], bins=[0,1.0,1.2,2.0], labels=['low','mid','high'])\n\nband = df.groupby('price_band', as_index=False).agg(avg_units=('units','mean'), avg_profit=('profit','mean'))\nseg = df.groupby(['channel','region'], as_index=False).agg(avg_price=('price','mean'), avg_units=('units','mean'))\nprint(band)\nprint(seg)",
+    "outputHint": "You should get price-band and segment-response diagnostics that directly feed elasticity/profit modeling."
+  },
+  {
+    "id": "recipe-feature-engineering-master-playbook",
+    "title": "Feature Engineering Master Playbook (End-to-End Tutorial)",
+    "libraries": [
+      "python",
+      "pandas",
+      "numpy",
+      "sklearn"
+    ],
+    "tags": [
+      "workflow",
+      "feature-engineering",
+      "tutorial",
+      "end-to-end"
+    ],
+    "goal": "Provide an all-encompassing, step-by-step framework for building high-quality, leakage-safe features that improve model performance and generalization.",
+    "steps": [
+      "Step 1 - Frame prediction clearly: define target, prediction moment, entity grain, and decision use-case.",
+      "Step 2 - Split strategy first: create train/validation/test (or time splits) before fitting any feature transforms.",
+      "Step 3 - Audit raw columns: separate numeric, categorical, datetime, text, and ID columns; remove pure identifiers.",
+      "Step 4 - Missingness design: decide per-column imputation strategy and create explicit missing-indicator flags where useful.",
+      "Step 5 - Numeric features: apply clipping/winsorization, log transforms for skew, ratios/rates with denominator guards.",
+      "Step 6 - Datetime features: derive year/month/weekday/recency and cyclical encodings where seasonal effects exist.",
+      "Step 7 - Categorical features: bucket rare levels, use one-hot for low-cardinality, and frequency/target-safe strategies for high-cardinality.",
+      "Step 8 - Behavioral aggregates: build historical groupby features (counts/sums/means) using only information available at prediction time.",
+      "Step 9 - Interaction features: add domain-driven interactions (e.g., discount x channel, spend x tenure) and test incremental value.",
+      "Step 10 - Leakage checks: remove post-outcome fields, future lookups, and target-contaminated aggregations.",
+      "Step 11 - Validation loop: evaluate with CV, inspect feature importance/stability, prune noisy or fragile features.",
+      "Step 12 - Production handoff: freeze feature definitions in a reproducible function/pipeline and version assumptions."
+    ],
+    "code": "import pandas as pd\nimport numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.linear_model import LogisticRegression\n\n# Toy raw table\ndf = pd.DataFrame({\n    'customer_id':[1,2,3,4,5,6,7,8],\n    'signup_date':['2024-01-10','2023-10-02','2025-02-01','2022-12-13','2025-05-07','2023-07-21','2024-09-11','2024-11-30'],\n    'tenure_months':[26,32,13,40,10,36,18,15],\n    'tickets_90d':[4,1,5,0,2,1,3,4],\n    'spend_90d':[120,340,95,460,280,510,170,230],\n    'region':['west','east','west','south','east','west','north','south'],\n    'plan':['basic','pro','basic','enterprise','pro','enterprise','basic','pro'],\n    'churn_30d':[1,0,1,0,0,0,1,1]\n})\n\n# 1) Parse + split early\ndf['signup_date'] = pd.to_datetime(df['signup_date'])\nX = df.drop(columns=['churn_30d'])\ny = df['churn_30d']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42, stratify=y)\n\n# 2) Feature function (train/test parity)\ndef build_features(frame):\n    out = frame.copy()\n    out['signup_year'] = out['signup_date'].dt.year\n    out['signup_month'] = out['signup_date'].dt.month\n    out['tickets_per_month'] = out['tickets_90d'] / out['tenure_months'].clip(lower=1)\n    out['log_spend_90d'] = np.log1p(out['spend_90d'])\n    out['spend_per_ticket'] = out['spend_90d'] / out['tickets_90d'].replace(0, np.nan)\n    out['spend_per_ticket_missing'] = out['spend_per_ticket'].isna().astype(int)\n    return out\n\nX_train_f = build_features(X_train)\nX_test_f = build_features(X_test)\n\n# 3) Preprocess + model\nnum_cols = ['tenure_months','tickets_90d','spend_90d','signup_year','signup_month','tickets_per_month','log_spend_90d','spend_per_ticket','spend_per_ticket_missing']\ncat_cols = ['region','plan']\n\npre = ColumnTransformer([\n    ('num', Pipeline([('impute', SimpleImputer(strategy='median')), ('scale', StandardScaler())]), num_cols),\n    ('cat', Pipeline([('impute', SimpleImputer(strategy='most_frequent')), ('oh', OneHotEncoder(handle_unknown='ignore'))]), cat_cols)\n])\n\npipe = Pipeline([('pre', pre), ('model', LogisticRegression(max_iter=500))])\npipe.fit(X_train_f, y_train)\nprint('train_score', pipe.score(X_train_f, y_train))\nprint('test_score', pipe.score(X_test_f, y_test))",
+    "outputHint": "A reproducible template showing how to design features safely, apply them consistently across splits, and package them in a production-ready pipeline."
+  },
+  {
+    "id": "recipe-feature-engineering-datetime-and-rolling",
+    "title": "Feature Engineering: Datetime, Lag, and Rolling Features (Time-Aware)",
+    "libraries": [
+      "python",
+      "pandas",
+      "numpy",
+      "sklearn"
+    ],
+    "tags": [
+      "workflow",
+      "feature-engineering",
+      "time-series",
+      "tutorial"
+    ],
+    "goal": "Show how to build robust temporal features (calendar, lag, rolling) without leaking future information.",
+    "steps": [
+      "Sort data by entity and timestamp before any lag/rolling operations.",
+      "Create calendar features (year, month, weekday, quarter, week of year).",
+      "Generate lag features with shift(1..k) per entity.",
+      "Create trailing rolling stats using shifted values only (no current/future leakage).",
+      "Encode cyclical patterns (sin/cos) for day-of-week or month if useful.",
+      "Drop rows lacking full lag context or handle early-window nulls consistently.",
+      "Validate feature usefulness on a time-based split, not random shuffle.",
+      "Document exact lookback windows to ensure train/serve parity in production."
+    ],
+    "code": "import pandas as pd\nimport numpy as np\n\n# Toy panel: store-day sales\ndf = pd.DataFrame({\n    'store':['A']*8 + ['B']*8,\n    'ds': list(pd.date_range('2026-01-01', periods=8, freq='D'))*2,\n    'sales':[120,118,130,128,140,145,142,150,90,95,98,105,110,112,119,123]\n})\n\ndf = df.sort_values(['store','ds']).copy()\n\n# Calendar features\ndf['dow'] = df['ds'].dt.dayofweek\ndf['month'] = df['ds'].dt.month\ndf['dow_sin'] = np.sin(2*np.pi*df['dow']/7)\ndf['dow_cos'] = np.cos(2*np.pi*df['dow']/7)\n\n# Lag and rolling features (shift first to avoid leakage)\ng = df.groupby('store')['sales']\ndf['lag1'] = g.shift(1)\ndf['lag7'] = g.shift(7)\ndf['roll3_mean'] = g.shift(1).rolling(3).mean()\ndf['roll3_std'] = g.shift(1).rolling(3).std()\n\n# Keep rows with full feature context\nfeature_df = df.dropna().copy()\nprint(feature_df[['store','ds','sales','lag1','lag7','roll3_mean','roll3_std','dow']].head())",
+    "outputHint": "A clean time-aware feature table with lag/rolling/calendar fields that can be fed into forecasting or demand models without future leakage."
+  },
+  {
+    "id": "recipe-feature-engineering-categorical-strategy",
+    "title": "Feature Engineering: Categorical Features (Low + High Cardinality)",
+    "libraries": [
+      "python",
+      "pandas",
+      "sklearn"
+    ],
+    "tags": [
+      "workflow",
+      "feature-engineering",
+      "categorical",
+      "tutorial"
+    ],
+    "goal": "Teach a practical strategy for handling categorical columns safely across both low-cardinality and high-cardinality fields.",
+    "steps": [
+      "Profile cardinality for each categorical column and split into low vs high cardinality groups.",
+      "Standardize text (trim/case) and collapse rare labels into an OTHER bucket.",
+      "Use one-hot encoding for low-cardinality features with handle_unknown=\"ignore\".",
+      "Use frequency/count encoding for high-cardinality fields when one-hot would explode dimensions.",
+      "Avoid target leakage in encoding: compute mappings using training data only.",
+      "Keep explicit unknown defaults for unseen categories at inference time.",
+      "Evaluate with and without each encoding block to measure real model lift.",
+      "Version the final encoding maps and transformations for production parity."
+    ],
+    "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import OneHotEncoder\n\ndf = pd.DataFrame({\n    'city':['Denver','Austin','Denver','Miami','Boise','Boise','Austin','Reno','Reno','Reno'],\n    'channel':['email','paid','paid','organic','email','paid','organic','paid','affiliate','affiliate'],\n    'sku':['A1','B2','A1','C3','D4','E5','A1','Z9','Z9','Y8'],\n    'converted':[1,0,1,0,0,1,1,0,1,0]\n})\n\nX = df[['city','channel','sku']].copy()\ny = df['converted']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)\n\n# Rare-label bucketing on train only\nfor col in ['city','channel']:\n    freq = X_train[col].value_counts(normalize=True)\n    keep = set(freq[freq >= 0.15].index)\n    X_train[col] = X_train[col].where(X_train[col].isin(keep), 'OTHER')\n    X_test[col] = X_test[col].where(X_test[col].isin(keep), 'OTHER')\n\n# Frequency encoding for high-cardinality sku (fit on train only)\nsku_freq = X_train['sku'].value_counts(normalize=True).to_dict()\nX_train['sku_freq'] = X_train['sku'].map(sku_freq).fillna(0)\nX_test['sku_freq'] = X_test['sku'].map(sku_freq).fillna(0)\n\n# One-hot low-cardinality categorical columns\noh = OneHotEncoder(handle_unknown='ignore', sparse_output=False)\ntrain_oh = oh.fit_transform(X_train[['city','channel']])\ntest_oh = oh.transform(X_test[['city','channel']])\n\nprint('one_hot_shape_train', train_oh.shape)\nprint('sku_freq_sample', X_train[['sku','sku_freq']].head())",
+    "outputHint": "A reusable pattern for combining rare-label handling, one-hot encoding, and train-only frequency encoding without leakage."
+  },
+  {
+    "id": "recipe-feature-engineering-aggregations-and-leakage-guardrails",
+    "title": "Feature Engineering: Event Aggregations + Leakage Guardrails",
+    "libraries": [
+      "python",
+      "pandas",
+      "numpy"
+    ],
+    "tags": [
+      "workflow",
+      "feature-engineering",
+      "aggregation",
+      "leakage",
+      "tutorial"
+    ],
+    "goal": "Demonstrate how to build powerful groupby/event aggregation features while strictly preventing target and future leakage.",
+    "steps": [
+      "Define prediction timestamp and ensure every feature uses only data available before that timestamp.",
+      "Build rolling historical aggregates (count/sum/mean) per entity with explicit lookback windows.",
+      "Use shift before rolling to exclude current-row outcome information.",
+      "Create cohort-relative features (share/rank/z-score) from historical windows only.",
+      "Prevent label leakage: never aggregate outcome columns or post-outcome events into predictors.",
+      "Validate using time-based backtesting to detect unrealistically optimistic leakage effects.",
+      "Compare train vs validation feature distributions to catch unstable engineered features.",
+      "Ship with a feature contract documenting window definitions, data latency, and refresh cadence."
+    ],
+    "code": "import pandas as pd\n\n# Toy customer event stream\ndf = pd.DataFrame({\n    'customer_id':[1,1,1,2,2,2,3,3,3],\n    'event_date':pd.to_datetime(['2026-01-01','2026-01-05','2026-01-20','2026-01-02','2026-01-12','2026-01-25','2026-01-03','2026-01-10','2026-01-28']),\n    'spend':[20,35,40,10,15,50,12,18,22],\n    'tickets':[1,0,2,0,1,1,0,1,0]\n})\n\ndf = df.sort_values(['customer_id','event_date']).copy()\ng_spend = df.groupby('customer_id')['spend']\ng_tickets = df.groupby('customer_id')['tickets']\n\n# Historical-only features (shift first)\ndf['spend_lag1'] = g_spend.shift(1)\ndf['spend_roll3_mean_hist'] = g_spend.shift(1).rolling(3).mean()\ndf['tickets_roll3_sum_hist'] = g_tickets.shift(1).rolling(3).sum()\n\n# Cross-sectional relative feature on same timestamp slice\ndf['daily_spend_share'] = df['spend'] / df.groupby('event_date')['spend'].transform('sum')\n\n# Remove rows without enough history\nfeature_df = df.dropna().copy()\nprint(feature_df[['customer_id','event_date','spend','spend_lag1','spend_roll3_mean_hist','tickets_roll3_sum_hist','daily_spend_share']])",
+    "outputHint": "A leakage-safe event feature table using lagged rolling aggregates and clear temporal guardrails."
   }
 ]

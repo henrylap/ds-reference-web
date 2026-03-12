@@ -27,7 +27,10 @@
         "sklearn-train-test-split",
         "sklearn-standardscaler",
         "sklearn-onehotencoder",
-        "sklearn-columntransformer"
+        "sklearn-columntransformer",
+        "sklearn-simpleimputer",
+        "sklearn-robustscaler",
+        "sklearn-pandas-get-dummies"
       ]
     },
     {
@@ -81,6 +84,29 @@
         "sklearn-r2-score",
         "sklearn-pca"
       ]
+    },
+    {
+      "name": "Preprocessing Deep Dive",
+      "docs": [
+        {
+          "label": "scikit-learn preprocessing guide",
+          "url": "https://scikit-learn.org/stable/modules/preprocessing.html"
+        },
+        {
+          "label": "pandas.get_dummies docs",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html"
+        }
+      ],
+      "commandIds": [
+        "sklearn-simpleimputer",
+        "sklearn-standardscaler",
+        "sklearn-minmaxscaler",
+        "sklearn-robustscaler",
+        "sklearn-onehotencoder",
+        "sklearn-pandas-get-dummies",
+        "sklearn-columntransformer",
+        "sklearn-pipeline"
+      ]
     }
   ],
   "cheatSheet": [
@@ -113,7 +139,9 @@
     "sklearn-classification-report",
     "sklearn-mean-squared-error",
     "sklearn-r2-score",
-    "sklearn-pca"
+    "sklearn-pca",
+    "sklearn-robustscaler",
+    "sklearn-pandas-get-dummies"
   ],
   "coverageOutline": [
     {
@@ -124,7 +152,10 @@
         "StandardScaler",
         "OneHotEncoder",
         "ColumnTransformer",
-        "Pipeline"
+        "Pipeline",
+        "SimpleImputer",
+        "RobustScaler",
+        "pandas.get_dummies"
       ]
     },
     {
@@ -187,7 +218,7 @@
           "name": "test_size",
           "type": "float|int",
           "default": "None",
-          "description": "Test split size.",
+          "description": "Parameter `test_size` configures how `train_test_split` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "0.2",
             "0.3"
@@ -206,6 +237,34 @@
           "pitfalls": [
             "Use for imbalanced data"
           ]
+        },
+        {
+          "name": "arrays",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `train_test_split`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "random_state",
+          "type": "int",
+          "description": "Random seed controlling reproducibility of shuffling/sampling behavior.",
+          "values": [
+            "42",
+            "7",
+            "None"
+          ],
+          "pitfalls": [
+            "Changing seed can shift results; fix seed for reproducible experiments."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -262,9 +321,9 @@
         "numeric"
       ],
       "level": "core",
-      "summary": "Standardize numeric features.",
+      "summary": "Standardize numeric columns so mean=0 and std=1 for stable model training.",
       "syntax": "StandardScaler(with_mean=True, with_std=True).fit(X).transform(X)",
-      "description": "Standardize numeric features. Use it for standardizing and encoding raw features before model fit and training, validating, and serving machine learning models. Key parameters: with_mean, with_std.",
+      "description": "Standardize numeric features before distance- or gradient-based estimators to improve convergence and coefficient comparability.",
       "docs": [
         {
           "label": "StandardScaler",
@@ -276,7 +335,7 @@
           "name": "with_mean",
           "type": "bool",
           "default": "True",
-          "description": "Center features.",
+          "description": "Parameter `with_mean` configures how `StandardScaler` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "True",
             "False"
@@ -289,7 +348,7 @@
           "name": "with_std",
           "type": "bool",
           "default": "True",
-          "description": "Scale by std.",
+          "description": "Parameter `with_std` configures how `StandardScaler` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "True",
             "False"
@@ -318,13 +377,13 @@
         },
         {
           "title": "StandardScaler additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = StandardScaler(with_mean=True, with_std=True).fit(X).transform(X)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run StandardScaler again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run StandardScaler exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -335,11 +394,11 @@
         "sklearn-pipeline",
         "sklearn-logisticregression"
       ],
-      "overview": "Standardize numeric features. Use StandardScaler when standardizing and encoding raw features before model fit. Typical business pattern: training, validating, and serving machine learning models. Key parameters: with_mean, with_std. Returns ndarray|sparse with shape same as input.",
+      "overview": "StandardScaler standardizes numeric columns to zero mean and unit variance. Use it when feature scales differ (e.g., income vs click-rate) and models are sensitive to scale such as logistic regression, SVM, KNN, or PCA. Fit only on training data, then transform validation/test/inference data with the same fitted scaler. Key parameters: with_mean, with_std. Returns transformed matrix with same rows.",
       "applications": [
-        "Primary application: StandardScaler is used for training, validating, and serving machine learning models.",
-        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
-        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+        "Primary application: scale numeric predictors before linear models, SVM, KNN, and PCA.",
+        "Workflow application: fit scaler on train only, then reuse in a Pipeline for leakage-safe evaluation.",
+        "Delivery application: persist scaler together with model so train and inference preprocessing are identical."
       ]
     },
     {
@@ -353,9 +412,9 @@
         "encoding"
       ],
       "level": "core",
-      "summary": "Encode categories into binary columns.",
+      "summary": "Encode categorical columns into model-ready binary indicators with safe unseen-category handling.",
       "syntax": "OneHotEncoder(handle_unknown='error', sparse_output=True)",
-      "description": "Encode categories into binary columns. Use it for standardizing and encoding raw features before model fit and turning categorical columns into model-consumable numeric features. Key parameters: handle_unknown, sparse_output.",
+      "description": "Convert categorical features into numeric indicator columns for scikit-learn models while controlling behavior for unseen labels.",
       "docs": [
         {
           "label": "OneHotEncoder",
@@ -409,13 +468,13 @@
         },
         {
           "title": "OneHotEncoder additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = OneHotEncoder(handle_unknown='error', sparse_output=True)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run OneHotEncoder again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run OneHotEncoder exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -426,11 +485,11 @@
         "sklearn-columntransformer",
         "sklearn-pipeline"
       ],
-      "overview": "OneHotEncoder converts each category into a sparse/dense binary indicator matrix so linear and tree models can consume categorical fields safely. Use it in training and inference pipelines to keep category handling consistent and avoid train/serve mismatches. Key parameters: handle_unknown, sparse_output. Returns matrix with shape (n_samples, encoded_cols).",
+      "overview": "OneHotEncoder converts each category into binary columns for model training. Use it as the default categorical encoding in sklearn pipelines, especially when categories may appear at inference that were not in training. Prefer handle_unknown=\"ignore\" for production scoring. Compared with pandas.get_dummies, OneHotEncoder is better for train/serve parity because it stores fitted category mappings and integrates with ColumnTransformer/Pipeline. Key parameters: handle_unknown, sparse_output. Returns encoded matrix of shape (n_samples, encoded_features).",
       "applications": [
-        "Primary application: OneHotEncoder is used for turning categorical columns into model-consumable numeric features.",
-        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
-        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+        "Primary application: transform nominal categorical columns into numeric features for modeling.",
+        "Workflow application: place OneHotEncoder inside ColumnTransformer + Pipeline for CV-safe preprocessing.",
+        "Delivery application: avoid category mismatch errors in production by using handle_unknown=\"ignore\"."
       ]
     },
     {
@@ -444,9 +503,9 @@
         "pipeline"
       ],
       "level": "core",
-      "summary": "Apply per-column transformations.",
+      "summary": "Apply different preprocessing blocks to numeric and categorical columns in one unified transformer.",
       "syntax": "ColumnTransformer(transformers=[('name', transformer, cols)], remainder='drop')",
-      "description": "Apply per-column transformations. Use it for standardizing and encoding raw features before model fit and training, validating, and serving machine learning models. Key parameters: transformers, remainder.",
+      "description": "Combine scaling, imputation, and encoding across mixed column types while preserving a single fit/transform interface.",
       "docs": [
         {
           "label": "ColumnTransformer",
@@ -477,6 +536,33 @@
           "pitfalls": [
             "passthrough can leak raw columns"
           ]
+        },
+        {
+          "name": "transformer",
+          "type": "Any",
+          "description": "Parameter `transformer` configures how `ColumnTransformer` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "cols)]",
+          "type": "str | list[str]",
+          "description": "Parameter `cols)]` configures how `ColumnTransformer` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
         }
       ],
       "returns": {
@@ -498,13 +584,13 @@
         },
         {
           "title": "ColumnTransformer additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = ColumnTransformer(transformers=[('name', transformer, cols)], remainder='drop')\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run ColumnTransformer again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run ColumnTransformer exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -516,11 +602,11 @@
         "sklearn-onehotencoder",
         "sklearn-standardscaler"
       ],
-      "overview": "ColumnTransformer applies different preprocessing logic to numeric and categorical subsets in one pass. Use it when your table mixes feature types and you need deterministic, auditable feature engineering before model fit. Key parameters: transformers, remainder. Returns transformer with shape (n_samples, transformed_cols).",
+      "overview": "ColumnTransformer lets you run separate preprocessing pipelines per column set (e.g., numeric: impute+scale, categorical: impute+one-hot) and concatenate outputs for modeling. Use it whenever your dataset contains mixed dtypes and you need reproducible, leakage-safe preprocessing. It is the backbone of most production sklearn pipelines. Key parameters: transformers, remainder. Returns transformed design matrix.",
       "applications": [
-        "Primary application: ColumnTransformer is used for training, validating, and serving machine learning models.",
-        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
-        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+        "Primary application: orchestrate mixed-type preprocessing in a single estimator object.",
+        "Workflow application: wrap ColumnTransformer in Pipeline so cross-validation fits preprocessors correctly each fold.",
+        "Delivery application: keep feature logic versioned and reusable across notebooks, APIs, and scheduled jobs."
       ]
     },
     {
@@ -567,6 +653,47 @@
           "pitfalls": [
             "Cached stale transforms can confuse debugging"
           ]
+        },
+        {
+          "name": "transformer)",
+          "type": "Any",
+          "description": "Parameter `transformer)` configures how `Pipeline` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "('model'",
+          "type": "Any",
+          "description": "Estimator object passed to `Pipeline`. It defines the algorithm, training behavior, and resulting predictions/metrics.",
+          "values": [
+            "scikit-learn estimator instance",
+            "Pipeline object",
+            "compatible model class"
+          ],
+          "pitfalls": [
+            "Use estimator interfaces compatible with this command (fit/predict/score).",
+            "Keep non-default hyperparameters documented for reproducibility."
+          ]
+        },
+        {
+          "name": "estimator)]",
+          "type": "Any",
+          "description": "Estimator object passed to `Pipeline`. It defines the algorithm, training behavior, and resulting predictions/metrics.",
+          "values": [
+            "scikit-learn estimator instance",
+            "Pipeline object",
+            "compatible model class"
+          ],
+          "pitfalls": [
+            "Use estimator interfaces compatible with this command (fit/predict/score).",
+            "Keep non-default hyperparameters documented for reproducibility."
+          ]
         }
       ],
       "returns": {
@@ -588,13 +715,13 @@
         },
         {
           "title": "Pipeline additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = Pipeline(steps=[('prep', transformer), ('model', model)])\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Pipeline again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Pipeline exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -659,6 +786,36 @@
           "pitfalls": [
             "Verify solver compatibility"
           ]
+        },
+        {
+          "name": "solver",
+          "type": "str | list[str]",
+          "description": "Parameter `solver` configures how `LogisticRegression` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "'lbfgs'"
+        },
+        {
+          "name": "max_iter",
+          "type": "int",
+          "description": "Parameter `max_iter` configures how `LogisticRegression` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "100"
         }
       ],
       "returns": {
@@ -729,7 +886,7 @@
           "name": "n_estimators",
           "type": "int",
           "default": "100",
-          "description": "Number of trees.",
+          "description": "Parameter `n_estimators` configures how `RandomForestClassifier` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "100",
             "300",
@@ -743,7 +900,7 @@
           "name": "max_depth",
           "type": "int|None",
           "default": "None",
-          "description": "Tree depth cap.",
+          "description": "Parameter `max_depth` configures how `RandomForestClassifier` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "None",
             "5",
@@ -752,6 +909,20 @@
           "pitfalls": [
             "Unlimited depth can overfit"
           ]
+        },
+        {
+          "name": "random_state",
+          "type": "int",
+          "description": "Random seed controlling reproducibility of shuffling/sampling behavior.",
+          "values": [
+            "42",
+            "7",
+            "None"
+          ],
+          "pitfalls": [
+            "Changing seed can shift results; fix seed for reproducible experiments."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -773,13 +944,13 @@
         },
         {
           "title": "RandomForestClassifier additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = RandomForestClassifier(n_estimators=100, max_depth=None, random_state=None)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run RandomForestClassifier again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run RandomForestClassifier exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -835,7 +1006,7 @@
         {
           "name": "scoring",
           "type": "str|callable",
-          "description": "Metric to compute.",
+          "description": "Metric specification for `cross_val_score`. It determines how model quality is measured and therefore which model looks \"best.\"",
           "values": [
             "'accuracy'",
             "'roc_auc'",
@@ -844,6 +1015,49 @@
           "pitfalls": [
             "Pick metric aligned to business objective"
           ]
+        },
+        {
+          "name": "estimator",
+          "type": "Any",
+          "description": "Estimator object passed to `cross_val_score`. It defines the algorithm, training behavior, and resulting predictions/metrics.",
+          "values": [
+            "scikit-learn estimator instance",
+            "Pipeline object",
+            "compatible model class"
+          ],
+          "pitfalls": [
+            "Use estimator interfaces compatible with this command (fit/predict/score).",
+            "Keep non-default hyperparameters documented for reproducibility."
+          ]
+        },
+        {
+          "name": "X",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `cross_val_score`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "array-like | DataFrame",
+          "description": "Target or label values used by `cross_val_score`. This controls what the model/metric learns or evaluates against.",
+          "values": [
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
+          ],
+          "pitfalls": [
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -865,13 +1079,13 @@
         },
         {
           "title": "cross_val_score additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nresult = cross_val_score(model, X, y=None, cv=None, scoring=None)\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run cross_val_score again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run cross_val_score exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -934,6 +1148,49 @@
           "pitfalls": [
             "Use business-relevant metric"
           ]
+        },
+        {
+          "name": "estimator",
+          "type": "Any",
+          "description": "Estimator object passed to `GridSearchCV`. It defines the algorithm, training behavior, and resulting predictions/metrics.",
+          "values": [
+            "scikit-learn estimator instance",
+            "Pipeline object",
+            "compatible model class"
+          ],
+          "pitfalls": [
+            "Use estimator interfaces compatible with this command (fit/predict/score).",
+            "Keep non-default hyperparameters documented for reproducibility."
+          ]
+        },
+        {
+          "name": "cv",
+          "type": "int",
+          "description": "Cross-validation split count or splitter object defining validation strategy.",
+          "values": [
+            "3",
+            "5",
+            "StratifiedKFold(5)"
+          ],
+          "pitfalls": [
+            "Time-series problems require time-aware splitters instead of random folds."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "n_jobs",
+          "type": "int",
+          "description": "Parameter `n_jobs` configures how `GridSearchCV` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -955,13 +1212,13 @@
         },
         {
           "title": "GridSearchCV additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = GridSearchCV(model, {'C':[0.1,1,10]}, scoring=None, cv=None, n_jobs=None)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run GridSearchCV again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run GridSearchCV exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1003,7 +1260,7 @@
         {
           "name": "y_true",
           "type": "array-like",
-          "description": "True labels.",
+          "description": "Parameter `y_true` configures how `roc_auc_score` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "[0,1,0,1]"
           ],
@@ -1022,6 +1279,34 @@
           "pitfalls": [
             "Hard labels lose ranking info"
           ]
+        },
+        {
+          "name": "average",
+          "type": "Any",
+          "description": "Parameter `average` configures how `roc_auc_score` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "'macro'"
+        },
+        {
+          "name": "multi_class",
+          "type": "Any",
+          "description": "Parameter `multi_class` configures how `roc_auc_score` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "'raise'"
         }
       ],
       "returns": {
@@ -1043,13 +1328,13 @@
         },
         {
           "title": "roc_auc_score additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nresult = roc_auc_score(y_test, proba, average='macro', multi_class='raise')\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run roc_auc_score again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run roc_auc_score exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1079,14 +1364,14 @@
         "preprocessing"
       ],
       "level": "extended",
-      "summary": "SimpleImputer fills missing values using statistics such as mean, median, or most frequent.",
+      "summary": "Fill missing values with train-fitted statistics (median/mean/most_frequent/constant).",
       "syntax": "SimpleImputer(strategy='mean').fit(X).transform(X)",
-      "description": "SimpleImputer fills missing values using statistics such as mean, median, or most frequent. Use it for standardizing and encoding raw features before model fit and handling null-heavy CRM, finance, and operations exports. Key parameter: strategy.",
-      "overview": "SimpleImputer fills missing values using statistics such as mean, median, or most frequent. Use SimpleImputer when standardizing and encoding raw features before model fit. Typical business pattern: handling null-heavy CRM, finance, and operations exports. Key parameter: strategy. Returns estimator | array | metric with shape depends on estimator and data.",
+      "description": "Handle nulls explicitly in preprocessing so models receive complete numeric/categorical inputs.",
+      "overview": "SimpleImputer replaces missing values using a chosen strategy fitted on training data. Use median for skewed numeric fields, most_frequent for categoricals, and constant for explicit missing buckets. Keep imputation inside your preprocessing pipeline to avoid leakage. Key parameters: strategy, fill_value, add_indicator. Returns matrix with imputed values (optionally plus missing flags).",
       "applications": [
-        "Primary application: SimpleImputer is used for handling null-heavy CRM, finance, and operations exports.",
-        "Workflow application: treat this command as a train/validation/inference workflow that should be wrapped in pipelines.",
-        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+        "Primary application: make feature matrices complete before scaling/encoding/model fit.",
+        "Workflow application: fit imputer on training folds only via Pipeline/ColumnTransformer.",
+        "Delivery application: optionally add missing-indicator flags for predictive missingness patterns."
       ],
       "docs": [
         {
@@ -1099,12 +1384,14 @@
           "name": "strategy",
           "type": "Any",
           "default": "'mean'",
-          "description": "Controls strategy in SimpleImputer.",
+          "description": "Rule used to compute replacement values for missing data.",
           "values": [
-            "data-specific"
+            "'mean'",
+            "'median'",
+            "'most_frequent'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Imputation choice can bias distributions if not validated on holdout data."
           ]
         }
       ],
@@ -1115,25 +1402,25 @@
       },
       "examples": [
         {
-          "title": "SimpleImputer in a full modeling workflow",
-          "scenario": "Classification workflow from train/test split through fitting and scoring pattern.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1, 1.0], [0.2, 0.9], [0.8, 0.2], [0.9, 0.1], [0.15, 0.85], [0.75, 0.25]])\ny = np.array([0, 0, 1, 1, 0, 1])\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\n\nprint(preds.shape)",
-          "expectedOutput": "Output prints prediction shape after model fit and inference steps.",
+          "title": "SimpleImputer primary workflow",
+          "scenario": "SimpleImputer used in a realistic business workflow with active command execution.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = SimpleImputer(strategy='mean').fit(X).transform(X)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Prepare a toy but realistic dataset with business feature names.",
-            "Apply SimpleImputer in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
-            "Reuse the same structure with your production feature table and deployment checks."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run SimpleImputer exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "SimpleImputer additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = SimpleImputer(strategy='mean').fit(X).transform(X)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run SimpleImputer again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run SimpleImputer exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1175,23 +1462,40 @@
           "name": "feature_range",
           "type": "Any",
           "default": "(0",
-          "description": "Controls feature_range in MinMaxScaler.",
+          "description": "Parameter `feature_range` configures how `MinMaxScaler` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "1",
           "type": "Any",
-          "description": "Controls 1 in MinMaxScaler.",
+          "description": "Parameter `1` configures how `MinMaxScaler` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "1)).fit(X).transform(X",
+          "type": "Any",
+          "description": "Parameter `1)).fit(X).transform(X` configures how `MinMaxScaler` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1202,25 +1506,25 @@
       },
       "examples": [
         {
-          "title": "MinMaxScaler in a full modeling workflow",
-          "scenario": "Classification workflow from train/test split through fitting and scoring pattern.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1, 1.0], [0.2, 0.9], [0.8, 0.2], [0.9, 0.1], [0.15, 0.85], [0.75, 0.25]])\ny = np.array([0, 0, 1, 1, 0, 1])\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\n\nprint(preds.shape)",
-          "expectedOutput": "Output prints prediction shape after model fit and inference steps.",
+          "title": "MinMaxScaler primary workflow",
+          "scenario": "MinMaxScaler used in a realistic business workflow with active command execution.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = MinMaxScaler(feature_range=(0, 1)).fit(X).transform(X)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Prepare a toy but realistic dataset with business feature names.",
-            "Apply MinMaxScaler in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
-            "Reuse the same structure with your production feature table and deployment checks."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run MinMaxScaler exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "MinMaxScaler additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = MinMaxScaler(feature_range=(0, 1)).fit(X).transform(X)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run MinMaxScaler again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run MinMaxScaler exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1262,26 +1566,28 @@
           "name": "handle_unknown",
           "type": "Any",
           "default": "'use_encoded_value'",
-          "description": "Controls handle_unknown in OrdinalEncoder.",
+          "description": "Behavior for categories not seen during fit time.",
           "values": [
-            "data-specific"
+            "'ignore'",
+            "'error'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Unseen categories can break inference unless handled explicitly."
           ]
         },
         {
           "name": "unknown_value",
           "type": "int",
           "default": "-1",
-          "description": "Controls unknown_value in OrdinalEncoder.",
+          "description": "Parameter `unknown_value` configures how `OrdinalEncoder` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1292,25 +1598,25 @@
       },
       "examples": [
         {
-          "title": "OrdinalEncoder in a full modeling workflow",
-          "scenario": "Classification workflow from train/test split through fitting and scoring pattern.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1, 1.0], [0.2, 0.9], [0.8, 0.2], [0.9, 0.1], [0.15, 0.85], [0.75, 0.25]])\ny = np.array([0, 0, 1, 1, 0, 1])\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\n\nprint(preds.shape)",
-          "expectedOutput": "Output prints prediction shape after model fit and inference steps.",
+          "title": "OrdinalEncoder primary workflow",
+          "scenario": "OrdinalEncoder used in a realistic business workflow with active command execution.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Prepare a toy but realistic dataset with business feature names.",
-            "Apply OrdinalEncoder in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
-            "Reuse the same structure with your production feature table and deployment checks."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run OrdinalEncoder exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "OrdinalEncoder additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run OrdinalEncoder again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run OrdinalEncoder exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1349,14 +1655,16 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
+          "name": ").fit(y).transform(y",
           "type": "Any",
-          "description": "Controls inputs in LabelEncoder.",
+          "description": "Parameter `).fit(y).transform(y` configures how `LabelEncoder` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1367,25 +1675,25 @@
       },
       "examples": [
         {
-          "title": "LabelEncoder in a full modeling workflow",
-          "scenario": "Classification workflow from train/test split through fitting and scoring pattern.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1, 1.0], [0.2, 0.9], [0.8, 0.2], [0.9, 0.1], [0.15, 0.85], [0.75, 0.25]])\ny = np.array([0, 0, 1, 1, 0, 1])\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\n\nprint(preds.shape)",
-          "expectedOutput": "Output prints prediction shape after model fit and inference steps.",
+          "title": "LabelEncoder primary workflow",
+          "scenario": "LabelEncoder used in a realistic business workflow with active command execution.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = LabelEncoder().fit(y).transform(y)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Prepare a toy but realistic dataset with business feature names.",
-            "Apply LabelEncoder in an end-to-end fit/predict workflow (or preprocessing/evaluation flow).",
-            "Reuse the same structure with your production feature table and deployment checks."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run LabelEncoder exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "LabelEncoder additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = LabelEncoder().fit(y).transform(y)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run LabelEncoder again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run LabelEncoder exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1426,34 +1734,40 @@
         {
           "name": "step1",
           "type": "Any",
-          "description": "Controls step1 in make_pipeline.",
+          "description": "Parameter `step1` configures how `make_pipeline` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "step2",
           "type": "Any",
-          "description": "Controls step2 in make_pipeline.",
+          "description": "Parameter `step2` configures how `make_pipeline` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "...",
           "type": "Any",
-          "description": "Controls ... in make_pipeline.",
+          "description": "Parameter `...` configures how `make_pipeline` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1476,13 +1790,13 @@
         },
         {
           "title": "make_pipeline additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nresult = make_pipeline(step1, step2, ...)\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run make_pipeline again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run make_pipeline exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1524,12 +1838,14 @@
           "name": "fit_intercept",
           "type": "Any",
           "default": "True",
-          "description": "Controls fit_intercept in LinearRegression.",
+          "description": "Parameter `fit_intercept` configures how `LinearRegression` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1552,13 +1868,13 @@
         },
         {
           "title": "LinearRegression additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = LinearRegression(fit_intercept=True)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run LinearRegression again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run LinearRegression exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1600,12 +1916,15 @@
           "name": "alpha",
           "type": "Any",
           "default": "1.0",
-          "description": "Controls alpha in Ridge.",
+          "description": "Regularization or learning-strength parameter for `Ridge`. It controls model flexibility and overfit/underfit trade-offs.",
           "values": [
-            "data-specific"
+            "small positive float",
+            "grid-searched range",
+            "library default"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Too large can underfit; too small can overfit.",
+            "Tune with cross-validation rather than single split results."
           ]
         }
       ],
@@ -1628,13 +1947,13 @@
         },
         {
           "title": "Ridge additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = Ridge(alpha=1.0)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Ridge again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Ridge exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1676,12 +1995,15 @@
           "name": "alpha",
           "type": "Any",
           "default": "1.0",
-          "description": "Controls alpha in Lasso.",
+          "description": "Regularization or learning-strength parameter for `Lasso`. It controls model flexibility and overfit/underfit trade-offs.",
           "values": [
-            "data-specific"
+            "small positive float",
+            "grid-searched range",
+            "library default"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Too large can underfit; too small can overfit.",
+            "Tune with cross-validation rather than single split results."
           ]
         }
       ],
@@ -1704,13 +2026,13 @@
         },
         {
           "title": "Lasso additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = Lasso(alpha=1.0)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Lasso again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Lasso exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1752,26 +2074,28 @@
           "name": "max_depth",
           "type": "Any",
           "default": "None",
-          "description": "Controls max_depth in DecisionTreeClassifier.",
+          "description": "Parameter `max_depth` configures how `DecisionTreeClassifier` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "random_state",
           "type": "int | None",
           "default": "None",
-          "description": "Controls random_state in DecisionTreeClassifier.",
+          "description": "Random seed controlling reproducibility of shuffling/sampling behavior.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Changing seed can shift results; fix seed for reproducible experiments."
           ]
         }
       ],
@@ -1794,13 +2118,13 @@
         },
         {
           "title": "DecisionTreeClassifier additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = DecisionTreeClassifier(max_depth=None, random_state=None)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run DecisionTreeClassifier again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run DecisionTreeClassifier exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1842,26 +2166,29 @@
           "name": "n_estimators",
           "type": "int",
           "default": "100",
-          "description": "Controls n_estimators in GradientBoostingClassifier.",
+          "description": "Parameter `n_estimators` configures how `GradientBoostingClassifier` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "learning_rate",
           "type": "Any",
           "default": "0.1",
-          "description": "Controls learning_rate in GradientBoostingClassifier.",
+          "description": "Parameter `learning_rate` configures how `GradientBoostingClassifier` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1884,13 +2211,13 @@
         },
         {
           "title": "GradientBoostingClassifier additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run GradientBoostingClassifier again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run GradientBoostingClassifier exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1932,14 +2259,15 @@
           "name": "n_neighbors",
           "type": "int",
           "default": "5",
-          "description": "Controls n_neighbors in KNeighborsClassifier.",
+          "description": "Parameter `n_neighbors` configures how `KNeighborsClassifier` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1962,13 +2290,13 @@
         },
         {
           "title": "KNeighborsClassifier additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = KNeighborsClassifier(n_neighbors=5)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run KNeighborsClassifier again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run KNeighborsClassifier exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2010,24 +2338,29 @@
           "name": "C",
           "type": "Any",
           "default": "1.0",
-          "description": "Controls C in SVC.",
+          "description": "Regularization or learning-strength parameter for `SVC`. It controls model flexibility and overfit/underfit trade-offs.",
           "values": [
-            "data-specific"
+            "small positive float",
+            "grid-searched range",
+            "library default"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Too large can underfit; too small can overfit.",
+            "Tune with cross-validation rather than single split results."
           ]
         },
         {
           "name": "kernel",
           "type": "Any",
           "default": "'rbf'",
-          "description": "Controls kernel in SVC.",
+          "description": "Parameter `kernel` configures how `SVC` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2050,13 +2383,13 @@
         },
         {
           "title": "SVC additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = SVC(C=1.0, kernel='rbf')\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run SVC again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run SVC exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2098,40 +2431,43 @@
           "name": "n_splits",
           "type": "int",
           "default": "5",
-          "description": "Controls n_splits in StratifiedKFold.",
+          "description": "Parameter `n_splits` configures how `StratifiedKFold` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "shuffle",
           "type": "Any",
           "default": "False",
-          "description": "Controls shuffle in StratifiedKFold.",
+          "description": "Parameter `shuffle` configures how `StratifiedKFold` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "random_state",
           "type": "int | None",
           "default": "None",
-          "description": "Controls random_state in StratifiedKFold.",
+          "description": "Random seed controlling reproducibility of shuffling/sampling behavior.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Changing seed can shift results; fix seed for reproducible experiments."
           ]
         }
       ],
@@ -2154,13 +2490,13 @@
         },
         {
           "title": "StratifiedKFold additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = StratifiedKFold(n_splits=5, shuffle=False, random_state=None)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run StratifiedKFold again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run StratifiedKFold exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2201,47 +2537,72 @@
         {
           "name": "estimator",
           "type": "Any",
-          "description": "Controls estimator in cross_validate.",
+          "description": "Estimator object passed to `cross_validate`. It defines the algorithm, training behavior, and resulting predictions/metrics.",
           "values": [
-            "data-specific"
+            "scikit-learn estimator instance",
+            "Pipeline object",
+            "compatible model class"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use estimator interfaces compatible with this command (fit/predict/score).",
+            "Keep non-default hyperparameters documented for reproducibility."
           ]
         },
         {
           "name": "X",
           "type": "Any",
-          "description": "Controls X in cross_validate.",
+          "description": "Data input consumed by `cross_validate`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
-          "description": "Controls y in cross_validate.",
+          "description": "Target or label values used by `cross_validate`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         },
         {
           "name": "cv",
           "type": "Any",
           "default": "None",
-          "description": "Controls cv in cross_validate.",
+          "description": "Cross-validation split count or splitter object defining validation strategy.",
           "values": [
-            "data-specific"
+            "3",
+            "5",
+            "StratifiedKFold(5)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Time-series problems require time-aware splitters instead of random folds."
           ]
+        },
+        {
+          "name": "scoring",
+          "type": "Any",
+          "description": "Evaluation metric used to score models or folds.",
+          "values": [
+            "'accuracy'",
+            "'roc_auc'",
+            "'f1'"
+          ],
+          "pitfalls": [
+            "Metric must align with business objective and class balance."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -2263,13 +2624,13 @@
         },
         {
           "title": "cross_validate additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nresult = cross_validate(model, X, y, cv=None, scoring=None)\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run cross_validate again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run cross_validate exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2310,37 +2671,43 @@
         {
           "name": "estimator",
           "type": "Any",
-          "description": "Controls estimator in RandomizedSearchCV.",
+          "description": "Estimator object passed to `RandomizedSearchCV`. It defines the algorithm, training behavior, and resulting predictions/metrics.",
           "values": [
-            "data-specific"
+            "scikit-learn estimator instance",
+            "Pipeline object",
+            "compatible model class"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use estimator interfaces compatible with this command (fit/predict/score).",
+            "Keep non-default hyperparameters documented for reproducibility."
           ]
         },
         {
           "name": "param_distributions",
           "type": "Any",
-          "description": "Controls param_distributions in RandomizedSearchCV.",
+          "description": "Parameter `param_distributions` configures how `RandomizedSearchCV` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "n_iter",
           "type": "int",
           "default": "10",
-          "description": "Controls n_iter in RandomizedSearchCV.",
+          "description": "Parameter `n_iter` configures how `RandomizedSearchCV` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2363,13 +2730,13 @@
         },
         {
           "title": "RandomizedSearchCV additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = RandomizedSearchCV(model, param_distributions, n_iter=10)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run RandomizedSearchCV again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run RandomizedSearchCV exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2410,23 +2777,27 @@
         {
           "name": "y_true",
           "type": "Any",
-          "description": "Controls y_true in confusion_matrix.",
+          "description": "Parameter `y_true` configures how `confusion_matrix` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "y_pred",
           "type": "Any",
-          "description": "Controls y_pred in confusion_matrix.",
+          "description": "Parameter `y_pred` configures how `confusion_matrix` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2449,13 +2820,13 @@
         },
         {
           "title": "confusion_matrix additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nresult = confusion_matrix(y_test, preds)\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run confusion_matrix again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run confusion_matrix exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2496,23 +2867,27 @@
         {
           "name": "y_true",
           "type": "Any",
-          "description": "Controls y_true in classification_report.",
+          "description": "Parameter `y_true` configures how `classification_report` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "y_pred",
           "type": "Any",
-          "description": "Controls y_pred in classification_report.",
+          "description": "Parameter `y_pred` configures how `classification_report` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2535,13 +2910,13 @@
         },
         {
           "title": "classification_report additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nresult = classification_report(y_test, preds)\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run classification_report again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run classification_report exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2582,23 +2957,27 @@
         {
           "name": "y_true",
           "type": "Any",
-          "description": "Controls y_true in mean_squared_error.",
+          "description": "Parameter `y_true` configures how `mean_squared_error` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "y_pred",
           "type": "Any",
-          "description": "Controls y_pred in mean_squared_error.",
+          "description": "Parameter `y_pred` configures how `mean_squared_error` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2621,13 +3000,13 @@
         },
         {
           "title": "mean_squared_error additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nresult = mean_squared_error(y_test, preds)\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run mean_squared_error again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run mean_squared_error exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2668,23 +3047,27 @@
         {
           "name": "y_true",
           "type": "Any",
-          "description": "Controls y_true in r2_score.",
+          "description": "Parameter `y_true` configures how `r2_score` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "y_pred",
           "type": "Any",
-          "description": "Controls y_pred in r2_score.",
+          "description": "Parameter `y_pred` configures how `r2_score` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2707,13 +3090,13 @@
         },
         {
           "title": "r2_score additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nresult = r2_score(y_test, preds)\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run r2_score again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run r2_score exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2755,14 +3138,15 @@
           "name": "n_components",
           "type": "int",
           "default": "None",
-          "description": "Controls n_components in PCA.",
+          "description": "Parameter `n_components` configures how `PCA` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2775,7 +3159,7 @@
         {
           "title": "Dimensionality reduction before model fitting",
           "scenario": "Reduce correlated features with PCA and then fit a downstream classifier.",
-          "code": "import numpy as np\nfrom sklearn.decomposition import PCA\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0,0.9],[0.2,0.8,0.7],[0.8,0.2,0.3],[0.9,0.1,0.2],[0.15,0.85,0.8],[0.75,0.25,0.4]])\ny = np.array([0,0,1,1,0,1])\n\npca = PCA(n_components=2, random_state=42)\nX_reduced = pca.fit_transform(X)\n\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_reduced, y)\nprint(X_reduced.shape)\nprint(model.predict(X_reduced[:2]))",
+          "code": "import numpy as np\nfrom sklearn.decomposition import PCA\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0,0.9],[0.2,0.8,0.7],[0.8,0.2,0.3],[0.9,0.1,0.2],[0.15,0.85,0.8],[0.75,0.25,0.4]])\ny = np.array([0,0,1,1,0,1])\n\npca = PCA(n_components=2, random_state=42)\npca.fit(X)\nX_reduced = pca.transform(X)\n\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_reduced, y)\nprint(X_reduced.shape)\nprint(model.predict(X_reduced[:2]))",
           "expectedOutput": "Reduced feature shape and model predictions on reduced space.",
           "walkthrough": [
             "Prepare a toy but realistic dataset with business feature names.",
@@ -2785,13 +3169,13 @@
         },
         {
           "title": "PCA additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\nprint(model.predict(X_test))",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression, LinearRegression\nfrom sklearn.metrics import roc_auc_score\n\nX = np.array([[0.1,1.0],[0.2,0.8],[0.8,0.2],[0.9,0.1],[0.15,0.85],[0.75,0.25]])\ny = np.array([0,0,1,1,0,1])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train, y_train)\npreds = model.predict(X_test)\nproba = model.predict_proba(X_test)[:,1]\nmodel = PCA(n_components=None).fit(X).transform(X)\ntry:\n    model.fit(X_train, y_train)\n    print(model.predict(X_test))\nexcept Exception:\n    print(type(model).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run PCA again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run PCA exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2800,6 +3184,251 @@
         "Always verify version-specific defaults in official docs before production deployment."
       ],
       "related": []
+    },
+    {
+      "id": "sklearn-pandas-get-dummies",
+      "slug": "sklearn-pandas-get-dummies",
+      "name": "pandas.get_dummies (for sklearn baselines)",
+      "library": "sklearn",
+      "subtopic": "Preprocessing",
+      "tags": [
+        "categorical",
+        "encoding",
+        "pandas",
+        "preprocessing"
+      ],
+      "level": "extended",
+      "summary": "Quickly one-hot encode categorical columns in pandas before feeding sklearn models.",
+      "syntax": "pd.get_dummies(df, columns=['channel','region'], drop_first=False, dummy_na=True, dtype='int8')",
+      "description": "Create binary indicator columns in pandas for rapid baseline experiments and notebook prototyping.",
+      "overview": "pandas.get_dummies is a fast way to one-hot encode categorical columns for sklearn baselines. Use it when you want quick, transparent preprocessing directly in a DataFrame. For production pipelines and robust train/serve parity, OneHotEncoder inside ColumnTransformer/Pipeline is usually safer because categories are learned on train and reused at inference. Key parameters: columns, drop_first, dummy_na, dtype. Returns encoded DataFrame.",
+      "applications": [
+        "Primary application: fast baseline encoding in exploratory notebooks before formal pipelines.",
+        "Workflow application: when using train/test split, align test columns to train columns after get_dummies.",
+        "Delivery application: migrate mature notebooks from get_dummies to OneHotEncoder for production robustness."
+      ],
+      "docs": [
+        {
+          "label": "pandas.get_dummies",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "columns",
+          "type": "list[str]",
+          "description": "Categorical columns to encode.",
+          "values": [
+            "['channel','region']"
+          ],
+          "pitfalls": [
+            "If omitted, object/category columns are inferred automatically and may change across datasets."
+          ]
+        },
+        {
+          "name": "drop_first",
+          "type": "bool",
+          "default": "False",
+          "description": "Drop one level per category to reduce collinearity.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Dropping first can hurt interpretability if reference class is not documented."
+          ]
+        },
+        {
+          "name": "dummy_na",
+          "type": "bool",
+          "default": "False",
+          "description": "Add explicit column for missing category values.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "If False, missing categories may be silently ignored."
+          ]
+        },
+        {
+          "name": "df",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `pandas.get_dummies (for sklearn baselines)`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "'region']",
+          "type": "Any",
+          "description": "Parameter `'region']` configures how `pandas.get_dummies (for sklearn baselines)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "dtype",
+          "type": "str | list[str]",
+          "description": "Output dtype for `pandas.get_dummies (for sklearn baselines)`. It controls memory footprint, precision, and interoperability with downstream steps.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Downcasting can truncate values or overflow.",
+            "Mixed dtypes can break model pipelines and aggregations."
+          ],
+          "default": "'int8'"
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "shape": "(rows, original_numeric + encoded_binary_cols)",
+        "description": "Encoded DataFrame ready for sklearn estimators."
+      },
+      "examples": [
+        {
+          "title": "Baseline encoding for logistic regression",
+          "scenario": "Prototype churn model with categorical plan/region fields and numeric spend.",
+          "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\n\ndf = pd.DataFrame({\n    'plan':['basic','pro','basic','enterprise','pro','basic'],\n    'region':['west','east','west','south','east','north'],\n    'spend':[120,340,95,460,280,170],\n    'churn':[1,0,1,0,0,1]\n})\n\nX = df[['plan','region','spend']]\ny = df['churn']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42, stratify=y)\n\nX_train_d = pd.get_dummies(X_train, columns=['plan','region'], dummy_na=True, dtype='int8')\nX_test_d = pd.get_dummies(X_test, columns=['plan','region'], dummy_na=True, dtype='int8')\nX_test_d = X_test_d.reindex(columns=X_train_d.columns, fill_value=0)\n\nmodel = LogisticRegression(max_iter=500)\nmodel.fit(X_train_d, y_train)\nprint(model.predict(X_test_d))",
+          "expectedOutput": "Predicted classes from a dummy-encoded baseline model with aligned train/test columns.",
+          "walkthrough": [
+            "Run get_dummies separately on train and test after split to avoid leaking distribution information.",
+            "Reindex test columns to match train columns exactly before prediction.",
+            "Use this as a baseline, then migrate to OneHotEncoder + Pipeline for production."
+          ]
+        }
+      ],
+      "notes": [
+        "Use dtype int8/uint8 to reduce memory footprint for wide encoded matrices."
+      ],
+      "related": [
+        "sklearn-onehotencoder",
+        "sklearn-columntransformer",
+        "sklearn-pipeline"
+      ]
+    },
+    {
+      "id": "sklearn-robustscaler",
+      "slug": "sklearn-robustscaler",
+      "name": "RobustScaler",
+      "library": "sklearn",
+      "subtopic": "Preprocessing",
+      "tags": [
+        "scale",
+        "outliers",
+        "numeric",
+        "preprocessing"
+      ],
+      "level": "extended",
+      "summary": "Scale numeric features using median and IQR, making scaling less sensitive to outliers.",
+      "syntax": "RobustScaler(with_centering=True, with_scaling=True, quantile_range=(25.0, 75.0))",
+      "description": "Alternative to StandardScaler when numeric columns contain heavy tails or extreme outliers.",
+      "overview": "RobustScaler scales using median and interquartile range (IQR), so extreme values have less influence than with mean/std scaling. Use it when outliers are common and you still need scale-sensitive models to train stably. Typical pattern: impute -> robust scale numeric columns -> model. Key parameters: quantile_range, with_centering, with_scaling. Returns transformed matrix with same rows.",
+      "applications": [
+        "Primary application: scale skewed/outlier-prone numeric columns before linear/SVM models.",
+        "Workflow application: compare RobustScaler vs StandardScaler with cross-validation to choose empirically.",
+        "Delivery application: keep scaler in Pipeline so training and inference preprocessing match exactly."
+      ],
+      "docs": [
+        {
+          "label": "RobustScaler",
+          "url": "https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.RobustScaler.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "quantile_range",
+          "type": "tuple[float,float]",
+          "default": "(25.0, 75.0)",
+          "description": "Percentile range used for IQR scaling.",
+          "values": [
+            "(10.0, 90.0)",
+            "(25.0, 75.0)"
+          ],
+          "pitfalls": [
+            "Very narrow ranges can over-amplify noise."
+          ]
+        },
+        {
+          "name": "with_centering",
+          "type": "bool",
+          "default": "True",
+          "description": "Center by median before scaling.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Centering sparse matrices may be inefficient."
+          ]
+        },
+        {
+          "name": "with_scaling",
+          "type": "bool",
+          "description": "Parameter `with_scaling` configures how `RobustScaler` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "True"
+        },
+        {
+          "name": "75.0)",
+          "type": "Any",
+          "description": "Parameter `75.0)` configures how `RobustScaler` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "ndarray | sparse matrix",
+        "shape": "same rows and feature count as input",
+        "description": "Robustly scaled numeric matrix."
+      },
+      "examples": [
+        {
+          "title": "Scale outlier-heavy spend features",
+          "scenario": "Customer spend has extreme values that destabilize standard scaling.",
+          "code": "import pandas as pd\nfrom sklearn.preprocessing import RobustScaler\n\nX = pd.DataFrame({'spend':[20,25,22,24,23,500], 'tickets':[1,2,1,2,1,8]})\nscaler = RobustScaler()\nX_scaled = scaler.fit_transform(X)\nprint(X_scaled)",
+          "expectedOutput": "Scaled numeric matrix where extreme spend has reduced influence relative to standard scaling.",
+          "walkthrough": [
+            "Inspect raw numeric distributions and identify heavy outliers.",
+            "Fit RobustScaler on training data only.",
+            "Transform train/test with same scaler and compare model stability vs StandardScaler."
+          ]
+        }
+      ],
+      "notes": [
+        "Tree-based models usually do not require scaling; robust scaling is most useful for scale-sensitive estimators."
+      ],
+      "related": [
+        "sklearn-standardscaler",
+        "sklearn-minmaxscaler",
+        "sklearn-simpleimputer"
+      ]
     }
   ],
   "overview": "scikit-learn standardizes practical machine learning with composable APIs for preprocessing, model training, validation, hyperparameter tuning, and evaluation.",

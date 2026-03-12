@@ -221,7 +221,7 @@
     {
       "id": "rstudio-readr-read-csv",
       "slug": "rstudio-readr-read-csv",
-      "name": "readr::read_csv",
+      "name": "read_csv (readr)",
       "library": "rstudio",
       "subtopic": "Data Import",
       "tags": [
@@ -241,14 +241,16 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how readr::read_csv is applied.",
+          "name": "'data/orders.csv'",
+          "type": "Any",
+          "description": "Parameter `'data/orders.csv'` configures how `read_csv (readr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -295,7 +297,7 @@
     {
       "id": "rstudio-dplyr-select",
       "slug": "rstudio-dplyr-select",
-      "name": "dplyr::select",
+      "name": "select (dplyr)",
       "library": "rstudio",
       "subtopic": "Wrangling",
       "tags": [
@@ -315,14 +317,43 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how dplyr::select is applied.",
+          "name": "customer_id",
+          "type": "Any",
+          "description": "Parameter `customer_id` configures how `select (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "revenue",
+          "type": "Any",
+          "description": "Data input consumed by `select (dplyr)`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "order_date",
+          "type": "Any",
+          "description": "Parameter `order_date` configures how `select (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -369,7 +400,7 @@
     {
       "id": "rstudio-dplyr-filter",
       "slug": "rstudio-dplyr-filter",
-      "name": "dplyr::filter",
+      "name": "filter (dplyr)",
       "library": "rstudio",
       "subtopic": "Wrangling",
       "tags": [
@@ -389,15 +420,31 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how dplyr::filter is applied.",
+          "name": "revenue>100",
+          "type": "Any",
+          "description": "Parameter `revenue>100` configures how `filter (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
+        },
+        {
+          "name": "region",
+          "type": "Any",
+          "description": "Parameter `region` configures how `filter (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "= \"West\""
         }
       ],
       "returns": {
@@ -443,7 +490,7 @@
     {
       "id": "rstudio-dplyr-mutate",
       "slug": "rstudio-dplyr-mutate",
-      "name": "dplyr::mutate",
+      "name": "mutate (dplyr)",
       "library": "rstudio",
       "subtopic": "Wrangling",
       "tags": [
@@ -463,14 +510,30 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how dplyr::mutate is applied.",
+          "name": "aov",
+          "type": "Any",
+          "description": "Parameter `aov` configures how `mutate (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "revenue / pmax(orders"
+        },
+        {
+          "name": "1)",
+          "type": "Any",
+          "description": "Parameter `1)` configures how `mutate (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -517,7 +580,7 @@
     {
       "id": "rstudio-dplyr-arrange",
       "slug": "rstudio-dplyr-arrange",
-      "name": "dplyr::arrange",
+      "name": "arrange (dplyr)",
       "library": "rstudio",
       "subtopic": "Wrangling",
       "tags": [
@@ -537,14 +600,16 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how dplyr::arrange is applied.",
+          "name": "dplyr::desc(revenue)",
+          "type": "Any",
+          "description": "Parameter `dplyr::desc(revenue)` configures how `arrange (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -591,7 +656,7 @@
     {
       "id": "rstudio-dplyr-summarise",
       "slug": "rstudio-dplyr-summarise",
-      "name": "dplyr::summarise",
+      "name": "summarise (dplyr)",
       "library": "rstudio",
       "subtopic": "Wrangling",
       "tags": [
@@ -611,15 +676,32 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how dplyr::summarise is applied.",
+          "name": "total_revenue",
+          "type": "Any",
+          "description": "Parameter `total_revenue` configures how `summarise (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
-          ]
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "sum(revenue)"
+        },
+        {
+          "name": "avg_revenue",
+          "type": "Any",
+          "description": "Parameter `avg_revenue` configures how `summarise (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "mean(revenue)"
         }
       ],
       "returns": {
@@ -665,7 +747,7 @@
     {
       "id": "rstudio-dplyr-group-by",
       "slug": "rstudio-dplyr-group-by",
-      "name": "dplyr::group_by",
+      "name": "group_by (dplyr)",
       "library": "rstudio",
       "subtopic": "Wrangling",
       "tags": [
@@ -685,15 +767,32 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how dplyr::group_by is applied.",
+          "name": "region)%>%dplyr::summarise(revenue",
+          "type": "Any",
+          "description": "Parameter `region)%>%dplyr::summarise(revenue` configures how `group_by (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
-          ]
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "sum(revenue)"
+        },
+        {
+          "name": ".groups",
+          "type": "Any",
+          "description": "Parameter `.groups` configures how `group_by (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "\"drop\""
         }
       ],
       "returns": {
@@ -739,7 +838,7 @@
     {
       "id": "rstudio-dplyr-left-join",
       "slug": "rstudio-dplyr-left-join",
-      "name": "dplyr::left_join",
+      "name": "left_join (dplyr)",
       "library": "rstudio",
       "subtopic": "Wrangling",
       "tags": [
@@ -759,15 +858,33 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how dplyr::left_join is applied.",
+          "name": "customers",
+          "type": "Any",
+          "description": "Data input consumed by `left_join (dplyr)`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
+        },
+        {
+          "name": "by",
+          "type": "Any",
+          "description": "Column/key selector for `left_join (dplyr)`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "\"customer_id\""
         }
       ],
       "returns": {
@@ -813,7 +930,7 @@
     {
       "id": "rstudio-dplyr-inner-join",
       "slug": "rstudio-dplyr-inner-join",
-      "name": "dplyr::inner_join",
+      "name": "inner_join (dplyr)",
       "library": "rstudio",
       "subtopic": "Wrangling",
       "tags": [
@@ -833,15 +950,32 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how dplyr::inner_join is applied.",
+          "name": "payments",
+          "type": "Any",
+          "description": "Parameter `payments` configures how `inner_join (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
+        },
+        {
+          "name": "by",
+          "type": "Any",
+          "description": "Column/key selector for `inner_join (dplyr)`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "\"order_id\""
         }
       ],
       "returns": {
@@ -887,7 +1021,7 @@
     {
       "id": "rstudio-tidyr-pivot-longer",
       "slug": "rstudio-tidyr-pivot-longer",
-      "name": "tidyr::pivot_longer",
+      "name": "pivot_longer (tidyr)",
       "library": "rstudio",
       "subtopic": "Reshaping",
       "tags": [
@@ -907,15 +1041,48 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how tidyr::pivot_longer is applied.",
+          "name": "cols",
+          "type": "str | list[str]",
+          "description": "Parameter `cols` configures how `pivot_longer (tidyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "'auto'",
+            "'left'",
+            "'mean'"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
-          ]
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "starts_with(\"m_\")"
+        },
+        {
+          "name": "names_to",
+          "type": "str | list[str]",
+          "description": "Parameter `names_to` configures how `pivot_longer (tidyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "\"metric\""
+        },
+        {
+          "name": "values_to",
+          "type": "Any",
+          "description": "Parameter `values_to` configures how `pivot_longer (tidyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "\"value\""
         }
       ],
       "returns": {
@@ -961,7 +1128,7 @@
     {
       "id": "rstudio-tidyr-pivot-wider",
       "slug": "rstudio-tidyr-pivot-wider",
-      "name": "tidyr::pivot_wider",
+      "name": "pivot_wider (tidyr)",
       "library": "rstudio",
       "subtopic": "Reshaping",
       "tags": [
@@ -981,15 +1148,33 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how tidyr::pivot_wider is applied.",
+          "name": "names_from",
+          "type": "str | list[str]",
+          "description": "Parameter `names_from` configures how `pivot_wider (tidyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "'auto'",
+            "'left'",
+            "'mean'"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
-          ]
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "metric"
+        },
+        {
+          "name": "values_from",
+          "type": "Any",
+          "description": "Parameter `values_from` configures how `pivot_wider (tidyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "value"
         }
       ],
       "returns": {
@@ -1035,7 +1220,7 @@
     {
       "id": "rstudio-tidyr-drop-na",
       "slug": "rstudio-tidyr-drop-na",
-      "name": "tidyr::drop_na",
+      "name": "drop_na (tidyr)",
       "library": "rstudio",
       "subtopic": "Reshaping",
       "tags": [
@@ -1055,14 +1240,30 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how tidyr::drop_na is applied.",
+          "name": "revenue",
+          "type": "Any",
+          "description": "Data input consumed by `drop_na (tidyr)`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "order_date",
+          "type": "Any",
+          "description": "Parameter `order_date` configures how `drop_na (tidyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1109,7 +1310,7 @@
     {
       "id": "rstudio-tidyr-replace-na",
       "slug": "rstudio-tidyr-replace-na",
-      "name": "tidyr::replace_na",
+      "name": "replace_na (tidyr)",
       "library": "rstudio",
       "subtopic": "Reshaping",
       "tags": [
@@ -1129,15 +1330,32 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how tidyr::replace_na is applied.",
+          "name": "list(revenue",
+          "type": "Any",
+          "description": "Parameter `list(revenue` configures how `replace_na (tidyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
-          ]
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "0"
+        },
+        {
+          "name": "region",
+          "type": "Any",
+          "description": "Parameter `region` configures how `replace_na (tidyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "\"Unknown\")"
         }
       ],
       "returns": {
@@ -1183,7 +1401,7 @@
     {
       "id": "rstudio-ggplot-geom-line",
       "slug": "rstudio-ggplot-geom-line",
-      "name": "ggplot2::geom_line",
+      "name": "geom_line (ggplot2)",
       "library": "rstudio",
       "subtopic": "Visualization",
       "tags": [
@@ -1203,14 +1421,43 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how ggplot2::geom_line is applied.",
+          "name": "df",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `geom_line (ggplot2)`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "ggplot2::aes(order_date",
+          "type": "Any",
+          "description": "Parameter `ggplot2::aes(order_date` configures how `geom_line (ggplot2)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "revenue))+ggplot2::geom_line(",
+          "type": "Any",
+          "description": "Parameter `revenue))+ggplot2::geom_line(` configures how `geom_line (ggplot2)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1257,7 +1504,7 @@
     {
       "id": "rstudio-ggplot-geom-col",
       "slug": "rstudio-ggplot-geom-col",
-      "name": "ggplot2::geom_col",
+      "name": "geom_col (ggplot2)",
       "library": "rstudio",
       "subtopic": "Visualization",
       "tags": [
@@ -1277,14 +1524,44 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how ggplot2::geom_col is applied.",
+          "name": "seg_kpi",
+          "type": "int",
+          "description": "Parameter `seg_kpi` configures how `geom_col (ggplot2)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "1",
+            "5",
+            "10"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "ggplot2::aes(region",
+          "type": "Any",
+          "description": "Parameter `ggplot2::aes(region` configures how `geom_col (ggplot2)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "revenue))+ggplot2::geom_col(",
+          "type": "str | list[str]",
+          "description": "Parameter `revenue))+ggplot2::geom_col(` configures how `geom_col (ggplot2)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1331,7 +1608,7 @@
     {
       "id": "rstudio-ggplot-geom-point",
       "slug": "rstudio-ggplot-geom-point",
-      "name": "ggplot2::geom_point",
+      "name": "geom_point (ggplot2)",
       "library": "rstudio",
       "subtopic": "Visualization",
       "tags": [
@@ -1351,14 +1628,43 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how ggplot2::geom_point is applied.",
+          "name": "df",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `geom_point (ggplot2)`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "ggplot2::aes(ad_spend",
+          "type": "Any",
+          "description": "Parameter `ggplot2::aes(ad_spend` configures how `geom_point (ggplot2)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "revenue))+ggplot2::geom_point(",
+          "type": "Any",
+          "description": "Parameter `revenue))+ggplot2::geom_point(` configures how `geom_point (ggplot2)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1405,7 +1711,7 @@
     {
       "id": "rstudio-lubridate-ymd",
       "slug": "rstudio-lubridate-ymd",
-      "name": "lubridate::ymd",
+      "name": "ymd (lubridate)",
       "library": "rstudio",
       "subtopic": "Dates and Time",
       "tags": [
@@ -1425,15 +1731,18 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how lubridate::ymd is applied.",
+          "name": "order_date",
+          "type": "Any",
+          "description": "Parameter `order_date` configures how `ymd (lubridate)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
-          ]
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "lubridate::ymd(order_date_raw)"
         }
       ],
       "returns": {
@@ -1479,7 +1788,7 @@
     {
       "id": "rstudio-lubridate-floor-date",
       "slug": "rstudio-lubridate-floor-date",
-      "name": "lubridate::floor_date",
+      "name": "floor_date (lubridate)",
       "library": "rstudio",
       "subtopic": "Dates and Time",
       "tags": [
@@ -1499,15 +1808,33 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how lubridate::floor_date is applied.",
+          "name": "week",
+          "type": "int",
+          "description": "Parameter `week` configures how `floor_date (lubridate)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "1",
+            "5",
+            "10"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
-          ]
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "lubridate::floor_date(order_date"
+        },
+        {
+          "name": "unit",
+          "type": "Any",
+          "description": "Parameter `unit` configures how `floor_date (lubridate)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "\"week\")"
         }
       ],
       "returns": {
@@ -1553,7 +1880,7 @@
     {
       "id": "rstudio-stringr-str-detect",
       "slug": "rstudio-stringr-str-detect",
-      "name": "stringr::str_detect",
+      "name": "str_detect (stringr)",
       "library": "rstudio",
       "subtopic": "Strings and Factors",
       "tags": [
@@ -1573,14 +1900,29 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how stringr::str_detect is applied.",
+          "name": "is_promo",
+          "type": "bool",
+          "description": "Parameter `is_promo` configures how `str_detect (stringr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "True",
+            "False"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "stringr::str_detect(campaign_name"
+        },
+        {
+          "name": "\"promo\")",
+          "type": "Any",
+          "description": "Parameter `\"promo\")` configures how `str_detect (stringr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1627,7 +1969,7 @@
     {
       "id": "rstudio-stringr-str-replace-all",
       "slug": "rstudio-stringr-str-replace-all",
-      "name": "stringr::str_replace_all",
+      "name": "str_replace_all (stringr)",
       "library": "rstudio",
       "subtopic": "Strings and Factors",
       "tags": [
@@ -1647,14 +1989,43 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how stringr::str_replace_all is applied.",
+          "name": "clean",
+          "type": "Any",
+          "description": "Parameter `clean` configures how `str_replace_all (stringr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "stringr::str_replace_all(raw_text"
+        },
+        {
+          "name": "\"[^A-Za-z0-9]\"",
+          "type": "Any",
+          "description": "Parameter `\"[^A-Za-z0-9]\"` configures how `str_replace_all (stringr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "\"\")",
+          "type": "Any",
+          "description": "Parameter `\"\")` configures how `str_replace_all (stringr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1701,7 +2072,7 @@
     {
       "id": "rstudio-forcats-fct-reorder",
       "slug": "rstudio-forcats-fct-reorder",
-      "name": "forcats::fct_reorder",
+      "name": "fct_reorder (forcats)",
       "library": "rstudio",
       "subtopic": "Strings and Factors",
       "tags": [
@@ -1721,15 +2092,46 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how forcats::fct_reorder is applied.",
+          "name": "region",
+          "type": "Any",
+          "description": "Parameter `region` configures how `fct_reorder (forcats)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "forcats::fct_reorder(region"
+        },
+        {
+          "name": "revenue",
+          "type": "Any",
+          "description": "Data input consumed by `fct_reorder (forcats)`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
+        },
+        {
+          "name": ".fun",
+          "type": "Any",
+          "description": "Parameter `.fun` configures how `fct_reorder (forcats)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "mean)"
         }
       ],
       "returns": {
@@ -1775,7 +2177,7 @@
     {
       "id": "rstudio-purrr-map",
       "slug": "rstudio-purrr-map",
-      "name": "purrr::map",
+      "name": "map (purrr)",
       "library": "rstudio",
       "subtopic": "Functional Patterns",
       "tags": [
@@ -1795,15 +2197,44 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how purrr::map is applied.",
+          "name": "split_df",
+          "type": "Any",
+          "description": "Parameter `split_df` configures how `map (purrr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
+        },
+        {
+          "name": "~mean(.x$revenue",
+          "type": "Any",
+          "description": "Parameter `~mean(.x$revenue` configures how `map (purrr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "na.rm",
+          "type": "Any",
+          "description": "Parameter `na.rm` configures how `map (purrr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "TRUE)"
         }
       ],
       "returns": {
@@ -1849,7 +2280,7 @@
     {
       "id": "rstudio-readr-write-csv",
       "slug": "rstudio-readr-write-csv",
-      "name": "readr::write_csv",
+      "name": "write_csv (readr)",
       "library": "rstudio",
       "subtopic": "Data Import",
       "tags": [
@@ -1869,14 +2300,31 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how readr::write_csv is applied.",
+          "name": "kpi",
+          "type": "int",
+          "description": "Parameter `kpi` configures how `write_csv (readr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "1",
+            "5",
+            "10"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "'outputs/weekly_kpi.csv'",
+          "type": "int",
+          "description": "Parameter `'outputs/weekly_kpi.csv'` configures how `write_csv (readr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1923,7 +2371,7 @@
     {
       "id": "rstudio-case-when",
       "slug": "rstudio-case-when",
-      "name": "dplyr::case_when",
+      "name": "case_when (dplyr)",
       "library": "rstudio",
       "subtopic": "Functional Patterns",
       "tags": [
@@ -1943,14 +2391,44 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how dplyr::case_when is applied.",
+          "name": "segment",
+          "type": "Any",
+          "description": "Parameter `segment` configures how `case_when (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "dplyr::case_when(revenue >= 200 ~ 'High'"
+        },
+        {
+          "name": "revenue>",
+          "type": "Any",
+          "description": "Parameter `revenue>` configures how `case_when (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "100 ~ 'Mid'"
+        },
+        {
+          "name": "TRUE~'Low')",
+          "type": "Any",
+          "description": "Parameter `TRUE~'Low')` configures how `case_when (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1997,7 +2475,7 @@
     {
       "id": "rstudio-if-else",
       "slug": "rstudio-if-else",
-      "name": "dplyr::if_else",
+      "name": "if_else (dplyr)",
       "library": "rstudio",
       "subtopic": "Functional Patterns",
       "tags": [
@@ -2017,14 +2495,43 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how dplyr::if_else is applied.",
+          "name": "is_target",
+          "type": "bool",
+          "description": "Parameter `is_target` configures how `if_else (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "True",
+            "False"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "dplyr::if_else(revenue >= 100"
+        },
+        {
+          "name": "'Y'",
+          "type": "Any",
+          "description": "Target or label values used by `if_else (dplyr)`. This controls what the model/metric learns or evaluates against.",
+          "values": [
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
+          ],
+          "pitfalls": [
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
+          ]
+        },
+        {
+          "name": "'N')",
+          "type": "Any",
+          "description": "Parameter `'N')` configures how `if_else (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2071,7 +2578,7 @@
     {
       "id": "rstudio-across",
       "slug": "rstudio-across",
-      "name": "dplyr::across",
+      "name": "across (dplyr)",
       "library": "rstudio",
       "subtopic": "Functional Patterns",
       "tags": [
@@ -2091,15 +2598,57 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "data.frame | tibble and function arguments",
-          "description": "Inputs that control how dplyr::across is applied.",
+          "name": "dplyr::across(c(revenue",
+          "type": "Any",
+          "description": "Parameter `dplyr::across(c(revenue` configures how `across (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm column names, data types, and package versions before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
+        },
+        {
+          "name": "orders)",
+          "type": "Any",
+          "description": "Parameter `orders)` configures how `across (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "~.x/max(.x",
+          "type": "Any",
+          "description": "Parameter `~.x/max(.x` configures how `across (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "na.rm",
+          "type": "Any",
+          "description": "Parameter `na.rm` configures how `across (dplyr)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "TRUE))"
         }
       ],
       "returns": {
@@ -2145,7 +2694,7 @@
     {
       "id": "rstudio-psych-describe",
       "slug": "rstudio-psych-describe",
-      "name": "psych::describe",
+      "name": "describe (psych)",
       "library": "rstudio",
       "subtopic": "Statistical Inference",
       "tags": [
@@ -2169,10 +2718,27 @@
           "type": "numeric",
           "description": "data controls how psych::describe is applied.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "df",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `describe (psych)`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2208,7 +2774,7 @@
     {
       "id": "rstudio-t-test",
       "slug": "rstudio-t-test",
-      "name": "stats::t.test",
+      "name": "t.test (stats)",
       "library": "rstudio",
       "subtopic": "Statistical Inference",
       "tags": [
@@ -2232,10 +2798,13 @@
           "type": "formula",
           "description": "formula controls how stats::t.test is applied.",
           "values": [
-            "project-specific"
+            "'y ~ x1 + x2'",
+            "'y ~ x1 * x2'",
+            "'y ~ .'"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Confirm categorical encodings before fitting formula models.",
+            "Interaction terms can inflate multicollinearity if overused."
           ]
         },
         {
@@ -2243,11 +2812,41 @@
           "type": "numeric",
           "description": "var.equal controls how stats::t.test is applied.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
+        },
+        {
+          "name": "outcome~group",
+          "type": "Any",
+          "description": "Parameter `outcome~group` configures how `t.test (stats)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "data",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `t.test (stats)`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "df"
         }
       ],
       "returns": {
@@ -2282,7 +2881,7 @@
     {
       "id": "rstudio-anova-aov",
       "slug": "rstudio-anova-aov",
-      "name": "stats::aov",
+      "name": "aov (stats)",
       "library": "rstudio",
       "subtopic": "Statistical Inference",
       "tags": [
@@ -2306,11 +2905,42 @@
           "type": "formula",
           "description": "formula controls how stats::aov is applied.",
           "values": [
-            "project-specific"
+            "'y ~ x1 + x2'",
+            "'y ~ x1 * x2'",
+            "'y ~ .'"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Confirm categorical encodings before fitting formula models.",
+            "Interaction terms can inflate multicollinearity if overused."
           ]
+        },
+        {
+          "name": "outcome~factor",
+          "type": "Any",
+          "description": "Parameter `outcome~factor` configures how `aov (stats)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "data",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `aov (stats)`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "df"
         }
       ],
       "returns": {
@@ -2345,7 +2975,7 @@
     {
       "id": "rstudio-lm-stats",
       "slug": "rstudio-lm-stats",
-      "name": "stats::lm (Inference + LinReg)",
+      "name": "lm (Inference + LinReg) (stats)",
       "library": "rstudio",
       "subtopic": "Regression and Forecasting",
       "tags": [
@@ -2369,11 +2999,42 @@
           "type": "formula",
           "description": "formula controls how stats::lm (Inference + LinReg) is applied.",
           "values": [
-            "project-specific"
+            "'y ~ x1 + x2'",
+            "'y ~ x1 * x2'",
+            "'y ~ .'"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Confirm categorical encodings before fitting formula models.",
+            "Interaction terms can inflate multicollinearity if overused."
           ]
+        },
+        {
+          "name": "y~x1+x2",
+          "type": "Any",
+          "description": "Parameter `y~x1+x2` configures how `lm (Inference + LinReg) (stats)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "data",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `lm (Inference + LinReg) (stats)`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "df"
         }
       ],
       "returns": {
@@ -2408,7 +3069,7 @@
     {
       "id": "rstudio-predict-stats",
       "slug": "rstudio-predict-stats",
-      "name": "stats::predict (Scenario Scoring)",
+      "name": "predict (Scenario Scoring) (stats)",
       "library": "rstudio",
       "subtopic": "Regression and Forecasting",
       "tags": [
@@ -2432,10 +3093,26 @@
           "type": "numeric",
           "description": "newdata controls how stats::predict (Scenario Scoring) is applied.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "model",
+          "type": "Any",
+          "description": "Estimator object passed to `predict (Scenario Scoring) (stats)`. It defines the algorithm, training behavior, and resulting predictions/metrics.",
+          "values": [
+            "scikit-learn estimator instance",
+            "Pipeline object",
+            "compatible model class"
+          ],
+          "pitfalls": [
+            "Use estimator interfaces compatible with this command (fit/predict/score).",
+            "Keep non-default hyperparameters documented for reproducibility."
           ]
         }
       ],
@@ -2471,7 +3148,7 @@
     {
       "id": "rstudio-kmeans-segmentation",
       "slug": "rstudio-kmeans-segmentation",
-      "name": "stats::kmeans",
+      "name": "kmeans (stats)",
       "library": "rstudio",
       "subtopic": "Segmentation",
       "tags": [
@@ -2495,10 +3172,12 @@
           "type": "numeric",
           "description": "centers controls how stats::kmeans is applied.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
@@ -2506,10 +3185,25 @@
           "type": "numeric",
           "description": "nstart controls how stats::kmeans is applied.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "df_scaled",
+          "type": "Any",
+          "description": "Parameter `df_scaled` configures how `kmeans (stats)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2545,7 +3239,7 @@
     {
       "id": "rstudio-scale-segmentation",
       "slug": "rstudio-scale-segmentation",
-      "name": "base::scale (Pre-clustering Standardization)",
+      "name": "scale (Pre-clustering Standardization) (base)",
       "library": "rstudio",
       "subtopic": "Segmentation",
       "tags": [
@@ -2569,10 +3263,26 @@
           "type": "data.frame | matrix",
           "description": "x controls how base::scale (Pre-clustering Standardization) is applied.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "df_numeric",
+          "type": "Any",
+          "description": "Parameter `df_numeric` configures how `scale (Pre-clustering Standardization) (base)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2632,10 +3342,12 @@
           "type": "numeric",
           "description": "price_grid controls how Pricing Profit Curve Pattern is applied.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
@@ -2643,10 +3355,51 @@
           "type": "formula",
           "description": "profit_formula controls how Pricing Profit Curve Pattern is applied.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "0.5",
+          "type": "Any",
+          "description": "Parameter `0.5` configures how `Pricing Profit Curve Pattern` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "3",
+          "type": "Any",
+          "description": "Parameter `3` configures how `Pricing Profit Curve Pattern` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "0.01);best<-profit_df[which.max(profit_df$profit",
+          "type": "Any",
+          "description": "Parameter `0.01);best<-profit_df[which.max(profit_df$profit` configures how `Pricing Profit Curve Pattern` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2706,10 +3459,12 @@
           "type": "numeric",
           "description": "ATE controls how A/B Lift and ROI Pattern is applied.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
@@ -2717,11 +3472,27 @@
           "type": "numeric",
           "description": "campaign_cost controls how A/B Lift and ROI Pattern is applied.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
+        },
+        {
+          "name": "y[test",
+          "type": "Any",
+          "description": "Parameter `y[test` configures how `A/B Lift and ROI Pattern` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "=1]) - mean(y[test==0]); ROI <- 100*(inc_profit-cost"
         }
       ],
       "returns": {
@@ -2780,10 +3551,12 @@
           "type": "numeric",
           "description": "M controls how CLV Discounted Sum Pattern is applied.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
@@ -2791,10 +3564,13 @@
           "type": "numeric",
           "description": "alpha controls how CLV Discounted Sum Pattern is applied.",
           "values": [
-            "project-specific"
+            "small positive float",
+            "grid-searched range",
+            "library default"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Too large can underfit; too small can overfit.",
+            "Tune with cross-validation rather than single split results."
           ]
         },
         {
@@ -2802,10 +3578,12 @@
           "type": "numeric",
           "description": "r controls how CLV Discounted Sum Pattern is applied.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
@@ -2813,10 +3591,39 @@
           "type": "numeric",
           "description": "T controls how CLV Discounted Sum Pattern is applied.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Validate assumptions and variable definitions before interpreting results."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "sapply(0:(T-1)",
+          "type": "Any",
+          "description": "Parameter `sapply(0:(T-1)` configures how `CLV Discounted Sum Pattern` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "function(t)M*(alpha/(1+r))^t)",
+          "type": "float",
+          "description": "Parameter `function(t)M*(alpha/(1+r))^t)` configures how `CLV Discounted Sum Pattern` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "0.1",
+            "1.0",
+            "10.0"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],

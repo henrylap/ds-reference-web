@@ -196,9 +196,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how SELECT and FROM is applied.",
+          "description": "Data input consumed by `SELECT and FROM`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -270,9 +272,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how DISTINCT is applied.",
+          "description": "Data input consumed by `DISTINCT`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -344,9 +348,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how WHERE is applied.",
+          "description": "Data input consumed by `WHERE`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -418,9 +424,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how ORDER BY is applied.",
+          "description": "Data input consumed by `ORDER BY`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -492,9 +500,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how LIMIT and OFFSET is applied.",
+          "description": "Data input consumed by `LIMIT and OFFSET`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -566,9 +576,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how LIKE and ILIKE is applied.",
+          "description": "Data input consumed by `LIKE and ILIKE`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -638,14 +650,44 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how IN and BETWEEN is applied.",
+          "name": "a",
+          "type": "Any",
+          "description": "Data input consumed by `IN and BETWEEN`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "b",
+          "type": "Any",
+          "description": "Parameter `b` configures how `IN and BETWEEN` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "c",
+          "type": "float",
+          "description": "Regularization or learning-strength parameter for `IN and BETWEEN`. It controls model flexibility and overfit/underfit trade-offs.",
+          "values": [
+            "0.1",
+            "1.0",
+            "10.0"
+          ],
+          "pitfalls": [
+            "Too large can underfit; too small can overfit.",
+            "Tune with cross-validation rather than single split results."
           ]
         }
       ],
@@ -712,14 +754,17 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how GROUP BY is applied.",
+          "name": "metric",
+          "type": "str | list[str]",
+          "description": "Metric specification for `GROUP BY`. It determines how model quality is measured and therefore which model looks \"best.\"",
           "values": [
-            "project-specific"
+            "'auto'",
+            "'left'",
+            "'mean'"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Choose a metric aligned to business cost of false positives/negatives.",
+            "For imbalanced classes, avoid relying on accuracy alone."
           ]
         }
       ],
@@ -788,9 +833,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how HAVING is applied.",
+          "description": "Data input consumed by `HAVING`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -860,14 +907,44 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how COUNT, SUM, AVG is applied.",
+          "name": ")ASrows",
+          "type": "Any",
+          "description": "Parameter `)ASrows` configures how `COUNT, SUM, AVG` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "SUM(metric)AStotal",
+          "type": "str | list[str]",
+          "description": "Parameter `SUM(metric)AStotal` configures how `COUNT, SUM, AVG` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "AVG(metric",
+          "type": "str | list[str]",
+          "description": "Parameter `AVG(metric` configures how `COUNT, SUM, AVG` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -936,9 +1013,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how CASE WHEN is applied.",
+          "description": "Data input consumed by `CASE WHEN`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -1008,14 +1087,57 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how COALESCE and NULLIF is applied.",
+          "name": "metric",
+          "type": "str | list[str]",
+          "description": "Metric specification for `COALESCE and NULLIF`. It determines how model quality is measured and therefore which model looks \"best.\"",
           "values": [
-            "project-specific"
+            "'auto'",
+            "'left'",
+            "'mean'"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Choose a metric aligned to business cost of false positives/negatives.",
+            "For imbalanced classes, avoid relying on accuracy alone."
+          ]
+        },
+        {
+          "name": "0)",
+          "type": "Any",
+          "description": "Parameter `0)` configures how `COALESCE and NULLIF` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "NULLIF(text_col",
+          "type": "str | list[str]",
+          "description": "Parameter `NULLIF(text_col` configures how `COALESCE and NULLIF` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "\"\"",
+          "type": "Any",
+          "description": "Parameter `\"\"` configures how `COALESCE and NULLIF` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1082,14 +1204,17 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how CAST is applied.",
+          "name": "text_colASNUMERIC",
+          "type": "str | list[str]",
+          "description": "Parameter `text_colASNUMERIC` configures how `CAST` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "'auto'",
+            "'left'",
+            "'mean'"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1158,9 +1283,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how INNER JOIN is applied.",
+          "description": "Data input consumed by `INNER JOIN`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -1232,9 +1359,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how LEFT JOIN is applied.",
+          "description": "Data input consumed by `LEFT JOIN`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -1306,9 +1435,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how FULL OUTER JOIN is applied.",
+          "description": "Data input consumed by `FULL OUTER JOIN`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -1380,9 +1511,11 @@
         {
           "name": "inputs",
           "type": "SQL expressions and table references",
-          "description": "Inputs that control how UNION and UNION ALL is applied.",
+          "description": "Data input consumed by `UNION and UNION ALL`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "project-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
             "Confirm table names and SQL dialect behavior before production deployment."
@@ -1452,14 +1585,17 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how Subqueries is applied.",
+          "name": "SELECTAVG(metric)FROMtable_name",
+          "type": "str | list[str]",
+          "description": "Parameter `SELECTAVG(metric)FROMtable_name` configures how `Subqueries` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "'auto'",
+            "'left'",
+            "'mean'"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1526,14 +1662,17 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how CTE WITH is applied.",
+          "name": "SELECT*FROMtable_name",
+          "type": "str | list[str]",
+          "description": "Parameter `SELECT*FROMtable_name` configures how `CTE WITH` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "'auto'",
+            "'left'",
+            "'mean'"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1600,14 +1739,17 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how ROW_NUMBER is applied.",
+          "name": ")OVER(PARTITIONBYkeyORDERBYmetricDESC",
+          "type": "int",
+          "description": "Parameter `)OVER(PARTITIONBYkeyORDERBYmetricDESC` configures how `ROW_NUMBER` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "1",
+            "5",
+            "10"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1674,14 +1816,17 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how RANK and DENSE_RANK is applied.",
+          "name": ")OVER(PARTITIONBYkeyORDERBYmetricDESC",
+          "type": "int",
+          "description": "Parameter `)OVER(PARTITIONBYkeyORDERBYmetricDESC` configures how `RANK and DENSE_RANK` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "1",
+            "5",
+            "10"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1748,14 +1893,17 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how LAG and LEAD is applied.",
+          "name": "metric)OVER(PARTITIONBYkeyORDERBYts",
+          "type": "int",
+          "description": "Parameter `metric)OVER(PARTITIONBYkeyORDERBYts` configures how `LAG and LEAD` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "1",
+            "5",
+            "10"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1822,14 +1970,17 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how PARTITION BY is applied.",
+          "name": "metric)OVER(PARTITIONBYsegment",
+          "type": "str | list[str]",
+          "description": "Parameter `metric)OVER(PARTITIONBYsegment` configures how `PARTITION BY` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "'auto'",
+            "'left'",
+            "'mean'"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1896,14 +2047,44 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how DATE_TRUNC is applied.",
+          "name": "'week'",
+          "type": "int",
+          "description": "Parameter `'week'` configures how `DATE_TRUNC` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "1",
+            "5",
+            "10"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "timestamp_col)ASweek_start",
+          "type": "int",
+          "description": "Parameter `timestamp_col)ASweek_start` configures how `DATE_TRUNC` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "COUNT(*",
+          "type": "Any",
+          "description": "Parameter `COUNT(*` configures how `DATE_TRUNC` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1970,14 +2151,16 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how Date Difference is applied.",
+          "name": "EPOCHFROM(end_ts-start_ts)",
+          "type": "Any",
+          "description": "Parameter `EPOCHFROM(end_ts-start_ts)` configures how `Date Difference` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2044,14 +2227,17 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
-          "type": "SQL expressions and table references",
-          "description": "Inputs that control how String Functions is applied.",
+          "name": "TRIM(text_col)",
+          "type": "str | list[str]",
+          "description": "Parameter `TRIM(text_col)` configures how `String Functions` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "project-specific"
+            "'auto'",
+            "'left'",
+            "'mean'"
           ],
           "pitfalls": [
-            "Confirm table names and SQL dialect behavior before production deployment."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],

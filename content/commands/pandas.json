@@ -9,7 +9,8 @@
     "Join",
     "Aggregation",
     "Missing Data",
-    "Time Series"
+    "Time Series",
+    "EDA"
   ],
   "commandGroups": [
     {
@@ -39,7 +40,8 @@
         "pandas-query",
         "pandas-assign",
         "pandas-fillna",
-        "pandas-to-datetime"
+        "pandas-to-datetime",
+        "pandas-datetime-filter"
       ]
     },
     {
@@ -58,7 +60,10 @@
         "pandas-merge",
         "pandas-groupby-agg",
         "pandas-pivot-table",
-        "pandas-resample"
+        "pandas-resample",
+        "pandas-groupby-basic",
+        "pandas-groupby-named-agg",
+        "pandas-groupby-share-total"
       ]
     },
     {
@@ -89,7 +94,37 @@
         "pandas-cut",
         "pandas-qcut",
         "pandas-rolling",
-        "pandas-shift"
+        "pandas-shift",
+        "pandas-dt-year",
+        "pandas-dt-components",
+        "pandas-corr",
+        "pandas-nunique"
+      ]
+    },
+    {
+      "name": "EDA and Datetime Playbook",
+      "docs": [
+        {
+          "label": "Pandas datetime guide",
+          "url": "https://pandas.pydata.org/docs/user_guide/timeseries.html"
+        },
+        {
+          "label": "Pandas groupby guide",
+          "url": "https://pandas.pydata.org/docs/user_guide/groupby.html"
+        }
+      ],
+      "commandIds": [
+        "pandas-to-datetime",
+        "pandas-dt-year",
+        "pandas-dt-components",
+        "pandas-datetime-filter",
+        "pandas-groupby-basic",
+        "pandas-groupby-agg",
+        "pandas-groupby-named-agg",
+        "pandas-groupby-transform",
+        "pandas-groupby-share-total",
+        "pandas-corr",
+        "pandas-nunique"
       ]
     }
   ],
@@ -125,7 +160,15 @@
     "pandas-cut",
     "pandas-qcut",
     "pandas-rolling",
-    "pandas-shift"
+    "pandas-shift",
+    "pandas-dt-year",
+    "pandas-dt-components",
+    "pandas-datetime-filter",
+    "pandas-groupby-basic",
+    "pandas-groupby-named-agg",
+    "pandas-groupby-share-total",
+    "pandas-corr",
+    "pandas-nunique"
   ],
   "coverageOutline": [
     {
@@ -169,6 +212,40 @@
         "melt",
         "stack",
         "unstack"
+      ]
+    },
+    {
+      "topic": "Datetime Feature Engineering",
+      "docUrl": "https://pandas.pydata.org/docs/user_guide/timeseries.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "to_datetime",
+        "dt.year",
+        "dt.month",
+        "dt.day_name",
+        "resample"
+      ]
+    },
+    {
+      "topic": "GroupBy Analytics Patterns",
+      "docUrl": "https://pandas.pydata.org/docs/user_guide/groupby.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "groupby",
+        "agg",
+        "transform",
+        "nunique"
+      ]
+    },
+    {
+      "topic": "EDA Profiling",
+      "docUrl": "https://pandas.pydata.org/docs/user_guide/basics.html",
+      "status": "seeded",
+      "highUsageApis": [
+        "info",
+        "describe",
+        "nunique",
+        "corr"
       ]
     }
   ],
@@ -222,7 +299,7 @@
         {
           "name": "dtype",
           "type": "dict[str, type] | type",
-          "description": "Column type map.",
+          "description": "Output dtype for `pandas.read_csv`. It controls memory footprint, precision, and interoperability with downstream steps.",
           "values": [
             "{'store_id': 'string'}",
             "{'amount': 'float64'}"
@@ -240,6 +317,33 @@
           ],
           "pitfalls": [
             "Mixed formats may produce object dtype"
+          ]
+        },
+        {
+          "name": "sep",
+          "type": "Any",
+          "description": "Parameter `sep` configures how `pandas.read_csv` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "'"
+        },
+        {
+          "name": "'",
+          "type": "Any",
+          "description": "Parameter `'` configures how `pandas.read_csv` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -329,14 +433,14 @@
       },
       "examples": [
         {
-          "title": "Sanity-check campaign dataset",
-          "scenario": "Marketing validates columns before feature engineering.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'campaign': ['A','B','C'], 'spend':[1200,900,1500]})\nprint(df.head(2))",
-          "expectedOutput": "2-row DataFrame with campaign and spend columns",
+          "title": "DataFrame.head primary workflow",
+          "scenario": "DataFrame.head used in a realistic business workflow with active command execution.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = DataFrame.head(n=5)\nprint(type(result).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply DataFrame.head with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run DataFrame.head exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
@@ -388,7 +492,7 @@
         {
           "name": "row_selector",
           "type": "label | list-like | bool mask | slice",
-          "description": "Rows to select.",
+          "description": "Parameter `row_selector` configures how `DataFrame.loc` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "df['amount'] > 100",
             "'2026-03-01':'2026-03-10'"
@@ -417,25 +521,25 @@
       },
       "examples": [
         {
-          "title": "Filter high-value orders",
-          "scenario": "E-commerce analyst isolates orders above $100 in North region.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'region':['N','S','N'], 'amount':[80,120,210]})\nout = df.loc[(df['region']=='N') & (df['amount']>100), ['region','amount']]\nprint(out)",
-          "expectedOutput": "1-row DataFrame for region N with amount 210",
+          "title": "DataFrame.loc primary workflow",
+          "scenario": "DataFrame.loc used in a realistic business workflow with active command execution.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.loc[row_selector, col_selector]\nprint(type(result).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply DataFrame.loc with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run DataFrame.loc exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "DataFrame.loc additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.loc[row_selector, col_selector]\nprint(type(result).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.loc[row_selector, col_selector]\nprint(type(result).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run DataFrame.loc again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run DataFrame.loc exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -485,6 +589,35 @@
           "pitfalls": [
             "Later expressions can reference earlier assigned columns only in order"
           ]
+        },
+        {
+          "name": "new_col",
+          "type": "str | list[str]",
+          "description": "Parameter `new_col` configures how `DataFrame.assign` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "expr"
+        },
+        {
+          "name": "other",
+          "type": "Any",
+          "description": "Parameter `other` configures how `DataFrame.assign` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "lambda x: ..."
         }
       ],
       "returns": {
@@ -595,13 +728,13 @@
         },
         {
           "title": "DataFrame.query additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.0.9uery(expr, engine='numexpr')\nprint(type(result).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.query(expr, engine='numexpr')\nprint(type(result).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run DataFrame.query again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run DataFrame.query exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -644,7 +777,7 @@
           "name": "how",
           "type": "{'left','right','inner','outer','cross'}",
           "default": "'inner'",
-          "description": "Join strategy.",
+          "description": "Join/merge strategy for `DataFrame.merge`. It determines which keys are retained from each side of the join.",
           "values": [
             "left",
             "inner",
@@ -657,7 +790,7 @@
         {
           "name": "on / left_on / right_on",
           "type": "str | list[str]",
-          "description": "Join key columns.",
+          "description": "Parameter `on / left_on / right_on` configures how `DataFrame.merge` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'customer_id'",
             "['store_id','week']"
@@ -678,6 +811,62 @@
           "pitfalls": [
             "Skipping validate can hide data quality issues"
           ]
+        },
+        {
+          "name": "df_right",
+          "type": "Any",
+          "description": "Parameter `df_right` configures how `DataFrame.merge` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "on",
+          "type": "Any",
+          "description": "Column/key selector for `DataFrame.merge`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "left_on",
+          "type": "Any",
+          "description": "Parameter `left_on` configures how `DataFrame.merge` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "right_on",
+          "type": "Any",
+          "description": "Parameter `right_on` configures how `DataFrame.merge` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -687,14 +876,14 @@
       },
       "examples": [
         {
-          "title": "Attach plan tier to invoices",
-          "scenario": "Billing analytics joins invoice facts with account dimension.",
-          "code": "import pandas as pd\ninv = pd.DataFrame({'account_id':[1,2,3], 'amount':[120,80,200]})\nacct = pd.DataFrame({'account_id':[1,2,3], 'tier':['Pro','Basic','Enterprise']})\nout = inv.merge(acct, on='account_id', how='left', validate='1:1')\nprint(out.head())",
-          "expectedOutput": "3-row DataFrame with amount and tier columns",
+          "title": "DataFrame.merge primary workflow",
+          "scenario": "DataFrame.merge used in a realistic business workflow with active command execution.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df_left.merge(df_right, how='inner', on=None, left_on=None, right_on=None)\nprint(type(result).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply DataFrame.merge with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run DataFrame.merge exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
@@ -725,106 +914,150 @@
     },
     {
       "id": "pandas-groupby-agg",
-      "slug": "pandas-groupby-agg",
-      "name": "DataFrame.groupby(...).agg",
-      "library": "pandas",
+      "name": "GroupBy.agg (Core)",
       "subtopic": "Aggregation",
       "tags": [
         "groupby",
-        "agg",
+        "aggregation",
         "kpi"
       ],
       "level": "core",
-      "summary": "Split-apply-combine aggregation by keys.",
-      "syntax": "df.groupby(keys, as_index=True).agg(named_agg)",
-      "description": "Split-apply-combine aggregation by keys. Use it for building grouped KPI tables for reporting and cleaning and reshaping transaction/event tables. Key parameters: keys, as_index, named_agg.",
+      "summary": "Build KPI tables with one row per segment using explicit metric aggregations.",
+      "syntax": "kpi=df.groupby('region',as_index=False).agg(total_revenue=('revenue','sum'),orders=('order_id','nunique'))",
+      "description": "Groups rows by business grain and computes summary metrics for reporting and EDA.",
+      "overview": "Build KPI tables with one row per segment using explicit metric aggregations. Use GroupBy.agg to move from event-level rows to decision-ready summaries by region/channel/product/cohort. Typical pattern: total revenue, average order, order count, unique customers. Key parameters: by, as_index, agg mapping. Returns compact KPI DataFrame.",
+      "applications": [
+        "Primary application: convert transactional data into segment-level scorecards.",
+        "Workflow application: use named aggregations so metrics stay stable across runs.",
+        "Delivery application: export grouped KPI tables directly to dashboards/stakeholder docs."
+      ],
       "docs": [
         {
-          "label": "GroupBy.agg",
+          "label": "DataFrameGroupBy.agg",
           "url": "https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.DataFrameGroupBy.agg.html"
         }
       ],
       "parameters": [
         {
-          "name": "keys",
-          "type": "label | list[label]",
-          "description": "Grouping columns.",
+          "name": "by",
+          "type": "str | list[str]",
+          "description": "Grouping keys defining analysis grain.",
           "values": [
             "'region'",
-            "['region','channel']"
+            "['month','channel']"
           ],
           "pitfalls": [
-            "High-cardinality keys can create huge outputs"
+            "Wrong grain can over/under-count KPIs."
+          ]
+        },
+        {
+          "name": "agg mapping",
+          "type": "named aggregation mapping",
+          "description": "Output metric definitions.",
+          "values": [
+            "total_revenue=('revenue','sum')",
+            "orders=('order_id','nunique')"
+          ],
+          "pitfalls": [
+            "Unclear metric names make interpretation difficult."
+          ]
+        },
+        {
+          "name": "'region'",
+          "type": "Any",
+          "description": "Parameter `'region'` configures how `GroupBy.agg (Core)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "as_index",
-          "type": "bool",
-          "default": "True",
-          "description": "Whether groups become index.",
+          "type": "Any",
+          "description": "Parameter `as_index` configures how `GroupBy.agg (Core)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "True",
-            "False"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "as_index=True may confuse downstream merge code"
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "False).agg(total_revenue=('revenue'"
+        },
+        {
+          "name": "'sum')",
+          "type": "Any",
+          "description": "Parameter `'sum')` configures how `GroupBy.agg (Core)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
-          "name": "named_agg",
-          "type": "dict-like",
-          "description": "Named output aggregations.",
+          "name": "orders",
+          "type": "Any",
+          "description": "Parameter `orders` configures how `GroupBy.agg (Core)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "sales_sum=('sales','sum')",
-            "orders=('id','count')"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Mixing old and new agg syntax can be hard to read"
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "('order_id'"
+        },
+        {
+          "name": "'nunique')",
+          "type": "Any",
+          "description": "Parameter `'nunique')` configures how `GroupBy.agg (Core)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
       "returns": {
         "type": "pandas.DataFrame",
-        "description": "Grouped summary table.",
-        "shape": "(num_groups, num_metrics)"
+        "shape": "(groups, metrics + key cols)",
+        "description": "Grouped summary table for EDA and reporting."
       },
       "examples": [
         {
-          "title": "Weekly revenue by channel",
-          "scenario": "Growth team summarizes order revenue and count by acquisition channel.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'channel':['ads','ads','organic'], 'revenue':[100,140,90], 'order_id':[1,2,3]})\nout = df.groupby('channel', as_index=False).agg(total_revenue=('revenue','sum'), orders=('order_id','count'))\nprint(out)",
-          "expectedOutput": "2-row DataFrame with channel, total_revenue, orders",
+          "title": "Region KPI scorecard",
+          "scenario": "Analyst needs total and average performance by region for weekly review.",
+          "code": "import pandas as pd\n\ndf=pd.DataFrame({'region':['W','W','E','E'],'order_id':[1,2,3,4],'revenue':[120,80,95,140]})\nkpi=df.groupby('region',as_index=False).agg(total_revenue=('revenue','sum'),avg_order=('revenue','mean'),orders=('order_id','nunique'))\nprint(kpi)",
+          "expectedOutput": "One row per region with explicit KPI columns.",
           "walkthrough": [
-            "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply DataFrame.groupby(...).agg with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
-          ]
-        },
-        {
-          "title": "DataFrame.groupby(...).agg additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.groupby(keys, as_index=True).agg(named_agg)\nprint(type(result).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
-          "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run DataFrame.groupby(...).agg again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Choose grouping dimension matching the business question.",
+            "Define named metrics in agg so output is report-ready.",
+            "Validate row counts and metric logic before publishing."
           ]
         }
       ],
       "notes": [
-        "Reset index when you need flat columns for BI exports."
+        "Named aggregation is the cleanest default for production summaries."
       ],
       "related": [
-        "pandas-pivot-table",
-        "pandas-merge"
+        "pandas-groupby-basic",
+        "pandas-groupby-named-agg",
+        "pandas-pivot-table"
       ],
-      "overview": "Split-apply-combine aggregation by keys. Use DataFrame.groupby(...).agg when building grouped KPI tables for reporting. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: keys, as_index, named_agg. Returns pandas.DataFrame with shape (num_groups, num_metrics).",
-      "applications": [
-        "Primary application: DataFrame.groupby(...).agg is used for cleaning and reshaping transaction/event tables.",
-        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
-        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
-      ]
+      "slug": "pandas-groupby-agg",
+      "library": "pandas"
     },
     {
       "id": "pandas-pivot-table",
@@ -884,6 +1117,49 @@
           "pitfalls": [
             "Multiple aggfunc produce MultiIndex columns"
           ]
+        },
+        {
+          "name": "index",
+          "type": "Any",
+          "description": "Column/key selector for `DataFrame.pivot_table`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ]
+        },
+        {
+          "name": "columns",
+          "type": "str | list[str]",
+          "description": "Columns included in this transformation step.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "fill_value",
+          "type": "Any",
+          "description": "Parameter `fill_value` configures how `DataFrame.pivot_table` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -952,7 +1228,7 @@
         {
           "name": "by",
           "type": "str | list[str]",
-          "description": "Sort key columns.",
+          "description": "Column/key selector for `DataFrame.sort_values`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
             "'revenue'",
             "['region','revenue']"
@@ -965,7 +1241,7 @@
           "name": "ascending",
           "type": "bool | list[bool]",
           "default": "True",
-          "description": "Sort direction.",
+          "description": "Execution behavior flag for `DataFrame.sort_values`. It changes orientation, ordering, mutability, or null-handling of the operation.",
           "values": [
             "True",
             "False",
@@ -1008,13 +1284,13 @@
         },
         {
           "title": "DataFrame.sort_values additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.sort_records[0]s(by, ascending=True, na_position='last')\nprint(type(result).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.sort_values(by, ascending=True, na_position='last')\nprint(type(result).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run DataFrame.sort_values again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run DataFrame.sort_values exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1088,6 +1364,20 @@
           "pitfalls": [
             "Not all missing gaps will be filled"
           ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "description": "Axis along which operation is applied.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Wrong axis silently changes calculation direction and interpretation."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -1135,18 +1425,23 @@
     },
     {
       "id": "pandas-to-datetime",
-      "slug": "pandas-to-datetime",
       "name": "pandas.to_datetime",
-      "library": "pandas",
       "subtopic": "Time Series",
       "tags": [
         "datetime",
-        "parsing"
+        "parsing",
+        "eda"
       ],
       "level": "core",
-      "summary": "Convert argument to datetime dtype.",
-      "syntax": "pd.to_datetime(arg, format=None, errors='raise', utc=False)",
-      "description": "Convert argument to datetime dtype. Use it for constructing lag, rolling, and resampled temporal features and cleaning and reshaping transaction/event tables. Key parameters: arg, format, errors.",
+      "summary": "Parse raw date columns to datetime dtype before any temporal analysis.",
+      "syntax": "df['order_date']=pd.to_datetime(df['order_date_raw'], errors='coerce')",
+      "description": "Converts source date fields into datetime so dt.year filtering and resampling work reliably.",
+      "overview": "Parse raw date columns to datetime dtype before any temporal analysis. Use pandas.to_datetime immediately after ingestion so downstream dt accessors, date filters, and resampling are consistent. Typical pattern: parse, audit parse nulls, then derive calendar features. Key parameters: arg, format, errors, utc. Returns datetime-aligned series/index.",
+      "applications": [
+        "Primary application: standardize incoming date columns from CSV/Excel/warehouse exports.",
+        "Workflow application: parse once early and reuse dt features across EDA/modeling.",
+        "Delivery application: track parse-failure rate so assumptions are explicit."
+      ],
       "docs": [
         {
           "label": "pandas.to_datetime",
@@ -1156,85 +1451,72 @@
       "parameters": [
         {
           "name": "arg",
-          "type": "scalar | array-like | Series",
-          "description": "Value(s) to convert.",
+          "type": "Series | list | scalar",
+          "description": "Raw datetime-like values to parse.",
           "values": [
-            "Series",
-            "list",
-            "single string"
+            "df['order_date_raw']",
+            "['2026-01-01','2026-01-02']"
           ],
           "pitfalls": [
-            "Mixed timezone and naive strings can coerce to object"
-          ]
-        },
-        {
-          "name": "format",
-          "type": "str",
-          "description": "Datetime parse format.",
-          "values": [
-            "'%Y-%m-%d'",
-            "'%m/%d/%Y'"
-          ],
-          "pitfalls": [
-            "Wrong format raises parser errors"
+            "Mixed formats can produce NaT rows when errors='coerce'."
           ]
         },
         {
           "name": "errors",
-          "type": "{'raise','coerce','ignore'}",
+          "type": "str",
           "default": "'raise'",
-          "description": "Error handling strategy.",
+          "description": "Failure handling policy.",
           "values": [
             "'raise'",
-            "'coerce'"
+            "'coerce'",
+            "'ignore'"
           ],
           "pitfalls": [
-            "coerce introduces NaT that must be handled"
+            "'ignore' can leave object dtype and break dt accessors."
+          ]
+        },
+        {
+          "name": "df['order_date_raw']",
+          "type": "Any",
+          "description": "Parameter `df['order_date_raw']` configures how `pandas.to_datetime` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
       "returns": {
-        "type": "datetime64[ns] Series/Index/Timestamp",
-        "description": "Datetime-converted object.",
-        "shape": "same length as input"
+        "type": "pandas.Series | pandas.DatetimeIndex",
+        "shape": "same length as input",
+        "description": "Datetime-converted values ready for date-based analysis."
       },
       "examples": [
         {
-          "title": "Parse subscription renewal date",
-          "scenario": "Retention analysis needs monthly cohorts from renewal timestamps.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'renewal':['2026-01-15','2026-02-20']})\ndf['renewal'] = pd.to_datetime(df['renewal'])\nprint(df['renewal'].dt.month.tolist())",
-          "expectedOutput": "[1, 2]",
+          "title": "Parse and audit date field",
+          "scenario": "New dataset includes inconsistent date strings and needs safe parsing before EDA.",
+          "code": "import pandas as pd\n\ndf=pd.DataFrame({'order_date_raw':['2026-01-01','01/05/2026','bad'],'revenue':[120,95,70]})\ndf['order_date']=pd.to_datetime(df['order_date_raw'],errors='coerce')\nprint(df)\nprint('parse_null_rate',df['order_date'].isna().mean())",
+          "expectedOutput": "Datetime column created, invalid rows become NaT, and parse null rate is visible.",
           "walkthrough": [
-            "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply pandas.to_datetime with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
-          ]
-        },
-        {
-          "title": "pandas.to_datetime additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = pd.to_datetime(np.array([1, 1, 2, 3])g, format=None, errors='raise', utc=False)\nprint(type(result).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
-          "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run pandas.to_datetime again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Parse the raw date field with an explicit errors policy.",
+            "Check dtype and parse null rate immediately.",
+            "Proceed to dt.year/groupby/resample only after validation."
           ]
         }
       ],
       "notes": [
-        "Provide explicit format for faster and safer parsing."
+        "Set format when source format is fixed for speed and fewer parse surprises."
       ],
       "related": [
-        "py-datetime-strptime",
+        "pandas-dt-year",
+        "pandas-dt-components",
         "pandas-resample"
       ],
-      "overview": "Convert argument to datetime dtype. Use pandas.to_datetime when constructing lag, rolling, and resampled temporal features. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameters: arg, format, errors. Returns datetime64[ns] Series/Index/Timestamp with shape same length as input.",
-      "applications": [
-        "Primary application: pandas.to_datetime is used for cleaning and reshaping transaction/event tables.",
-        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
-        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
-      ]
+      "slug": "pandas-to-datetime",
+      "library": "pandas"
     },
     {
       "id": "pandas-resample",
@@ -1261,7 +1543,7 @@
         {
           "name": "rule",
           "type": "offset alias",
-          "description": "Target frequency.",
+          "description": "Parameter `rule` configures how `DataFrame.resample` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'D'",
             "'W'",
@@ -1371,38 +1653,43 @@
         {
           "name": "io",
           "type": "Any",
-          "description": "Controls io in pandas.read_excel.",
+          "description": "Parameter `io` configures how `pandas.read_excel` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "sheet_name",
           "type": "Any",
           "default": "0",
-          "description": "Controls sheet_name in pandas.read_excel.",
+          "description": "Parameter `sheet_name` configures how `pandas.read_excel` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "usecols",
           "type": "str | list[str]",
           "default": "None",
-          "description": "Controls usecols in pandas.read_excel.",
+          "description": "Column/key selector for `pandas.read_excel`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         }
       ],
@@ -1472,24 +1759,28 @@
           "name": "verbose",
           "type": "Any",
           "default": "None",
-          "description": "Controls verbose in DataFrame.info.",
+          "description": "Parameter `verbose` configures how `DataFrame.info` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "show_counts",
           "type": "Any",
           "default": "None",
-          "description": "Controls show_counts in DataFrame.info.",
+          "description": "Parameter `show_counts` configures how `DataFrame.info` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1559,12 +1850,14 @@
           "name": "include",
           "type": "Any",
           "default": "None",
-          "description": "Controls include in DataFrame.describe.",
+          "description": "Parameter `include` configures how `DataFrame.describe` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1633,12 +1926,15 @@
         {
           "name": "inputs",
           "type": "Any",
-          "description": "Controls inputs in DataFrame.iloc.",
+          "description": "Data input consumed by `DataFrame.iloc`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -1649,25 +1945,25 @@
       },
       "examples": [
         {
-          "title": "DataFrame.iloc for segmented revenue reporting",
-          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
-          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.iloc[:, :2]\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
-          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "title": "DataFrame.iloc primary workflow",
+          "scenario": "DataFrame.iloc used in a realistic business workflow with active command execution.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.iloc[:, :2]\nprint(type(result).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
-            "Run DataFrame.iloc directly (not commented) and store output in `result`.",
-            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run DataFrame.iloc exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "DataFrame.iloc additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.iloc[:, :2]\nprint(type(result).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.iloc[:, :2]\nprint(type(result).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run DataFrame.iloc again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run DataFrame.iloc exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1708,55 +2004,57 @@
           "name": "labels",
           "type": "str | list[str]",
           "default": "None",
-          "description": "Controls labels in DataFrame.drop.",
+          "description": "Target or label values used by `DataFrame.drop`. This controls what the model/metric learns or evaluates against.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "0",
-          "description": "Controls axis in DataFrame.drop.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         },
         {
           "name": "columns",
           "type": "str | list[str]",
           "default": "None",
-          "description": "Controls columns in DataFrame.drop.",
+          "description": "Columns included in this transformation step.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "inplace",
           "type": "bool",
           "default": "False",
-          "description": "Controls inplace in DataFrame.drop.",
+          "description": "Execution behavior flag for `DataFrame.drop`. It changes orientation, ordering, mutability, or null-handling of the operation.",
           "values": [
             "True",
             "False"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Boolean default can materially change output semantics."
           ]
         }
       ],
@@ -1826,26 +2124,30 @@
           "name": "columns",
           "type": "str | list[str]",
           "default": "None",
-          "description": "Controls columns in DataFrame.rename.",
+          "description": "Columns included in this transformation step.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "index",
           "type": "Any",
           "default": "None",
-          "description": "Controls index in DataFrame.rename.",
+          "description": "Column/key selector for `DataFrame.rename`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
-            "data-specific"
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         }
       ],
@@ -1914,25 +2216,28 @@
         {
           "name": "dtype",
           "type": "Any",
-          "description": "Controls dtype in DataFrame.astype.",
+          "description": "Output dtype for `DataFrame.astype`. It controls memory footprint, precision, and interoperability with downstream steps.",
           "values": [
-            "data-specific"
+            "'float64'",
+            "'int64'",
+            "'int8' / 'category' where applicable"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Downcasting can truncate values or overflow.",
+            "Mixed dtypes can break model pipelines and aggregations."
           ]
         },
         {
           "name": "copy",
           "type": "bool",
           "default": "True",
-          "description": "Controls copy in DataFrame.astype.",
+          "description": "Execution behavior flag for `DataFrame.astype`. It changes orientation, ordering, mutability, or null-handling of the operation.",
           "values": [
             "True",
             "False"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Boolean default can materially change output semantics."
           ]
         }
       ],
@@ -2002,25 +2307,27 @@
           "name": "normalize",
           "type": "Any",
           "default": "False",
-          "description": "Controls normalize in Series.value_counts.",
+          "description": "Parameter `normalize` configures how `Series.value_counts` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "dropna",
           "type": "bool",
           "default": "True",
-          "description": "Controls dropna in Series.value_counts.",
+          "description": "Execution behavior flag for `Series.value_counts`. It changes orientation, ordering, mutability, or null-handling of the operation.",
           "values": [
             "True",
             "False"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Boolean default can materially change output semantics."
           ]
         }
       ],
@@ -2043,13 +2350,13 @@
         },
         {
           "title": "Series.value_counts additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = s.records[0]_counts(normalize=False, dropna=True)\nprint(type(result).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = s.value_counts(normalize=False, dropna=True)\nprint(type(result).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Series.value_counts again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Series.value_counts exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2061,77 +2368,97 @@
     },
     {
       "id": "pandas-groupby-transform",
-      "slug": "pandas-groupby-transform",
       "name": "GroupBy.transform",
-      "library": "pandas",
       "subtopic": "Aggregation",
       "tags": [
         "groupby",
-        "features"
+        "transform",
+        "feature-engineering"
       ],
       "level": "extended",
-      "summary": "GroupBy.transform computes group-level metrics aligned back to original rows.",
-      "syntax": "df.groupby(keys)[col].transform(func)",
-      "description": "GroupBy.transform computes group-level metrics aligned back to original rows. Use it for building grouped KPI tables for reporting and cleaning and reshaping transaction/event tables. Key parameter: keys.",
-      "overview": "GroupBy.transform computes group-level metrics aligned back to original rows. Use GroupBy.transform when building grouped KPI tables for reporting. Typical business pattern: cleaning and reshaping transaction/event tables. Key parameter: keys. Returns DataFrame | Series | scalar with shape (rows, columns) or scalar.",
+      "summary": "Create row-level features that depend on group context.",
+      "syntax": "df['share_in_region']=df['revenue']/df.groupby('region')['revenue'].transform('sum')",
+      "description": "Keeps original row count while adding group-relative features such as shares or z-scores.",
+      "overview": "Create row-level features that depend on group context. Use transform when each row must be compared to its peer group without collapsing the table. Typical pattern: within-segment share, within-plan z-score, or deviation from group mean before modeling. Key parameters: by, function, target column. Returns row-aligned series/dataframe.",
       "applications": [
-        "Primary application: GroupBy.transform is used for cleaning and reshaping transaction/event tables.",
-        "Workflow application: treat this command as a tabular transformation step in ETL/EDA/model-prep workflows.",
-        "Delivery application: document chosen parameters and output checks so teammates can reproduce results."
+        "Primary application: generate relative features for EDA and model performance gains.",
+        "Workflow application: use transform before train/test split so feature logic is transparent.",
+        "Delivery application: explain derived group-relative metrics alongside raw values."
       ],
       "docs": [
         {
-          "label": "GroupBy.transform official docs",
+          "label": "SeriesGroupBy.transform",
           "url": "https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.SeriesGroupBy.transform.html"
         }
       ],
       "parameters": [
         {
-          "name": "keys",
-          "type": "Any",
-          "description": "Controls keys in GroupBy.transform.",
+          "name": "by",
+          "type": "str | list[str]",
+          "description": "Grouping keys for comparison context.",
           "values": [
-            "data-specific"
+            "'region'",
+            "['region','channel']"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Incorrect grouping key makes relative metrics misleading."
+          ]
+        },
+        {
+          "name": "func",
+          "type": "str | callable",
+          "description": "Groupwise transformation function.",
+          "values": [
+            "'sum'",
+            "'mean'",
+            "lambda s:(s-s.mean())/s.std(ddof=0)"
+          ],
+          "pitfalls": [
+            "Complex lambdas can be slow on large data."
+          ]
+        },
+        {
+          "name": "'region')['revenue'].transform('sum'",
+          "type": "Any",
+          "description": "Parameter `'region')['revenue'].transform('sum'` configures how `GroupBy.transform` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
       "returns": {
-        "type": "DataFrame | Series | scalar",
-        "shape": "(rows, columns) or scalar",
-        "description": "Tabular transformation or summary result."
+        "type": "pandas.Series | pandas.DataFrame",
+        "shape": "same rows as input",
+        "description": "Row-aligned transformed feature(s)."
       },
       "examples": [
         {
-          "title": "GroupBy.transform for segmented revenue reporting",
-          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
-          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df.groupby(['segment'])['value'].transform('mean')\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
-          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "title": "Share-of-region feature",
+          "scenario": "Revenue model needs each order expressed as share of regional total.",
+          "code": "import pandas as pd\n\ndf=pd.DataFrame({'region':['W','W','E','E'],'revenue':[120,80,90,110]})\ndf['share_in_region']=df['revenue']/df.groupby('region')['revenue'].transform('sum')\nprint(df)",
+          "expectedOutput": "Each row gets a share feature; shares sum to 1 per region.",
           "walkthrough": [
-            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
-            "Run GroupBy.transform directly (not commented) and store output in `result`.",
-            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
-          ]
-        },
-        {
-          "title": "GroupBy.transform additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df.groupby(['segment'])['records[0]'].transform('mean')\nprint(type(result).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
-          "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run GroupBy.transform again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Group by the comparison segment.",
+            "Use transform to keep one value per original row.",
+            "Validate share sums and reuse in downstream modeling."
           ]
         }
       ],
       "notes": [
-        "Start with toy data and explicit parameters, then scale to full datasets.",
-        "Always verify version-specific defaults in official docs before production deployment."
+        "Use agg instead when you want one row per group rather than row-level features."
       ],
-      "related": []
+      "related": [
+        "pandas-groupby-agg",
+        "pandas-groupby-share-total",
+        "pandas-assign"
+      ],
+      "slug": "pandas-groupby-transform",
+      "library": "pandas"
     },
     {
       "id": "pandas-melt",
@@ -2163,36 +2490,42 @@
         {
           "name": "frame",
           "type": "Any",
-          "description": "Controls frame in pandas.melt.",
+          "description": "Parameter `frame` configures how `pandas.melt` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "id_vars",
           "type": "Any",
           "default": "None",
-          "description": "Controls id_vars in pandas.melt.",
+          "description": "Parameter `id_vars` configures how `pandas.melt` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "value_vars",
           "type": "Any",
           "default": "None",
-          "description": "Controls value_vars in pandas.melt.",
+          "description": "Parameter `value_vars` configures how `pandas.melt` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2261,38 +2594,42 @@
         {
           "name": "objs",
           "type": "Any",
-          "description": "Controls objs in pandas.concat.",
+          "description": "Parameter `objs` configures how `pandas.concat` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "0",
-          "description": "Controls axis in pandas.concat.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         },
         {
           "name": "ignore_index",
           "type": "Any",
           "default": "False",
-          "description": "Controls ignore_index in pandas.concat.",
+          "description": "Parameter `ignore_index` configures how `pandas.concat` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2361,36 +2698,44 @@
         {
           "name": "other",
           "type": "Any",
-          "description": "Controls other in DataFrame.join.",
+          "description": "Parameter `other` configures how `DataFrame.join` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "on",
           "type": "Any",
           "default": "None",
-          "description": "Controls on in DataFrame.join.",
+          "description": "Column/key selector for `DataFrame.join`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
-            "data-specific"
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         },
         {
           "name": "how",
           "type": "Any",
           "default": "'left'",
-          "description": "Controls how in DataFrame.join.",
+          "description": "Join/merge strategy for `DataFrame.join`. It determines which keys are retained from each side of the join.",
           "values": [
-            "data-specific"
+            "'left'",
+            "'inner'",
+            "'outer' / 'right'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use left joins when preserving the primary table is required.",
+            "Check row counts before and after join to catch accidental duplication."
           ]
         }
       ],
@@ -2460,24 +2805,29 @@
           "name": "subset",
           "type": "Any",
           "default": "None",
-          "description": "Controls subset in DataFrame.drop_duplicates.",
+          "description": "Data input consumed by `DataFrame.drop_duplicates`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "keep",
           "type": "Any",
           "default": "'first'",
-          "description": "Controls keep in DataFrame.drop_duplicates.",
+          "description": "Parameter `keep` configures how `DataFrame.drop_duplicates` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2546,12 +2896,15 @@
         {
           "name": "inputs",
           "type": "Any",
-          "description": "Controls inputs in DataFrame.isna.",
+          "description": "Data input consumed by `DataFrame.isna`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2621,38 +2974,44 @@
           "name": "axis",
           "type": "int",
           "default": "0",
-          "description": "Controls axis in DataFrame.dropna.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         },
         {
           "name": "how",
           "type": "Any",
           "default": "'any'",
-          "description": "Controls how in DataFrame.dropna.",
+          "description": "Join/merge strategy for `DataFrame.dropna`. It determines which keys are retained from each side of the join.",
           "values": [
-            "data-specific"
+            "'left'",
+            "'inner'",
+            "'outer' / 'right'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use left joins when preserving the primary table is required.",
+            "Check row counts before and after join to catch accidental duplication."
           ]
         },
         {
           "name": "subset",
           "type": "Any",
           "default": "None",
-          "description": "Controls subset in DataFrame.dropna.",
+          "description": "Data input consumed by `DataFrame.dropna`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2721,23 +3080,27 @@
         {
           "name": "to_replace",
           "type": "Any",
-          "description": "Controls to_replace in DataFrame.replace.",
+          "description": "Parameter `to_replace` configures how `DataFrame.replace` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "value",
           "type": "Any",
-          "description": "Controls value in DataFrame.replace.",
+          "description": "Parameter `value` configures how `DataFrame.replace` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2806,37 +3169,43 @@
         {
           "name": "x",
           "type": "Any",
-          "description": "Controls x in pandas.cut.",
+          "description": "Data input consumed by `pandas.cut`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "bins",
           "type": "Any",
-          "description": "Controls bins in pandas.cut.",
+          "description": "Parameter `bins` configures how `pandas.cut` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "labels",
           "type": "str | list[str]",
           "default": "None",
-          "description": "Controls labels in pandas.cut.",
+          "description": "Target or label values used by `pandas.cut`. This controls what the model/metric learns or evaluates against.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         }
       ],
@@ -2905,37 +3274,43 @@
         {
           "name": "x",
           "type": "Any",
-          "description": "Controls x in pandas.qcut.",
+          "description": "Data input consumed by `pandas.qcut`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "q",
           "type": "Any",
-          "description": "Controls q in pandas.qcut.",
+          "description": "Parameter `q` configures how `pandas.qcut` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "labels",
           "type": "str | list[str]",
           "default": "None",
-          "description": "Controls labels in pandas.qcut.",
+          "description": "Target or label values used by `pandas.qcut`. This controls what the model/metric learns or evaluates against.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         }
       ],
@@ -2958,13 +3333,13 @@
         },
         {
           "title": "pandas.qcut additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = pd.0.9cut(df['records[0]'], q=2, labels=['low','high'])\nprint(type(result).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = pd.qcut(df['records[0]'], q=2, labels=['low','high'])\nprint(type(result).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run pandas.qcut again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run pandas.qcut exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -3004,26 +3379,29 @@
         {
           "name": "window",
           "type": "Any",
-          "description": "Controls window in DataFrame.rolling.",
+          "description": "Parameter `window` configures how `DataFrame.rolling` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "min_periods",
           "type": "int",
           "default": "None",
-          "description": "Controls min_periods in DataFrame.rolling.",
+          "description": "Parameter `min_periods` configures how `DataFrame.rolling` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -3034,25 +3412,25 @@
       },
       "examples": [
         {
-          "title": "DataFrame.rolling for segmented revenue reporting",
-          "scenario": "Revenue analytics workflow using segmented business records and repeatable table transformations.",
-          "code": "import pandas as pd\n\ndf = pd.DataFrame({\n    'segment': ['A', 'A', 'B', 'C'],\n    'value': [10, 20, 30, 40],\n    'date': pd.date_range('2026-01-01', periods=4)\n})\nother = pd.DataFrame({'tier': ['gold', 'gold', 'silver', 'bronze']}, index=df.index)\n\nresult = df[['value']].rolling(window=2)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
-          "expectedOutput": "Printed output shows command result type and shape/value, ready to adapt to your real table.",
+          "title": "DataFrame.rolling primary workflow",
+          "scenario": "DataFrame.rolling used in a realistic business workflow with active command execution.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df[['records[0]']].rolling(window=2)\nprint(type(result).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Create a small DataFrame that mirrors your business columns (segment, value, date).",
-            "Run DataFrame.rolling directly (not commented) and store output in `result`.",
-            "Check output type/shape, then swap in your project DataFrame and keep the same pattern."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run DataFrame.rolling exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "DataFrame.rolling additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30]})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df[['records[0]']].rolling(window=2)\nprint(type(result).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df[['records[0]']].rolling(window=2)\nprint(type(result).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run DataFrame.rolling again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run DataFrame.rolling exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -3093,12 +3471,14 @@
           "name": "periods",
           "type": "Any",
           "default": "1",
-          "description": "Controls periods in DataFrame.shift.",
+          "description": "Parameter `periods` configures how `DataFrame.shift` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -3136,12 +3516,823 @@
         "Always verify version-specific defaults in official docs before production deployment."
       ],
       "related": []
+    },
+    {
+      "id": "pandas-dt-year",
+      "name": "Series.dt.year",
+      "subtopic": "Time Series",
+      "tags": [
+        "datetime",
+        "dt-accessor",
+        "eda"
+      ],
+      "level": "core",
+      "summary": "Extract calendar year for cohort and annual trend analysis.",
+      "syntax": "df['order_year']=df['order_date'].dt.year",
+      "description": "Fast year extraction once a column is parsed to datetime dtype.",
+      "overview": "Extract calendar year for cohort and annual trend analysis. Use dt.year to create stable annual grouping keys for retention, growth, and seasonality analysis. Typical pattern: parse order_date with to_datetime, derive order_year, then groupby annual KPIs. Returns integer series aligned to row count.",
+      "applications": [
+        "Primary application: build annual cohorts and yearly KPI rollups.",
+        "Workflow application: derive year once and reuse across EDA and modeling.",
+        "Delivery application: keep explicit year fields in outputs for reproducibility."
+      ],
+      "docs": [
+        {
+          "label": "Series.dt.year",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.Series.dt.year.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "datetime series",
+          "type": "pandas.Series[datetime64]",
+          "description": "Datetime column for year extraction.",
+          "values": [
+            "df['order_date']",
+            "df['signup_date']"
+          ],
+          "pitfalls": [
+            "Object dtype must be parsed first using pandas.to_datetime."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.Series[int]",
+        "shape": "same rows as input",
+        "description": "Year value per row."
+      },
+      "examples": [
+        {
+          "title": "Series.dt.year primary workflow",
+          "scenario": "Series.dt.year used in a realistic business workflow with active command execution.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df['order_year']=df['order_date'].dt.year\nprint(type(result).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Series.dt.year exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
+          ]
+        }
+      ],
+      "notes": [
+        "Use dt.isocalendar().year if ISO week-year is required."
+      ],
+      "related": [
+        "pandas-to-datetime",
+        "pandas-dt-components",
+        "pandas-groupby-basic"
+      ],
+      "slug": "pandas-dt-year",
+      "library": "pandas"
+    },
+    {
+      "id": "pandas-dt-components",
+      "name": "Series.dt.month / day_name / quarter",
+      "subtopic": "Time Series",
+      "tags": [
+        "datetime",
+        "seasonality",
+        "feature-engineering"
+      ],
+      "level": "extended",
+      "summary": "Create month/weekday/quarter features for seasonal EDA.",
+      "syntax": "df=df.assign(month=df['order_date'].dt.month,weekday=df['order_date'].dt.day_name(),quarter=df['order_date'].dt.quarter)",
+      "description": "Derive calendar components to explain weekly and quarterly patterns.",
+      "overview": "Create month/weekday/quarter features for seasonal EDA. Use dt components when exploring cyclic behavior, weekday effects, and quarter-level shifts. Typical pattern: add month and weekday columns, then run groupby summaries to compare demand/conversion across calendar slices. Returns added feature columns with same row count.",
+      "applications": [
+        "Primary application: identify seasonal patterns hidden in raw timestamps.",
+        "Workflow application: engineer calendar features before model training.",
+        "Delivery application: report weekday/month effects in stakeholder-friendly terms."
+      ],
+      "docs": [
+        {
+          "label": "Datetime properties",
+          "url": "https://pandas.pydata.org/docs/reference/series.html#datetimelike-properties"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "datetime series",
+          "type": "pandas.Series[datetime64]",
+          "description": "Source datetime column.",
+          "values": [
+            "df['order_date']"
+          ],
+          "pitfalls": [
+            "NaT rows propagate missing calendar components."
+          ]
+        },
+        {
+          "name": "month",
+          "type": "Any",
+          "description": "Parameter `month` configures how `Series.dt.month / day_name / quarter` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "df['order_date'].dt.month"
+        },
+        {
+          "name": "weekday",
+          "type": "int",
+          "description": "Parameter `weekday` configures how `Series.dt.month / day_name / quarter` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "df['order_date'].dt.day_name()"
+        },
+        {
+          "name": "quarter",
+          "type": "Any",
+          "description": "Parameter `quarter` configures how `Series.dt.month / day_name / quarter` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "df['order_date'].dt.quarter"
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame (new columns)",
+        "shape": "same rows, +calendar columns",
+        "description": "Calendar-derived features for EDA/modeling."
+      },
+      "examples": [
+        {
+          "title": "Series.dt.month / day_name / quarter primary workflow",
+          "scenario": "Series.dt.month / day_name / quarter used in a realistic business workflow with active command execution.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({'segment':['A','B','A'], 'value':[10,20,30], 'date': pd.date_range('2026-01-01', periods=3)})\nother = pd.DataFrame({'tier':['gold','silver','gold']}, index=df.index)\nresult = df=df.assign(month=df['order_date'].dt.month,weekday=df['order_date'].dt.day_name(),quarter=df['order_date'].dt.quarter)\nprint(type(result).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
+          "walkthrough": [
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Series.dt.month / day_name / quarter exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
+          ]
+        }
+      ],
+      "notes": [
+        "Convert weekday to ordered categorical for Monday-Sunday chart ordering."
+      ],
+      "related": [
+        "pandas-to-datetime",
+        "pandas-dt-year",
+        "pandas-resample"
+      ],
+      "slug": "pandas-dt-components",
+      "library": "pandas"
+    },
+    {
+      "id": "pandas-datetime-filter",
+      "name": "Datetime Filtering (.between / .dt)",
+      "subtopic": "Time Series",
+      "tags": [
+        "datetime",
+        "filtering",
+        "eda"
+      ],
+      "level": "core",
+      "summary": "Filter by date range and calendar conditions (weekday/month/quarter).",
+      "syntax": "q1_weekdays=df.loc[df['order_date'].between('2026-01-01','2026-03-31') & (df['order_date'].dt.dayofweek < 5)]",
+      "description": "Scopes analysis windows precisely for fair comparisons and cleaner EDA.",
+      "overview": "Filter by date range and calendar conditions (weekday/month/quarter). Use datetime filtering for pre/post analyses, quarter slices, or business-day-only KPI comparisons. Typical pattern: combine between(start,end) with dt.dayofweek/month constraints to isolate a valid analysis slice. Returns filtered DataFrame.",
+      "applications": [
+        "Primary application: isolate a valid analysis window before computing KPIs.",
+        "Workflow application: centralize date filters near top of notebook for consistency.",
+        "Delivery application: report exact date boundaries with every metric output."
+      ],
+      "docs": [
+        {
+          "label": "Indexing guide",
+          "url": "https://pandas.pydata.org/docs/user_guide/indexing.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "start/end bounds",
+          "type": "str | Timestamp",
+          "description": "Date range boundaries.",
+          "values": [
+            "'2026-01-01'",
+            "'2026-03-31'"
+          ],
+          "pitfalls": [
+            "Timezone mismatch can shift boundaries unexpectedly."
+          ]
+        },
+        {
+          "name": "dt condition",
+          "type": "boolean mask",
+          "description": "Calendar rule on datetime accessor.",
+          "values": [
+            "df['order_date'].dt.dayofweek < 5",
+            "df['order_date'].dt.month.isin([11,12])"
+          ],
+          "pitfalls": [
+            "Missing parentheses in boolean logic changes filter meaning."
+          ]
+        },
+        {
+          "name": "'2026-01-01'",
+          "type": "Any",
+          "description": "Parameter `'2026-01-01'` configures how `Datetime Filtering (.between / .dt)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "'2026-03-31')&(df['order_date'].dt.dayofweek<5",
+          "type": "int",
+          "description": "Parameter `'2026-03-31')&(df['order_date'].dt.dayofweek<5` configures how `Datetime Filtering (.between / .dt)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "shape": "(filtered_rows, columns)",
+        "description": "Windowed subset for scoped analysis."
+      },
+      "examples": [
+        {
+          "title": "Q1 business-day slice",
+          "scenario": "Finance compares Q1 weekday performance only.",
+          "code": "import pandas as pd\n\ndf=pd.DataFrame({'order_date':pd.to_datetime(['2026-01-02','2026-01-03','2026-04-01']),'revenue':[120,220,140]})\nmask=df['order_date'].between('2026-01-01','2026-03-31') & (df['order_date'].dt.dayofweek < 5)\nprint(df.loc[mask])",
+          "expectedOutput": "Only Q1 weekday rows remain.",
+          "walkthrough": [
+            "Define range.",
+            "Apply dt weekday mask.",
+            "Use filtered frame for downstream EDA."
+          ]
+        }
+      ],
+      "notes": [
+        "If the date is index-based, date slicing with .loc can be simpler."
+      ],
+      "related": [
+        "pandas-to-datetime",
+        "pandas-query",
+        "pandas-dt-components"
+      ],
+      "slug": "pandas-datetime-filter",
+      "library": "pandas"
+    },
+    {
+      "id": "pandas-groupby-basic",
+      "name": "DataFrame.groupby + size/count",
+      "subtopic": "Aggregation",
+      "tags": [
+        "groupby",
+        "counts",
+        "eda"
+      ],
+      "level": "core",
+      "summary": "Start with segment-level row counts and non-null counts.",
+      "syntax": "df.groupby('segment',as_index=False).size()",
+      "description": "First-pass group audit for sample balance and missingness by segment.",
+      "overview": "Start with segment-level row counts and non-null counts. Use size vs count as an EDA checkpoint before complex aggregations/modeling. Typical pattern: check whether groups are under-sampled and whether key metrics are missing unevenly across segments. Returns compact group diagnostics.",
+      "applications": [
+        "Primary application: validate sample size adequacy by segment.",
+        "Workflow application: compare size vs count to localize missing-data risk.",
+        "Delivery application: include count diagnostics in EDA summaries for context."
+      ],
+      "docs": [
+        {
+          "label": "Groupby guide",
+          "url": "https://pandas.pydata.org/docs/user_guide/groupby.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "by",
+          "type": "str | list[str]",
+          "description": "Column/key selector for `DataFrame.groupby + size/count`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "'segment'",
+            "['region','plan']"
+          ],
+          "pitfalls": [
+            "Too-granular keys create noisy sparse groups."
+          ]
+        },
+        {
+          "name": "count target",
+          "type": "str",
+          "description": "Column for non-null count comparison.",
+          "values": [
+            "'revenue'"
+          ],
+          "pitfalls": [
+            "count excludes nulls; size includes all rows."
+          ]
+        },
+        {
+          "name": "'segment'",
+          "type": "Any",
+          "description": "Parameter `'segment'` configures how `DataFrame.groupby + size/count` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "as_index",
+          "type": "Any",
+          "description": "Parameter `as_index` configures how `DataFrame.groupby + size/count` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "False).size("
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "shape": "(groups, count columns)",
+        "description": "Group-level count diagnostics."
+      },
+      "examples": [
+        {
+          "title": "Size vs count check",
+          "scenario": "Analyst checks missingness concentration before KPI reporting.",
+          "code": "import pandas as pd\n\ndf=pd.DataFrame({'segment':['A','A','B','B','C'],'revenue':[100,None,80,95,None]})\nsize_tbl=df.groupby('segment',as_index=False).size()\ncount_tbl=df.groupby('segment',as_index=False).agg(revenue_non_null=('revenue','count'))\nprint(size_tbl.merge(count_tbl,on='segment'))",
+          "expectedOutput": "Per-segment total rows and non-null revenue counts.",
+          "walkthrough": [
+            "Run size.",
+            "Run count on key measure.",
+            "Compare and flag weak segments."
+          ]
+        }
+      ],
+      "notes": [
+        "Use this check in every new EDA pipeline before deep analysis."
+      ],
+      "related": [
+        "pandas-groupby-agg",
+        "pandas-isna",
+        "pandas-nunique"
+      ],
+      "slug": "pandas-groupby-basic",
+      "library": "pandas"
+    },
+    {
+      "id": "pandas-groupby-named-agg",
+      "name": "GroupBy Named Aggregations",
+      "subtopic": "Aggregation",
+      "tags": [
+        "groupby",
+        "named-aggregation",
+        "kpi"
+      ],
+      "level": "extended",
+      "summary": "Define multi-metric group summaries with explicit output names.",
+      "syntax": "df.groupby('channel',as_index=False).agg(total_revenue=('revenue','sum'),avg_order=('revenue','mean'),customers=('customer_id','nunique'))",
+      "description": "Named metrics prevent ambiguous columns and make KPI outputs easy to reuse.",
+      "overview": "Define multi-metric group summaries with explicit output names. Use this pattern for business scorecards where metric clarity matters and outputs are reused in dashboards/models. Typical pattern: one grouped table combining totals, means, counts, and distinct counts per segment. Returns flat-column DataFrame ready for publishing.",
+      "applications": [
+        "Primary application: generate report-ready KPI tables in one pass.",
+        "Workflow application: keep metric naming stable across notebooks and production jobs.",
+        "Delivery application: avoid post-processing renames by naming metrics in agg directly."
+      ],
+      "docs": [
+        {
+          "label": "Named aggregation",
+          "url": "https://pandas.pydata.org/docs/user_guide/groupby.html#named-aggregation"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "group keys",
+          "type": "str | list[str]",
+          "description": "Segmentation dimensions.",
+          "values": [
+            "'channel'",
+            "['month','region']"
+          ],
+          "pitfalls": [
+            "Changing keys changes interpretation and comparability."
+          ]
+        },
+        {
+          "name": "named metrics",
+          "type": "tuple mapping",
+          "description": "Metric definitions with output names.",
+          "values": [
+            "total_revenue=('revenue','sum')",
+            "customers=('customer_id','nunique')"
+          ],
+          "pitfalls": [
+            "Inconsistent naming across analyses creates confusion."
+          ]
+        },
+        {
+          "name": "'channel'",
+          "type": "Any",
+          "description": "Parameter `'channel'` configures how `GroupBy Named Aggregations` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "as_index",
+          "type": "Any",
+          "description": "Parameter `as_index` configures how `GroupBy Named Aggregations` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "False).agg(total_revenue=('revenue'"
+        },
+        {
+          "name": "'sum')",
+          "type": "Any",
+          "description": "Parameter `'sum')` configures how `GroupBy Named Aggregations` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "avg_order",
+          "type": "Any",
+          "description": "Parameter `avg_order` configures how `GroupBy Named Aggregations` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "('revenue'"
+        },
+        {
+          "name": "'mean')",
+          "type": "Any",
+          "description": "Parameter `'mean')` configures how `GroupBy Named Aggregations` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "customers",
+          "type": "Any",
+          "description": "Data input consumed by `GroupBy Named Aggregations`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "('customer_id'"
+        },
+        {
+          "name": "'nunique')",
+          "type": "Any",
+          "description": "Parameter `'nunique')` configures how `GroupBy Named Aggregations` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "shape": "(groups, metrics + keys)",
+        "description": "Flat KPI summary with explicit metric names."
+      },
+      "examples": [
+        {
+          "title": "Channel scorecard",
+          "scenario": "Growth team needs clear weekly metrics by acquisition channel.",
+          "code": "import pandas as pd\n\ndf=pd.DataFrame({'channel':['Email','Paid','Email','Organic'],'customer_id':[1,2,1,3],'revenue':[80,140,95,120]})\nout=df.groupby('channel',as_index=False).agg(total_revenue=('revenue','sum'),avg_order=('revenue','mean'),customers=('customer_id','nunique'))\nprint(out)",
+          "expectedOutput": "KPI table by channel with readable metric names.",
+          "walkthrough": [
+            "Group by business segment.",
+            "Use named metrics.",
+            "Publish directly without column cleanup."
+          ]
+        }
+      ],
+      "notes": [
+        "Prefer named aggregations to avoid MultiIndex outputs."
+      ],
+      "related": [
+        "pandas-groupby-agg",
+        "pandas-groupby-share-total",
+        "pandas-pivot-table"
+      ],
+      "slug": "pandas-groupby-named-agg",
+      "library": "pandas"
+    },
+    {
+      "id": "pandas-groupby-share-total",
+      "name": "GroupBy.transform (Share of Group Total)",
+      "subtopic": "Aggregation",
+      "tags": [
+        "groupby",
+        "transform",
+        "normalization"
+      ],
+      "level": "extended",
+      "summary": "Compute each row as a share of its group total.",
+      "syntax": "df['share_in_region']=df['revenue']/df.groupby('region')['revenue'].transform('sum')",
+      "description": "Creates normalized within-group features for fair cross-segment comparisons.",
+      "overview": "Compute each row as a share of its group total. Use this transform pattern when absolute values are hard to compare across groups and relative contribution matters. Typical pattern: product share within region, campaign share within channel, or customer spend share within cohort. Returns row-level proportion feature aligned to original data.",
+      "applications": [
+        "Primary application: expose concentration/mix effects inside each segment.",
+        "Workflow application: pair share metrics with rank to identify top contributors.",
+        "Delivery application: present both absolute and share metrics for balanced decisions."
+      ],
+      "docs": [
+        {
+          "label": "SeriesGroupBy.transform",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.SeriesGroupBy.transform.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "group key",
+          "type": "str | list[str]",
+          "description": "Segmentation key for denominator totals.",
+          "values": [
+            "'region'",
+            "['region','month']"
+          ],
+          "pitfalls": [
+            "Wrong group key yields misleading share values."
+          ]
+        },
+        {
+          "name": "metric",
+          "type": "numeric Series",
+          "description": "Value normalized by group sum.",
+          "values": [
+            "df['revenue']",
+            "df['orders']"
+          ],
+          "pitfalls": [
+            "Handle zero denominators before dividing."
+          ]
+        },
+        {
+          "name": "'region')['revenue'].transform('sum'",
+          "type": "Any",
+          "description": "Parameter `'region')['revenue'].transform('sum'` configures how `GroupBy.transform (Share of Group Total)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.Series[float]",
+        "shape": "same rows as input",
+        "description": "Within-group share feature."
+      },
+      "examples": [
+        {
+          "title": "Regional revenue mix",
+          "scenario": "Merchandising wants product contribution by region.",
+          "code": "import pandas as pd\n\ndf=pd.DataFrame({'region':['W','W','E','E'],'product':['A','B','A','C'],'revenue':[120,80,90,210]})\ndf['share_in_region']=df['revenue']/df.groupby('region')['revenue'].transform('sum')\nprint(df)",
+          "expectedOutput": "Rows include share_in_region that sums to 1 within each region.",
+          "walkthrough": [
+            "Choose business segment key.",
+            "Compute group sums with transform.",
+            "Derive and validate share feature."
+          ]
+        }
+      ],
+      "notes": [
+        "For skewed groups, inspect both share and absolute values together."
+      ],
+      "related": [
+        "pandas-groupby-transform",
+        "pandas-groupby-named-agg",
+        "pandas-sort-values"
+      ],
+      "slug": "pandas-groupby-share-total",
+      "library": "pandas"
+    },
+    {
+      "id": "pandas-corr",
+      "name": "DataFrame.corr",
+      "subtopic": "EDA",
+      "tags": [
+        "eda",
+        "correlation",
+        "numeric"
+      ],
+      "level": "extended",
+      "summary": "Screen linear relationships among numeric variables quickly.",
+      "syntax": "df[['spend','clicks','revenue']].corr(numeric_only=True)",
+      "description": "Useful early EDA step for feature selection and multicollinearity awareness.",
+      "overview": "Screen linear relationships among numeric variables quickly. Use DataFrame.corr during initial EDA to identify highly related predictors and confirm directional intuition before modeling. Typical pattern: analyze spend, traffic, conversion, and revenue metrics together to prioritize features and transformations. Returns square correlation matrix.",
+      "applications": [
+        "Primary application: identify redundant or strongly related numeric features.",
+        "Workflow application: use correlation findings to guide feature pruning and interactions.",
+        "Delivery application: report correlation with business context, not as causal proof."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.corr",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "method",
+          "type": "str",
+          "default": "'pearson'",
+          "description": "Correlation method.",
+          "values": [
+            "'pearson'",
+            "'spearman'",
+            "'kendall'"
+          ],
+          "pitfalls": [
+            "Pearson is sensitive to outliers and only linear."
+          ]
+        },
+        {
+          "name": "numeric_only",
+          "type": "bool",
+          "default": "False",
+          "description": "Use only numeric columns.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Mixed dtypes may need explicit column selection."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.DataFrame",
+        "shape": "(numeric_cols, numeric_cols)",
+        "description": "Pairwise correlation matrix."
+      },
+      "examples": [
+        {
+          "title": "Quick driver screen",
+          "scenario": "Analyst prepares baseline regression and wants a first correlation pass.",
+          "code": "import pandas as pd\n\ndf=pd.DataFrame({'spend':[100,120,150],'clicks':[400,450,560],'revenue':[1200,1300,1660]})\nprint(df.corr(numeric_only=True))",
+          "expectedOutput": "Numeric correlation matrix for selected columns.",
+          "walkthrough": [
+            "Select core numeric features.",
+            "Compute corr matrix.",
+            "Use high-correlation pairs to guide next checks."
+          ]
+        }
+      ],
+      "notes": [
+        "Correlation does not imply causation; verify with experiment/time controls."
+      ],
+      "related": [
+        "pandas-describe",
+        "pandas-groupby-agg",
+        "pandas-nunique"
+      ],
+      "slug": "pandas-corr",
+      "library": "pandas"
+    },
+    {
+      "id": "pandas-nunique",
+      "name": "DataFrame.nunique",
+      "subtopic": "EDA",
+      "tags": [
+        "eda",
+        "cardinality",
+        "data-quality"
+      ],
+      "level": "core",
+      "summary": "Profile distinct counts per column for key/cardinality sanity checks.",
+      "syntax": "df.nunique(dropna=False).sort_values(ascending=False)",
+      "description": "Fast onboarding command for understanding feature granularity and key uniqueness.",
+      "overview": "Profile distinct counts per column for key/cardinality sanity checks. Use nunique at the start of EDA to spot near-constant features, high-cardinality IDs, and duplicate-key risk. Typical pattern: verify whether order_id/customer_id uniqueness matches expectations and whether categorical fields are manageable. Returns distinct-count series.",
+      "applications": [
+        "Primary application: validate key uniqueness and feature cardinality.",
+        "Workflow application: combine with null-rate and dtype audit in dataset onboarding.",
+        "Delivery application: include cardinality summary in EDA handoff documents."
+      ],
+      "docs": [
+        {
+          "label": "DataFrame.nunique",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.nunique.html"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "dropna",
+          "type": "bool",
+          "default": "True",
+          "description": "Include/exclude NaN in counts.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Inconsistent dropna setting can skew comparisons."
+          ]
+        }
+      ],
+      "returns": {
+        "type": "pandas.Series",
+        "shape": "(number_of_columns,)",
+        "description": "Distinct count per column."
+      },
+      "examples": [
+        {
+          "title": "Cardinality audit",
+          "scenario": "New dataset needs key uniqueness and categorical cardinality check.",
+          "code": "import pandas as pd\n\ndf=pd.DataFrame({'customer_id':[1,2,2,4],'region':['W','E','E','W'],'plan':['basic','pro','pro',None]})\nprint(df.nunique(dropna=False).sort_values(ascending=False))",
+          "expectedOutput": "Series of distinct counts by column.",
+          "walkthrough": [
+            "Run nunique early.",
+            "Inspect keys for duplicates.",
+            "Use counts to decide feature treatment."
+          ]
+        }
+      ],
+      "notes": [
+        "Pair with duplicated/drop_duplicates for direct duplicate-row diagnostics."
+      ],
+      "related": [
+        "pandas-info",
+        "pandas-drop-duplicates",
+        "pandas-groupby-basic"
+      ],
+      "slug": "pandas-nunique",
+      "library": "pandas"
     }
   ],
-  "overview": "Pandas is the daily workhorse for tabular data in analytics: load, clean, join, aggregate, reshape, and time-align datasets before visualization or modeling.",
+  "overview": "Pandas is the core tabular toolkit for import, cleaning, EDA, datetime analysis, groupby summarization, and model-ready feature preparation.",
   "applications": [
-    "ETL from CSV/Excel exports into analysis-ready tables.",
-    "EDA and KPI reporting with groupby, pivots, and time windows.",
-    "Feature table preparation for machine learning."
+    "Run robust first-pass EDA with schema checks, missingness audits, and cardinality profiling.",
+    "Engineer datetime features (dt.year/month/weekday) and scoped date filters for reliable temporal analysis.",
+    "Build repeatable groupby KPI tables and row-level share features for reporting and modeling."
   ]
 }

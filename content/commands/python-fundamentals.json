@@ -248,6 +248,19 @@
           "pitfalls": [
             "Only valid for string inputs"
           ]
+        },
+        {
+          "name": "x);float(x);str(x",
+          "type": "Any",
+          "description": "Parameter `x);float(x);str(x` configures how `Assignment and Casting` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
         }
       ],
       "returns": {
@@ -259,7 +272,7 @@
         {
           "title": "Normalize order quantity field",
           "scenario": "Ops CSV exports quantity as text and needs integer math.",
-          "code": "raw_qty = '120'\nqty = int(raw_qty)\nunit_cost = 3.5\nline_total = qty * unit_cost\nprint(type(qty).__name__, line_total)",
+          "code": "raw_qty = \"120\"\nqty = int(raw_qty)\nunit_cost = float(\"3.50\")\nqty_label = str(qty)\nline_total = qty * unit_cost\nprint(qty_label, line_total)",
           "expectedOutput": "int 420.0",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -270,7 +283,7 @@
         {
           "title": "Assignment and Casting additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = x = records[0]\nprint(type(result).__name__, result)",
+          "code": "raw_discount = \"0.15\"\ndiscount = float(raw_discount)\norders = int(\"42\")\nsummary = str(round(orders * (1 - discount), 2))\nprint(type(orders).__name__, summary)",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -353,25 +366,25 @@
       },
       "examples": [
         {
-          "title": "Keep most recent 7 daily revenue values",
-          "scenario": "Finance needs the latest rolling week from a list loaded in memory.",
-          "code": "daily_revenue = [4200, 4100, 4300, 4500, 4700, 4600, 4900, 5100, 5300]\nlatest_week = daily_revenue[-7:]\nprint(latest_week)",
-          "expectedOutput": "[4300, 4500, 4700, 4600, 4900, 5100, 5300]",
+          "title": "Indexing and Slicing primary workflow",
+          "scenario": "Indexing and Slicing used in a realistic business workflow with active command execution.",
+          "code": "# indexing and slicing\nrecords = [120, 140, 160, 180]\nfirst = records[0]\nlast_two = records[-2:]\nmiddle = records[1:3]\nprint(first, last_two, middle)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply Indexing and Slicing with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run Indexing and Slicing exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Indexing and Slicing additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = se0.9[idx]\nprint(type(result).__name__, result)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "# indexing and slicing\nvalues = ['A','B','C','D','E']\nstep_slice = values[::2]\nreverse = values[::-1]\nprint(step_slice, reverse)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Indexing and Slicing again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Indexing and Slicing exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -445,25 +458,25 @@
       },
       "examples": [
         {
-          "title": "Apply marketing discount eligibility",
-          "scenario": "Mark eligible basket values above threshold for coupon targeting.",
-          "code": "baskets = [25, 88, 140, 42, 215]\neligible = [value for value in baskets if value >= 100]\nprint(eligible)",
-          "expectedOutput": "[140, 215]",
+          "title": "List Comprehension primary workflow",
+          "scenario": "List Comprehension used in a realistic business workflow with active command execution.",
+          "code": "# list comprehension\namounts = [120, 95, 140, 80]\nnet = [x * 0.9 for x in amounts]\nhigh = [x for x in net if x >= 100]\nprint(net, high)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply List Comprehension with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run List Comprehension exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "List Comprehension additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = [expression for item in records if condition]\nprint(type(result).__name__, result)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "# list comprehension\nregions = ['west','east','north','south']\nlabels = [r.upper() for r in regions]\nprint(labels)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run List Comprehension again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run List Comprehension exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -530,6 +543,20 @@
           "pitfalls": [
             "Mutable defaults in setdefault can be shared if reused"
           ]
+        },
+        {
+          "name": "default);d.setdefault(key",
+          "type": "int",
+          "description": "Parameter `default);d.setdefault(key` configures how `dict.get and dict.setdefault` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
         }
       ],
       "returns": {
@@ -539,20 +566,20 @@
       },
       "examples": [
         {
-          "title": "Count support tickets by channel",
-          "scenario": "Customer ops wants channel-level counts from raw events.",
-          "code": "channels = ['email', 'chat', 'chat', 'phone']\ncounts = {}\nfor c in channels:\n    counts[c] = counts.get(c, 0) + 1\nprint(counts)",
-          "expectedOutput": "{'email': 1, 'chat': 2, 'phone': 1}",
+          "title": "dict.get and dict.setdefault primary workflow",
+          "scenario": "dict.get and dict.setdefault used in a realistic business workflow with active command execution.",
+          "code": "region_revenue = {\"west\": 120, \"east\": 95}\nwest_value = region_revenue.get(\"west\", 0)\nsouth_value = region_revenue.setdefault(\"south\", 0)\nprint(west_value, south_value, region_revenue)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply dict.get and dict.setdefault with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run dict.get and dict.setdefault exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "dict.get and dict.setdefault additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = d.get(key, default)\nprint(type(result).__name__, result)",
+          "code": "inventory = {\"A\": 5}\ncurrent_a = inventory.get(\"A\", 0)\ncurrent_b = inventory.setdefault(\"B\", 0)\ninventory[\"B\"] = current_b + 3\nprint(current_a, inventory[\"B\"], inventory)",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -636,14 +663,14 @@
       },
       "examples": [
         {
-          "title": "Route leads to campaign strategy",
-          "scenario": "Marketing assigns strategy based on lead source.",
-          "code": "source = 'organic'\nmatch source:\n    case 'paid': strategy = 'retarget'\n    case 'organic': strategy = 'newsletter'\n    case _: strategy = 'manual-review'\nprint(strategy)",
-          "expectedOutput": "newsletter",
+          "title": "if / elif / else and match / case primary workflow",
+          "scenario": "if / elif / else and match / case used in a realistic business workflow with active command execution.",
+          "code": "records = [120, 140, 160]\nresult = if cond: ... elif cond: ... else: ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply if / elif / else and match / case with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run if / elif / else and match / case exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
@@ -817,6 +844,47 @@
           "pitfalls": [
             "Unexpected keys can silently pass unless validated"
           ]
+        },
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Data input consumed by `Functions, lambda, *args and **kwargs`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "args",
+          "type": "Any",
+          "description": "Parameter `args` configures how `Functions, lambda, *args and **kwargs` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "b",
+          "type": "Any",
+          "description": "Parameter `b` configures how `Functions, lambda, *args and **kwargs` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "0"
         }
       ],
       "returns": {
@@ -826,14 +894,14 @@
       },
       "examples": [
         {
-          "title": "Compute weighted pricing score",
-          "scenario": "Pricing team combines margin and demand into one score.",
-          "code": "def pricing_score(price, demand, *, alpha=0.6):\n    return alpha * demand + (1 - alpha) * price\nprint(round(pricing_score(20, 80, alpha=0.7), 2))",
-          "expectedOutput": "62.0",
+          "title": "Functions, lambda, *args and **kwargs primary workflow",
+          "scenario": "Functions, lambda, *args and **kwargs used in a realistic business workflow with active command execution.",
+          "code": "records = [120, 140, 160]\nresult = def fn(arr, *args, b=0, **kwargs): ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply Functions, lambda, *args and **kwargs with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run Functions, lambda, *args and **kwargs exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
@@ -980,7 +1048,7 @@
         {
           "name": "path",
           "type": "str | path-like",
-          "description": "File location.",
+          "description": "Parameter `path` configures how `with open(...) for file I/O` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'data.csv'",
             "'reports/output.txt'"
@@ -1008,7 +1076,7 @@
           "name": "encoding",
           "type": "str",
           "default": "platform default",
-          "description": "Text encoding.",
+          "description": "Parameter `encoding` configures how `with open(...) for file I/O` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'utf-8'",
             "'latin-1'"
@@ -1107,6 +1175,32 @@
           "pitfalls": [
             "%m is month, %M is minute"
           ]
+        },
+        {
+          "name": ");datetime.strptime(text",
+          "type": "Any",
+          "description": "Parameter `);datetime.strptime(text` configures how `datetime.now, strptime, strftime` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "fmt);dt.strftime(fmt",
+          "type": "Any",
+          "description": "Parameter `fmt);dt.strftime(fmt` configures how `datetime.now, strptime, strftime` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
         }
       ],
       "returns": {
@@ -1116,20 +1210,20 @@
       },
       "examples": [
         {
-          "title": "Parse subscription start date",
-          "scenario": "Retention model expects datetime objects for tenure calculations.",
-          "code": "from datetime import datetime\nstart = datetime.strptime('2025-11-12', '%Y-%m-%d')\nprint(start.year, start.month)",
-          "expectedOutput": "2025 11",
+          "title": "datetime.now, strptime, strftime primary workflow",
+          "scenario": "datetime.now, strptime, strftime used in a realistic business workflow with active command execution.",
+          "code": "from datetime import datetime\nnow_ts = datetime.now()\nparsed = datetime.strptime(\"2026-01-05\", \"%Y-%m-%d\")\nlabel = parsed.strftime(\"%b %d, %Y\")\nprint(now_ts.year, label)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply datetime.now, strptime, strftime with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run datetime.now, strptime, strftime exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "datetime.now, strptime, strftime additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = datetime.now()\nprint(type(result).__name__, result)",
+          "code": "from datetime import datetime\nrun_at = datetime.now()\nevent_ts = datetime.strptime(\"2026-03-01 14:30\", \"%Y-%m-%d %H:%M\")\nexport_key = event_ts.strftime(\"mktg_%Y_%m_%d_%H%M\")\nprint(run_at.date(), export_key)",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -1198,6 +1292,45 @@
           "pitfalls": [
             "Handle None explicitly before operations"
           ]
+        },
+        {
+          "name": "x:list[float]",
+          "type": "Any",
+          "description": "Parameter `x:list[float]` configures how `Typing annotations (list, dict, Optional)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "y:dict[str",
+          "type": "Any",
+          "description": "Parameter `y:dict[str` configures how `Typing annotations (list, dict, Optional)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "int]|None",
+          "type": "Any",
+          "description": "Parameter `int]|None` configures how `Typing annotations (list, dict, Optional)` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
         }
       ],
       "returns": {
@@ -1207,14 +1340,14 @@
       },
       "examples": [
         {
-          "title": "Typed KPI helper",
-          "scenario": "Analytics team standardizes helper signatures for shared utility modules.",
-          "code": "def conversion_rate(signups: int, visits: int) -> float:\n    return signups / visits if visits else 0.0\nprint(conversion_rate(52, 1300))",
-          "expectedOutput": "0.04",
+          "title": "Typing annotations (list, dict, Optional) primary workflow",
+          "scenario": "Typing annotations (list, dict, Optional) used in a realistic business workflow with active command execution.",
+          "code": "records = [120, 140, 160]\nresult = def fn(arr: list[float], y: dict[str, int] | None) -> float: ...\nprint(type(result).__name__, result)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply Typing annotations (list, dict, Optional) with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run Typing annotations (list, dict, Optional) exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
@@ -1302,25 +1435,25 @@
       },
       "examples": [
         {
-          "title": "Flag risky transactions",
-          "scenario": "Fintech risk rule flags transactions that are high amount and from new devices.",
-          "code": "amount = 850\\nknown_device = False\\nis_high_risk = (amount > 500) and (not known_device)\\nprint(is_high_risk)",
-          "expectedOutput": "True",
+          "title": "Operators and Boolean Logic primary workflow",
+          "scenario": "Operators and Boolean Logic used in a realistic business workflow with active command execution.",
+          "code": "# boolean operators\nrevenue = 125\ncost = 90\nmargin_ok = (revenue - cost) > 20 and revenue >= 100\nneeds_review = not margin_ok or cost > revenue\nprint(margin_ok, needs_review)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply Operators and Boolean Logic with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run Operators and Boolean Logic exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Operators and Boolean Logic additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = a + b\nprint(type(result).__name__, result)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "# boolean operators\nis_weekend = False\nhigh_demand = True\nship_today = high_demand and (not is_weekend)\nprint(ship_today)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Operators and Boolean Logic again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Operators and Boolean Logic exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1397,14 +1530,14 @@
       },
       "examples": [
         {
-          "title": "Compare customer cohorts",
-          "scenario": "Marketing compares this month active users to last month to find retained users.",
-          "code": "last_month = {'u1', 'u2', 'u3', 'u5'}\\nthis_month = {'u2', 'u3', 'u4', 'u6'}\\nretained = last_month & this_month\\nchurned = last_month - this_month\\nprint(retained, churned)",
-          "expectedOutput": "{'u2', 'u3'} {'u1', 'u5'}",
+          "title": "Set Operations primary workflow",
+          "scenario": "Set Operations used in a realistic business workflow with active command execution.",
+          "code": "records = [120, 140, 160]\nresult = s = set(records)\nprint(type(result).__name__, result)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply Set Operations with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run Set Operations exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
@@ -1649,13 +1782,45 @@
         {
           "name": "obj",
           "type": "Any",
-          "description": "Controls obj in len and sum.",
+          "description": "Data input consumed by `len and sum`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
+        },
+        {
+          "name": "obj);sum(iterable",
+          "type": "int",
+          "description": "Parameter `obj);sum(iterable` configures how `len and sum` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "start",
+          "type": "Any",
+          "description": "Layout or range argument for `len and sum`. It changes output dimensions, resolution, or sampled interval.",
+          "values": [
+            "positive integer",
+            "tuple",
+            "float"
+          ],
+          "pitfalls": [
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
+          ],
+          "default": "0"
         }
       ],
       "returns": {
@@ -1667,7 +1832,7 @@
         {
           "title": "len and sum step-by-step pattern",
           "scenario": "len and sum is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply len and sum\n# len(obj); sum(iterable, start=0)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "orders = [10, 20, 30]\norder_count = len(orders)\norder_total = sum(orders)\nprint(order_count, order_total)",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -1678,7 +1843,7 @@
         {
           "title": "len and sum additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = len(records)\nprint(type(result).__name__, result)",
+          "code": "daily_signups = [120, 140, 160]\nn_days = len(daily_signups)\ntotal_signups = sum(daily_signups)\navg_signups = total_signups / n_days\nprint(n_days, total_signups, round(avg_signups, 2))",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -1724,13 +1889,58 @@
         {
           "name": "iterable",
           "type": "Any",
-          "description": "Controls iterable in min max sorted.",
+          "description": "Data input consumed by `min max sorted`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
+        },
+        {
+          "name": "iterable);max(iterable);sorted(iterable",
+          "type": "int",
+          "description": "Parameter `iterable);max(iterable);sorted(iterable` configures how `min max sorted` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "key",
+          "type": "int",
+          "description": "Column/key selector for `min max sorted`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "reverse",
+          "type": "bool",
+          "description": "Execution behavior flag for `min max sorted`. It changes orientation, ordering, mutability, or null-handling of the operation.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "False"
         }
       ],
       "returns": {
@@ -1742,7 +1952,7 @@
         {
           "title": "min max sorted step-by-step pattern",
           "scenario": "min max sorted is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply min max sorted\n# min(iterable); max(iterable); sorted(iterable, key=None, reverse=False)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "values = [10, 20, 30]\nmin_v = min(values)\nmax_v = max(values)\nsorted_desc = sorted(values, reverse=True)\nprint(min_v, max_v, sorted_desc)",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -1753,7 +1963,7 @@
         {
           "title": "min max sorted additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = min(records)\nprint(type(result).__name__, result)",
+          "code": "margins = [12.4, 8.9, 15.2, 10.1]\nlowest = min(margins)\nhighest = max(margins)\nranked = sorted(margins)\nprint(lowest, highest, ranked)",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -1799,24 +2009,30 @@
         {
           "name": "iterable",
           "type": "Any",
-          "description": "Controls iterable in enumerate and zip.",
+          "description": "Data input consumed by `enumerate and zip`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "start",
           "type": "Any",
           "default": "0",
-          "description": "Controls start in enumerate and zip.",
+          "description": "Layout or range argument for `enumerate and zip`. It changes output dimensions, resolution, or sampled interval.",
           "values": [
-            "data-specific"
+            "positive integer",
+            "tuple",
+            "float"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
           ]
         }
       ],
@@ -1829,7 +2045,7 @@
         {
           "title": "enumerate and zip step-by-step pattern",
           "scenario": "enumerate and zip is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply enumerate and zip\n# enumerate(iterable, start=0); zip(*iterables)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "channels = [\"email\", \"paid\", \"organic\"]\nspend = [1200, 2400, 900]\nindexed_channels = list(enumerate(channels, start=1))\npaired = list(zip(channels, spend))\nprint(indexed_channels)\nprint(paired)",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -1840,7 +2056,7 @@
         {
           "title": "enumerate and zip additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = enumerate(records, stnp.array([1, 1, 2, 3])t=0)\nprint(type(result).__name__, result)",
+          "code": "weeks = [\"W1\", \"W2\", \"W3\"]\nlift = [0.03, 0.05, 0.01]\nfor idx, (week, value) in enumerate(zip(weeks, lift), start=1):\n    print(idx, week, value)",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -1886,12 +2102,29 @@
         {
           "name": "iterable",
           "type": "Any",
-          "description": "Controls iterable in any and all.",
+          "description": "Data input consumed by `any and all`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "iterable);all(iterable",
+          "type": "int",
+          "description": "Parameter `iterable);all(iterable` configures how `any and all` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1904,7 +2137,7 @@
         {
           "title": "any and all step-by-step pattern",
           "scenario": "any and all is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply any and all\n# any(iterable); all(iterable)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "conversion_lift = [0.02, 0.01, -0.01]\nany_positive = any(x > 0 for x in conversion_lift)\nall_positive = all(x > 0 for x in conversion_lift)\nprint(any_positive, all_positive)",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -1915,7 +2148,7 @@
         {
           "title": "any and all additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = any(records)\nprint(type(result).__name__, result)",
+          "code": "stock_levels = [12, 9, 0, 5]\nhas_stockout = any(level == 0 for level in stock_levels)\nall_in_stock = all(level > 0 for level in stock_levels)\nprint(has_stockout, all_in_stock)",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -1959,14 +2192,29 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
+          "name": ");s.lower();s.upper();s.replace(old",
           "type": "Any",
-          "description": "Controls inputs in string methods.",
+          "description": "Parameter `);s.lower();s.upper();s.replace(old` configures how `string methods` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "new",
+          "type": "Any",
+          "description": "Parameter `new` configures how `string methods` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1979,7 +2227,7 @@
         {
           "title": "string methods step-by-step pattern",
           "scenario": "string methods is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply string methods\n# s.strip(); s.lower(); s.upper(); s.replace(old, new)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "raw_region = \"  North-East  \"\nclean_region = raw_region.strip()\nregion_lower = clean_region.lower()\nregion_upper = clean_region.upper()\nregion_label = region_lower.replace(\"-\", \" \")\nprint(clean_region, region_lower, region_upper, region_label)",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -1990,7 +2238,7 @@
         {
           "title": "string methods additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = s.strip()\nprint(type(result).__name__, result)",
+          "code": "campaign = \"  SPRING-SALE  \"\nprint(campaign.strip())\nprint(campaign.lower())\nprint(campaign.upper())\nprint(campaign.replace(\"-\", \"_\"))",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -2036,12 +2284,15 @@
         {
           "name": "inputs",
           "type": "Any",
-          "description": "Controls inputs in f-strings.",
+          "description": "Data input consumed by `f-strings`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2111,12 +2362,28 @@
         {
           "name": "item",
           "type": "Any",
-          "description": "Controls item in list append extend.",
+          "description": "Parameter `item` configures how `list append extend` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "item);lst.extend(iterable",
+          "type": "int",
+          "description": "Parameter `item);lst.extend(iterable` configures how `list append extend` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2129,7 +2396,7 @@
         {
           "title": "list append extend step-by-step pattern",
           "scenario": "list append extend is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply list append extend\n# lst.append(item); lst.extend(iterable)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "segments = [\"high_value\", \"at_risk\"]\nsegments.append(\"new_customers\")\nsegments.extend([\"win_back\", \"upsell\"])\nprint(segments)",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -2140,7 +2407,7 @@
         {
           "title": "list append extend additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = lst.append(item)\nprint(type(result).__name__, result)",
+          "code": "daily_counts = [120, 140]\ndaily_counts.append(160)\ndaily_counts.extend([180, 200])\nprint(daily_counts)",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -2187,24 +2454,30 @@
           "name": "key",
           "type": "Any",
           "default": "None",
-          "description": "Controls key in list sort and sorted.",
+          "description": "Column/key selector for `list sort and sorted`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
-            "data-specific"
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         },
         {
           "name": "reverse",
           "type": "Any",
           "default": "False",
-          "description": "Controls reverse in list sort and sorted.",
+          "description": "Execution behavior flag for `list sort and sorted`. It changes orientation, ordering, mutability, or null-handling of the operation.",
           "values": [
-            "data-specific"
+            "True/False",
+            "0 or 1",
+            "None (library default)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Be explicit about axis semantics (rows vs columns).",
+            "Avoid silent in-place mutations unless you intentionally want side effects."
           ]
         }
       ],
@@ -2217,7 +2490,7 @@
         {
           "title": "list sort and sorted step-by-step pattern",
           "scenario": "list sort and sorted is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply list sort and sorted\n# lst.sort(key=None, reverse=False); sorted(iterable, key=None, reverse=False)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "revenues = [120, 95, 160, 110]\nrevenues.sort()\ntop_to_bottom = sorted(revenues, reverse=True)\nprint(revenues)\nprint(top_to_bottom)",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -2228,7 +2501,7 @@
         {
           "title": "list sort and sorted additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = lst.sort(key=None, reverse=False)\nprint(type(result).__name__, result)",
+          "code": "rows = [{\"sku\": \"A\", \"margin\": 12}, {\"sku\": \"B\", \"margin\": 8}, {\"sku\": \"C\", \"margin\": 16}]\nrows.sort(key=lambda x: x[\"margin\"])\nsorted_rows = sorted(rows, key=lambda x: x[\"margin\"], reverse=True)\nprint(rows[0], sorted_rows[0])",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -2272,14 +2545,16 @@
       ],
       "parameters": [
         {
-          "name": "inputs",
+          "name": ");d.values();d.items(",
           "type": "Any",
-          "description": "Controls inputs in dict keys values items.",
+          "description": "Parameter `);d.values();d.items(` configures how `dict keys values items` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2292,7 +2567,7 @@
         {
           "title": "dict keys values items step-by-step pattern",
           "scenario": "dict keys values items is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply dict keys values items\n# d.keys(); d.values(); d.items()\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "metrics = {\"west\": 120, \"east\": 95, \"south\": 110}\nprint(list(metrics.keys()))\nprint(list(metrics.values()))\nprint(list(metrics.items()))",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -2303,7 +2578,7 @@
         {
           "title": "dict keys values items additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = d.keys()\nprint(type(result).__name__, result)",
+          "code": "ab_results = {\"A\": 0.042, \"B\": 0.057}\nkeys_view = ab_results.keys()\nvalues_view = ab_results.values()\nitems_view = ab_results.items()\nprint(list(keys_view), list(values_view), list(items_view))",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -2349,12 +2624,15 @@
         {
           "name": "inputs",
           "type": "Any",
-          "description": "Controls inputs in dictionary comprehension.",
+          "description": "Data input consumed by `dictionary comprehension`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2377,13 +2655,13 @@
         },
         {
           "title": "dictionary comprehension additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = {k: v for k, v in records}\nprint(type(result).__name__, result)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "# dictionary comprehension\nrows = [('A', 120), ('B', 95), ('C', 140)]\nrevenue_map = {k: v for k, v in rows}\nprint(revenue_map)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run dictionary comprehension again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run dictionary comprehension exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2424,12 +2702,15 @@
         {
           "name": "inputs",
           "type": "Any",
-          "description": "Controls inputs in set comprehension.",
+          "description": "Data input consumed by `set comprehension`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2452,13 +2733,13 @@
         },
         {
           "title": "set comprehension additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = {expr for item in records if condition}\nprint(type(result).__name__, result)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "# set comprehension\nchannels = ['email','paid','email','seo','paid']\nunique_channels = {c for c in channels}\nprint(unique_channels)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run set comprehension again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run set comprehension exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2499,12 +2780,15 @@
         {
           "name": "inputs",
           "type": "Any",
-          "description": "Controls inputs in match case.",
+          "description": "Data input consumed by `match case`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2574,12 +2858,27 @@
         {
           "name": "s",
           "type": "Any",
-          "description": "Controls s in json loads dumps.",
+          "description": "Parameter `s` configures how `json loads dumps` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "s);json.dumps(obj",
+          "type": "Any",
+          "description": "Parameter `s);json.dumps(obj` configures how `json loads dumps` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2592,7 +2891,7 @@
         {
           "title": "json loads dumps step-by-step pattern",
           "scenario": "json loads dumps is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply json loads dumps\n# json.loads(s); json.dumps(obj)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "import json\npayload = '{\"region\":\"west\",\"revenue\":120}'\nobj = json.loads(payload)\nserialized = json.dumps(obj, indent=2)\nprint(obj[\"region\"])\nprint(serialized.splitlines()[0])",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -2603,7 +2902,7 @@
         {
           "title": "json loads dumps additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = json.loads(s)\nprint(type(result).__name__, result)",
+          "code": "import json\nraw = '{\"variant\":\"B\",\"lift\":0.06}'\nparsed = json.loads(raw)\nparsed[\"decision\"] = \"ship\" if parsed[\"lift\"] > 0.02 else \"hold\"\nencoded = json.dumps(parsed)\nprint(encoded)",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -2649,12 +2948,14 @@
         {
           "name": "file_obj",
           "type": "Any",
-          "description": "Controls file_obj in csv DictReader.",
+          "description": "Parameter `file_obj` configures how `csv DictReader` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2667,7 +2968,7 @@
         {
           "title": "csv DictReader step-by-step pattern",
           "scenario": "csv DictReader is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply csv DictReader\n# csv.DictReader(file_obj)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "import csv\nfrom io import StringIO\n\ncsv_text = \"region,revenue\\nWest,120\\nEast,95\\n\"\nreader = csv.DictReader(StringIO(csv_text))\nrows = list(reader)\nprint(rows[0][\"region\"], rows[1][\"revenue\"])",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -2678,7 +2979,7 @@
         {
           "title": "csv DictReader additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = csv.DictReader(file_records)\nprint(type(result).__name__, result)",
+          "code": "import csv\nfrom io import StringIO\n\ncsv_text = \"channel,orders\\nEmail,32\\nPaid,41\\n\"\nreader = csv.DictReader(StringIO(csv_text))\nfor row in reader:\n    print(row[\"channel\"], int(row[\"orders\"]))",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -2724,12 +3025,27 @@
         {
           "name": "path_str",
           "type": "Any",
-          "description": "Controls path_str in pathlib Path.",
+          "description": "Parameter `path_str` configures how `pathlib Path` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "path_str);path.exists(",
+          "type": "Any",
+          "description": "Parameter `path_str);path.exists(` configures how `pathlib Path` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2742,7 +3058,7 @@
         {
           "title": "pathlib Path step-by-step pattern",
           "scenario": "pathlib Path is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply pathlib Path\n# Path(path_str); path.exists(); path / 'child'\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "from pathlib import Path\ndata_dir = Path(\"data\")\nsales_path = data_dir / \"sales.csv\"\nprint(sales_path)\nprint(sales_path.exists())",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -2753,7 +3069,7 @@
         {
           "title": "pathlib Path additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = Path('data/sales.csv')\nprint(type(result).__name__, result)",
+          "code": "from pathlib import Path\nbase = Path(\"reports\")\ndaily_file = base / \"2026-03-11-summary.txt\"\nexists_flag = daily_file.exists()\nprint(daily_file.as_posix(), exists_flag)",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -2799,12 +3115,14 @@
         {
           "name": "ExceptionType",
           "type": "Any",
-          "description": "Controls ExceptionType in contextlib suppress.",
+          "description": "Parameter `ExceptionType` configures how `contextlib suppress` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2817,7 +3135,7 @@
         {
           "title": "contextlib suppress step-by-step pattern",
           "scenario": "contextlib suppress is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply contextlib suppress\n# with suppress(ExceptionType): ...\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "from contextlib import suppress\nwith suppress(FileNotFoundError):\n    open(\"missing-input.csv\", \"r\", encoding=\"utf-8\").read()\nprint(\"continued\")",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -2828,7 +3146,7 @@
         {
           "title": "contextlib suppress additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = with suppress(ExceptionType): ...\nprint(type(result).__name__, result)",
+          "code": "from contextlib import suppress\ncache = {}\nwith suppress(KeyError):\n    print(cache[\"missing_key\"])\nprint(\"safe fallback\")",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -2875,24 +3193,28 @@
           "name": "days",
           "type": "Any",
           "default": "0",
-          "description": "Controls days in datetime timedelta.",
+          "description": "Parameter `days` configures how `datetime timedelta` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "seconds",
           "type": "Any",
           "default": "0",
-          "description": "Controls seconds in datetime timedelta.",
+          "description": "Parameter `seconds` configures how `datetime timedelta` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2905,7 +3227,7 @@
         {
           "title": "datetime timedelta step-by-step pattern",
           "scenario": "datetime timedelta is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply datetime timedelta\n# timedelta(days=0, seconds=0)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "from datetime import datetime, timedelta\nrun_ts = datetime(2026, 3, 11, 9, 0)\nnext_run = run_ts + timedelta(days=7)\nprint(run_ts.date(), next_run.date())",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -2916,7 +3238,7 @@
         {
           "title": "datetime timedelta additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = timedelta(days=0, seconds=0)\nprint(type(result).__name__, result)",
+          "code": "from datetime import datetime, timedelta\ntrial_start = datetime(2026, 1, 1)\ntrial_end = trial_start + timedelta(days=14)\nprint((trial_end - trial_start).days)",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -2962,12 +3284,27 @@
         {
           "name": "timezone.utc",
           "type": "Any",
-          "description": "Controls timezone.utc in timezone-aware datetime.",
+          "description": "Parameter `timezone.utc` configures how `timezone-aware datetime` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "timezone.utc);dt.astimezone(tz",
+          "type": "Any",
+          "description": "Parameter `timezone.utc);dt.astimezone(tz` configures how `timezone-aware datetime` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2980,7 +3317,7 @@
         {
           "title": "timezone-aware datetime step-by-step pattern",
           "scenario": "timezone-aware datetime is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply timezone-aware datetime\n# datetime.now(timezone.utc); dt.astimezone(tz)\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "from datetime import datetime, timezone\nfrom zoneinfo import ZoneInfo\nutc_now = datetime.now(timezone.utc)\ndenver_now = utc_now.astimezone(ZoneInfo(\"America/Denver\"))\nprint(utc_now.tzinfo, denver_now.tzinfo)",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -2991,7 +3328,7 @@
         {
           "title": "timezone-aware datetime additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = datetime.now(timezone.utc)\nprint(type(result).__name__, result)",
+          "code": "from datetime import datetime, timezone\nfrom zoneinfo import ZoneInfo\ncreated_at_utc = datetime.now(timezone.utc)\nla_time = created_at_utc.astimezone(ZoneInfo(\"America/Los_Angeles\"))\nprint(created_at_utc.isoformat())\nprint(la_time.isoformat())",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -3037,12 +3374,14 @@
         {
           "name": "TypedDict",
           "type": "Any",
-          "description": "Controls TypedDict in typing TypedDict.",
+          "description": "Parameter `TypedDict` configures how `typing TypedDict` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -3055,7 +3394,7 @@
         {
           "title": "typing TypedDict step-by-step pattern",
           "scenario": "typing TypedDict is used in cleaning and validating exported business records before analytics steps.",
-          "code": "# 1) Toy business input\nrecords = [10, 20, 30]\n# 2) Apply typing TypedDict\n# class Row(TypedDict): ...\n# 3) Inspect output and adapt field names to your dataset\nprint(records)",
+          "code": "from typing import TypedDict\n\nclass Row(TypedDict):\n    customer_id: int\n    revenue: float\n\nrow: Row = {\"customer_id\": 101, \"revenue\": 120.5}\nprint(row[\"customer_id\"], row[\"revenue\"])\n",
           "expectedOutput": "Output should confirm shape/type and provide a baseline you can adapt to your own dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -3066,7 +3405,7 @@
         {
           "title": "typing TypedDict additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "records = [120, 140, 160]\nresult = class Row(TypedDict): ...\nprint(type(result).__name__, result)",
+          "code": "from typing import TypedDict\n\nclass Row(TypedDict):\n    segment: str\n    lift: float\n\nresult: Row = {\"segment\": \"high_value\", \"lift\": 0.07}\nprint(result)\n",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -3112,12 +3451,15 @@
         {
           "name": "inputs",
           "type": "Any",
-          "description": "Controls inputs in dataclass.",
+          "description": "Data input consumed by `dataclass`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],

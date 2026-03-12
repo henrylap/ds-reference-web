@@ -202,7 +202,7 @@
           "name": "dpi",
           "type": "float",
           "default": "rcParams",
-          "description": "Resolution.",
+          "description": "Layout or range argument for `plt.figure`. It changes output dimensions, resolution, or sampled interval.",
           "values": [
             "100",
             "150",
@@ -232,13 +232,13 @@
         },
         {
           "title": "plt.figure additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nplt.figure(figsize=None, dpi=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run plt.figure again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run plt.figure exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -281,7 +281,7 @@
           "name": "nrows,ncols",
           "type": "int",
           "default": "1",
-          "description": "Grid size.",
+          "description": "Parameter `nrows,ncols` configures how `plt.subplots` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "1,1",
             "2,2"
@@ -302,6 +302,77 @@
           "pitfalls": [
             "Shared scales can hide local variation"
           ]
+        },
+        {
+          "name": "nrows",
+          "type": "Any",
+          "description": "Layout or range argument for `plt.subplots`. It changes output dimensions, resolution, or sampled interval.",
+          "values": [
+            "positive integer",
+            "tuple",
+            "float"
+          ],
+          "pitfalls": [
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
+          ],
+          "default": "1"
+        },
+        {
+          "name": "ncols",
+          "type": "str | list[str]",
+          "description": "Layout or range argument for `plt.subplots`. It changes output dimensions, resolution, or sampled interval.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
+          ],
+          "default": "1"
+        },
+        {
+          "name": "figsize",
+          "type": "int",
+          "description": "Layout or range argument for `plt.subplots`. It changes output dimensions, resolution, or sampled interval.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "sharex",
+          "type": "bool",
+          "description": "Parameter `sharex` configures how `plt.subplots` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "False"
+        },
+        {
+          "name": "sharey",
+          "type": "bool",
+          "description": "Parameter `sharey` configures how `plt.subplots` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "False"
         }
       ],
       "returns": {
@@ -371,7 +442,7 @@
         {
           "name": "x,y",
           "type": "array-like",
-          "description": "Coordinates.",
+          "description": "Parameter `x,y` configures how `Axes.plot` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "lists",
             "numpy arrays",
@@ -385,7 +456,7 @@
           "name": "linestyle/marker",
           "type": "str",
           "default": "'-'/None",
-          "description": "Visual style.",
+          "description": "Parameter `linestyle/marker` configures how `Axes.plot` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'-'",
             "'--'",
@@ -394,6 +465,94 @@
           "pitfalls": [
             "Too many markers can clutter dense data"
           ]
+        },
+        {
+          "name": "x",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `Axes.plot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "array-like | DataFrame",
+          "description": "Target or label values used by `Axes.plot`. This controls what the model/metric learns or evaluates against.",
+          "values": [
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
+          ],
+          "pitfalls": [
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
+          ]
+        },
+        {
+          "name": "label",
+          "type": "str | list[str]",
+          "description": "Visualization styling argument for `Axes.plot`. It controls chart readability, emphasis, and annotation behavior.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "color",
+          "type": "str | list[str]",
+          "description": "Visualization styling argument for `Axes.plot`. It controls chart readability, emphasis, and annotation behavior.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "linestyle",
+          "type": "Any",
+          "description": "Visualization styling argument for `Axes.plot`. It controls chart readability, emphasis, and annotation behavior.",
+          "values": [
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
+          ],
+          "pitfalls": [
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
+          ],
+          "default": "'-'"
+        },
+        {
+          "name": "marker",
+          "type": "int",
+          "description": "Visualization styling argument for `Axes.plot`. It controls chart readability, emphasis, and annotation behavior.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -485,6 +644,78 @@
           "pitfalls": [
             "Huge markers hide structure"
           ]
+        },
+        {
+          "name": "x",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `Axes.scatter`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "array-like | DataFrame",
+          "description": "Target or label values used by `Axes.scatter`. This controls what the model/metric learns or evaluates against.",
+          "values": [
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
+          ],
+          "pitfalls": [
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
+          ]
+        },
+        {
+          "name": "s",
+          "type": "Any",
+          "description": "Parameter `s` configures how `Axes.scatter` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "c",
+          "type": "float",
+          "description": "Regularization or learning-strength parameter for `Axes.scatter`. It controls model flexibility and overfit/underfit trade-offs.",
+          "values": [
+            "0.1",
+            "1.0",
+            "10.0"
+          ],
+          "pitfalls": [
+            "Too large can underfit; too small can overfit.",
+            "Tune with cross-validation rather than single split results."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "alpha",
+          "type": "float",
+          "description": "Regularization or learning-strength parameter for `Axes.scatter`. It controls model flexibility and overfit/underfit trade-offs.",
+          "values": [
+            "0.1",
+            "1.0",
+            "10.0"
+          ],
+          "pitfalls": [
+            "Too large can underfit; too small can overfit.",
+            "Tune with cross-validation rather than single split results."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -506,13 +737,13 @@
         },
         {
           "title": "Axes.scatter additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.scatter(arr, y, s=None, c=None, alpha=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.scatter again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.scatter exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -566,7 +797,7 @@
           "name": "width",
           "type": "float",
           "default": "0.8",
-          "description": "Bar width.",
+          "description": "Parameter `width` configures how `Axes.bar` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "0.5",
             "0.8"
@@ -574,6 +805,48 @@
           "pitfalls": [
             "Too wide bars overlap in grouped charts"
           ]
+        },
+        {
+          "name": "x",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `Axes.bar`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "height",
+          "type": "Any",
+          "description": "Parameter `height` configures how `Axes.bar` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "color",
+          "type": "str | list[str]",
+          "description": "Visualization styling argument for `Axes.bar`. It controls chart readability, emphasis, and annotation behavior.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -595,13 +868,13 @@
         },
         {
           "title": "Axes.bar additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.bar(arr, height, width=0.8, color=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.bar again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.bar exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -643,7 +916,7 @@
         {
           "name": "x",
           "type": "array-like",
-          "description": "Numeric values.",
+          "description": "Data input consumed by `Axes.hist`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
             "list",
             "ndarray",
@@ -657,7 +930,7 @@
           "name": "bins",
           "type": "int|sequence|str",
           "default": "rcParams",
-          "description": "Bin strategy.",
+          "description": "Parameter `bins` configures how `Axes.hist` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "10",
             "20",
@@ -666,6 +939,34 @@
           "pitfalls": [
             "Too many bins create noisy plots"
           ]
+        },
+        {
+          "name": "density",
+          "type": "bool",
+          "description": "Parameter `density` configures how `Axes.hist` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "False"
+        },
+        {
+          "name": "alpha",
+          "type": "float",
+          "description": "Regularization or learning-strength parameter for `Axes.hist`. It controls model flexibility and overfit/underfit trade-offs.",
+          "values": [
+            "0.1",
+            "1.0",
+            "10.0"
+          ],
+          "pitfalls": [
+            "Too large can underfit; too small can overfit.",
+            "Tune with cross-validation rather than single split results."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -687,13 +988,13 @@
         },
         {
           "title": "Axes.hist additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.hist(arr, bins=None, density=False, alpha=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.hist again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.hist exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -735,7 +1036,7 @@
         {
           "name": "label text",
           "type": "str",
-          "description": "Title/axis text.",
+          "description": "Parameter `label text` configures how `Axes.set_title / set_xlabel / set_ylabel` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'Weekly Revenue'",
             "'Conversion Rate (%)'"
@@ -755,6 +1056,20 @@
           ],
           "pitfalls": [
             "Oversized text can crowd plots"
+          ]
+        },
+        {
+          "name": "label);ax.set_xlabel(xlabel);ax.set_ylabel(ylabel",
+          "type": "str | list[str]",
+          "description": "Parameter `label);ax.set_xlabel(xlabel);ax.set_ylabel(ylabel` configures how `Axes.set_title / set_xlabel / set_ylabel` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -778,7 +1093,7 @@
         {
           "title": "Axes.set_title / set_xlabel / set_ylabel additional business case",
           "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7, 4), dpi=120)\nax.plot([1, 2, 3], [2, 3, 5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nax.set_xlabel('Week')\nax.set_ylabel('Conversion Rate (%)')\nplt.tight_layout()\nprint(ax.get_xlabel(), ax.get_ylabel())",
           "expectedOutput": "Output confirms executable pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy business slice (different segment/time window).",
@@ -825,7 +1140,7 @@
           "name": "loc",
           "type": "str|int",
           "default": "'best'",
-          "description": "Legend position.",
+          "description": "Parameter `loc` configures how `Axes.legend` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'best'",
             "'upper left'",
@@ -838,7 +1153,7 @@
         {
           "name": "title",
           "type": "str|None",
-          "description": "Legend title.",
+          "description": "Parameter `title` configures how `Axes.legend` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'Channel'",
             "None"
@@ -867,13 +1182,13 @@
         },
         {
           "title": "Axes.legend additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.legend(loc='best', title=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.legend again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.legend exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1007,7 +1322,7 @@
         {
           "name": "fname",
           "type": "str|path-like",
-          "description": "Output file path.",
+          "description": "Parameter `fname` configures how `plt.savefig` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'chart.png'",
             "'report/rev.svg'"
@@ -1028,6 +1343,34 @@
           "pitfalls": [
             "Without 'tight', labels may be clipped"
           ]
+        },
+        {
+          "name": "dpi",
+          "type": "Any",
+          "description": "Layout or range argument for `plt.savefig`. It changes output dimensions, resolution, or sampled interval.",
+          "values": [
+            "positive integer",
+            "tuple",
+            "float"
+          ],
+          "pitfalls": [
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "transparent",
+          "type": "bool",
+          "description": "Parameter `transparent` configures how `plt.savefig` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "False"
         }
       ],
       "returns": {
@@ -1049,13 +1392,13 @@
         },
         {
           "title": "plt.savefig additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nplt.savefig(fname, dpi=None, bbox_inches=None, transparent=False)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run plt.savefig again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run plt.savefig exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1104,14 +1447,15 @@
         {
           "name": "style",
           "type": "str | list[str]",
-          "description": "Controls style in plt.style.use.",
+          "description": "Column/key selector for `plt.style.use`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         }
       ],
@@ -1181,12 +1525,15 @@
         {
           "name": "inputs",
           "type": "Any",
-          "description": "Controls inputs in plt.show.",
+          "description": "Data input consumed by `plt.show`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -1197,25 +1544,25 @@
       },
       "examples": [
         {
-          "title": "plt.show with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "plt.show primary workflow",
+          "scenario": "plt.show used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nplt.show()\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run plt.show exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "plt.show additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nplt.show()\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run plt.show again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run plt.show exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1256,14 +1603,15 @@
         {
           "name": "label",
           "type": "str | list[str]",
-          "description": "Controls label in Axes.set_title.",
+          "description": "Visualization styling argument for `Axes.set_title`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         }
       ],
@@ -1334,24 +1682,30 @@
           "name": "left",
           "type": "Any",
           "default": "None",
-          "description": "Controls left in Axes.set_xlim.",
+          "description": "Data input consumed by `Axes.set_xlim`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "right",
           "type": "Any",
           "default": "None",
-          "description": "Controls right in Axes.set_xlim.",
+          "description": "Data input consumed by `Axes.set_xlim`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -1362,25 +1716,25 @@
       },
       "examples": [
         {
-          "title": "Axes.set_xlim with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.set_xlim primary workflow",
+          "scenario": "Axes.set_xlim used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.set_xlim(left=None, right=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.set_xlim exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.set_xlim additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.set_xlim(left=None, right=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.set_xlim again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.set_xlim exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1422,24 +1776,30 @@
           "name": "bottom",
           "type": "Any",
           "default": "None",
-          "description": "Controls bottom in Axes.set_ylim.",
+          "description": "Visualization styling argument for `Axes.set_ylim`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         },
         {
           "name": "top",
           "type": "Any",
           "default": "None",
-          "description": "Controls top in Axes.set_ylim.",
+          "description": "Visualization styling argument for `Axes.set_ylim`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         }
       ],
@@ -1450,25 +1810,25 @@
       },
       "examples": [
         {
-          "title": "Axes.set_ylim with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.set_ylim primary workflow",
+          "scenario": "Axes.set_ylim used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.set_ylim(bottom=None, top=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.set_ylim exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.set_ylim additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.set_ylim(bottom=None, top=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.set_ylim again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.set_ylim exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1510,38 +1870,44 @@
           "name": "visible",
           "type": "Any",
           "default": "True",
-          "description": "Controls visible in Axes.grid.",
+          "description": "Visualization styling argument for `Axes.grid`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         },
         {
           "name": "which",
           "type": "Any",
           "default": "'major'",
-          "description": "Controls which in Axes.grid.",
+          "description": "Visualization styling argument for `Axes.grid`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "'both'",
-          "description": "Controls axis in Axes.grid.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         }
       ],
@@ -1564,13 +1930,13 @@
         },
         {
           "title": "Axes.grid additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.grid(visible=True, which='major', axis='both')\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.grid again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.grid exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1612,36 +1978,45 @@
           "name": "y",
           "type": "Any",
           "default": "0",
-          "description": "Controls y in Axes.axhline.",
+          "description": "Target or label values used by `Axes.axhline`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         },
         {
           "name": "xmin",
           "type": "Any",
           "default": "0",
-          "description": "Controls xmin in Axes.axhline.",
+          "description": "Visualization styling argument for `Axes.axhline`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         },
         {
           "name": "xmax",
           "type": "Any",
           "default": "1",
-          "description": "Controls xmax in Axes.axhline.",
+          "description": "Visualization styling argument for `Axes.axhline`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         }
       ],
@@ -1652,25 +2027,25 @@
       },
       "examples": [
         {
-          "title": "Axes.axhline with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.axhline primary workflow",
+          "scenario": "Axes.axhline used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.axhline(y=0, xmin=0, xmax=1)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.axhline exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.axhline additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.axhline(y=0, xmin=0, xmax=1)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.axhline again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.axhline exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1712,36 +2087,45 @@
           "name": "x",
           "type": "Any",
           "default": "0",
-          "description": "Controls x in Axes.axvline.",
+          "description": "Data input consumed by `Axes.axvline`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "ymin",
           "type": "Any",
           "default": "0",
-          "description": "Controls ymin in Axes.axvline.",
+          "description": "Visualization styling argument for `Axes.axvline`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         },
         {
           "name": "ymax",
           "type": "Any",
           "default": "1",
-          "description": "Controls ymax in Axes.axvline.",
+          "description": "Visualization styling argument for `Axes.axvline`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         }
       ],
@@ -1752,25 +2136,25 @@
       },
       "examples": [
         {
-          "title": "Axes.axvline with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.axvline primary workflow",
+          "scenario": "Axes.axvline used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.axvline(arr=0, ymin=0, ymax=1)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.axvline exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.axvline additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.axvline(arr=0, ymin=0, ymax=1)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.axvline again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.axvline exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1811,47 +2195,59 @@
         {
           "name": "text",
           "type": "Any",
-          "description": "Controls text in Axes.annotate.",
+          "description": "Visualization styling argument for `Axes.annotate`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         },
         {
           "name": "xy",
           "type": "Any",
-          "description": "Controls xy in Axes.annotate.",
+          "description": "Visualization styling argument for `Axes.annotate`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         },
         {
           "name": "xytext",
           "type": "Any",
           "default": "None",
-          "description": "Controls xytext in Axes.annotate.",
+          "description": "Visualization styling argument for `Axes.annotate`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         },
         {
           "name": "arrowprops",
           "type": "Any",
           "default": "None",
-          "description": "Controls arrowprops in Axes.annotate.",
+          "description": "Visualization styling argument for `Axes.annotate`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         }
       ],
@@ -1862,25 +2258,25 @@
       },
       "examples": [
         {
-          "title": "Axes.annotate with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.annotate primary workflow",
+          "scenario": "Axes.annotate used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.annotate(text, xy, xytext=None, arrowprops=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.annotate exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.annotate additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.annotate(text, xy, xytext=None, arrowprops=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.annotate again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.annotate exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1921,35 +2317,42 @@
         {
           "name": "x",
           "type": "Any",
-          "description": "Controls x in Axes.fill_between.",
+          "description": "Data input consumed by `Axes.fill_between`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y1",
           "type": "Any",
-          "description": "Controls y1 in Axes.fill_between.",
+          "description": "Parameter `y1` configures how `Axes.fill_between` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "y2",
           "type": "Any",
           "default": "0",
-          "description": "Controls y2 in Axes.fill_between.",
+          "description": "Parameter `y2` configures how `Axes.fill_between` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1960,25 +2363,25 @@
       },
       "examples": [
         {
-          "title": "Axes.fill_between with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.fill_between primary workflow",
+          "scenario": "Axes.fill_between used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.fill_between(arr, y1, y2=0)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.fill_between exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.fill_between additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.fill_between(arr, y1, y2=0)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.fill_between again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.fill_between exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2019,47 +2422,57 @@
         {
           "name": "x",
           "type": "Any",
-          "description": "Controls x in Axes.errorbar.",
+          "description": "Data input consumed by `Axes.errorbar`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
-          "description": "Controls y in Axes.errorbar.",
+          "description": "Target or label values used by `Axes.errorbar`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         },
         {
           "name": "yerr",
           "type": "Any",
           "default": "None",
-          "description": "Controls yerr in Axes.errorbar.",
+          "description": "Parameter `yerr` configures how `Axes.errorbar` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "xerr",
           "type": "Any",
           "default": "None",
-          "description": "Controls xerr in Axes.errorbar.",
+          "description": "Parameter `xerr` configures how `Axes.errorbar` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2070,25 +2483,25 @@
       },
       "examples": [
         {
-          "title": "Axes.errorbar with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.errorbar primary workflow",
+          "scenario": "Axes.errorbar used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.errorbar(arr, y, yerr=None, xerr=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.errorbar exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.errorbar additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.errorbar(arr, y, yerr=None, xerr=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.errorbar again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.errorbar exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2129,12 +2542,15 @@
         {
           "name": "x",
           "type": "Any",
-          "description": "Controls x in Axes.boxplot.",
+          "description": "Data input consumed by `Axes.boxplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2145,25 +2561,25 @@
       },
       "examples": [
         {
-          "title": "Axes.boxplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.boxplot primary workflow",
+          "scenario": "Axes.boxplot used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.boxplot(arr)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.boxplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.boxplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.boxplot(arr)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.boxplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.boxplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2204,12 +2620,15 @@
         {
           "name": "dataset",
           "type": "Any",
-          "description": "Controls dataset in Axes.violinplot.",
+          "description": "Data input consumed by `Axes.violinplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2220,25 +2639,25 @@
       },
       "examples": [
         {
-          "title": "Axes.violinplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.violinplot primary workflow",
+          "scenario": "Axes.violinplot used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.violinplot(dataset)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.violinplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.violinplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.violinplot(dataset)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.violinplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.violinplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2279,38 +2698,45 @@
         {
           "name": "x",
           "type": "Any",
-          "description": "Controls x in Axes.pie.",
+          "description": "Data input consumed by `Axes.pie`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "labels",
           "type": "str | list[str]",
           "default": "None",
-          "description": "Controls labels in Axes.pie.",
+          "description": "Target or label values used by `Axes.pie`. This controls what the model/metric learns or evaluates against.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         },
         {
           "name": "autopct",
           "type": "Any",
           "default": "None",
-          "description": "Controls autopct in Axes.pie.",
+          "description": "Visualization styling argument for `Axes.pie`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         }
       ],
@@ -2321,25 +2747,25 @@
       },
       "examples": [
         {
-          "title": "Axes.pie with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.pie primary workflow",
+          "scenario": "Axes.pie used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.pie(arr, labels=None, autopct=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.pie exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.pie additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.pie(arr, labels=None, autopct=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.pie again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.pie exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2380,24 +2806,30 @@
         {
           "name": "X",
           "type": "Any",
-          "description": "Controls X in Axes.imshow.",
+          "description": "Data input consumed by `Axes.imshow`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "cmap",
           "type": "Any",
           "default": "None",
-          "description": "Controls cmap in Axes.imshow.",
+          "description": "Visualization styling argument for `Axes.imshow`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         }
       ],
@@ -2408,25 +2840,25 @@
       },
       "examples": [
         {
-          "title": "Axes.imshow with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.imshow primary workflow",
+          "scenario": "Axes.imshow used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.imshow(X, cmap=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.imshow exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.imshow additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.imshow(X, cmap=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.imshow again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.imshow exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2467,12 +2899,15 @@
         {
           "name": "inputs",
           "type": "Any",
-          "description": "Controls inputs in Axes.twinx.",
+          "description": "Data input consumed by `Axes.twinx`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2483,25 +2918,25 @@
       },
       "examples": [
         {
-          "title": "Axes.twinx with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.twinx primary workflow",
+          "scenario": "Axes.twinx used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax2 = ax.twinx()\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.twinx exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.twinx additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax2 = ax.twinx()\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.twinx again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.twinx exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2543,48 +2978,60 @@
           "name": "left",
           "type": "Any",
           "default": "None",
-          "description": "Controls left in plt.subplots_adjust.",
+          "description": "Data input consumed by `plt.subplots_adjust`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "right",
           "type": "Any",
           "default": "None",
-          "description": "Controls right in plt.subplots_adjust.",
+          "description": "Data input consumed by `plt.subplots_adjust`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "wspace",
           "type": "Any",
           "default": "None",
-          "description": "Controls wspace in plt.subplots_adjust.",
+          "description": "Layout or range argument for `plt.subplots_adjust`. It changes output dimensions, resolution, or sampled interval.",
           "values": [
-            "data-specific"
+            "positive integer",
+            "tuple",
+            "float"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
           ]
         },
         {
           "name": "hspace",
           "type": "Any",
           "default": "None",
-          "description": "Controls hspace in plt.subplots_adjust.",
+          "description": "Layout or range argument for `plt.subplots_adjust`. It changes output dimensions, resolution, or sampled interval.",
           "values": [
-            "data-specific"
+            "positive integer",
+            "tuple",
+            "float"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
           ]
         }
       ],
@@ -2595,25 +3042,25 @@
       },
       "examples": [
         {
-          "title": "plt.subplots_adjust with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "plt.subplots_adjust primary workflow",
+          "scenario": "plt.subplots_adjust used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nplt.subplots_adjust(left=None, right=None, wspace=None, hspace=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run plt.subplots_adjust exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "plt.subplots_adjust additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nplt.subplots_adjust(left=None, right=None, wspace=None, hspace=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run plt.subplots_adjust again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run plt.subplots_adjust exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2655,24 +3102,30 @@
           "name": "bottom",
           "type": "Any",
           "default": "0.2",
-          "description": "Controls bottom in Figure.autofmt_xdate.",
+          "description": "Visualization styling argument for `Figure.autofmt_xdate`. It controls chart readability, emphasis, and annotation behavior.",
           "values": [
-            "data-specific"
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
           ]
         },
         {
           "name": "rotation",
           "type": "Any",
           "default": "30",
-          "description": "Controls rotation in Figure.autofmt_xdate.",
+          "description": "Layout or range argument for `Figure.autofmt_xdate`. It changes output dimensions, resolution, or sampled interval.",
           "values": [
-            "data-specific"
+            "positive integer",
+            "tuple",
+            "float"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
           ]
         }
       ],
@@ -2683,25 +3136,25 @@
       },
       "examples": [
         {
-          "title": "Figure.autofmt_xdate with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Figure.autofmt_xdate primary workflow",
+          "scenario": "Figure.autofmt_xdate used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nfig.autofmt_xdate(bottom=0.2, rotation=30)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Figure.autofmt_xdate exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Figure.autofmt_xdate additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nfig.autofmt_xdate(bottom=0.2, rotation=30)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Figure.autofmt_xdate again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Figure.autofmt_xdate exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2743,12 +3196,14 @@
           "name": "fig",
           "type": "Any",
           "default": "None",
-          "description": "Controls fig in plt.close.",
+          "description": "Parameter `fig` configures how `plt.close` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2759,25 +3214,25 @@
       },
       "examples": [
         {
-          "title": "plt.close with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "plt.close primary workflow",
+          "scenario": "plt.close used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nplt.close(fig=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run plt.close exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "plt.close additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nplt.close(fig=None)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run plt.close again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run plt.close exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2818,34 +3273,42 @@
         {
           "name": "x",
           "type": "Any",
-          "description": "Controls x in Axes.text.",
+          "description": "Data input consumed by `Axes.text`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
-          "description": "Controls y in Axes.text.",
+          "description": "Target or label values used by `Axes.text`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         },
         {
           "name": "s",
           "type": "Any",
-          "description": "Controls s in Axes.text.",
+          "description": "Parameter `s` configures how `Axes.text` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2856,25 +3319,25 @@
       },
       "examples": [
         {
-          "title": "Axes.text with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import matplotlib.pyplot as plt\n\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(8, 4.5), dpi=120)\n\nmonths = ['Jan', 'Feb', 'Mar', 'Apr']\nrevenue = [120, 135, 150, 145]\nax.plot(months, revenue, color='#0f7a84', marker='o', linewidth=2.5)\n\nax.set_title('Revenue trend by month', fontsize=14, weight='bold')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.set_facecolor('#f7fbff')\nfig.patch.set_facecolor('#edf5f8')\nax.grid(alpha=0.3)\n\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "Axes.text primary workflow",
+          "scenario": "Axes.text used in a realistic business workflow with active command execution.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.text(arr, y, s)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.text exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "Axes.text additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import matplotlib.pyplot as plt\nplt.style.use('seaborn-v0_8-whitegrid')\nfig, ax = plt.subplots(figsize=(7,4), dpi=120)\nax.plot([1,2,3], [2,3,5], color='#0f7a84', marker='o')\nax.set_title('Styled KPI trend')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots(figsize=(6,4), dpi=120)\nax.plot([1,2,3],[2,3,5], marker='o')\nax.text(arr, y, s)\nplt.tight_layout()\nprint(type(ax).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run Axes.text again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run Axes.text exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],

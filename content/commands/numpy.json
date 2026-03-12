@@ -234,6 +234,19 @@
           "pitfalls": [
             "Adds leading singleton dimensions"
           ]
+        },
+        {
+          "name": "copy",
+          "type": "bool",
+          "description": "Execution behavior flag for `numpy.array`. It changes orientation, ordering, mutability, or null-handling of the operation.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "True"
         }
       ],
       "returns": {
@@ -323,6 +336,48 @@
           "pitfalls": [
             "dtype conversion can hide precision issues"
           ]
+        },
+        {
+          "name": "[start",
+          "type": "Any",
+          "description": "Layout or range argument for `numpy.arange`. It changes output dimensions, resolution, or sampled interval.",
+          "values": [
+            "positive integer",
+            "tuple",
+            "float"
+          ],
+          "pitfalls": [
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
+          ]
+        },
+        {
+          "name": "]stop[",
+          "type": "Any",
+          "description": "Layout or range argument for `numpy.arange`. It changes output dimensions, resolution, or sampled interval.",
+          "values": [
+            "positive integer",
+            "tuple",
+            "float"
+          ],
+          "pitfalls": [
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
+          ]
+        },
+        {
+          "name": "step]",
+          "type": "Any",
+          "description": "Layout or range argument for `numpy.arange`. It changes output dimensions, resolution, or sampled interval.",
+          "values": [
+            "positive integer",
+            "tuple",
+            "float"
+          ],
+          "pitfalls": [
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
+          ]
         }
       ],
       "returns": {
@@ -391,7 +446,7 @@
         {
           "name": "start, stop",
           "type": "float",
-          "description": "Range endpoints.",
+          "description": "Parameter `start, stop` configures how `numpy.linspace` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "0",
             "1",
@@ -415,6 +470,62 @@
           "pitfalls": [
             "num<2 may be invalid for some downstream uses"
           ]
+        },
+        {
+          "name": "start",
+          "type": "Any",
+          "description": "Layout or range argument for `numpy.linspace`. It changes output dimensions, resolution, or sampled interval.",
+          "values": [
+            "positive integer",
+            "tuple",
+            "float"
+          ],
+          "pitfalls": [
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
+          ]
+        },
+        {
+          "name": "stop",
+          "type": "Any",
+          "description": "Layout or range argument for `numpy.linspace`. It changes output dimensions, resolution, or sampled interval.",
+          "values": [
+            "positive integer",
+            "tuple",
+            "float"
+          ],
+          "pitfalls": [
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
+          ]
+        },
+        {
+          "name": "endpoint",
+          "type": "bool",
+          "description": "Parameter `endpoint` configures how `numpy.linspace` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "True"
+        },
+        {
+          "name": "dtype",
+          "type": "str | list[str]",
+          "description": "Output dtype for `numpy.linspace`. It controls memory footprint, precision, and interoperability with downstream steps.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Downcasting can truncate values or overflow.",
+            "Mixed dtypes can break model pipelines and aggregations."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -483,7 +594,7 @@
         {
           "name": "a",
           "type": "array-like",
-          "description": "Input data.",
+          "description": "Data input consumed by `numpy.reshape`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
             "1D",
             "2D",
@@ -527,25 +638,25 @@
       },
       "examples": [
         {
-          "title": "Build weekly demand matrix",
-          "scenario": "Forecasting converts flat sales vector into 4 weeks x 7 days table.",
-          "code": "import numpy as np\nsales = np.arange(28)\nweekly = sales.reshape(4, 7)\nprint(weekly.shape)",
-          "expectedOutput": "(4, 7)",
+          "title": "numpy.reshape primary workflow",
+          "scenario": "numpy.reshape used in a realistic business workflow with active command execution.",
+          "code": "import numpy as np\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\nresult = np.reshape(arr, newshape, order='C')\nprint(type(result).__name__)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
-            "Apply numpy.reshape with explicit parameters shown in the snippet, then verify shapes/dtypes.",
-            "Transfer the same pattern to your full dataset and rerun your validation checks."
+            "Run numpy.reshape exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "numpy.reshape additional business case",
-          "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
-          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.arange(12).reshape(3, 4)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
-          "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import numpy as np\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\nresult = np.reshape(arr, newshape, order='C')\nprint(type(result).__name__)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy numeric slice with realistic magnitudes.",
-            "Execute numpy.reshape directly and inspect output type/shape/value.",
-            "Reuse the same code pattern in your production feature engineering step."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run numpy.reshape exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -600,7 +711,7 @@
           "name": "axis",
           "type": "int",
           "default": "0",
-          "description": "Axis to join on.",
+          "description": "Execution behavior flag for `numpy.concatenate`. It changes orientation, ordering, mutability, or null-handling of the operation.",
           "values": [
             "0",
             "1",
@@ -608,6 +719,45 @@
           ],
           "pitfalls": [
             "axis=None flattens arrays first"
+          ]
+        },
+        {
+          "name": "(a1",
+          "type": "Any",
+          "description": "Parameter `(a1` configures how `numpy.concatenate` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "a2",
+          "type": "Any",
+          "description": "Parameter `a2` configures how `numpy.concatenate` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ]
+        },
+        {
+          "name": "...)",
+          "type": "Any",
+          "description": "Parameter `...)` configures how `numpy.concatenate` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -677,7 +827,7 @@
         {
           "name": "condition",
           "type": "array_like[bool]",
-          "description": "Boolean mask.",
+          "description": "Parameter `condition` configures how `numpy.where` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "arr > 0",
             "np.isnan(arr)"
@@ -697,6 +847,34 @@
           ],
           "pitfalls": [
             "Type coercion may upcast output dtype"
+          ]
+        },
+        {
+          "name": "x",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `numpy.where`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "y",
+          "type": "array-like | DataFrame",
+          "description": "Target or label values used by `numpy.where`. This controls what the model/metric learns or evaluates against.",
+          "values": [
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
+          ],
+          "pitfalls": [
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         }
       ],
@@ -781,7 +959,7 @@
           "name": "axis",
           "type": "int | tuple[int] | None",
           "default": "None",
-          "description": "Axis to reduce.",
+          "description": "Execution behavior flag for `numpy.mean`. It changes orientation, ordering, mutability, or null-handling of the operation.",
           "values": [
             "None",
             "0",
@@ -790,6 +968,34 @@
           "pitfalls": [
             "Wrong axis flips row/column semantics"
           ]
+        },
+        {
+          "name": "dtype",
+          "type": "str | list[str]",
+          "description": "Output dtype for `numpy.mean`. It controls memory footprint, precision, and interoperability with downstream steps.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Downcasting can truncate values or overflow.",
+            "Mixed dtypes can break model pipelines and aggregations."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "keepdims",
+          "type": "bool",
+          "description": "Execution behavior flag for `numpy.mean`. It changes orientation, ordering, mutability, or null-handling of the operation.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "False"
         }
       ],
       "returns": {
@@ -873,7 +1079,7 @@
           "name": "axis",
           "type": "int | None",
           "default": "None",
-          "description": "Reduction axis.",
+          "description": "Execution behavior flag for `numpy.std`. It changes orientation, ordering, mutability, or null-handling of the operation.",
           "values": [
             "None",
             "0",
@@ -882,6 +1088,33 @@
           "pitfalls": [
             "Axis errors are common in 2D feature matrices"
           ]
+        },
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Data input consumed by `numpy.std`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "keepdims",
+          "type": "bool",
+          "description": "Execution behavior flag for `numpy.std`. It changes orientation, ordering, mutability, or null-handling of the operation.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "False"
         }
       ],
       "returns": {
@@ -973,6 +1206,34 @@
           "pitfalls": [
             "Method choice can slightly alter tail metrics"
           ]
+        },
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Data input consumed by `numpy.percentile`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "axis",
+          "type": "int",
+          "description": "Axis along which operation is applied.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Wrong axis silently changes calculation direction and interpretation."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -1049,6 +1310,33 @@
           ],
           "pitfalls": [
             "Inner dimensions must align"
+          ]
+        },
+        {
+          "name": "a",
+          "type": "Any",
+          "description": "Data input consumed by `numpy.dot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "b",
+          "type": "Any",
+          "description": "Parameter `b` configures how `numpy.dot` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1139,7 +1427,7 @@
         {
           "title": "Simulate daily transaction counts",
           "scenario": "Ops planning uses Poisson simulation for staffing scenarios.",
-          "code": "import numpy as np\nrng = np.random.default_rng(7)\nsamples = rng.poisson(lam=120, size=5)\nprint(samples.shape)",
+          "code": "import numpy as np\nrng = np.random.default_rng(7)\nnormal_draws = rng.normal(loc=120, scale=15, size=5)\ninteger_draws = rng.integers(low=80, high=160, size=5)\nprint(normal_draws.round(1))\nprint(integer_draws)",
           "expectedOutput": "(5,)",
           "walkthrough": [
             "Create a toy dataset that mirrors your project columns and value types.",
@@ -1150,7 +1438,7 @@
         {
           "title": "numpy.random.default_rng additional business case",
           "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
-          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.random.default_rng(42).normal(loc=0, scale=1, size=3)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "code": "import numpy as np\nrng = np.random.default_rng(42)\nbaseline = rng.normal(loc=0, scale=1, size=3)\nbands = rng.integers(low=1, high=5, size=3)\nprint(baseline.round(3))\nprint(bands)",
           "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy numeric slice with realistic magnitudes.",
@@ -1281,24 +1569,30 @@
         {
           "name": "shape",
           "type": "Any",
-          "description": "Controls shape in numpy.zeros.",
+          "description": "Layout or range argument for `numpy.zeros`. It changes output dimensions, resolution, or sampled interval.",
           "values": [
-            "data-specific"
+            "positive integer",
+            "tuple",
+            "float"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
           ]
         },
         {
           "name": "dtype",
           "type": "Any",
           "default": "float",
-          "description": "Controls dtype in numpy.zeros.",
+          "description": "Output dtype for `numpy.zeros`. It controls memory footprint, precision, and interoperability with downstream steps.",
           "values": [
-            "data-specific"
+            "'float64'",
+            "'int64'",
+            "'int8' / 'category' where applicable"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Downcasting can truncate values or overflow.",
+            "Mixed dtypes can break model pipelines and aggregations."
           ]
         }
       ],
@@ -1367,24 +1661,30 @@
         {
           "name": "shape",
           "type": "Any",
-          "description": "Controls shape in numpy.ones.",
+          "description": "Layout or range argument for `numpy.ones`. It changes output dimensions, resolution, or sampled interval.",
           "values": [
-            "data-specific"
+            "positive integer",
+            "tuple",
+            "float"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
           ]
         },
         {
           "name": "dtype",
           "type": "Any",
           "default": "float",
-          "description": "Controls dtype in numpy.ones.",
+          "description": "Output dtype for `numpy.ones`. It controls memory footprint, precision, and interoperability with downstream steps.",
           "values": [
-            "data-specific"
+            "'float64'",
+            "'int64'",
+            "'int8' / 'category' where applicable"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Downcasting can truncate values or overflow.",
+            "Mixed dtypes can break model pipelines and aggregations."
           ]
         }
       ],
@@ -1453,35 +1753,43 @@
         {
           "name": "shape",
           "type": "Any",
-          "description": "Controls shape in numpy.full.",
+          "description": "Layout or range argument for `numpy.full`. It changes output dimensions, resolution, or sampled interval.",
           "values": [
-            "data-specific"
+            "positive integer",
+            "tuple",
+            "float"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Extreme values can create unreadable visuals or heavy memory use.",
+            "Match size/resolution to display or reporting destination."
           ]
         },
         {
           "name": "fill_value",
           "type": "Any",
-          "description": "Controls fill_value in numpy.full.",
+          "description": "Parameter `fill_value` configures how `numpy.full` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "dtype",
           "type": "Any",
           "default": "None",
-          "description": "Controls dtype in numpy.full.",
+          "description": "Output dtype for `numpy.full`. It controls memory footprint, precision, and interoperability with downstream steps.",
           "values": [
-            "data-specific"
+            "'float64'",
+            "'int64'",
+            "'int8' / 'category' where applicable"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Downcasting can truncate values or overflow.",
+            "Mixed dtypes can break model pipelines and aggregations."
           ]
         }
       ],
@@ -1550,26 +1858,29 @@
         {
           "name": "arrays",
           "type": "Any",
-          "description": "Controls arrays in numpy.stack.",
+          "description": "Data input consumed by `numpy.stack`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "0",
-          "description": "Controls axis in numpy.stack.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         }
       ],
@@ -1638,12 +1949,14 @@
         {
           "name": "tup",
           "type": "Any",
-          "description": "Controls tup in numpy.vstack.",
+          "description": "Parameter `tup` configures how `numpy.vstack` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1712,12 +2025,14 @@
         {
           "name": "tup",
           "type": "Any",
-          "description": "Controls tup in numpy.hstack.",
+          "description": "Parameter `tup` configures how `numpy.hstack` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1786,37 +2101,42 @@
         {
           "name": "ary",
           "type": "Any",
-          "description": "Controls ary in numpy.split.",
+          "description": "Data input consumed by `numpy.split`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "indices_or_sections",
           "type": "Any",
-          "description": "Controls indices_or_sections in numpy.split.",
+          "description": "Parameter `indices_or_sections` configures how `numpy.split` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "0",
-          "description": "Controls axis in numpy.split.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         }
       ],
@@ -1885,26 +2205,30 @@
         {
           "name": "ar",
           "type": "Any",
-          "description": "Controls ar in numpy.unique.",
+          "description": "Data input consumed by `numpy.unique`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "return_counts",
           "type": "int",
           "default": "False",
-          "description": "Controls return_counts in numpy.unique.",
+          "description": "Parameter `return_counts` configures how `numpy.unique` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1973,26 +2297,29 @@
         {
           "name": "a",
           "type": "Any",
-          "description": "Controls a in numpy.sort.",
+          "description": "Data input consumed by `numpy.sort`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "-1",
-          "description": "Controls axis in numpy.sort.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         }
       ],
@@ -2061,26 +2388,29 @@
         {
           "name": "a",
           "type": "Any",
-          "description": "Controls a in numpy.argsort.",
+          "description": "Data input consumed by `numpy.argsort`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "-1",
-          "description": "Controls axis in numpy.argsort.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         }
       ],
@@ -2149,26 +2479,29 @@
         {
           "name": "a",
           "type": "Any",
-          "description": "Controls a in numpy.argmax and argmin.",
+          "description": "Data input consumed by `numpy.argmax and argmin`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "None",
-          "description": "Controls axis in numpy.argmax and argmin.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         }
       ],
@@ -2181,7 +2514,7 @@
         {
           "title": "numpy.argmax and argmin for pricing feature matrix prep",
           "scenario": "Pricing analytics uses numeric arrays for fast transformations and robust KPI calculations.",
-          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1, 2])\narr2 = np.array([3, 4])\n\nresult = np.argmax(arr, axis=None)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "code": "import numpy as np\nscores = np.array([[0.8, 0.2], [0.4, 0.6], [0.55, 0.45]])\nargmax_idx = np.argmax(scores, axis=1)\nargmin_idx = np.argmin(scores, axis=1)\nprint(argmax_idx)\nprint(argmin_idx)",
           "expectedOutput": "Output confirms NumPy result type and shape/value for direct adaptation into feature pipelines.",
           "walkthrough": [
             "Build a toy numeric array matching your feature scale and dimensionality.",
@@ -2192,7 +2525,7 @@
         {
           "title": "numpy.argmax and argmin additional business case",
           "scenario": "Secondary business slice: confirm the same numeric pattern on another cohort before production rollout.",
-          "code": "import numpy as np\n\narr = np.array([10.0, 20.0, 30.0, 40.0])\narr1 = np.array([1.0, 2.0])\narr2 = np.array([3.0, 4.0])\n\nresult = np.argmax(arr)\n\nif hasattr(result, 'shape'):\n    print(type(result).__name__, result.shape)\nelse:\n    print(type(result).__name__, result)",
+          "code": "import numpy as np\nprofits = np.array([120, 95, 160, 110])\nbest_idx = np.argmax(profits)\nworst_idx = np.argmin(profits)\nprint(best_idx, worst_idx)",
           "expectedOutput": "Output confirms executable numeric pattern for a second business use case.",
           "walkthrough": [
             "Create a second toy numeric slice with realistic magnitudes.",
@@ -2237,26 +2570,29 @@
         {
           "name": "a",
           "type": "Any",
-          "description": "Controls a in numpy.sum.",
+          "description": "Data input consumed by `numpy.sum`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "None",
-          "description": "Controls axis in numpy.sum.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         }
       ],
@@ -2325,26 +2661,29 @@
         {
           "name": "a",
           "type": "Any",
-          "description": "Controls a in numpy.median.",
+          "description": "Data input consumed by `numpy.median`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "None",
-          "description": "Controls axis in numpy.median.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         }
       ],
@@ -2413,37 +2752,42 @@
         {
           "name": "a",
           "type": "Any",
-          "description": "Controls a in numpy.quantile.",
+          "description": "Data input consumed by `numpy.quantile`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "q",
           "type": "Any",
-          "description": "Controls q in numpy.quantile.",
+          "description": "Parameter `q` configures how `numpy.quantile` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "None",
-          "description": "Controls axis in numpy.quantile.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         }
       ],
@@ -2512,26 +2856,29 @@
         {
           "name": "a",
           "type": "Any",
-          "description": "Controls a in numpy.nanmean.",
+          "description": "Data input consumed by `numpy.nanmean`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "axis",
           "type": "int",
           "default": "None",
-          "description": "Controls axis in numpy.nanmean.",
+          "description": "Axis along which operation is applied.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Wrong axis silently changes calculation direction and interpretation."
           ]
         }
       ],
@@ -2600,34 +2947,41 @@
         {
           "name": "a",
           "type": "Any",
-          "description": "Controls a in numpy.clip.",
+          "description": "Data input consumed by `numpy.clip`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "a_min",
           "type": "Any",
-          "description": "Controls a_min in numpy.clip.",
+          "description": "Parameter `a_min` configures how `numpy.clip` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "a_max",
           "type": "Any",
-          "description": "Controls a_max in numpy.clip.",
+          "description": "Parameter `a_max` configures how `numpy.clip` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2696,12 +3050,15 @@
         {
           "name": "x",
           "type": "Any",
-          "description": "Controls x in numpy.log.",
+          "description": "Data input consumed by `numpy.log`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2770,12 +3127,15 @@
         {
           "name": "x",
           "type": "Any",
-          "description": "Controls x in numpy.exp.",
+          "description": "Data input consumed by `numpy.exp`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         }
       ],
@@ -2844,24 +3204,29 @@
         {
           "name": "a",
           "type": "Any",
-          "description": "Controls a in numpy.transpose.",
+          "description": "Data input consumed by `numpy.transpose`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "axes",
           "type": "Any",
           "default": "None",
-          "description": "Controls axes in numpy.transpose.",
+          "description": "Parameter `axes` configures how `numpy.transpose` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2930,23 +3295,28 @@
         {
           "name": "a",
           "type": "Any",
-          "description": "Controls a in numpy.linalg.solve.",
+          "description": "Data input consumed by `numpy.linalg.solve`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "b",
           "type": "Any",
-          "description": "Controls b in numpy.linalg.solve.",
+          "description": "Parameter `b` configures how `numpy.linalg.solve` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],

@@ -192,6 +192,21 @@
           "pitfalls": [
             "Grid-heavy styles can distract on dense plots"
           ]
+        },
+        {
+          "name": "palette",
+          "type": "Any",
+          "description": "Column/key selector for `sns.set_theme`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "'deep'"
         }
       ],
       "returns": {
@@ -280,6 +295,96 @@
           "pitfalls": [
             "Too many categories reduce readability"
           ]
+        },
+        {
+          "name": "data",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.lineplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "x",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.lineplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "y",
+          "type": "array-like | DataFrame",
+          "description": "Target or label values used by `sns.lineplot`. This controls what the model/metric learns or evaluates against.",
+          "values": [
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
+          ],
+          "pitfalls": [
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "description": "Column/key selector for `sns.lineplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "style",
+          "type": "Any",
+          "description": "Column/key selector for `sns.lineplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "estimator",
+          "type": "Any",
+          "description": "Estimator object passed to `sns.lineplot`. It defines the algorithm, training behavior, and resulting predictions/metrics.",
+          "values": [
+            "scikit-learn estimator instance",
+            "Pipeline object",
+            "compatible model class"
+          ],
+          "pitfalls": [
+            "Use estimator interfaces compatible with this command (fit/predict/score).",
+            "Keep non-default hyperparameters documented for reproducibility."
+          ],
+          "default": "'mean'"
         }
       ],
       "returns": {
@@ -370,6 +475,66 @@
           "pitfalls": [
             "Confirm estimator matches business KPI"
           ]
+        },
+        {
+          "name": "data",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.barplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "x",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.barplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "y",
+          "type": "array-like | DataFrame",
+          "description": "Target or label values used by `sns.barplot`. This controls what the model/metric learns or evaluates against.",
+          "values": [
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
+          ],
+          "pitfalls": [
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "description": "Column/key selector for `sns.barplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -391,13 +556,13 @@
         },
         {
           "title": "sns.barplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.barplot(data=None, arr=None, y=None, hue=None, model='mean')\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run sns.barplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run sns.barplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -439,7 +604,7 @@
         {
           "name": "hue/size/style",
           "type": "str|vector",
-          "description": "Visual encodings.",
+          "description": "Parameter `hue/size/style` configures how `sns.scatterplot` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "hue='segment'",
             "size='orders'"
@@ -460,6 +625,96 @@
           "pitfalls": [
             "Opaque points can hide density"
           ]
+        },
+        {
+          "name": "data",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.scatterplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "x",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.scatterplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "y",
+          "type": "array-like | DataFrame",
+          "description": "Target or label values used by `sns.scatterplot`. This controls what the model/metric learns or evaluates against.",
+          "values": [
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
+          ],
+          "pitfalls": [
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "description": "Column/key selector for `sns.scatterplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "size",
+          "type": "int",
+          "description": "Parameter `size` configures how `sns.scatterplot` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "1",
+            "5",
+            "10"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "style",
+          "type": "Any",
+          "description": "Column/key selector for `sns.scatterplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -481,13 +736,13 @@
         },
         {
           "title": "sns.scatterplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.scatterplot(data=None, arr=None, y=None, hue=None, size=None, style=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run sns.scatterplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run sns.scatterplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -530,7 +785,7 @@
           "name": "bins",
           "type": "int|str|sequence",
           "default": "'auto'",
-          "description": "Binning strategy.",
+          "description": "Parameter `bins` configures how `sns.histplot` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "10",
             "20",
@@ -552,6 +807,51 @@
           "pitfalls": [
             "KDE can be misleading for very small samples"
           ]
+        },
+        {
+          "name": "data",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.histplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "x",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.histplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "description": "Column/key selector for `sns.histplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -573,13 +873,13 @@
         },
         {
           "title": "sns.histplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.histplot(data=None, arr=None, bins='auto', kde=False, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run sns.histplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run sns.histplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -639,6 +939,51 @@
           "pitfalls": [
             "Too many hue levels clutter layout"
           ]
+        },
+        {
+          "name": "data",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.boxplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "x",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.boxplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "y",
+          "type": "array-like | DataFrame",
+          "description": "Target or label values used by `sns.boxplot`. This controls what the model/metric learns or evaluates against.",
+          "values": [
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
+          ],
+          "pitfalls": [
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -660,13 +1005,13 @@
         },
         {
           "title": "sns.boxplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.boxplot(data=None, arr=None, y=None, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run sns.boxplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run sns.boxplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -732,6 +1077,66 @@
           "pitfalls": [
             "Over-annotation can reduce readability"
           ]
+        },
+        {
+          "name": "data",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.violinplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "x",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.violinplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "y",
+          "type": "array-like | DataFrame",
+          "description": "Target or label values used by `sns.violinplot`. This controls what the model/metric learns or evaluates against.",
+          "values": [
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
+          ],
+          "pitfalls": [
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "description": "Column/key selector for `sns.violinplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -753,13 +1158,13 @@
         },
         {
           "title": "sns.violinplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.violinplot(data=None, arr=None, y=None, hue=None, cut=2)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run sns.violinplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run sns.violinplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -814,7 +1219,7 @@
           "name": "annot",
           "type": "bool",
           "default": "False",
-          "description": "Show cell values.",
+          "description": "Parameter `annot` configures how `sns.heatmap` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "True",
             "False"
@@ -822,6 +1227,49 @@
           "pitfalls": [
             "Annotations clutter large matrices"
           ]
+        },
+        {
+          "name": "fmt",
+          "type": "Any",
+          "description": "Parameter `fmt` configures how `sns.heatmap` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "'.2g'"
+        },
+        {
+          "name": "cmap",
+          "type": "Any",
+          "description": "Visualization styling argument for `sns.heatmap`. It controls chart readability, emphasis, and annotation behavior.",
+          "values": [
+            "named color/style string",
+            "tuple/object for geometry",
+            "None (use Matplotlib defaults)"
+          ],
+          "pitfalls": [
+            "Keep styles consistent with dashboard/report standards.",
+            "Avoid low-contrast combinations that reduce readability."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "center",
+          "type": "Any",
+          "description": "Parameter `center` configures how `sns.heatmap` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "library default",
+            "dataset-specific value"
+          ],
+          "pitfalls": [
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -843,13 +1291,13 @@
         },
         {
           "title": "sns.heatmap additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.heatmap(data, annot=False, fmt='.2g', cmap=None, center=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run sns.heatmap again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run sns.heatmap exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -910,6 +1358,33 @@
           "pitfalls": [
             "High-cardinality hue overwhelms plot"
           ]
+        },
+        {
+          "name": "data",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.pairplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ]
+        },
+        {
+          "name": "corner",
+          "type": "bool",
+          "description": "Parameter `corner` configures how `sns.pairplot` runs. Changing it affects output shape, behavior, or performance for your dataset.",
+          "values": [
+            "True",
+            "False"
+          ],
+          "pitfalls": [
+            "Boolean default can materially change output semantics."
+          ],
+          "default": "False"
         }
       ],
       "returns": {
@@ -931,13 +1406,13 @@
         },
         {
           "title": "sns.pairplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.pairplot(data, hue=None, vars=None, corner=False)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run sns.pairplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run sns.pairplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1002,6 +1477,81 @@
           "pitfalls": [
             "Too many facets make plots too small"
           ]
+        },
+        {
+          "name": "data",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.catplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "x",
+          "type": "array-like | DataFrame",
+          "description": "Data input consumed by `sns.catplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "y",
+          "type": "array-like | DataFrame",
+          "description": "Target or label values used by `sns.catplot`. This controls what the model/metric learns or evaluates against.",
+          "values": [
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
+          ],
+          "pitfalls": [
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "hue",
+          "type": "Any",
+          "description": "Column/key selector for `sns.catplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
+          "values": [
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
+          ],
+          "pitfalls": [
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
+          ],
+          "default": "None"
+        },
+        {
+          "name": "col",
+          "type": "str | list[str]",
+          "description": "Data input consumed by `sns.catplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -1023,13 +1573,13 @@
         },
         {
           "title": "sns.catplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.catplot(data=None, arr=None, y=None, hue=None, col=None, kind='strip')\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run sns.catplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run sns.catplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1078,49 +1628,76 @@
         {
           "name": "data",
           "type": "Any",
-          "description": "Controls data in seaborn.relplot.",
+          "description": "Data input consumed by `seaborn.relplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.relplot.",
+          "description": "Data input consumed by `seaborn.relplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
           "default": "None",
-          "description": "Controls y in seaborn.relplot.",
+          "description": "Target or label values used by `seaborn.relplot`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         },
         {
           "name": "hue",
           "type": "Any",
           "default": "None",
-          "description": "Controls hue in seaborn.relplot.",
+          "description": "Column/key selector for `seaborn.relplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
-            "data-specific"
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
+        },
+        {
+          "name": "col",
+          "type": "str | list[str]",
+          "description": "Data input consumed by `seaborn.relplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -1130,25 +1707,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.relplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.relplot primary workflow",
+          "scenario": "seaborn.relplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.relplot(data, arr=None, y=None, hue=None, col=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.relplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.relplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.relplot(data, arr=None, y=None, hue=None, col=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.relplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.relplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1189,38 +1766,45 @@
         {
           "name": "data",
           "type": "Any",
-          "description": "Controls data in seaborn.displot.",
+          "description": "Data input consumed by `seaborn.displot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.displot.",
+          "description": "Data input consumed by `seaborn.displot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "kind",
           "type": "str | list[str]",
           "default": "'hist'",
-          "description": "Controls kind in seaborn.displot.",
+          "description": "Parameter `kind` configures how `seaborn.displot` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1231,25 +1815,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.displot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.displot primary workflow",
+          "scenario": "seaborn.displot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.displot(data, arr=None, kind='hist')\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.displot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.displot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.displot(data, arr=None, kind='hist')\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.displot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.displot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1291,36 +1875,45 @@
           "name": "data",
           "type": "Any",
           "default": "None",
-          "description": "Controls data in seaborn.kdeplot.",
+          "description": "Data input consumed by `seaborn.kdeplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.kdeplot.",
+          "description": "Data input consumed by `seaborn.kdeplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
           "default": "None",
-          "description": "Controls y in seaborn.kdeplot.",
+          "description": "Target or label values used by `seaborn.kdeplot`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         }
       ],
@@ -1331,25 +1924,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.kdeplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.kdeplot primary workflow",
+          "scenario": "seaborn.kdeplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.kdeplot(data=None, arr=None, y=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.kdeplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.kdeplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.kdeplot(data=None, arr=None, y=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.kdeplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.kdeplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1391,36 +1984,45 @@
           "name": "data",
           "type": "Any",
           "default": "None",
-          "description": "Controls data in seaborn.ecdfplot.",
+          "description": "Data input consumed by `seaborn.ecdfplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.ecdfplot.",
+          "description": "Data input consumed by `seaborn.ecdfplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "hue",
           "type": "Any",
           "default": "None",
-          "description": "Controls hue in seaborn.ecdfplot.",
+          "description": "Column/key selector for `seaborn.ecdfplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
-            "data-specific"
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         }
       ],
@@ -1431,25 +2033,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.ecdfplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.ecdfplot primary workflow",
+          "scenario": "seaborn.ecdfplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.ecdfplot(data=None, arr=None, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.ecdfplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.ecdfplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.ecdfplot(data=None, arr=None, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.ecdfplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.ecdfplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1491,36 +2093,45 @@
           "name": "data",
           "type": "Any",
           "default": "None",
-          "description": "Controls data in seaborn.regplot.",
+          "description": "Data input consumed by `seaborn.regplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.regplot.",
+          "description": "Data input consumed by `seaborn.regplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
           "default": "None",
-          "description": "Controls y in seaborn.regplot.",
+          "description": "Target or label values used by `seaborn.regplot`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         }
       ],
@@ -1531,25 +2142,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.regplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.regplot primary workflow",
+          "scenario": "seaborn.regplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.regplot(data=None, arr=None, y=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.regplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.regplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.regplot(data=None, arr=None, y=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.regplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.regplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1590,47 +2201,74 @@
         {
           "name": "data",
           "type": "Any",
-          "description": "Controls data in seaborn.lmplot.",
+          "description": "Data input consumed by `seaborn.lmplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
-          "description": "Controls x in seaborn.lmplot.",
+          "description": "Data input consumed by `seaborn.lmplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
-          "description": "Controls y in seaborn.lmplot.",
+          "description": "Target or label values used by `seaborn.lmplot`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         },
         {
           "name": "hue",
           "type": "Any",
           "default": "None",
-          "description": "Controls hue in seaborn.lmplot.",
+          "description": "Column/key selector for `seaborn.lmplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
-            "data-specific"
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
+        },
+        {
+          "name": "col",
+          "type": "str | list[str]",
+          "description": "Data input consumed by `seaborn.lmplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
+          "values": [
+            "'auto'",
+            "'left'",
+            "'mean'"
+          ],
+          "pitfalls": [
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
+          ],
+          "default": "None"
         }
       ],
       "returns": {
@@ -1640,25 +2278,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.lmplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.lmplot primary workflow",
+          "scenario": "seaborn.lmplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.lmplot(data, arr, y, hue=None, col=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.lmplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.lmplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.lmplot(data, arr, y, hue=None, col=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.lmplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.lmplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1700,50 +2338,60 @@
           "name": "data",
           "type": "Any",
           "default": "None",
-          "description": "Controls data in seaborn.jointplot.",
+          "description": "Data input consumed by `seaborn.jointplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.jointplot.",
+          "description": "Data input consumed by `seaborn.jointplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
           "default": "None",
-          "description": "Controls y in seaborn.jointplot.",
+          "description": "Target or label values used by `seaborn.jointplot`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         },
         {
           "name": "kind",
           "type": "str | list[str]",
           "default": "'scatter'",
-          "description": "Controls kind in seaborn.jointplot.",
+          "description": "Parameter `kind` configures how `seaborn.jointplot` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1754,25 +2402,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.jointplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.jointplot primary workflow",
+          "scenario": "seaborn.jointplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.jointplot(data=None, arr=None, y=None, kind='scatter')\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.jointplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.jointplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.jointplot(data=None, arr=None, y=None, kind='scatter')\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.jointplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.jointplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1814,36 +2462,45 @@
           "name": "data",
           "type": "Any",
           "default": "None",
-          "description": "Controls data in seaborn.countplot.",
+          "description": "Data input consumed by `seaborn.countplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.countplot.",
+          "description": "Data input consumed by `seaborn.countplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "hue",
           "type": "Any",
           "default": "None",
-          "description": "Controls hue in seaborn.countplot.",
+          "description": "Column/key selector for `seaborn.countplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
-            "data-specific"
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         }
       ],
@@ -1854,25 +2511,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.countplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.countplot primary workflow",
+          "scenario": "seaborn.countplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.countplot(data=None, arr=None, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.countplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.countplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.countplot(data=None, arr=None, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.countplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.countplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -1914,48 +2571,59 @@
           "name": "data",
           "type": "Any",
           "default": "None",
-          "description": "Controls data in seaborn.stripplot.",
+          "description": "Data input consumed by `seaborn.stripplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.stripplot.",
+          "description": "Data input consumed by `seaborn.stripplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
           "default": "None",
-          "description": "Controls y in seaborn.stripplot.",
+          "description": "Target or label values used by `seaborn.stripplot`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         },
         {
           "name": "jitter",
           "type": "Any",
           "default": "True",
-          "description": "Controls jitter in seaborn.stripplot.",
+          "description": "Parameter `jitter` configures how `seaborn.stripplot` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -1966,25 +2634,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.stripplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.stripplot primary workflow",
+          "scenario": "seaborn.stripplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.stripplot(data=None, arr=None, y=None, jitter=True)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.stripplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.stripplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.stripplot(data=None, arr=None, y=None, jitter=True)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.stripplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.stripplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2026,36 +2694,45 @@
           "name": "data",
           "type": "Any",
           "default": "None",
-          "description": "Controls data in seaborn.swarmplot.",
+          "description": "Data input consumed by `seaborn.swarmplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.swarmplot.",
+          "description": "Data input consumed by `seaborn.swarmplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
           "default": "None",
-          "description": "Controls y in seaborn.swarmplot.",
+          "description": "Target or label values used by `seaborn.swarmplot`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         }
       ],
@@ -2066,25 +2743,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.swarmplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.swarmplot primary workflow",
+          "scenario": "seaborn.swarmplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.swarmplot(data=None, arr=None, y=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.swarmplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.swarmplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.swarmplot(data=None, arr=None, y=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.swarmplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.swarmplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2126,48 +2803,60 @@
           "name": "data",
           "type": "Any",
           "default": "None",
-          "description": "Controls data in seaborn.pointplot.",
+          "description": "Data input consumed by `seaborn.pointplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.pointplot.",
+          "description": "Data input consumed by `seaborn.pointplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
           "default": "None",
-          "description": "Controls y in seaborn.pointplot.",
+          "description": "Target or label values used by `seaborn.pointplot`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         },
         {
           "name": "hue",
           "type": "Any",
           "default": "None",
-          "description": "Controls hue in seaborn.pointplot.",
+          "description": "Column/key selector for `seaborn.pointplot`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
-            "data-specific"
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         }
       ],
@@ -2178,25 +2867,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.pointplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.pointplot primary workflow",
+          "scenario": "seaborn.pointplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.pointplot(data=None, arr=None, y=None, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.pointplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.pointplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.pointplot(data=None, arr=None, y=None, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.pointplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.pointplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2238,36 +2927,45 @@
           "name": "data",
           "type": "Any",
           "default": "None",
-          "description": "Controls data in seaborn.boxenplot.",
+          "description": "Data input consumed by `seaborn.boxenplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.boxenplot.",
+          "description": "Data input consumed by `seaborn.boxenplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
           "default": "None",
-          "description": "Controls y in seaborn.boxenplot.",
+          "description": "Target or label values used by `seaborn.boxenplot`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         }
       ],
@@ -2278,25 +2976,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.boxenplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.boxenplot primary workflow",
+          "scenario": "seaborn.boxenplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.boxenplot(data=None, arr=None, y=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.boxenplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.boxenplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.boxenplot(data=None, arr=None, y=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.boxenplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.boxenplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2337,38 +3035,45 @@
         {
           "name": "data",
           "type": "Any",
-          "description": "Controls data in seaborn.clustermap.",
+          "description": "Data input consumed by `seaborn.clustermap`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "metric",
           "type": "Any",
           "default": "'euclidean'",
-          "description": "Controls metric in seaborn.clustermap.",
+          "description": "Metric specification for `seaborn.clustermap`. It determines how model quality is measured and therefore which model looks \"best.\"",
           "values": [
-            "data-specific"
+            "'accuracy'",
+            "'f1'",
+            "'roc_auc'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Choose a metric aligned to business cost of false positives/negatives.",
+            "For imbalanced classes, avoid relying on accuracy alone."
           ]
         },
         {
           "name": "method",
           "type": "str | list[str]",
           "default": "'average'",
-          "description": "Controls method in seaborn.clustermap.",
+          "description": "Parameter `method` configures how `seaborn.clustermap` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2379,25 +3084,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.clustermap with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.clustermap primary workflow",
+          "scenario": "seaborn.clustermap used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.clustermap(data, metric='euclidean', method='average')\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.clustermap exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.clustermap additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.clustermap(data, metric='euclidean', method='average')\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.clustermap again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.clustermap exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2438,50 +3143,59 @@
         {
           "name": "data",
           "type": "Any",
-          "description": "Controls data in seaborn.FacetGrid.",
+          "description": "Data input consumed by `seaborn.FacetGrid`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "row",
           "type": "Any",
           "default": "None",
-          "description": "Controls row in seaborn.FacetGrid.",
+          "description": "Parameter `row` configures how `seaborn.FacetGrid` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "col",
           "type": "str | list[str]",
           "default": "None",
-          "description": "Controls col in seaborn.FacetGrid.",
+          "description": "Data input consumed by `seaborn.FacetGrid`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "hue",
           "type": "Any",
           "default": "None",
-          "description": "Controls hue in seaborn.FacetGrid.",
+          "description": "Column/key selector for `seaborn.FacetGrid`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
-            "data-specific"
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         }
       ],
@@ -2492,25 +3206,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.FacetGrid with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.FacetGrid primary workflow",
+          "scenario": "seaborn.FacetGrid used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.FacetGrid(data, row=None, col=None, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.FacetGrid exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.FacetGrid additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.FacetGrid(data, row=None, col=None, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.FacetGrid again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.FacetGrid exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2551,36 +3265,44 @@
         {
           "name": "data",
           "type": "Any",
-          "description": "Controls data in seaborn.PairGrid.",
+          "description": "Data input consumed by `seaborn.PairGrid`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "vars",
           "type": "Any",
           "default": "None",
-          "description": "Controls vars in seaborn.PairGrid.",
+          "description": "Parameter `vars` configures how `seaborn.PairGrid` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "hue",
           "type": "Any",
           "default": "None",
-          "description": "Controls hue in seaborn.PairGrid.",
+          "description": "Column/key selector for `seaborn.PairGrid`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
-            "data-specific"
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         }
       ],
@@ -2591,25 +3313,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.PairGrid with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.PairGrid primary workflow",
+          "scenario": "seaborn.PairGrid used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.PairGrid(data, vars=None, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.PairGrid exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.PairGrid additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.PairGrid(data, vars=None, hue=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.PairGrid again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.PairGrid exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2650,23 +3372,28 @@
         {
           "name": "obj",
           "type": "Any",
-          "description": "Controls obj in seaborn.move_legend.",
+          "description": "Data input consumed by `seaborn.move_legend`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "loc",
           "type": "Any",
-          "description": "Controls loc in seaborn.move_legend.",
+          "description": "Parameter `loc` configures how `seaborn.move_legend` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2677,25 +3404,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.move_legend with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.move_legend primary workflow",
+          "scenario": "seaborn.move_legend used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.move_legend(records, loc)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.move_legend exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.move_legend additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.move_legend(records, loc)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.move_legend again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.move_legend exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2737,26 +3464,30 @@
           "name": "palette",
           "type": "Any",
           "default": "None",
-          "description": "Controls palette in seaborn.color_palette.",
+          "description": "Column/key selector for `seaborn.color_palette`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
-            "data-specific"
+            "single column name",
+            "list of column names",
+            "None (all applicable columns)"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         },
         {
           "name": "n_colors",
           "type": "int",
           "default": "None",
-          "description": "Controls n_colors in seaborn.color_palette.",
+          "description": "Parameter `n_colors` configures how `seaborn.color_palette` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
             "1",
             "5",
             "10"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2767,25 +3498,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.color_palette with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.color_palette primary workflow",
+          "scenario": "seaborn.color_palette used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.color_palette(palette=None, n_colors=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.color_palette exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.color_palette additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.color_palette(palette=None, n_colors=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.color_palette again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.color_palette exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2826,24 +3557,28 @@
         {
           "name": "context",
           "type": "Any",
-          "description": "Controls context in seaborn.set_context.",
+          "description": "Parameter `context` configures how `seaborn.set_context` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         },
         {
           "name": "font_scale",
           "type": "Any",
           "default": "1",
-          "description": "Controls font_scale in seaborn.set_context.",
+          "description": "Parameter `font_scale` configures how `seaborn.set_context` runs. Changing it affects output shape, behavior, or performance for your dataset.",
           "values": [
-            "data-specific"
+            "library default",
+            "dataset-specific value"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Use values compatible with your data types and task objective.",
+            "Record non-default choices so teammates can reproduce results."
           ]
         }
       ],
@@ -2854,25 +3589,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.set_context with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.set_context primary workflow",
+          "scenario": "seaborn.set_context used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.set_context(context, font_scale=1)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.set_context exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.set_context additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.set_context(context, font_scale=1)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.set_context again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.set_context exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2914,14 +3649,15 @@
           "name": "style",
           "type": "str | list[str]",
           "default": "'darkgrid'",
-          "description": "Controls style in seaborn.set_style.",
+          "description": "Column/key selector for `seaborn.set_style`. It controls grouping, joining, encoding, or styling based on the selected fields.",
           "values": [
             "'auto'",
             "'left'",
             "'mean'"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Misspelled column names cause runtime errors.",
+            "High-cardinality keys may increase memory and runtime."
           ]
         }
       ],
@@ -2932,25 +3668,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.set_style with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.set_style primary workflow",
+          "scenario": "seaborn.set_style used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.set_style(style='darkgrid')\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.set_style exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.set_style additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.set_style(style='darkgrid')\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.set_style again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.set_style exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
@@ -2992,36 +3728,45 @@
           "name": "data",
           "type": "Any",
           "default": "None",
-          "description": "Controls data in seaborn.residplot.",
+          "description": "Data input consumed by `seaborn.residplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "x",
           "type": "Any",
           "default": "None",
-          "description": "Controls x in seaborn.residplot.",
+          "description": "Data input consumed by `seaborn.residplot`. Changing this argument changes which rows/columns are processed and can alter output shape and statistics.",
           "values": [
-            "data-specific"
+            "DataFrame",
+            "array-like object",
+            "Series/list input"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Confirm required columns exist before running.",
+            "Check dtypes so numeric operations/modeling behave as expected."
           ]
         },
         {
           "name": "y",
           "type": "Any",
           "default": "None",
-          "description": "Controls y in seaborn.residplot.",
+          "description": "Target or label values used by `seaborn.residplot`. This controls what the model/metric learns or evaluates against.",
           "values": [
-            "data-specific"
+            "1D target array",
+            "binary labels",
+            "continuous numeric target"
           ],
           "pitfalls": [
-            "Verify defaults and accepted values in the official docs for your installed version."
+            "Ensure `X` and `y` have matching row counts.",
+            "Avoid leakage by excluding post-outcome fields from features."
           ]
         }
       ],
@@ -3032,25 +3777,25 @@
       },
       "examples": [
         {
-          "title": "seaborn.residplot with polished business chart styling",
-          "scenario": "Visualization example optimized for stakeholder-facing charts with clean colors, spacing, and readability.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\nsns.set_theme(style='whitegrid', context='talk', palette='Set2')\ndf = pd.DataFrame({\n    'month': ['Jan', 'Feb', 'Mar', 'Apr'],\n    'revenue_k': [120, 135, 150, 145],\n    'channel': ['ads', 'ads', 'organic', 'organic']\n})\n\nax = sns.lineplot(data=df, x='month', y='revenue_k', hue='channel', marker='o')\nax.set_title('Revenue trend by channel')\nax.set_xlabel('Month')\nax.set_ylabel('Revenue (k USD)')\nax.figure.set_facecolor('#f7fbff')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms plot object creation; chart style uses clean palette, readable labels, and dashboard-friendly aesthetics.",
+          "title": "seaborn.residplot primary workflow",
+          "scenario": "seaborn.residplot used in a realistic business workflow with active command execution.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.residplot(data=None, arr=None, y=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "Executable output object/value that confirms the command ran on the sample dataset.",
           "walkthrough": [
-            "Set a clear visual theme (palette, context, background) before plotting.",
-            "Plot business metrics with readable labels, title, and spacing.",
-            "Apply layout and style tweaks so the chart is presentation-ready."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.residplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         },
         {
           "title": "seaborn.residplot additional business case",
-          "scenario": "Second realistic usage variant for adapting the command to another business dataset slice.",
-          "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\nsns.set_theme(style='whitegrid', palette='Set2')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nax = sns.lineplot(data=df, x='x', y='y', hue='group', marker='o')\nplt.tight_layout()\nprint(type(ax).__name__)",
-          "expectedOutput": "Output confirms executable pattern for a second business use case.",
+          "scenario": "Second realistic usage variant where the same command is applied to a different data slice.",
+          "code": "import seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt\nsns.set_theme(style='whitegrid')\ndf = pd.DataFrame({'x':[1,2,3], 'y':[2,4,3], 'group':['A','A','B']})\nsns.residplot(data=None, arr=None, y=None)\nplt.tight_layout()\nprint(df.shape)",
+          "expectedOutput": "A second executable output pattern that still uses the documented command.",
           "walkthrough": [
-            "Create a second toy business slice (different segment/time window).",
-            "Run seaborn.residplot again on this alternate slice to validate transferability.",
-            "Move the same pattern into your production notebook/script with assertions."
+            "Create a toy dataset that mirrors your project columns and value types.",
+            "Run seaborn.residplot exactly as shown and inspect the output type/shape.",
+            "Transfer the same command pattern into your production notebook or pipeline."
           ]
         }
       ],
