@@ -1,9 +1,9 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { GlobalSearch } from "@/components/global-search";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/recipes", label: "Recipes" },
+  { href: "/workflows", label: "Workflows" },
   { href: "/cheatsheets", label: "Cheat Sheets" },
   { href: "/compare", label: "Compare" }
 ];
@@ -31,3 +31,4 @@ export function TopHeader() {
     </header>
   );
 }
+

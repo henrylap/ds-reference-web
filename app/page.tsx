@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { CommandCard } from "@/components/command-card";
 import { HomePersonalized } from "@/components/home-personalized";
 import { allCommands, libraries, recipeList } from "@/lib/content";
@@ -20,7 +20,7 @@ export default function HomePage() {
         <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4 text-sm">
           <span className="stat-chip">{libraries.length} libraries</span>
           <span className="stat-chip">{allCommands.length} commands</span>
-          <span className="stat-chip">{recipeList.length} recipes</span>
+          <span className="stat-chip">{recipeList.length} workflows</span>
           <span className="stat-chip">Official docs linked per group/API</span>
         </div>
       </section>
@@ -66,9 +66,9 @@ export default function HomePage() {
 
       <section className="panel p-4 reveal-in">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-xl font-semibold">Workflow Recipes</h2>
-          <Link href="/recipes" className="text-sm text-[var(--accent-strong)] hover:underline">
-            View all recipes
+          <h2 className="text-xl font-semibold">Workflow Library</h2>
+          <Link href="/workflows" className="text-sm text-[var(--accent-strong)] hover:underline">
+            View all workflows
           </Link>
         </div>
         <div className="mt-3 grid gap-3 md:grid-cols-2">
@@ -90,3 +90,4 @@ export default function HomePage() {
     </div>
   );
 }
+
